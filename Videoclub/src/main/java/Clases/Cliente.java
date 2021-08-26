@@ -1,11 +1,11 @@
 package Clases;
 
-public class Cliente {
+public class Cliente{
     private String nombre;
     private String rut;
 
-    private short historial[][]; // 50 x 2 fila: id col:la recomienda?rank?
-    private String peliculasEnPosesion[];  // id     fecha //3 x 2
+    private short historial[][] = new short [50][2]; // 50 x 2 fila: id col:la recomienda?rank?
+    private short peliculasEnPosesion[] = new short[3];  // id     fecha //3 x 2
     int deuda;
     
     public Cliente(){ //constructor
@@ -18,12 +18,25 @@ public class Cliente {
     public void setRut(String rut){
         this.rut = rut;
     }
-    public void setHistorial(short id, short ranking, short i){       
-        historial[i][0] = id;
-        historial[i][1] = ranking;
+    public void setHistorial(short id, short ranking){       
+        short i; 
+        for(i=0; i<50; i++){
+            if(historial[i][0] == 0){
+                historial[i][0] = id;
+                historial[i][1] = ranking;
+                return;
+            }
+        }
     }
-    public void setPeliculasEnPosecion(String film, short i){
-        peliculasEnPosesion[i] = film;       
+    public void setPeliculasEnPosesion(short id){
+        short i;
+        for(i=0; i<3; i++){
+            if(peliculasEnPosesion[i] == 0){
+                peliculasEnPosesion[i] = id;
+                return;
+            }
+        }
+            
     }
     public void setDeuda(int deuda){
         this.deuda = deuda;
@@ -34,20 +47,15 @@ public class Cliente {
     public String getRut(){
         return rut;
     }
-    public void getHistorial(){ // terminar
-        short i;
-        
-        for(i=0 ; i <50; i++){
-            System.out.println("");
-        }
+    public short[][] getHistorial(){
+        return historial;
     }
-    public void getPeliculasEnPosecion(){//terminar
-        
+    public short[] getPeliculasEnPosesion(){
+        return peliculasEnPosesion;
     }
     public int getDeuda(){
         return deuda;
     }
-    /*
     public void sugerirPelicula(){ // Verificar que esté en stock.
     }
     public void rankPelicula(){ // valora pelicula de 1 al 5
@@ -55,6 +63,5 @@ public class Cliente {
     public void arrendarPelicula(){ 
     }
     public void devolverPelicula(){
-    }*/
-
+    }
 }
