@@ -13,24 +13,14 @@ import java.util.Scanner;
 
 public class Interface {
     public static void login(){
-        Scanner entrada = new Scanner(System.in);
-        int i;
-        
-        do{
             System.out.println("Porfavor, seleccione tipo de Usuario: ");
             System.out.println("1)Cliente");
             System.out.println("2)Trabajador");
+    }
+    public static void menúCliente(){
         
-            i = entrada.nextInt();
-            switch(i){
-                case 1:
-                    ;
-                case 2:
-                    ;
-                default:
-                    if(i != 0) System.out.println("Ingrese una opción válida...");
-            }
-            
-        }while(i != 0);
+    }
+    public static void menúAdmin(){
+        
     }
 }
