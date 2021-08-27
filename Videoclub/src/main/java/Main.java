@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 import java.util.Scanner;
+import java.io.*;
 /**
  *
  * @author sebas
  */
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
 //------------------------------Lectura de datos desde archivos------------------------------
         String linea;
         int qDatosPeliculas = 11;
@@ -28,9 +29,9 @@ public class Main {
         String[] arrayLineaClientes = new String[qDatosClientes];
         File flClientes = new File("./src/main/java/data/clientes.tsv");
 	Scanner scCli = new Scanner(flClientes);
-	while(sc.hasNextLine()){
-		ln = scCli.nextLine();
-		arrayLineaClientes = ln.split("\t");
+	while(scCli.hasNextLine()){
+		linea = scCli.nextLine();
+		arrayLineaClientes = linea.split("\t");
 		//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
 	}
         
@@ -54,6 +55,5 @@ public class Main {
         }while(opción != 0);
         
         
-    }
-    
+    } 
 }
