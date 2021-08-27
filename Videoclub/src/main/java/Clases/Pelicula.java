@@ -1,20 +1,15 @@
 package Clases;
 package com.mycompany.videoclub;
-
 import java.util.Arrays;
 
-/**
- *
- * @author HP
- */
 public class Pelicula {
      
     private String nombre;
-    public short id;
-    public short existencias; //Numero total de peliculas de la que es dueña la tienda
-    public short disponibles; //Numero de peliculas disponibles para arrendar
-    public float valuacion;   //Valoracion de la pelicula de 1 a 5
-    public short cantValuaciones; //Numero perosnas que han valorado la pelicula
+    private short id;
+    private short existencias; //Numero total de peliculas de la que es dueña la tienda
+    private short disponibles; //Numero de peliculas disponibles para arrendar
+    private float valuacion;   //Valoracion de la pelicula de 0 a 5 estrellas
+    private short cantValuaciones; //Numero perosnas que han valorado la pelicula
     private short añoEstreno;
     private short duraciónMin;
 
@@ -24,8 +19,7 @@ public class Pelicula {
     private String actores[];  //Arreglo que contiene los nombres de los actores(Compacto sin plibre)
     private String generos[];  //Arreglo que contiene los nombres de los generos(Compacto sin plibre)
     
-    public Pelicula(){
-    }       
+    public Pelicula(){}       
 
     public String getNombre() {
         return nombre;
