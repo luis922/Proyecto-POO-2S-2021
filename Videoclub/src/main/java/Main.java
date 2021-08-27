@@ -16,7 +16,7 @@ public class Main {
         int qDatosClientes = 5;
         
 //--------------Peliculas
-        String[] arrayLineaPeliculas = new String(qDatosPeliculas);
+        String[] arrayLineaPeliculas = new String[qDatosPeliculas];
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 	Scanner scPel = new Scanner(flPeliculas);
 	while(scPel.hasNextLine()){
@@ -25,7 +25,7 @@ public class Main {
 		//Guardar Datos en array de Peliculas [0]=nombre, [1]=Existencias, [2]=Disponibles, [3]Rank... 
 	}
 //---------------Clientes
-        String[] arrayLineaClientes = new String(qDatosClientes);
+        String[] arrayLineaClientes = new String[qDatosClientes];
         File flClientes = new File("./src/main/java/data/clientes.tsv");
 	Scanner scCli = new Scanner(flClientes);
 	while(sc.hasNextLine()){
