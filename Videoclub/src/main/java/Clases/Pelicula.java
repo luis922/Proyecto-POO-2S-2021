@@ -25,9 +25,6 @@ public class Pelicula {
     private String generos[];  //Arreglo que contiene los nombres de los generos(Compacto sin plibre)
     
     public Pelicula(){
-       /* director = new String[5];
-        actores = new String[5];
-        generos = new String[5];*/
     }       
 
     public String getNombre() {
