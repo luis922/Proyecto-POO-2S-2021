@@ -1,6 +1,8 @@
 package Clases;
 package com.mycompany.videoclub;
 
+import java.util.Arrays;
+
 /**
  *
  * @author HP
@@ -23,9 +25,9 @@ public class Pelicula {
     private String generos[];  //Arreglo que contiene los nombres de los generos(Compacto sin plibre)
     
     public Pelicula(){
-        director = new String[5];
+       /* director = new String[5];
         actores = new String[5];
-        generos = new String[5];
+        generos = new String[5];*/
     }       
 
     public String getNombre() {
@@ -108,69 +110,27 @@ public class Pelicula {
         this.calidad = calidad;
     }
 
-    public String getDirector(int index) {
-        int i;
-        for(i = 0; i< director.length ;i++){
-            if(i == index){
-                return director[i];
-            }
-        }        
-        return "Indice fuera de rango";
+    public String[] getDirector() {
+        return Arrays.copyOf(director,director.length);
     }    
 
-    public void setDirector(String nombreDirector) {
-        int i;
-        for(i = 0; i< director.length ;i++){
-            if(director[i] == null){
-                director[i] = nombreDirector;
-                return;
-            }
-        }
-        if(i == director.length)
-            System.out.println("No hay más espacio en arreglo \"director\"");
+    public void setDirector(String[] directores) {
+        director = Arrays.copyOf(directores,directores.length);
     }
 
-    public String getActores(int index) {
-        int i;
-        for(i = 0; i< actores.length ;i++){
-            if(i == index){
-                return actores[i];
-            }
-        }        
-        return "Indice fuera de rango";
+    public String[] getActores() {
+        return Arrays.copyOf(actores,actores.length);
     }
 
-    public void setActores(String actor) {
-        int i;
-        for(i = 0; i< actores.length ;i++){
-            if(actores[i] == null){
-              actores[i] = actor;
-              return;
-            }                
-        }
-        if(i == actores.length)
-            System.out.println("No hay más espacio en arreglo \"actores\"");
+    public void setActores(String[] actor) {
+        actores = Arrays.copyOf(actor,actor.length);
     }
 
-    public String getGeneros(int index) {
-        int i;
-        for(i = 0; i< generos.length ;i++){
-            if(i == index){
-                return generos[i];
-            }
-        }        
-        return "Indice fuera de rango";
+    public String[] getGeneros() {
+        return Arrays.copyOf(generos,generos.length);
     }
 
-    public void setGeneros(String genero) {
-        int i;
-        for(i = 0; i< generos.length ;i++){
-            if(generos[i] == null){
-                generos[i] = genero;
-              return;
-            }                
-        }
-        if(i == generos.length)
-            System.out.println("No hay más espacio en arreglo \"generos\"");
+    public void setGeneros(String[] genero) {
+        generos = Arrays.copyOf(generos,generos.length);
     }         
 }

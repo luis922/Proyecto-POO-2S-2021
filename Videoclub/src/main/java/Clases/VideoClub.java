@@ -37,16 +37,18 @@ public class VideoClub {
         this.direccion = direccion;
     }
 
-    public Pelicula getListaPeliculas(short index) {//Retorna objeto pelicula
-        return listaPeliculas.get(index);
+    public ArrayList<Pelicula> getListaPeliculas() {
+        ArrayList<Pelicula> copia = new ArrayList(listaPeliculas);
+        return copia;
     }
 
     public void setListaPeliculas(Pelicula peli) {
         listaPeliculas.add(peli);
     }
 
-    public Cliente getListaClientes(int index) {
-        return listaClientes.get(index);
+    public ArrayList<Cliente> getListaClientes() {
+        ArrayList<Cliente> copia = new ArrayList(listaClientes);
+        return copia;
     }
 
     public void setListaClientes( Cliente persona) {
