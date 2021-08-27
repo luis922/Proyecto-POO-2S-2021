@@ -17,8 +17,8 @@ public class VideoClub {
 
   
     public VideoClub(){//constructor
-        listaPeliculas = new ArrayList();
-        listaClientes = new ArrayList();
+       /* listaPeliculas = new ArrayList();
+        listaClientes = new ArrayList();*/
     }
     
     public String getNombreTienda() {
@@ -38,22 +38,19 @@ public class VideoClub {
     }
 
     public ArrayList<Pelicula> getListaPeliculas() {
-        ArrayList<Pelicula> copia = new ArrayList(listaPeliculas);
-        return copia;
+        return new ArrayList(listaPeliculas);
     }
 
     public void setListaPeliculas(ArrayList<Pelicula> listaPelis) {
-        ArrayList<Pelicula> copia = new ArrayList(listaPelis);
-        listaPeliculas = copia;
+        listaPeliculas = new ArrayList(listaPelis);
     }
 
     public ArrayList<Cliente> getListaClientes() {
-        ArrayList<Cliente> copia = new ArrayList(listaClientes);
-        return copia;
+        return new ArrayList(listaClientes);
     }
 
-    public void setListaClientes( Cliente persona) {
-        listaClientes.add(persona);
+    public void setListaClientes( ArrayList<Cliente> listaClientes) {
+        this.listaClientes = new ArrayList(listaClientes);
     }
     
     /*Función para obtener tamaños de los Arrays
