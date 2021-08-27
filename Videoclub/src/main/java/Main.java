@@ -6,9 +6,8 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-	
-	    VideoClub videoClub1 = new VideoClub();
-        Pelicula pelicula ;
+	VideoClub videoClub1 = new VideoClub();
+        Pelicula pelicula;
         Cliente cliente;
         ArrayList<Pelicula> listaPeliculas = new ArrayList();
         ArrayList<Cliente> listaClientes = new ArrayList();
@@ -21,6 +20,7 @@ public class Main {
         String[] arrayLineaPeliculas = new String[qDatosPeliculas];
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 	Scanner scPel = new Scanner(flPeliculas);
+        linea = scPel.nextLine();
 	while(scPel.hasNextLine()){
 	    linea = scPel.nextLine();
 	    arrayLineaPeliculas = linea.split("\t");
@@ -36,7 +36,7 @@ public class Main {
 	    pelicula.setCalidad(arrayLineaPeliculas[7]);
 	    pelicula.setDirector(arrayLineaPeliculas[8].split(" "));
 	    pelicula.setActores(arrayLineaPeliculas[9].split(" "));
-	    pelicula.setGeneros(arrayLineaPeliculas[10].split(" "));
+	    //pelicula.setGeneros(arrayLineaPeliculas[10].split(" "));
 	    listaPeliculas.add(pelicula);
 	}
 	videoClub1.setListaPeliculas(listaPeliculas);
@@ -44,6 +44,7 @@ public class Main {
         String[] arrayLineaClientes = new String[qDatosClientes];
         File flClientes = new File("./src/main/java/data/clientes.tsv");
 	Scanner scCli = new Scanner(flClientes);
+        linea = scCli.nextLine();
 	while(scCli.hasNextLine()){
 	    linea = scCli.nextLine();
 	    arrayLineaClientes = linea.split("\t");
@@ -51,11 +52,12 @@ public class Main {
 	    cliente = new Cliente();
 	    cliente.setNombre(arrayLineaClientes[0]);
 	    cliente.setRut(arrayLineaClientes[1]);
-	   // cliente.setHistorial(arrayLineaClientes[2].split("_"));
-	   // cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
+	    //cliente.setHistorial(arrayLineaClientes[2].split("_"));
+	    //cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
 	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
 	}
-	videoClub1.setListaClientes(listaClientes);       
+	videoClub1.setListaClientes(listaClientes); 
+        
 //----------------------------------------------------------------------------------------------  
         Scanner entrada = new Scanner(System.in);
         int opción;
@@ -73,6 +75,7 @@ public class Main {
         
             
         }while(opción != 0);
-     
+        
+        
     } 
 }
