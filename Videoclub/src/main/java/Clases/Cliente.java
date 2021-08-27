@@ -19,8 +19,7 @@ public class Cliente{
         this.rut = rut;
     }
     public void setHistorial(short[][] listaPeliculas){       
-        ArrayList<short[]> copia = new ArrayList(listaPeliculas);
-        historial = copia;  
+        historial = listaPeliculas;
     }
     public void setPeliculasEnPosesion(short[] listaPeliculas){
         ArrayList<short> copia = new ArrayList(listaPeliculas);
