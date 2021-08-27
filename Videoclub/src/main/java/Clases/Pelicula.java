@@ -131,6 +131,6 @@ public class Pelicula {
     }
 
     public void setGeneros(String[] genero) {
-        generos = Arrays.copyOf(generos,generos.length);
+        generos = Arrays.copyOf(genero,genero.length);
     }         
 }
