@@ -10,6 +10,7 @@ import java.io.*;
  * @author sebas
  */
 public class Main {
+    //tttttttt
     public static void main(String[] args) throws Exception{
 //------------------------------Lectura de datos desde archivos------------------------------
         String linea;
@@ -19,21 +20,21 @@ public class Main {
 //--------------Peliculas
         String[] arrayLineaPeliculas = new String[qDatosPeliculas];
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
-	Scanner scPel = new Scanner(flPeliculas);
-	while(scPel.hasNextLine()){
-		linea = scPel.nextLine();
-		arrayLineaPeliculas = linea.split("\t");
-		//Guardar Datos en array de Peliculas [0]=nombre, [1]=Existencias, [2]=Disponibles, [3]Rank... 
-	}
+	    Scanner scPel = new Scanner(flPeliculas);
+	    while(scPel.hasNextLine()){
+		    linea = scPel.nextLine();
+		    arrayLineaPeliculas = linea.split("\t");
+		    //Guardar Datos en array de Peliculas [0]=nombre, [1]=Existencias, [2]=Disponibles, [3]Rank... 
+	    }
 //---------------Clientes
         String[] arrayLineaClientes = new String[qDatosClientes];
         File flClientes = new File("./src/main/java/data/clientes.tsv");
-	Scanner scCli = new Scanner(flClientes);
-	while(scCli.hasNextLine()){
-		linea = scCli.nextLine();
-		arrayLineaClientes = linea.split("\t");
-		//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
-	}
+	    Scanner scCli = new Scanner(flClientes);
+	    while(scCli.hasNextLine()){
+		    linea = scCli.nextLine();
+		    arrayLineaClientes = linea.split("\t");
+		    //Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
+	    }
         
 //----------------------------------------------------------------------------------------------  
         Scanner entrada = new Scanner(System.in);
