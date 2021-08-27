@@ -56,6 +56,20 @@ public class VideoClub {
         listaClientes.add(persona);
     }
     
+    /*Función para obtener tamaños de los Arrays
+    "listaClientes" y "listaPeliculas"
+    
+    Sus modos son:
+    1 = Tamaño lista de clientes
+    2 = Tamaño lista de peliculas*/
+    public int getSize(int modo){
+        switch(modo){
+            case 1: return listaClientes.size();
+            case 2: return listaPeliculas.size();
+        }
+        return 0;
+    }
+    
    /* 
     public void ordenarPeliculasRank(){
         Función que despliega todas las películas ordenadas desde la mejor

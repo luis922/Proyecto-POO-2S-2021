@@ -69,7 +69,7 @@ public class Main {
             opción = entrada.nextInt();
             switch(opción){
                  case 1:
-                    ;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
+                    Comprobadores.Comprobar.loginClientes(videoClub1);//Se llama a una función que verifique si el rut a ingresar está en la base de datos
                 case 2:
                     ;
                 default:
