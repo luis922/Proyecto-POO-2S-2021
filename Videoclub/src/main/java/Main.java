@@ -59,7 +59,7 @@ public class Main {
 	    cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
 	    cliente.setDeuda(arrayLineaClientes[4]);
 	}
-	videoClub1.setListaCliente(listaClientes)        
+	videoClub1.setListaCliente(listaClientes);       
 //----------------------------------------------------------------------------------------------  
         Scanner entrada = new Scanner(System.in);
         int opción;
