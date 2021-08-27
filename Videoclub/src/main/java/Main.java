@@ -6,11 +6,12 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-	VideoClub videoClub1 = new VideoClub();
-        Pelicula pelicula;
+	
+	    VideoClub videoClub1 = new VideoClub();
+        Pelicula pelicula ;
         Cliente cliente;
-        private ArrayList<Pelicula> listaPeliculas;
-        private ArrayList<Cliente> listaClientes;
+        ArrayList<Pelicula> listaPeliculas = new ArrayList();
+        ArrayList<Cliente> listaClientes = new ArrayList();
 //------------------------------Lectura de datos desde archivos------------------------------
         String linea;
         int qDatosPeliculas = 11;
@@ -24,7 +25,7 @@ public class Main {
 	    linea = scPel.nextLine();
 	    arrayLineaPeliculas = linea.split("\t");
 	    //Guardar Datos en array de Peliculas
-	    Pelicula pelicula = new Pelicula();
+	    pelicula = new Pelicula();
 	    pelicula.setNombre(arrayLineaPeliculas[0]);
 	    pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[1]));
 	    pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[2]));
@@ -47,14 +48,14 @@ public class Main {
 	    linea = scCli.nextLine();
 	    arrayLineaClientes = linea.split("\t");
 	    //Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
-	    Cliente cliente = new Cliente();
+	    cliente = new Cliente();
 	    cliente.setNombre(arrayLineaClientes[0]);
 	    cliente.setRut(arrayLineaClientes[1]);
-	    cliente.setHistorial(arrayLineaClientes[2].split("_"));
-	    cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
+	   // cliente.setHistorial(arrayLineaClientes[2].split("_"));
+	   // cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
 	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
 	}
-	videoClub1.setListaCliente(listaClientes);       
+	videoClub1.setListaClientes(listaClientes);       
 //----------------------------------------------------------------------------------------------  
         Scanner entrada = new Scanner(System.in);
         int opción;
@@ -72,7 +73,6 @@ public class Main {
         
             
         }while(opción != 0);
-        
-        
+     
     } 
 }
