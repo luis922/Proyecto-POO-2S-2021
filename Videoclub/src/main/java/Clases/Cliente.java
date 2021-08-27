@@ -18,25 +18,13 @@ public class Cliente{
     public void setRut(String rut){
         this.rut = rut;
     }
-    public void setHistorial(short id, short ranking){       
-        short i; 
-        for(i=0; i<50; i++){
-            if(historial[i][0] == 0){
-                historial[i][0] = id;
-                historial[i][1] = ranking;
-                return;
-            }
-        }
+    public void setHistorial(short[] listaPeliculas){       
+        ArrayList<short> copia = new ArrayList(listaPeliculas);
+        historial = copia;  
     }
-    public void setPeliculasEnPosesion(short id){
-        short i;
-        for(i=0; i<3; i++){
-            if(peliculasEnPosesion[i] == 0){
-                peliculasEnPosesion[i] = id;
-                return;
-            }
-        }
-            
+    public void setPeliculasEnPosesion(short[] listaPeliculas){
+        ArrayList<short> copia = new ArrayList(listaPeliculas);
+        peliculasEnPosesion = copia;    
     }
     public void setDeuda(int deuda){
         this.deuda = deuda;
