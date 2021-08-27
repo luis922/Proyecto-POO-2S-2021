@@ -3,7 +3,7 @@ package Clases;
 public class Cliente{
     private String nombre;
     private String rut;
-
+    // Arreglar historail para funcionar con matriz
     private short historial[][] = new short [50][2]; // 50 x 2 fila: id col:la recomienda?rank?
     private short peliculasEnPosesion[] = new short[3];  // id     fecha //3 x 2
     int deuda;
@@ -18,8 +18,8 @@ public class Cliente{
     public void setRut(String rut){
         this.rut = rut;
     }
-    public void setHistorial(short[] listaPeliculas){       
-        ArrayList<short> copia = new ArrayList(listaPeliculas);
+    public void setHistorial(short[][] listaPeliculas){       
+        ArrayList<short[]> copia = new ArrayList(listaPeliculas);
         historial = copia;  
     }
     public void setPeliculasEnPosesion(short[] listaPeliculas){
