@@ -21,9 +21,8 @@ public class Cliente{
     public void setHistorial(short[][] listaPeliculas){       
         historial = listaPeliculas;
     }
-    public void setPeliculasEnPosesion(short[] listaPeliculas){
-        ArrayList<short> copia = new ArrayList(listaPeliculas);
-        peliculasEnPosesion = copia;    
+    public void setPeliculasEnPosesion(short[] peliculasEnPosesion){      
+        this.peliculasEnPosesion =  Array.copyOf(peliculasEnPosesion, peliculasEnPosesion.length);    
     }
     public void setDeuda(int deuda){
         this.deuda = deuda;
