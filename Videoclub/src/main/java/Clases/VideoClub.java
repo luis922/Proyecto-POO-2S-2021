@@ -42,8 +42,9 @@ public class VideoClub {
         return copia;
     }
 
-    public void setListaPeliculas(Pelicula peli) {
-        listaPeliculas.add(peli);
+    public void setListaPeliculas(ArrayList<Pelicula> listaPelis) {
+        ArrayList<Pelicula> copia = new ArrayList(listaPelis);
+        listaPeliculas = copia;
     }
 
     public ArrayList<Cliente> getListaClientes() {
