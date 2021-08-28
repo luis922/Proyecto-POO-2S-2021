@@ -25,7 +25,6 @@ public class VideoClub {
     public void mostrarDatosClientes(String rut){
         int i;
         for(i=0; i<listaClientes.size(); i++){
-            System.out.println("Test");
             if(listaClientes.get(i).getRut().equals(rut)){
                 System.out.println("Datos cliente de rut " + rut);
                 System.out.println("Nombre: " + listaClientes.get(i).getNombre());
