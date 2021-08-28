@@ -62,9 +62,10 @@ public class Main {
 	}
 	videoClub1.setListaClientes(listaClientes);
         //Imprime ciertos datos almacenados
-        videoClub1.mostrarClientes();
-	videoClub1.mostrarPeliculas();
-	videoClub1.mostrarPeliculas(3);
+        videoClub1.mostrarDatosClientes();
+	videoClub1.mostrarDatos.Clientes("10693359");
+	videoClub1.mostrarDatosPeliculas();
+	videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 		/* Scanner entrada = new Scanner(System.in);
