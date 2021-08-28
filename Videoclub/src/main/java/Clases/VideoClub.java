@@ -11,6 +11,30 @@ public class VideoClub {
 
     }
     
+    public void mostrarClientes(){
+        int i;
+        for(i=0; i<listaClientes.size(); i++){
+            System.out.println("Cliente: " + (i+1));
+            System.out.println("Nombre: " + listaClientes.get(i).getNombre());
+            System.out.println("Rut: " + listaClientes.get(i).getRut());
+            System.out.println("Deuda: " + listaClientes.get(i).getDeuda());
+            System.out.println();
+        }
+    }
+    
+    public void mostrarClientes(String rut){
+        int i;
+        for(i=0; i<listaClientes.size(); i++){
+            System.out.println("Test");
+            if(listaClientes.get(i).getRut().equals(rut)){
+                System.out.println("Datos cliente de rut " + rut);
+                System.out.println("Nombre: " + listaClientes.get(i).getNombre());
+                System.out.println("Deuda: " + listaClientes.get(i).getDeuda());
+                return;
+            }
+        }
+    }
+    
     public String getNombreTienda() {
         return nombreTienda;
     }
