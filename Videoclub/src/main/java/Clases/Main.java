@@ -17,10 +17,10 @@ public class Main {
         //int qDatosClientes = 5;
         
 //--------------Peliculas
-        String[] arrayLineaPeliculas;// = new String[qDatosPeliculas];
+        String[] arrayLineaPeliculas;
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 	Scanner scPel = new Scanner(flPeliculas);
-        linea = scPel.nextLine();
+        scPel.nextLine();
 	while(scPel.hasNextLine()){
 	    linea = scPel.nextLine();
 	    arrayLineaPeliculas = linea.split("\t");
@@ -41,10 +41,10 @@ public class Main {
 	}
 	videoClub1.setListaPeliculas(listaPeliculas);
 //---------------Clientes
-        String[] arrayLineaClientes;// = new String[qDatosClientes];
+        String[] arrayLineaClientes;
         File flClientes = new File("./src/main/java/data/clientes.tsv");
 	Scanner scCli = new Scanner(flClientes);
-        linea = scCli.nextLine();
+        scCli.nextLine();
 	while(scCli.hasNextLine()){
 	    linea = scCli.nextLine();
 	    arrayLineaClientes = linea.split("\t");
