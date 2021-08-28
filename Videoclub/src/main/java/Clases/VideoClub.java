@@ -29,6 +29,7 @@ public class VideoClub {
                 System.out.println("Datos del cliente rut " + rut);
                 System.out.println("Nombre: " + listaClientes.get(i).getNombre());
                 System.out.println("Deuda: " + listaClientes.get(i).getDeuda());
+                System.out.println();
                 return;
             }
         }
