@@ -1,5 +1,5 @@
 package Clases;
-package com.mycompany.videoclub;
+
 import java.util.Arrays;
 
 public class Pelicula {
