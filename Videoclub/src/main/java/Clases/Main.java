@@ -63,7 +63,7 @@ public class Main {
 	videoClub1.setListaClientes(listaClientes);
         //Imprime ciertos datos almacenados
         videoClub1.mostrarDatosClientes();
-	videoClub1.mostrarDatos.Clientes("10693359");
+	videoClub1.mostrarDatos.Clientes("10693359-1");
 	videoClub1.mostrarDatosPeliculas();
 	videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
