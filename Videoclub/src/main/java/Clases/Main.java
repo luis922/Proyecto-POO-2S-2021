@@ -1,5 +1,8 @@
 package Clases;
-
+/*Instruccion del main:
+Solo compilar y ejecutar el main para obtener los datos desde los archivos
+y mostrar algunos de estos por pantalla
+*/
 import java.util.*; //Scanner, Arrays
 import java.io.*;
 
@@ -58,22 +61,25 @@ public class Main {
             listaClientes.add(cliente);
 	}
 	videoClub1.setListaClientes(listaClientes);
-        //Imprime los nombre de los datos almacenados
+        //Imprime ciertos datos almacenados
         int i,j;
         for (i=0; i<videoClub1.getListaPeliculas().size(); i++){
 			System.out.println("Nombre pelicula N°"+(i+1)+" es: "+videoClub1.getListaPeliculas().get(i).getNombre());
 			System.out.println("Año de estreno: "+videoClub1.getListaPeliculas().get(i).getAñoEstreno());
 			System.out.print("Genero: ");
             for(j=0; j<videoClub1.getListaPeliculas().get(i).getGeneros().length;j++ ) {
-				System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j] + ", ");
+
 				if (j == (videoClub1.getListaPeliculas().get(i).getGeneros().length - 1))
 					System.out.println(videoClub1.getListaPeliculas().get(i).getGeneros()[j]);
+				else
+					System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j] + ", ");
 			}
 			System.out.print("Actores: ");
 			for (j = 0; j <videoClub1.getListaPeliculas().get(i).getActores().length ; j++) {
-				System.out.print(videoClub1.getListaPeliculas().get(i).getActores()[j]+", ");
 				if(j==(videoClub1.getListaPeliculas().get(i).getActores().length -1 ))
 					System.out.println(videoClub1.getListaPeliculas().get(i).getActores()[j]);
+				else
+					System.out.print(videoClub1.getListaPeliculas().get(i).getActores()[j]+", ");
 			}
 			System.out.println();
         }
