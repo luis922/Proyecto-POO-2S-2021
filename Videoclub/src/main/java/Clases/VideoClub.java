@@ -11,7 +11,7 @@ public class VideoClub {
 
     }
     
-    public void mostrarClientes(){
+    public void mostrarDatosClientes(){
         int i;
         for(i=0; i<listaClientes.size(); i++){
             System.out.println("Cliente: " + (i+1));
@@ -22,7 +22,7 @@ public class VideoClub {
         }
     }
     
-    public void mostrarClientes(String rut){
+    public void mostrarDatosClientes(String rut){
         int i;
         for(i=0; i<listaClientes.size(); i++){
             System.out.println("Test");
@@ -33,6 +33,74 @@ public class VideoClub {
                 return;
             }
         }
+    }
+    
+    public void mostrarDatosPeliculas(){
+        int i,j;
+        for (i=0; i<listaPeliculas.size(); i++){
+            System.out.println("Nombre pelicula N°"+(i+1)+": "+listaPeliculas.get(i).getNombre());
+            System.out.println("Año de estreno: "+listaPeliculas.get(i).getAñoEstreno());
+            System.out.println("Duración: "+listaPeliculas.get(i).getDuraciónMin()+" minutos");
+            System.out.println("Calidad: "+listaPeliculas.get(i).getCalidad());
+            System.out.println("Puntuación: "+listaPeliculas.get(i).getValuacion()+ " de 5");
+            System.out.println("Sinopsis: "+listaPeliculas.get(i).getSinopsis());
+            System.out.print("Director(s): ");
+
+            for(j=0; j<listaPeliculas.get(i).getDirector().length;j++ ) {
+                if (j == (listaPeliculas.get(i).getDirector().length - 1))
+                    System.out.println(listaPeliculas.get(i).getDirector()[j]);
+                else
+                    System.out.print(listaPeliculas.get(i).getDirector()[j] + ", ");
+            }
+
+            for(j=0; j<listaPeliculas.get(i).getGeneros().length;j++ ) {
+                if (j == (listaPeliculas.get(i).getGeneros().length - 1))
+                    System.out.println(listaPeliculas.get(i).getGeneros()[j]);
+                else
+                    System.out.print(listaPeliculas.get(i).getGeneros()[j] + ", ");
+            }
+            System.out.print("Actores: ");
+            for (j = 0; j <listaPeliculas.get(i).getActores().length ; j++) {
+                if(j==(listaPeliculas.get(i).getActores().length -1 ))
+                    System.out.println(listaPeliculas.get(i).getActores()[j]);
+                else
+                    System.out.print(listaPeliculas.get(i).getActores()[j]+", ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void mostrarDatosPeliculas(int index){
+        int i,j;
+        System.out.println("Nombre: "+listaPeliculas.get(index).getNombre());
+        System.out.println("Año de estreno: "+listaPeliculas.get(index).getAñoEstreno());
+        System.out.println("Duración: "+listaPeliculas.get(index).getDuraciónMin()+" minutos");
+        System.out.println("Calidad: "+listaPeliculas.get(index).getCalidad());
+        System.out.println("Puntuación: "+listaPeliculas.get(index).getValuacion()+ " de 5");
+        System.out.println("Sinopsis: "+listaPeliculas.get(index).getSinopsis());
+        System.out.print("Director(s): ");
+
+        for(j=0; j<listaPeliculas.get(index).getDirector().length;j++ ) {
+            if (j == (listaPeliculas.get(index).getDirector().length - 1))
+                System.out.println(listaPeliculas.get(index).getDirector()[j]);
+            else
+                System.out.print(listaPeliculas.get(index).getDirector()[j] + ", ");
+        }
+
+        for(j=0; j<listaPeliculas.get(index).getGeneros().length;j++ ) {
+            if (j == (listaPeliculas.get(index).getGeneros().length - 1))
+                System.out.println(listaPeliculas.get(index).getGeneros()[j]);
+            else
+                System.out.print(listaPeliculas.get(index).getGeneros()[j] + ", ");
+        }
+        System.out.print("Actores: ");
+        for (j = 0; j <listaPeliculas.get(index).getActores().length ; j++) {
+            if(j==(listaPeliculas.get(index).getActores().length -1 ))
+                System.out.println(listaPeliculas.get(index).getActores()[j]);
+            else
+                System.out.print(listaPeliculas.get(index).getActores()[j]+", ");
+        }
+        System.out.println();
     }
     
     public String getNombreTienda() {
