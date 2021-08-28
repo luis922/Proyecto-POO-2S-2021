@@ -62,33 +62,10 @@ public class Main {
 	}
 	videoClub1.setListaClientes(listaClientes);
         //Imprime ciertos datos almacenados
-        int i,j;
-        for (i=0; i<videoClub1.getListaPeliculas().size(); i++){
-			System.out.println("Nombre pelicula N°"+(i+1)+" es: "+videoClub1.getListaPeliculas().get(i).getNombre());
-			System.out.println("Año de estreno: "+videoClub1.getListaPeliculas().get(i).getAñoEstreno());
-			System.out.print("Genero: ");
-            for(j=0; j<videoClub1.getListaPeliculas().get(i).getGeneros().length;j++ ) {
-
-				if (j == (videoClub1.getListaPeliculas().get(i).getGeneros().length - 1))
-					System.out.println(videoClub1.getListaPeliculas().get(i).getGeneros()[j]);
-				else
-					System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j] + ", ");
-			}
-			System.out.print("Actores: ");
-			for (j = 0; j <videoClub1.getListaPeliculas().get(i).getActores().length ; j++) {
-				if(j==(videoClub1.getListaPeliculas().get(i).getActores().length -1 ))
-					System.out.println(videoClub1.getListaPeliculas().get(i).getActores()[j]);
-				else
-					System.out.print(videoClub1.getListaPeliculas().get(i).getActores()[j]+", ");
-			}
-			System.out.println();
-        }
-		System.out.println("Clientes ");
-        for (i=0; i<videoClub1.getListaClientes().size(); i++){
-            System.out.println(videoClub1.getListaClientes().get(i).getNombre()+" "+
-					           videoClub1.getListaClientes().get(i).getRut());
-        }
-
+        videoClub1.mostrarDatosClientes();
+	videoClub1.mostrarDatosClientes("10693359-1");
+	videoClub1.mostrarDatosPeliculas();
+	videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 		/* Scanner entrada = new Scanner(System.in);
