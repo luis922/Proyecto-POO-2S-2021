@@ -36,7 +36,7 @@ public class Main {
 	    pelicula.setCalidad(arrayLineaPeliculas[7]);
 	    pelicula.setDirector(arrayLineaPeliculas[8].split("_"));
 	    pelicula.setActores(arrayLineaPeliculas[9].split("_"));
-	    //pelicula.setGeneros(arrayLineaPeliculas[10].split(" "));
+	    pelicula.setGeneros(arrayLineaPeliculas[10].split("_"));
 	    listaPeliculas.add(pelicula);
 	}
 	videoClub1.setListaPeliculas(listaPeliculas);
@@ -58,13 +58,15 @@ public class Main {
             listaClientes.add(cliente);
 	}
 	videoClub1.setListaClientes(listaClientes);
-        /*  Imprime los nombre de los datos almacenados
-        int i;
+        /*Imprime los nombre de los datos almacenados
+        int i,j;
         for (i=0; i<videoClub1.getListaPeliculas().size(); i++){
-            System.out.println(videoClub1.getListaPeliculas().get(i).getNombre());
+            for(j=0; j<videoClub1.getListaPeliculas().get(i).getGeneros().length;j++ )
+                System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j]);
+            System.out.println();
         }
         for (i=0; i<videoClub1.getListaClientes().size(); i++){
-            System.out.println(videoClub1.getListaClientes().get(i).getNombre());
+            System.out.println(videoClub1.getListaClientes().get(i).getRut());
         }
         */
 //----------------------------------------------------------------------------------------------  
@@ -84,7 +86,5 @@ public class Main {
         
             
         }while(opción != 0);
-        
-        
     } 
 }
