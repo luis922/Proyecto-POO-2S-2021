@@ -58,19 +58,34 @@ public class Main {
             listaClientes.add(cliente);
 	}
 	videoClub1.setListaClientes(listaClientes);
-        /*Imprime los nombre de los datos almacenados
+        //Imprime los nombre de los datos almacenados
         int i,j;
         for (i=0; i<videoClub1.getListaPeliculas().size(); i++){
-            for(j=0; j<videoClub1.getListaPeliculas().get(i).getGeneros().length;j++ )
-                System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j]);
-            System.out.println();
+			System.out.println("Nombre pelicula N°"+(i+1)+" es: "+videoClub1.getListaPeliculas().get(i).getNombre());
+			System.out.println("Año de estreno: "+videoClub1.getListaPeliculas().get(i).getAñoEstreno());
+			System.out.print("Genero: ");
+            for(j=0; j<videoClub1.getListaPeliculas().get(i).getGeneros().length;j++ ) {
+				System.out.print(videoClub1.getListaPeliculas().get(i).getGeneros()[j] + ", ");
+				if (j == (videoClub1.getListaPeliculas().get(i).getGeneros().length - 1))
+					System.out.println(videoClub1.getListaPeliculas().get(i).getGeneros()[j]);
+			}
+			System.out.print("Actores: ");
+			for (j = 0; j <videoClub1.getListaPeliculas().get(i).getActores().length ; j++) {
+				System.out.print(videoClub1.getListaPeliculas().get(i).getActores()[j]+", ");
+				if(j==(videoClub1.getListaPeliculas().get(i).getActores().length -1 ))
+					System.out.println(videoClub1.getListaPeliculas().get(i).getActores()[j]);
+			}
+			System.out.println();
         }
+		System.out.println("Clientes ");
         for (i=0; i<videoClub1.getListaClientes().size(); i++){
-            System.out.println(videoClub1.getListaClientes().get(i).getRut());
+            System.out.println(videoClub1.getListaClientes().get(i).getNombre()+" "+
+					           videoClub1.getListaClientes().get(i).getRut());
         }
-        */
+
 //----------------------------------------------------------------------------------------------  
-        Scanner entrada = new Scanner(System.in);
+       	//Menu arcaico por consola
+		/* Scanner entrada = new Scanner(System.in);
         int opción;
         do{
             Interfaz.Interface.login();
@@ -85,6 +100,6 @@ public class Main {
             }
         
             
-        }while(opción != 0);
+        }while(opción != 0); */
     } 
 }
