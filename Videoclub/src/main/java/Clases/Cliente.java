@@ -5,7 +5,7 @@ public class Cliente{
     private String nombre;
     private String rut;
     private ArrayList<Historial> historial; //Coleccion de objetos 1 anidación.
-    int deuda;
+    private int deuda;
 
     public Cliente() {
         deuda = 0;
