@@ -34,8 +34,8 @@ public class Main {
 	    pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[5]));
 	    pelicula.setSinopsis(arrayLineaPeliculas[6]);
 	    pelicula.setCalidad(arrayLineaPeliculas[7]);
-	    pelicula.setDirector(arrayLineaPeliculas[8].split(" "));
-	    pelicula.setActores(arrayLineaPeliculas[9].split(" "));
+	    pelicula.setDirector(arrayLineaPeliculas[8].split("_"));
+	    pelicula.setActores(arrayLineaPeliculas[9].split("_"));
 	    //pelicula.setGeneros(arrayLineaPeliculas[10].split(" "));
 	    listaPeliculas.add(pelicula);
 	}
