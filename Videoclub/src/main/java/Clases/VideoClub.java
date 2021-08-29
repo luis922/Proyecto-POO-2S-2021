@@ -33,18 +33,6 @@ public class VideoClub {
         System.out.println();
     }
     
-    public void mostrarDatosClientes(String rut){
-        int i;
-        for(i=0; i<listaClientes.size(); i++){
-            if(listaClientes.get(i).getRut().equals(rut)){
-                System.out.println("Datos del cliente rut " + rut);
-                System.out.println("Nombre: " + listaClientes.get(i).getNombre());
-                System.out.println("Deuda: " + listaClientes.get(i).getDeuda());
-                System.out.println();
-                return;
-            }
-        }
-    }
     
     public void mostrarDatosPeliculas(){
         int i,j;
