@@ -8,7 +8,7 @@ public class VideoClub {
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
 
     private HashMap<String,Pelicula> pelisXId;       //Key es ID pelicula
-    private HashMap<String, Cliente> clientesPorRut; //Key es Rut cliente
+    private HashMap<String, Cliente> clientesXRut; //Key es Rut cliente
 
     public VideoClub(){ //constructor
     }
@@ -19,17 +19,17 @@ public class VideoClub {
         for(i=0; i<listaClientes.size(); i++){
             rut = listaClientes.get(i).getRut();
             System.out.println("Cliente: " + (i+1));
-            System.out.println("Nombre: " + clientesPorRut.get(rut).getNombre());
+            System.out.println("Nombre: " + clientesXRut.get(rut).getNombre());
             System.out.println("Rut: " + rut);
-            System.out.println("Deuda: " + clientesPorRut.get(rut).getDeuda());
+            System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
             System.out.println();
         }
     }
     
     public void mostrarDatosClientes(String rut){
         System.out.println("Datos del cliente rut " + rut);
-        System.out.println("Nombre: " + clientesPorRut.get(rut).getNombre());
-        System.out.println("Deuda: " + clientesPorRut.get(rut).getDeuda());
+        System.out.println("Nombre: " + clientesXRut.get(rut).getNombre());
+        System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
         System.out.println();
     }
     
@@ -70,7 +70,7 @@ public class VideoClub {
     }
 
     public void mostrarDatosPeliculas(int index){
-        int i,j;
+        int j;
         System.out.println("Nombre: "+listaPeliculas.get(index).getNombre());
         System.out.println("Año de estreno: "+listaPeliculas.get(index).getAñoEstreno());
         System.out.println("Duración: "+listaPeliculas.get(index).getDuraciónMin()+" minutos");
@@ -135,18 +135,18 @@ public class VideoClub {
     }
     
     public void setClientesPorRut(HashMap <String, Cliente>  clientes){
-        this.clientesPorRut = new HashMap<String,Cliente>(clientes);
+        this.clientesXRut = new HashMap(clientes);
     }
     public HashMap<String, Cliente> getClientesPorRut(){
-        return new HashMap<String,Cliente>(clientes);
+        return new HashMap(clientesXRut);
     }
     
     public HashMap<String, Pelicula> getPelisXId() {
-        return new HashMap<String,Pelicula>(pelisXId);
+        return new HashMap(pelisXId);
     }
 
     public void setPelisXId(HashMap<String, Pelicula> pelisXId) {
-        this.pelisXId = new HashMap<String,Pelicula>(pelisXId;
+        this.pelisXId = new HashMap(pelisXId);
     }
     
     /*Función para obtener tamaños de los Arrays
