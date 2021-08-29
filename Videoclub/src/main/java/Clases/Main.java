@@ -14,7 +14,9 @@ public class Main {
         Cliente cliente;
         ArrayList<Pelicula> listaPeliculas = new ArrayList();
         ArrayList<Cliente> listaClientes = new ArrayList();
+	
         HashMap<String,Pelicula> pelisXId = new HashMap<String,Pelicula>();
+	HashMap<String, Cliente> clientesPorRut= new HashMap();
 //------------------------------Lectura de datos desde archivos------------------------------
         String linea;
         //int qDatosPeliculas = 11;
@@ -61,8 +63,10 @@ public class Main {
 	    cliente.setRut(arrayLineaClientes[1]);
 	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
             listaClientes.add(cliente);
+            clientesPorRut.put(arrayLineaClientes[1], cliente);//<---
 	}
 	videoClub1.setListaClientes(listaClientes);
+	videoClub1.setClientesPorRut(clientesPorRut);
 
         //Imprime ciertos datos almacenados
         videoClub1.mostrarDatosClientes();
