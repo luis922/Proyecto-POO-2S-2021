@@ -1,5 +1,5 @@
 package Clases;
-import java.util.ArrayList;
+import java.util.*;
 
 public class VideoClub {
     private String nombreTienda;
@@ -7,19 +7,30 @@ public class VideoClub {
     private ArrayList<Pelicula> listaPeliculas;//Coleccion de objetos 1 anidación
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
 
-    public VideoClub(){ //constructor
+    private HashMap<String, Cliente> clientesPorRut;
 
+    public VideoClub(){ //constructor
+        clientesPorRut = new HashMap();
     }
     
     public void mostrarDatosClientes(){
         int i;
+        String rut;
         for(i=0; i<listaClientes.size(); i++){
+            rut = listaClientes.get(i).getRut();
             System.out.println("Cliente: " + (i+1));
-            System.out.println("Nombre: " + listaClientes.get(i).getNombre());
-            System.out.println("Rut: " + listaClientes.get(i).getRut());
-            System.out.println("Deuda: " + listaClientes.get(i).getDeuda());
+            System.out.println("Nombre: " + clientesPorRut.get(rut).getNombre());
+            System.out.println("Rut: " + rut);
+            System.out.println("Deuda: " + clientesPorRut.get(rut).getDeuda());
             System.out.println();
         }
+    }
+    
+    public void mostrarDatosClientes(String rut){
+        System.out.println("Datos del cliente rut " + rut);
+        System.out.println("Nombre: " + clientesPorRut.get(rut).getNombre());
+        System.out.println("Deuda: " + clientesPorRut.get(rut).getDeuda());
+        System.out.println();
     }
     
     public void mostrarDatosClientes(String rut){
@@ -133,6 +144,13 @@ public class VideoClub {
 
     public void setListaClientes( ArrayList<Cliente> listaClientes) {
         this.listaClientes = new ArrayList(listaClientes);
+    }
+    
+    public void setClientesPorRut(HashMap <String, Cliente>  clientes){
+        this.clientesPorRut = new HashMap(clientes);
+    }
+    public HashMap<String, Cliente> getClientesPorRut(){
+        return clientesPorRut;
     }
     
     /*Función para obtener tamaños de los Arrays
