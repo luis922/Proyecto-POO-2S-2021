@@ -7,6 +7,7 @@ public class VideoClub {
     private ArrayList<Pelicula> listaPeliculas;//Coleccion de objetos 1 anidación
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
 
+    private HashMap<String,Pelicula> pelisXId;
     private HashMap<String, Cliente> clientesPorRut;
 
     public VideoClub(){ //constructor
@@ -135,10 +136,18 @@ public class VideoClub {
     }
     
     public void setClientesPorRut(HashMap <String, Cliente>  clientes){
-        this.clientesPorRut = new HashMap(clientes);
+        this.clientesPorRut = new HashMap<String,Cliente>(clientes);
     }
     public HashMap<String, Cliente> getClientesPorRut(){
-        return clientesPorRut;
+        return new HashMap<String,Cliente>(clientes);
+    }
+    
+    public HashMap<String, Pelicula> getPelisXId() {
+        return new HashMap<String,Pelicula>(pelisXId);
+    }
+
+    public void setPelisXId(HashMap<String, Pelicula> pelisXId) {
+        this.pelisXId = new HashMap<String,Pelicula>(pelisXId;
     }
     
     /*Función para obtener tamaños de los Arrays
