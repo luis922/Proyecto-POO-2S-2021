@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Pelicula {
      
     private String nombre;
-    private short id;
+    private String id;
     private short existencias; //Numero total de peliculas de la que es dueña la tienda
     private short disponibles; //Numero de peliculas disponibles para arrendar
     private float valuacion;   //Valoracion de la pelicula de 0 a 5 estrellas
@@ -29,11 +29,11 @@ public class Pelicula {
         this.nombre = nombre;
     }
 
-    public short getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(String id) {
         this.id = id;
     }
 

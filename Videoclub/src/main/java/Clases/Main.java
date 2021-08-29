@@ -14,6 +14,7 @@ public class Main {
         Cliente cliente;
         ArrayList<Pelicula> listaPeliculas = new ArrayList();
         ArrayList<Cliente> listaClientes = new ArrayList();
+        HashMap<String,Pelicula> pelisXId = new HashMap<String,Pelicula>();
 //------------------------------Lectura de datos desde archivos------------------------------
         String linea;
         //int qDatosPeliculas = 11;
@@ -41,8 +42,11 @@ public class Main {
 	    pelicula.setActores(arrayLineaPeliculas[9].split("_"));
 	    pelicula.setGeneros(arrayLineaPeliculas[10].split("_"));
 	    listaPeliculas.add(pelicula);
+	    pelisXId.put(pelicula.getId(),pelicula);
 	}
 	videoClub1.setListaPeliculas(listaPeliculas);
+	videoClub1.setPelisXId(pelisXId); //Se asigna el hashmao de peliculas por ide al video club
+
 //---------------Clientes
         String[] arrayLineaClientes;
         File flClientes = new File("./src/main/java/data/clientes.tsv");
@@ -55,12 +59,11 @@ public class Main {
 	    cliente = new Cliente();
 	    cliente.setNombre(arrayLineaClientes[0]);
 	    cliente.setRut(arrayLineaClientes[1]);
-	    //cliente.setHistorial(arrayLineaClientes[2].split("_"));
-	    //cliente.setPeliculasPosesion(arrayLineaClientes[3].split("_"));
 	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
             listaClientes.add(cliente);
 	}
 	videoClub1.setListaClientes(listaClientes);
+
         //Imprime ciertos datos almacenados
         videoClub1.mostrarDatosClientes();
 	videoClub1.mostrarDatosClientes("10693359-1");
