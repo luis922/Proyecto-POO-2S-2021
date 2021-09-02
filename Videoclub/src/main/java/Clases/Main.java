@@ -10,22 +10,49 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws Exception{
 	VideoClub videoClub1 = new VideoClub();
-        Pelicula pelicula;
-        Cliente cliente;
+        Pelicula pelicula = new Pelicula();
+        Cliente cliente = new Cliente();
+        
         ArrayList<Pelicula> listaPeliculas = new ArrayList();
         ArrayList<Cliente> listaClientes = new ArrayList();
 	
-        HashMap<String,Pelicula> pelisXId = new HashMap<String,Pelicula>();
-	HashMap<String, Cliente> clientesPorRut= new HashMap();
-//------------------------------Lectura de datos desde archivos------------------------------
-        String linea;
-        //int qDatosPeliculas = 11;
-        //int qDatosClientes = 5;
-        
+        HashMap<String,Pelicula> pelisXId = new HashMap();
+	HashMap<String, Cliente> clientesXRut= new HashMap();
+//------------------------------Lectura de datos desde archivos------------------------------        
 //--------------Peliculas
-        String[] arrayLineaPeliculas;
+        LeerArcvhivoPeliculas(videoClub1,pelicula, listaPeliculas,pelisXId);
+        LeerArchivoClientes(videoClub1, cliente, listaClientes,clientesXRut);
+//---------------Clientes
+   
+
+//---------------Imprime ciertos datos almacenados
+        videoClub1.mostrarDatosClientes();
+	videoClub1.mostrarDatosClientes("10693359-1");
+	videoClub1.mostrarDatosPeliculas();
+	videoClub1.mostrarDatosPeliculas(3);
+//----------------------------------------------------------------------------------------------  
+       	//Menu arcaico por consola
+		/* Scanner entrada = new Scanner(System.in);
+        int opción;
+        do{
+            Interfaz.Interface.login();
+            opción = entrada.nextInt();
+            switch(opción){
+                 case 1:
+                    Comprobadores.Comprobar.loginClientes(videoClub1);//Se llama a una función que verifique si el rut a ingresar está en la base de datos
+                case 2:
+                    ;
+                default:
+                    if(opción != 0) System.out.println("Ingrese una opción válida...");
+            }
+        }while(opción != 0); */
+    }
+    
+    public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula, ArrayList<Pelicula> listaPeliculas, HashMap<String, Pelicula> pelisXId) throws FileNotFoundException{
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 	Scanner scPel = new Scanner(flPeliculas);
+        String linea;
+        String[] arrayLineaPeliculas;
         scPel.nextLine();
 	while(scPel.hasNextLine()){
 	    linea = scPel.nextLine();
@@ -46,13 +73,14 @@ public class Main {
 	    listaPeliculas.add(pelicula);
 	    pelisXId.put(pelicula.getId(),pelicula);
 	}
-	videoClub1.setListaPeliculas(listaPeliculas);
-	videoClub1.setPelisXId(pelisXId); //Se asigna el hashmao de peliculas por ide al video club
-
-//---------------Clientes
-        String[] arrayLineaClientes;
+	videoClub.setListaPeliculas(listaPeliculas);
+	videoClub.setPelisXId(pelisXId);
+    }
+    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente, ArrayList<Cliente> listaClientes, HashMap<String, Cliente> clientesXRut)throws FileNotFoundException{
         File flClientes = new File("./src/main/java/data/clientes.tsv");
-	Scanner scCli = new Scanner(flClientes);
+        Scanner scCli = new Scanner(flClientes);
+        String linea;
+        String[] arrayLineaClientes;
         scCli.nextLine();
 	while(scCli.hasNextLine()){
 	    linea = scCli.nextLine();
@@ -63,33 +91,9 @@ public class Main {
 	    cliente.setRut(arrayLineaClientes[1]);
 	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
             listaClientes.add(cliente);
-            clientesPorRut.put(arrayLineaClientes[1], cliente);//<---
+            clientesXRut.put(arrayLineaClientes[1], cliente);//<---
 	}
-	videoClub1.setListaClientes(listaClientes);
-	videoClub1.setClientesPorRut(clientesPorRut);
-
-        //Imprime ciertos datos almacenados
-        videoClub1.mostrarDatosClientes();
-	videoClub1.mostrarDatosClientes("10693359-1");
-	videoClub1.mostrarDatosPeliculas();
-	videoClub1.mostrarDatosPeliculas(3);
-//----------------------------------------------------------------------------------------------  
-       	//Menu arcaico por consola
-		/* Scanner entrada = new Scanner(System.in);
-        int opción;
-        do{
-            Interfaz.Interface.login();
-            opción = entrada.nextInt();
-            switch(opción){
-                 case 1:
-                    Comprobadores.Comprobar.loginClientes(videoClub1);//Se llama a una función que verifique si el rut a ingresar está en la base de datos
-                case 2:
-                    ;
-                default:
-                    if(opción != 0) System.out.println("Ingrese una opción válida...");
-            }
-        
-            
-        }while(opción != 0); */
-    } 
+	videoClub.setListaClientes(listaClientes);
+	videoClub.setClientesPorRut(clientesXRut);
+    }
 }
