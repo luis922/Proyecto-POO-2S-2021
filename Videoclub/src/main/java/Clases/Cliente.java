@@ -10,6 +10,13 @@ public class Cliente{
     public Cliente() {
         deuda = 0;
     }
+    
+    public Cliente(String nombre, String rut){ //Para el ingreso de un cliente nuevo, no existente en la base de datos.
+        this.nombre = nombre;
+        this.rut = rut;
+        this.deuda = 0;
+        this.historial = new ArrayList();
+    }
 
     public String getNombre() {
         return nombre;
