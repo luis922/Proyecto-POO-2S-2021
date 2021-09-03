@@ -123,11 +123,17 @@ public class VideoClub {
     }
 
     public void addPeliToListaPelis(Pelicula peli) {
-        listaPeliculas.add(peli);
+        if(!listaPeliculas.contains(peli))
+            listaPeliculas.add(peli);
+        else
+            System.out.println("La pelicula \""+peli.getNombre()+ "\" ya esta almacenada");
     }
 
     public void addClientToListaClients( Cliente cliente) {
-        listaClientes.add(cliente);
+        if(!listaClientes.contains(cliente))
+            listaClientes.add(cliente);
+        else
+            System.out.println("El cliente de rut "+cliente.getRut()+" ya esta almacenado");
     }
     
     public void addClientToClientXRut(String rut, Cliente cliente){
@@ -152,6 +158,20 @@ public class VideoClub {
 
     public boolean containsRUT(String rut){
         return clientesXRut.containsKey(rut);
+    }
+    
+    public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
+        for (int j = 0; j < listaPeliculas.size() ; j++)
+            if(listaPeliculas.get(j).getId().equals(id))
+                return true;
+        return false;
+    }
+
+    public boolean existRUT(String rut){//Comprueba si el cliente esta ya guardada en base al RUT otorgado
+        for (int j = 0; j < listaClientes.size() ; j++)
+            if(listaPeliculas.get(j).getId().equals(rut))
+                return true;
+        return false;
     }
     
     /*Función para obtener tamaños de los Arrays
