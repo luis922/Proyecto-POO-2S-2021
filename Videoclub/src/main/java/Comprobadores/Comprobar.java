@@ -18,11 +18,11 @@ public class Comprobar {
         String rutIngresado;
         int i = 0;
         do{
-            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado.");
+            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
             else System.out.println("Ingrese el rut con su respectivo \"-\": ");
             rutIngresado = aux.nextLine();
             i++;
-        }while(formatoCorrectoRut(rutIngresado) != true);
+        }while(formatoCorrectoRut(rutIngresado) != true || x.containsRUT(rutIngresado)==false);
         
         return rutIngresado;
     }
@@ -34,7 +34,7 @@ public class Comprobar {
             if(rut.charAt(i) == '-') guión++;
             if(Character.isDigit(rut.charAt(i)) == false) letras ++;
         }
-        if(guión == 1 && letras == 1){
+        if(guión == 1 && letras <= 1){
             return true;
         }
         else return false;
