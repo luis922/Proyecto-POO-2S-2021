@@ -146,7 +146,13 @@ public class VideoClub {
         return pelisXId.get(id);
     }
 
+    public boolean containsID(String id){
+        return pelisXId.containsKey(id);
+    }
 
+    public boolean containsRUT(String rut){
+        return clientesXRut.containsKey(rut);
+    }
     
     /*Función para obtener tamaños de los Arrays
     "listaClientes" y "listaPeliculas"
