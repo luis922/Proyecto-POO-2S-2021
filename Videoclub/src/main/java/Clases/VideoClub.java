@@ -11,6 +11,10 @@ public class VideoClub {
     private HashMap<String, Cliente> clientesXRut; //Key es Rut cliente
 
     public VideoClub(){ //constructor
+        listaPeliculas = new ArrayList<>();
+        listaClientes = new ArrayList<>();
+        pelisXId = new HashMap<>();
+        clientesXRut = new HashMap<>();
     }
     
     public void mostrarDatosClientes(){
@@ -118,36 +122,31 @@ public class VideoClub {
         this.direccion = direccion;
     }
 
-    public ArrayList<Pelicula> getListaPeliculas() {
-        return new ArrayList(listaPeliculas);
+    public void addPeliToListaPelis(Pelicula peli) {
+        listaPeliculas.add(peli);
     }
 
-    public void setListaPeliculas(ArrayList<Pelicula> listaPelis) {
-        listaPeliculas = new ArrayList(listaPelis);
-    }
-
-    public ArrayList<Cliente> getListaClientes() {
-        return new ArrayList(listaClientes);
-    }
-
-    public void setListaClientes( ArrayList<Cliente> listaClientes) {
-        this.listaClientes = new ArrayList(listaClientes);
+    public void addClientToListaClients( Cliente cliente) {
+        listaClientes.add(cliente);
     }
     
-    public void setClientesPorRut(HashMap <String, Cliente>  clientes){
-        this.clientesXRut = new HashMap(clientes);
-    }
-    public HashMap<String, Cliente> getClientesPorRut(){
-        return new HashMap(clientesXRut);
-    }
-    
-    public HashMap<String, Pelicula> getPelisXId() {
-        return new HashMap(pelisXId);
+    public void addClientToClientXRut(String rut, Cliente cliente){
+        clientesXRut.put(rut,cliente);
     }
 
-    public void setPelisXId(HashMap<String, Pelicula> pelisXId) {
-        this.pelisXId = new HashMap(pelisXId);
+    public void addPeliToPelisXId(String id, Pelicula peli) {
+        pelisXId.put(id,peli);
     }
+
+    public Cliente getClientFromClientXRut(String rut){
+        return clientesXRut.get(rut);
+    }
+
+    public Pelicula getPeliFromPelisXId(String id) {
+        return pelisXId.get(id);
+    }
+
+
     
     /*Función para obtener tamaños de los Arrays
     "listaClientes" y "listaPeliculas"

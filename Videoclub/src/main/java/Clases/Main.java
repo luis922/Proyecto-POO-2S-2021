@@ -9,27 +9,18 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-	VideoClub videoClub1 = new VideoClub();
+		VideoClub videoClub1 = new VideoClub();
         Pelicula pelicula = new Pelicula();
         Cliente cliente = new Cliente();
-        
-        ArrayList<Pelicula> listaPeliculas = new ArrayList();
-        ArrayList<Cliente> listaClientes = new ArrayList();
-	
-        HashMap<String,Pelicula> pelisXId = new HashMap();
-	HashMap<String, Cliente> clientesXRut= new HashMap();
-//------------------------------Lectura de datos desde archivos------------------------------        
-//--------------Peliculas
-        LeerArcvhivoPeliculas(videoClub1,pelicula, listaPeliculas,pelisXId);
-        LeerArchivoClientes(videoClub1, cliente, listaClientes,clientesXRut);
-//---------------Clientes
-   
 
-//---------------Imprime ciertos datos almacenados
+//------------------------------Lectura de datos desde archivos--------------------------------
+        LeerArcvhivoPeliculas(videoClub1,pelicula);
+        LeerArchivoClientes(videoClub1, cliente);
+//---------------Imprime ciertos datos almacenados----------------------------------------------
         videoClub1.mostrarDatosClientes();
-	videoClub1.mostrarDatosClientes("10693359-1");
-	videoClub1.mostrarDatosPeliculas();
-	videoClub1.mostrarDatosPeliculas(3);
+		videoClub1.mostrarDatosClientes("10693359-1");
+		videoClub1.mostrarDatosPeliculas();
+		videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 		/* Scanner entrada = new Scanner(System.in);
@@ -48,52 +39,48 @@ public class Main {
         }while(opción != 0); */
     }
     
-    public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula, ArrayList<Pelicula> listaPeliculas, HashMap<String, Pelicula> pelisXId) throws FileNotFoundException{
+    public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
-	Scanner scPel = new Scanner(flPeliculas);
+		Scanner scPel = new Scanner(flPeliculas);
         String linea;
         String[] arrayLineaPeliculas;
         scPel.nextLine();
-	while(scPel.hasNextLine()){
-	    linea = scPel.nextLine();
-	    arrayLineaPeliculas = linea.split("\t");
-	    //Guardar Datos en array de Peliculas
-	    pelicula = new Pelicula();
-	    pelicula.setNombre(arrayLineaPeliculas[0]);
-	    pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[1]));
-	    pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[2]));
-	    pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[3]));
-	    pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[4]));
-	    pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[5]));
-	    pelicula.setSinopsis(arrayLineaPeliculas[6]);
-	    pelicula.setCalidad(arrayLineaPeliculas[7]);
-	    pelicula.setDirector(arrayLineaPeliculas[8].split("_"));
-	    pelicula.setActores(arrayLineaPeliculas[9].split("_"));
-	    pelicula.setGeneros(arrayLineaPeliculas[10].split("_"));
-	    listaPeliculas.add(pelicula);
-	    pelisXId.put(pelicula.getId(),pelicula);
-	}
-	videoClub.setListaPeliculas(listaPeliculas);
-	videoClub.setPelisXId(pelisXId);
+		while(scPel.hasNextLine()){
+			linea = scPel.nextLine();
+			arrayLineaPeliculas = linea.split("\t");
+			//Guardar Datos en array de Peliculas
+			pelicula = new Pelicula();
+			pelicula.setNombre(arrayLineaPeliculas[0]);
+			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[1]));
+			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[2]));
+			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[3]));
+			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[4]));
+			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[5]));
+			pelicula.setSinopsis(arrayLineaPeliculas[6]);
+			pelicula.setCalidad(arrayLineaPeliculas[7]);
+			pelicula.setDirector(arrayLineaPeliculas[8].split("_"));
+			pelicula.setActores(arrayLineaPeliculas[9].split("_"));
+			pelicula.setGeneros(arrayLineaPeliculas[10].split("_"));
+			videoClub.addPeliToListaPelis(pelicula);
+			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
+		}
     }
-    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente, ArrayList<Cliente> listaClientes, HashMap<String, Cliente> clientesXRut)throws FileNotFoundException{
+    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)throws FileNotFoundException{
         File flClientes = new File("./src/main/java/data/clientes.tsv");
         Scanner scCli = new Scanner(flClientes);
         String linea;
         String[] arrayLineaClientes;
         scCli.nextLine();
-	while(scCli.hasNextLine()){
-	    linea = scCli.nextLine();
-	    arrayLineaClientes = linea.split("\t");
-	    //Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
-	    cliente = new Cliente();
-	    cliente.setNombre(arrayLineaClientes[0]);
-	    cliente.setRut(arrayLineaClientes[1]);
-	    cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
-            listaClientes.add(cliente);
-            clientesXRut.put(arrayLineaClientes[1], cliente);//<---
-	}
-	videoClub.setListaClientes(listaClientes);
-	videoClub.setClientesPorRut(clientesXRut);
+		while(scCli.hasNextLine()){
+			linea = scCli.nextLine();
+			arrayLineaClientes = linea.split("\t");
+			//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
+			cliente = new Cliente();
+			cliente.setNombre(arrayLineaClientes[0]);
+			cliente.setRut(arrayLineaClientes[1]);
+			cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
+			videoClub.addClientToListaClients(cliente);
+			videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
+		}
     }
 }
