@@ -8,7 +8,6 @@ public class Cliente{
     private int deuda;
 
     public Cliente() {
-        deuda = 0;
     }
     
     public Cliente(String nombre, String rut){ //Para el ingreso de un cliente nuevo, no existente en la base de datos.
