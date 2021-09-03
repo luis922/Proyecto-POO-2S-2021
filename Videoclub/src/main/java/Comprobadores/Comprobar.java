@@ -11,7 +11,7 @@ import Clases.*;
  * @author sebas
  */
 
-
+/*
 public class Comprobar {
     public static void loginClientes(VideoClub x){
         Scanner aux = new Scanner(System.in);
@@ -40,3 +40,4 @@ public class Comprobar {
         return false;
     }
 }
+*/
