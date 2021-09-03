@@ -23,20 +23,24 @@ public class Main {
 		videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
-		/* Scanner entrada = new Scanner(System.in);
-        int opción;
+		 Scanner entrada = new Scanner(System.in);
+        byte opción;
         do{
             Interfaz.Interface.login();
-            opción = entrada.nextInt();
+            opción = entrada.nextByte();
             switch(opción){
                  case 1:
-                    Comprobadores.Comprobar.loginClientes(videoClub1);//Se llama a una función que verifique si el rut a ingresar está en la base de datos
+                     String rut = Comprobadores.Comprobar.loginClientes(videoClub1);
+                    if (videoClub1.containsRUT(rut)) Interfaz.Interface.menúCliente(rut,videoClub1);
+                    break;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
                 case 2:
-                    ;
+                    Interfaz.Interface.menúAdmin(videoClub1);
+                    break;
                 default:
                     if(opción != 0) System.out.println("Ingrese una opción válida...");
+                    break;
             }
-        }while(opción != 0); */
+        }while(opción != 0); 
     }
     
     public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
