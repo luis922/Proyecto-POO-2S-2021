@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Cliente{
     private String nombre;
     private String rut;
-    private ArrayList<Historial> historial; //Coleccion de objetos 1 anidación.
+    private ArrayList<Historial> listaArriendo; //Coleccion de objetos 1 anidación.
     private int deuda;
 
     public Cliente() {
@@ -14,7 +14,7 @@ public class Cliente{
         this.nombre = nombre;
         this.rut = rut;
         this.deuda = 0;
-        this.historial = new ArrayList();
+        this.listaArriendo = new ArrayList();
     }
 
     public String getNombre() {
