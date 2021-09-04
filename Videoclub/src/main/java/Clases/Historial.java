@@ -1,7 +1,7 @@
 package Clases;
 
 public class Historial {
-    private Pelicula film;
+    private String id;
     private float valoracion; //Numero de estrellas con la que el cliente valoro el film de 1 a 5
     private String fechaArriendo;
     private String fechaEntrega;
@@ -11,13 +11,14 @@ public class Historial {
         entregado = true;
     }
 
-    public Pelicula getFilm() {
-        return film;
+    public String getId() {
+        return id;
     }
 
-    public void setFilm(Pelicula film) {
-        this.film = film;
+    public void setId(String id) {
+        this.id = id;
     }
+
 
     public float getValoracion() {
         return valoracion;
