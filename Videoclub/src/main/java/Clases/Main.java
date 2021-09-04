@@ -23,7 +23,7 @@ public class Main {
 		videoClub1.mostrarDatosPeliculas(3);
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
-		 Scanner entrada = new Scanner(System.in);
+/*		 Scanner entrada = new Scanner(System.in);
         byte opción;
         do{
             Interfaz.Interface.login();
@@ -40,7 +40,7 @@ public class Main {
                     if(opción != 0) System.out.println("Ingrese una opción válida...");
                     break;
             }
-        }while(opción != 0); 
+        }while(opción != 0);*/ 
     }
     
     public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
