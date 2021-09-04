@@ -19,7 +19,6 @@ public class Historial {
         this.id = id;
     }
 
-
     public float getValoracion() {
         return valoracion;
     }
