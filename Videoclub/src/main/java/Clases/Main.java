@@ -14,7 +14,7 @@ public class Main {
         Cliente cliente = new Cliente();
 
 //------------------------------Lectura de datos desde archivos--------------------------------
-        LeerArcvhivoPeliculas(videoClub1,pelicula);
+        LeerArchivoPeliculas(videoClub1,pelicula);
         LeerArchivoClientes(videoClub1, cliente);
 //---------------Imprime ciertos datos almacenados----------------------------------------------
         videoClub1.mostrarDatosClientes();
@@ -43,7 +43,7 @@ public class Main {
         }while(opción != 0);*/ 
     }
     
-    public static void LeerArcvhivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
+    public static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 		Scanner scPel = new Scanner(flPeliculas);
         String linea;
@@ -54,17 +54,18 @@ public class Main {
 			arrayLineaPeliculas = linea.split("\t");
 			//Guardar Datos en array de Peliculas
 			pelicula = new Pelicula();
-			pelicula.setNombre(arrayLineaPeliculas[0]);
-			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[1]));
-			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[2]));
-			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[3]));
-			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[4]));
-			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[5]));
-			pelicula.setSinopsis(arrayLineaPeliculas[6]);
-			pelicula.setCalidad(arrayLineaPeliculas[7]);
-			pelicula.setDirector(arrayLineaPeliculas[8].split("_"));
-			pelicula.setActores(arrayLineaPeliculas[9].split("_"));
-			pelicula.setGeneros(arrayLineaPeliculas[10].split("_"));
+                        pelicula.setId(arrayLineaPeliculas[0]);
+			pelicula.setNombre(arrayLineaPeliculas[1]);
+			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[2]));
+			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[3]));
+			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[4]));
+			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[5]));
+			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[6]));
+			pelicula.setSinopsis(arrayLineaPeliculas[7]);
+			pelicula.setCalidad(arrayLineaPeliculas[8]);
+			pelicula.setDirector(arrayLineaPeliculas[9].split("_"));
+			pelicula.setActores(arrayLineaPeliculas[10].split("_"));
+			pelicula.setGeneros(arrayLineaPeliculas[11].split("_"));
 			videoClub.addPeliToListaPelis(pelicula);
 			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
 		}
@@ -75,16 +76,29 @@ public class Main {
         String linea;
         String[] arrayLineaClientes;
         scCli.nextLine();
-		while(scCli.hasNextLine()){
-			linea = scCli.nextLine();
-			arrayLineaClientes = linea.split("\t");
-			//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
-			cliente = new Cliente();
-			cliente.setNombre(arrayLineaClientes[0]);
-			cliente.setRut(arrayLineaClientes[1]);
-			cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
-			videoClub.addClientToListaClients(cliente);
-			videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
+	while(scCli.hasNextLine()){
+		linea = scCli.nextLine();
+		arrayLineaClientes = linea.split("\t");
+		//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
+		cliente = new Cliente();
+		cliente.setNombre(arrayLineaClientes[0]);
+		cliente.setRut(arrayLineaClientes[1]);
+		/*
+		arrayIdHistorial = arrayLineaClientes[2].split("_");
+		for(i=0; i<arrayIdHistorial.length; i++){
+		    film = videoClub.getPeliFromPelisXId(arrayIdHistorial[i]);
+		    historial.setFilm(film.getId());
+		    cliente.setHistorial(historial);
+		}
+		for(i=0; i<arrayIdHistorial.length; i++){
+		    System.out.print(arrayIdHistorial[i]+ " ");
+		    System.out.println(cliente.getHistorial().get(i).getId());
+		}
+		System.out.println("");
+		*/
+		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
+		videoClub.addClientToListaClients(cliente);
+		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
 		}
     }
 }
