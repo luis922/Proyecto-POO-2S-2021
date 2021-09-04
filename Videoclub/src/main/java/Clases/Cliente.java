@@ -33,12 +33,8 @@ public class Cliente{
         this.rut = rut;
     }
 
-    public void setHistorial(ArrayList<Historial> historial) {
-        this.historial = new ArrayList(historial);
-    }
-
-    public ArrayList<Historial> getHistorial() {
-        return new ArrayList(historial);
+    public void addArriendoToHistorial(Historial arriendo) {
+        listaArriendo.add(arriendo);
     }
 
     public int getDeuda() {
