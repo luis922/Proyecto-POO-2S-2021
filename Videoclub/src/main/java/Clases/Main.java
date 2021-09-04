@@ -20,7 +20,7 @@ public class Main {
         videoClub1.mostrarDatosClientes();
 		videoClub1.mostrarDatosClientes("10693359-1");
 		videoClub1.mostrarDatosPeliculas();
-		videoClub1.mostrarDatosPeliculas(3);
+		videoClub1.mostrarDatosPeliculas("3");
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 /*		 Scanner entrada = new Scanner(System.in);
