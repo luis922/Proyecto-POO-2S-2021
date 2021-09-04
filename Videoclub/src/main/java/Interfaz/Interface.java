@@ -32,10 +32,10 @@ public class Interface {
             opción = input.nextByte();
             switch(opción){
                 case 1:
-                    listaPeliculas(x);
+                    //listaPeliculas(x);
                     break;
                 case 2:
-                    historialCliente(x,usuario);
+                    //historialCliente(x,usuario);
                 default:
                     System.out.println("Ingrese una opción valida");
             }
@@ -58,19 +58,19 @@ public class Interface {
             opción = input.nextByte();
             switch(opción){
                 case 1:
-                    listaClientes(x);
+                    //listaClientes(x);
                     break;
                 case 2:
-                    listaPeliculas(x);
+                    //listaPeliculas(x);
                     break;
                 case 3:
-                    registroClientes(x);
+                    //registroClientes(x);
                     break;
                 case 4:
-                    registroPeliculas(x);
+                    //registroPeliculas(x);
                     break;
                 case 5:
-                    historialCliente(x,null);
+                    //historialCliente(x,null);
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida");
