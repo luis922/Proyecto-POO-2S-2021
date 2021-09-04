@@ -41,67 +41,70 @@ public class VideoClub {
     public void mostrarDatosPeliculas(){
         int i,j;
         for (i=0; i<listaPeliculas.size(); i++){
-            System.out.println("Nombre pelicula N°"+(i+1)+": "+listaPeliculas.get(i).getNombre());
-            System.out.println("Año de estreno: "+listaPeliculas.get(i).getAñoEstreno());
-            System.out.println("Duración: "+listaPeliculas.get(i).getDuraciónMin()+" minutos");
-            System.out.println("Calidad: "+listaPeliculas.get(i).getCalidad());
-            System.out.println("Puntuación: "+listaPeliculas.get(i).getValuacion()+ " de 5");
-            System.out.println("Sinopsis: "+listaPeliculas.get(i).getSinopsis());
+            String id = listaPeliculas.get(i).getId();
+            System.out.println("Nombre pelicula N°"+(i+1)+": "+pelisXId.get(id).getNombre());
+            System.out.println("Id: " + id);
+            System.out.println("Año de estreno: "+pelisXId.get(id).getAñoEstreno());
+            System.out.println("Duración: "+pelisXId.get(id).getDuraciónMin()+" minutos");
+            System.out.println("Calidad: "+pelisXId.get(id).getCalidad());
+            System.out.println("Puntuación: "+pelisXId.get(id).getValuacion()+ " de 5");
+            System.out.println("Sinopsis: "+pelisXId.get(id).getSinopsis());
             System.out.print("Director(s): ");
 
-            for(j=0; j<listaPeliculas.get(i).getDirector().length;j++ ) {
-                if (j == (listaPeliculas.get(i).getDirector().length - 1))
-                    System.out.println(listaPeliculas.get(i).getDirector()[j]);
+            for(j=0; j<pelisXId.get(id).getDirector().length;j++ ) {
+                if (j == (pelisXId.get(id).getDirector().length - 1))
+                    System.out.println(pelisXId.get(id).getDirector()[j]);
                 else
-                    System.out.print(listaPeliculas.get(i).getDirector()[j] + ", ");
+                    System.out.print(pelisXId.get(id).getDirector()[j] + ", ");
             }
 
-            for(j=0; j<listaPeliculas.get(i).getGeneros().length;j++ ) {
-                if (j == (listaPeliculas.get(i).getGeneros().length - 1))
-                    System.out.println(listaPeliculas.get(i).getGeneros()[j]);
+            for(j=0; j<pelisXId.get(id).getGeneros().length;j++ ) {
+                if (j == (pelisXId.get(id).getGeneros().length - 1))
+                    System.out.println(pelisXId.get(id).getGeneros()[j]);
                 else
-                    System.out.print(listaPeliculas.get(i).getGeneros()[j] + ", ");
+                    System.out.print(pelisXId.get(id).getGeneros()[j] + ", ");
             }
             System.out.print("Actores: ");
-            for (j = 0; j <listaPeliculas.get(i).getActores().length ; j++) {
-                if(j==(listaPeliculas.get(i).getActores().length -1 ))
-                    System.out.println(listaPeliculas.get(i).getActores()[j]);
+            for (j = 0; j <pelisXId.get(id).getActores().length ; j++) {
+                if(j==(pelisXId.get(id).getActores().length -1 ))
+                    System.out.println(pelisXId.get(id).getActores()[j]);
                 else
-                    System.out.print(listaPeliculas.get(i).getActores()[j]+", ");
+                    System.out.print(pelisXId.get(id).getActores()[j]+", ");
             }
             System.out.println();
         }
     }
 
-    public void mostrarDatosPeliculas(int index){
+    public void mostrarDatosPeliculas(String id){
         int j;
-        System.out.println("Nombre: "+listaPeliculas.get(index).getNombre());
-        System.out.println("Año de estreno: "+listaPeliculas.get(index).getAñoEstreno());
-        System.out.println("Duración: "+listaPeliculas.get(index).getDuraciónMin()+" minutos");
-        System.out.println("Calidad: "+listaPeliculas.get(index).getCalidad());
-        System.out.println("Puntuación: "+listaPeliculas.get(index).getValuacion()+ " de 5");
-        System.out.println("Sinopsis: "+listaPeliculas.get(index).getSinopsis());
+        System.out.println("Nombre: "+pelisXId.get(id).getNombre());
+        System.out.println("Id: " + id);
+        System.out.println("Año de estreno: "+pelisXId.get(id).getAñoEstreno());
+        System.out.println("Duración: "+pelisXId.get(id).getDuraciónMin()+" minutos");
+        System.out.println("Calidad: "+pelisXId.get(id).getCalidad());
+        System.out.println("Puntuación: "+pelisXId.get(id).getValuacion()+ " de 5");
+        System.out.println("Sinopsis: "+pelisXId.get(id).getSinopsis());
         System.out.print("Director(s): ");
 
-        for(j=0; j<listaPeliculas.get(index).getDirector().length;j++ ) {
-            if (j == (listaPeliculas.get(index).getDirector().length - 1))
-                System.out.println(listaPeliculas.get(index).getDirector()[j]);
+        for(j=0; j<pelisXId.get(id).getDirector().length;j++ ) {
+            if (j == (pelisXId.get(id).getDirector().length - 1))
+                System.out.println(pelisXId.get(id).getDirector()[j]);
             else
-                System.out.print(listaPeliculas.get(index).getDirector()[j] + ", ");
+                System.out.print(pelisXId.get(id).getDirector()[j] + ", ");
         }
 
-        for(j=0; j<listaPeliculas.get(index).getGeneros().length;j++ ) {
-            if (j == (listaPeliculas.get(index).getGeneros().length - 1))
-                System.out.println(listaPeliculas.get(index).getGeneros()[j]);
+        for(j=0; j<pelisXId.get(id).getGeneros().length;j++ ) {
+            if (j == (pelisXId.get(id).getGeneros().length - 1))
+                System.out.println(pelisXId.get(id).getGeneros()[j]);
             else
-                System.out.print(listaPeliculas.get(index).getGeneros()[j] + ", ");
+                System.out.print(pelisXId.get(id).getGeneros()[j] + ", ");
         }
         System.out.print("Actores: ");
-        for (j = 0; j <listaPeliculas.get(index).getActores().length ; j++) {
-            if(j==(listaPeliculas.get(index).getActores().length -1 ))
-                System.out.println(listaPeliculas.get(index).getActores()[j]);
+        for (j = 0; j <pelisXId.get(id).getActores().length ; j++) {
+            if(j==(pelisXId.get(id).getActores().length -1 ))
+                System.out.println(pelisXId.get(id).getActores()[j]);
             else
-                System.out.print(listaPeliculas.get(index).getActores()[j]+", ");
+                System.out.print(pelisXId.get(id).getActores()[j]+", ");
         }
         System.out.println();
     }
