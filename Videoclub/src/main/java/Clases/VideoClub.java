@@ -8,7 +8,7 @@ public class VideoClub {
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
 
     private HashMap<String,Pelicula> pelisXId;       //Key es ID pelicula
-    private HashMap<String, Cliente> clientesXRut; //Key es Rut cliente
+    private HashMap<String,Cliente> clientesXRut; //Key es Rut cliente
 
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
@@ -36,7 +36,6 @@ public class VideoClub {
         System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
         System.out.println();
     }
-    
     
     public void mostrarDatosPeliculas(){
         int i,j;

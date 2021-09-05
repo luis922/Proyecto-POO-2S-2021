@@ -1,0 +1,130 @@
+@startuml
+Main --> VideoClub
+Main --> Pelicula
+Main --> Cliente
+VideoClub "1     " o-- "Varios" Cliente : Tiene
+VideoClub "1    " o-- "Varias" Pelicula: Tiene
+Cliente "1    " o-- "Varios"Arriendo: Tiene
+
+class VideoClub{
+    -String  nombreTienda
+    -String  direccion
+    -ArrayList<Pelicula> listaPeliculas
+    -ArrayList<Cliente>   listaClientes
+    -HashMap<String,Pelicula> pelisXId
+    -HashMap<String,Cliente> clientesXRut
+
+    +VideoClub()
+    +void mostrarDatosPeliculas()
+    +void mostrarDatosClientes(String rut)
+    +void mostrarDatosPeliculas()
+    +void mostrarDatosPeliculas(String id)
+    +String getNombreTienda()
+    +void setNombreTienda(String nombreTienda)
+    +String getDireccion()
+    +void setDireccion(String direccion)
+    +void addPeliToListaPelis(Pelicula peli)
+    +void addClientToListaClients( Cliente cliente)
+    +void addClientToClientXRut(String rut, Cliente cliente)
+    +void addPeliToPelisXId(String id, Pelicula peli)
+    +Cliente getClientFromClientXRut(String rut)
+    +Pelicula getPeliFromPelisXId(String id)
+    +boolean containsID(String id)
+    +boolean containsRUT(String rut)
+    +boolean existID(String id)
+    +boolean existRUT(String rut)
+}
+
+class Cliente{
+    -String nombre
+    -String rut
+    -ArrayList<Arriendo> listaArriendos
+    -int deuda
+
+    +Cliente()
+    +Cliente(String nombre, String rut)
+    +String getNombre()
+    +void setNombre(String nombre)
+    +String getRut()
+    +void setRut(String rut)
+    +void addArriendoToHistorial(Arriendo arriendo)
+    +int getDeuda()
+    +void setDeuda(int deuda)
+}
+
+class Pelicula{
+    -String nombre
+    -String id
+    -short existencias
+    -short disponibles
+    -float valuacion
+    -short cantValuaciones
+    -short añoEstreno
+    -short duraciónMin
+    -String sinopsis
+    -String calidad
+    -String director[]
+    -String actores[]
+    -String generos[]
+
+    +Pelicula()
+    +String getNombre()
+    +void setNombre(String nombre)
+    +String getId()
+    +void setId(String id)
+    +short getExistencias()
+    +void setExistencias(short existencias)
+    +short getDisponibles()
+    +void setDisponibles(short disponibles)
+    +float getValuacion()
+    +void setValuacion(float valuacion)
+    +short getCantValuaciones()
+    +void setCantValuaciones(short cantValuaciones)
+    +short getAñoEstreno()
+    +void setAñoEstreno(short añoEstreno)
+    +short getDuraciónMin()
+    +void setDuraciónMin(short duraciónMin)
+    +String getSinopsis()
+    +void setSinopsis(String sinopsis)
+    +String getCalidad()
+    +void setCalidad(String calidad)
+    +String[] getDirector()
+    +void setDirector(String[] directores)
+    +String[] getActores()
+    +void setActores(String[] actor)
+    +String[] getGeneros()
+    +void setGeneros(String[] genero)
+}
+
+class Arriendo{
+    -String id
+    -float valoracion
+    -String fechaArriendo
+    -String fechaEntrega
+    -boolean entregado
+
+    +Historial()
+    +String getId()
+    +void setId(String id)
+    +float getValoracion()
+    +void setValoracion(float valoracion)
+    +String getFechaArriendo()
+    +void setFechaArriendo(String fechaArriendo)
+    +String getFechaEntrega()
+    +void setFechaEntrega(String fechaEntrega)
+    +boolean isEntregado()
+    +void setEntregado(boolean entregado)
+}
+
+class Main{
+    +static void main(String[] args)
+    +static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula)
+    +static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)
+
+}
+class Interface{
+    +static void login()
+    +static void menúCliente(String usuario,VideoClub x)
+    +static void menúAdmin(VideoClub x)
+}
+@enduml
