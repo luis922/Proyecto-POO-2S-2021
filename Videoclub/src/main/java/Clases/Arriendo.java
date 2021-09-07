@@ -6,13 +6,16 @@ public class Arriendo {
     private String fechaArriendo;
     private String fechaEntrega;
     private boolean entregado; //TRUE si la pelicula fue devuelta, False en el caso contrario
-    
+    private int vecesArrendada;
+    //Hacer una coleccion de objeto que contenga fecha
+
     public Arriendo(){
         id = null;
         valoracion = 0;
         fechaArriendo = null;
         fechaEntrega = null;
         entregado = true;
+        vecesArrendada = 0;
     }
 
     public String getId() {
@@ -53,6 +56,13 @@ public class Arriendo {
 
     public void setEntregado(boolean entregado) {
         this.entregado = entregado;
-    }    
-    
+    }
+
+    public void setVecesArrendada(int vecesArrendada) {
+        this.vecesArrendada = vecesArrendada;
+    }
+
+    public int getVecesArrendada() {
+        return vecesArrendada;
+    }
 }
