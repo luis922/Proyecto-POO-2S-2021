@@ -68,6 +68,7 @@ public class Cliente{
                 System.out.println(" ENTREGADO");
             else
                 System.out.println(" NO ENTREGADO");
+            System.out.println();
         }
     }
     public void mostrarHistorial(String id){
