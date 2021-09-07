@@ -5,6 +5,7 @@ y mostrar algunos de estos por pantalla
 */
 import java.util.*; //Scanner, Arrays
 import java.io.*;
+import Menú.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
@@ -26,15 +27,15 @@ public class Main {
 	Scanner entrada = new Scanner(System.in);
         byte opción;
         do{
-            Menú.Interface.login();
+            Interface.login();
             opción = entrada.nextByte();
             switch(opción){
                  case 1:
                      String rut = Comprobadores.Comprobar.loginClientes(videoClub1);
-                    if (videoClub1.containsRUT(rut)) Menú.Interface.menúCliente(rut,videoClub1);
+                    if (videoClub1.containsRUT(rut)) Interface.menúCliente(rut,videoClub1);
                     break;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
                 case 2:
-                    Menú.Interface.menúAdmin(videoClub1);
+                    Interface.menúAdmin(videoClub1);
                     break;
                 default:
                     if(opción != 0) System.out.println("Ingrese una opción válida...");
