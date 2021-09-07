@@ -7,7 +7,7 @@ public class Arriendo {
     private String fechaEntrega;
     private boolean entregado; //TRUE si la pelicula fue devuelta, False en el caso contrario
     private int vecesArrendada;
-    //Hacer una coleccion de objeto que contenga fecha
+    //Hacer una coleccion de un objeto que contenga fecha de arriendo, entrega y valoracion.
 
     public Arriendo(){
         id = null;
