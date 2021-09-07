@@ -2,9 +2,9 @@
 Main --> VideoClub
 Main --> Pelicula
 Main --> Cliente
-VideoClub "1     " o-- "Varios" Cliente : Tiene
-VideoClub "1    " o-- "Varias" Pelicula: Tiene
-Cliente "1    " o-- "Varios"Arriendo: Tiene
+VideoClub  --> "Varios" Cliente
+VideoClub  --> "Varias" Pelicula
+Cliente  --> "Varios"Arriendo
 
 class VideoClub{
     -String  nombreTienda
