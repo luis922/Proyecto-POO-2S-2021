@@ -10,6 +10,8 @@ public class Cliente{
     private int deuda;
 
     public Cliente() {
+        this.historialArriendos = new ArrayList();//Agrege esto
+        this.historialXid = new HashMap<>();
     }
     
     public Cliente(String nombre, String rut){ //Para el ingreso de un cliente nuevo, no existente en la base de datos.
