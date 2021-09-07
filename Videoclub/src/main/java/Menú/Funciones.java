@@ -26,6 +26,17 @@ public class Funciones {
         x.mostrarDatosClientes();
     }
     
+    public static void mostarHistorialCliente(VideoClub x, String rut){
+        System.out.println("Información sobre las peliculas arrendadas");
+        x.getClientFromClientXRut(rut).mostrarHistorial();
+    }
+
+    public static void mostrarHistorialPeli(VideoClub x, String rut, String id){
+        System.out.println("Información sobre el arriendo de esta pelicula");
+        x.getClientFromClientXRut(rut).mostrarHistorial(id);
+
+    }
+    
     public static void registrarCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         Cliente nuevo = new Cliente();
