@@ -8,7 +8,7 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-		VideoClub videoClub1 = new VideoClub();
+	VideoClub videoClub1 = new VideoClub();
         Pelicula pelicula = new Pelicula();
         Cliente cliente = new Cliente();
 
@@ -16,10 +16,11 @@ public class Main {
         LeerArchivoPeliculas(videoClub1,pelicula);
         LeerArchivoClientes(videoClub1, cliente);
 //---------------Imprime ciertos datos almacenados----------------------------------------------
-        videoClub1.mostrarDatosClientes();
-		videoClub1.mostrarDatosClientes("10693359-1");
-		videoClub1.mostrarDatosPeliculas();
-		videoClub1.mostrarDatosPeliculas("3");
+        //videoClub1.mostrarDatosClientes();
+	//videoClub1.mostrarDatosClientes("10693359-1");
+	//videoClub1.mostrarDatosPeliculas();
+	//videoClub1.mostrarDatosPeliculas("3");
+        videoClub1.getClientFromClientXRut("19034223-3").mostrarHistorial();
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 	Scanner entrada = new Scanner(System.in);
@@ -75,26 +76,21 @@ public class Main {
         String linea;
         String[] arrayLineaClientes;
         scCli.nextLine();
+        Arriendo arriendo;
+        int i;
 	while(scCli.hasNextLine()){
 		linea = scCli.nextLine();
 		arrayLineaClientes = linea.split("\t");
-		//Guardar Datos en array de Clientes: [0]=noimbre, [1]=rut, [2]=historial, [3]=pelPosesion, [4]=Deuda
+		//Guardar Datos en array de Clientes: [0]=nombre, [1]=rut, [2]=historial arriendos , [3]=pelPosesion, [4]=Deuda
 		cliente = new Cliente();
 		cliente.setNombre(arrayLineaClientes[0]);
 		cliente.setRut(arrayLineaClientes[1]);
-		/*
-		arrayIdHistorial = arrayLineaClientes[2].split("_");
-		for(i=0; i<arrayIdHistorial.length; i++){
-		    film = videoClub.getPeliFromPelisXId(arrayIdHistorial[i]);
-		    historial.setFilm(film.getId());
-		    cliente.setHistorial(historial);
-		}
-		for(i=0; i<arrayIdHistorial.length; i++){
-		    System.out.print(arrayIdHistorial[i]+ " ");
-		    System.out.println(cliente.getHistorial().get(i).getId());
-		}
-		System.out.println("");
-		*/
+                for(i=0; i<arrayLineaClientes[2].split("_").length; i++){
+                    arriendo = new Arriendo();
+                    arriendo.setId(arrayLineaClientes[2].split("_")[i]);
+                    cliente.addArriendoToHistorial(arriendo);
+                    cliente.addToHistorialXid(arriendo);
+                }
 		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
 		videoClub.addClientToListaClients(cliente);
 		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
