@@ -6,7 +6,6 @@ y mostrar algunos de estos por pantalla
 import java.util.*; //Scanner, Arrays
 import java.io.*;
 
-//TEst
 public class Main {
     public static void main(String[] args) throws Exception{
 		VideoClub videoClub1 = new VideoClub();
