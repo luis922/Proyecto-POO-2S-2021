@@ -44,5 +44,23 @@ public class Cliente{
     public void setDeuda(int deuda) {
         this.deuda = deuda;
     }
+
+    public void mostrarHistorial(){
+        for (int i = 0; i < listaArriendo.size(); i++) {
+            System.out.println("ID pelicula: "+listaArriendo.get(i).getId());
+            System.out.print("Valoración : ");
+            if(!listaArriendo.get(i).isEntregado())
+                System.out.println("N0 REGISTRADA");
+            else
+                System.out.println(listaArriendo.get(i).getValoracion());
+            System.out.println("Fecha de arriendo: "+listaArriendo.get(i).getFechaArriendo());
+            System.out.println("Fecha de entrega: "+listaArriendo.get(i).getFechaEntrega());
+            System.out.print("Estado de entrega: ");
+            if(listaArriendo.get(i).isEntregado())
+                System.out.println(" ENTREGADO");
+            else
+                System.out.println(" NO ENTREGADO");
+        }
+    }
     
 }

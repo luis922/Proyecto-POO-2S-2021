@@ -42,6 +42,7 @@ public class Funciones {
         
         x.addClientToListaClients(nuevo);
         x.addClientToClientXRut(nuevo.getRut(), nuevo);
+        x.addClientToClientXRut(nuevo.getRut(),nuevo);
         System.out.println("¡Cliente registrado exitosamente!");
     }
     
@@ -72,6 +73,5 @@ public class Funciones {
         }while(continuar && contador < 5);
         
         return directores;
-        
     }
 }

@@ -2,12 +2,16 @@ package Clases;
 
 public class Historial {
     private String id;
-    private float valoracion; //Numero de estrellas con la que el cliente valoro el film de 1 a 5
+    private float valoracion; //Numero de estrellas con la que el cliente valoro el film de 0 a 5
     private String fechaArriendo;
     private String fechaEntrega;
     private boolean entregado; //TRUE si la pelicula fue devuelta, False en el caso contrario
     
     public Historial(){
+        id = null;
+        valoracion = 0;
+        fechaArriendo = null;
+        fechaEntrega = null;
         entregado = true;
     }
 
