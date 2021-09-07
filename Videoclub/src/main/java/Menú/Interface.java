@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interfaz;
+package Menú;
 import Clases.VideoClub;
 import java.util.Scanner;
 /**
@@ -23,21 +23,24 @@ public class Interface {
         Scanner input = new Scanner(System.in);
         
         byte opción;
-        String nombre = x.getClientFromClientXRut(usuario).getNombre();
-        System.out.println("Bienvenido Sr(a) " + nombre);
-        System.out.println("1)Desplegar lista de peliculas");
-        System.out.println("2)Revisar mi historial");
-        System.out.println("0)Menú anterior");
         do{
+            String nombre = x.getClientFromClientXRut(usuario).getNombre();
+            System.out.println("Bienvenido Sr(a) " + nombre);
+            System.out.println("1)Desplegar lista de peliculas");
+            System.out.println("2)Revisar mi historial");
+            System.out.println("0)Menú anterior");
             opción = input.nextByte();
+            
             switch(opción){
                 case 1:
-                    //listaPeliculas(x);
+                    Funciones.listaPeliculas(x);
                     break;
                 case 2:
-                    //historialCliente(x,usuario);
+                    //Funciones.historialCliente(x,usuario);
+                    break;
                 default:
                     System.out.println("Ingrese una opción valida");
+                    break;
             }
             
         }while(opción != 0);
@@ -47,33 +50,36 @@ public class Interface {
         Scanner input = new Scanner(System.in);
         
         byte opción;
-        System.out.println("Menú Administrador");
-        System.out.println("1)Desplegar lista de clientes");
-        System.out.println("2)Desplegar lista de peliculas");
-        System.out.println("3)Registrar Cliente");
-        System.out.println("4)Registrar Pelicula");
-        System.out.println("5)Desplegar historial de cliente");
-        System.out.println("0)Menú anterior");
+        
         do{
+            System.out.println("Menú Administrador");
+            System.out.println("1)Desplegar lista de clientes");
+            System.out.println("2)Desplegar lista de peliculas");
+            System.out.println("3)Registrar Cliente");
+            System.out.println("4)Registrar Pelicula");
+            System.out.println("5)Desplegar historial de cliente");
+            System.out.println("0)Menú anterior");
             opción = input.nextByte();
+            
             switch(opción){
                 case 1:
-                    //listaClientes(x);
+                    Funciones.listaClientes(x);
                     break;
                 case 2:
-                    //listaPeliculas(x);
+                    Funciones.listaPeliculas(x);
                     break;
                 case 3:
-                    //registroClientes(x);
+                    Funciones.registrarCliente(x);
                     break;
                 case 4:
-                    //registroPeliculas(x);
+                    Funciones.registrarPelicula(x);
                     break;
                 case 5:
                     //historialCliente(x,null);
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida");
+                    break;
                     
             }
             
