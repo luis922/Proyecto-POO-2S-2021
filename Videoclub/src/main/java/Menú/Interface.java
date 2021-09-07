@@ -21,12 +21,12 @@ public class Interface {
     }
     public static void menúCliente(String usuario,VideoClub x){
         Scanner input = new Scanner(System.in);
-        String id;//ingreso de id pelicula
+        //String id;//ingreso de id pelicula
         byte opción;
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
-            System.out.println("1)Desplegar lista de peliculas");
+            System.out.println("1)Mostrar catálogo de películas disponibles");
             System.out.println("2)Desplegar mi historial completo");
             System.out.println("3)Mostrar historial de arriendo de una pelicula");
             System.out.println("0)Menú anterior");
@@ -40,7 +40,7 @@ public class Interface {
                     Funciones.mostarHistorialCliente(x,usuario);
                     break;
                 case 3:
-                    Funciones.mostrarHistorialPeli(x,usuario,id);
+          //          Funciones.mostrarHistorialPeli(x,usuario,id);
                     break;
                 default:
                     System.out.println("Ingrese una opción valida");

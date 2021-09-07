@@ -6,6 +6,7 @@ y mostrar algunos de estos por pantalla
 import java.util.*; //Scanner, Arrays
 import java.io.*;
 import Menú.*;
+import Comprobadores.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
@@ -31,7 +32,7 @@ public class Main {
             opción = entrada.nextByte();
             switch(opción){
                  case 1:
-                     String rut = Comprobadores.Comprobar.loginClientes(videoClub1);
+                     String rut = Comprobar.loginClientes(videoClub1);
                     if (videoClub1.containsRUT(rut)) Interface.menúCliente(rut,videoClub1);
                     break;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
                 case 2:
