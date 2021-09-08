@@ -20,6 +20,7 @@ public class Interface {
             System.out.println("2)Trabajador");
             System.out.println("0)Finalizar programa");
     }
+    //-------------------------MENU CLIENTE-----------------------------------------
     public static void menúCliente(String usuario,VideoClub x){
         Scanner teclado = new Scanner(System.in);
         //String id;//ingreso de id pelicula
@@ -27,9 +28,9 @@ public class Interface {
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
-            System.out.println("1)Desplegar lista de peliculas");
+            System.out.println("1)Desplegar catalogo de peliculas");
             System.out.println("2)Revisar mi historial");
-            System.out.println("3)Buscar película");
+            System.out.println("3)Revisar historial de pelicula");
             System.out.println("4)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
             opción = teclado.nextByte();
@@ -40,11 +41,13 @@ public class Interface {
                     break;
                 case 2:
                     Funciones.mostrarHistorialCliente(x,usuario);
+                    break;
                 case 3:
                     Funciones.buscarPelicula(x);
                     break;
                 case 4:
                     Funciones.desplegarMiFicha(x,usuario);
+                    break;
                 default:
                     System.out.println("Ingrese una opción valida");
                     break;
@@ -53,6 +56,7 @@ public class Interface {
         }while(opción != 0);
         
     }
+    //-------------------------MENU EMPLEADO-----------------------------------------
     public static void menúAdmin(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         
