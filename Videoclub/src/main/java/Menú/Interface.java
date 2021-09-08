@@ -23,7 +23,6 @@ public class Interface {
     //-------------------------MENU CLIENTE-----------------------------------------
     public static void menúCliente(String usuario,VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        //String id;//ingreso de id pelicula
         byte opción;
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
@@ -43,7 +42,7 @@ public class Interface {
                     Funciones.mostrarHistorialCliente(x,usuario);
                     break;
                 case 3:
-                    Funciones.buscarPelicula(x);
+                    Funciones.mostrarHistorialPeli(x, usuario);
                     break;
                 case 4:
                     Funciones.desplegarMiFicha(x,usuario);
