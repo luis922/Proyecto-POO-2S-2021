@@ -156,8 +156,14 @@ public class Funciones {
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
         System.out.println("Ingrese nombre de la pelicula a buscar: ");
-        nombrePeli= teclado.nextLine();
-        x.mostrarDatosPeliculas(x.obtenerIdXNombre(nombrePeli));
+        nombrePeli = teclado.nextLine();
+        String id = x.obtenerIdXNombre(nombrePeli);
+        if (id != null){
+            x.mostrarDatosPeliculas(id);
+        }
+        else{
+            System.out.println("Pelicula no registrada");
+        }
     }
     
     public static void desplegarMiFicha(VideoClub x, String usuario){
