@@ -170,7 +170,7 @@ public class VideoClub {
     }
 
     public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
-        return pelisXId.containsKey(id)
+        return pelisXId.containsKey(id);
     }
 
     public boolean existRUT(String rut){//Comprueba si el cliente esta ya guardada en base al RUT otorgado
