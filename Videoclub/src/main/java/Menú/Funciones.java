@@ -62,7 +62,6 @@ public class Funciones {
         
         x.addClientToListaClients(nuevo);
         x.addClientToClientXRut(nuevo.getRut(), nuevo);
-        x.addClientToClientXRut(nuevo.getRut(),nuevo);
         System.out.println("¡Cliente registrado exitosamente!");
     }
     
@@ -183,8 +182,14 @@ public class Funciones {
     public static void historialCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingrese el rut del cliente:");
-        String rut = teclado.nextLine();
-        x.getClientFromClientXRut(rut).mostrarHistorial();
+        String rut;
+        do{
+            rut = teclado.nextLine();
+            if(x.existRUT(rut))
+                x.getClientFromClientXRut(rut).mostrarHistorial();
+            else
+                System.out.println("Ingrese un rut valido: ");
+        }while(!x.existRUT(rut));
     }
     
     public static void buscarCliente(VideoClub x){
