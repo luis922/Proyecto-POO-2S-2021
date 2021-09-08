@@ -30,10 +30,20 @@ public class Funciones {
         x.getClientFromClientXRut(rut).mostrarHistorial();
     }
 
-    public static void mostrarHistorialPeli(VideoClub x, String rut, String id){
-        System.out.println("Información sobre el arriendo de esta pelicula");
-        x.getClientFromClientXRut(rut).mostrarHistorial(id);
+    public static void mostrarHistorialPeli(VideoClub x, String rut){
+        Scanner teclado = new Scanner(System.in);
+        String id;
+        System.out.println("Ingrese el id de la pelicula cuyo historial de arriendo quiere revisar: ");
 
+        do{
+            id = teclado.nextLine();
+            if(x.getClientFromClientXRut(rut).existIDMap(id)){
+                System.out.println("Información obtenida");
+                x.getClientFromClientXRut(rut).mostrarHistorial(id);
+            }
+            else
+                System.out.println("Ingrese una id valida");
+        }while(!x.getClientFromClientXRut(rut).existIDMap(id));
     }
     
     public static void registrarCliente(VideoClub x){
