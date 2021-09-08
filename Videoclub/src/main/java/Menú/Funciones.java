@@ -153,7 +153,11 @@ public class Funciones {
     }
     
     public static void buscarPelicula(VideoClub x){
-        System.out.println("Buscando pelicula XdXdXdXd");
+        Scanner teclado = new Scanner(System.in);
+        String nombrePeli;
+        System.out.println("Ingrese nombre de la pelicula a buscar: ");
+        nombrePeli= teclado.nextLine();
+        x.mostrarDatosPeliculas(x.obtenerIdXNombre(nombrePeli));
     }
     
     public static void desplegarMiFicha(VideoClub x, String usuario){
