@@ -162,12 +162,6 @@ public class VideoClub {
         return clientesXRut.containsKey(rut);
     }
     
-    public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
-        for (int j = 0; j < listaPeliculas.size() ; j++)
-            if(listaPeliculas.get(j).getId().equals(id))
-                return true;
-        return false;
-    }
     public String obtenerIdXNombre(String nombre){
         for (int j = 0; j < listaPeliculas.size() ; j++)
             if(listaPeliculas.get(j).getNombre().equals(nombre))
@@ -175,11 +169,15 @@ public class VideoClub {
         return null;
     }
 
+    public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
+        if(pelisXId.containsKey(id))
+            return true;
+        return false;
+    }
 
     public boolean existRUT(String rut){//Comprueba si el cliente esta ya guardada en base al RUT otorgado
-        for (int j = 0; j < listaClientes.size() ; j++)
-            if(listaPeliculas.get(j).getId().equals(rut))
-                return true;
+        if(clientesXRut.containsKey(rut))
+            return true;
         return false;
     }
     
