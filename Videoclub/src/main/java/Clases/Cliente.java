@@ -91,4 +91,8 @@ public class Cliente{
             System.out.println("Ingrese una id valida");
 
     }
+    
+    public boolean existIDMap(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
+        return historialXid.containsKey(id);
+    }
 }
