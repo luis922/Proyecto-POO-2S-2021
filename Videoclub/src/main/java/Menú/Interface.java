@@ -6,6 +6,7 @@
 package Menú;
 import Clases.VideoClub;
 import java.util.Scanner;
+
 /**
  *
  * @author sebas
@@ -38,7 +39,7 @@ public class Interface {
                     Funciones.listaPeliculas(x);
                     break;
                 case 2:
-                    Funciones.historialCliente(x,usuario);
+                    Funciones.mostrarHistorialCliente(x,usuario);
                 case 3:
                     Funciones.buscarPelicula(x);
                     break;
@@ -83,7 +84,7 @@ public class Interface {
                     Funciones.registrarPelicula(x);
                     break;
                 case 5:
-                    //historialCliente(x,null);
+                    Funciones.historialCliente(x);
                     break;
                 case 6:
                     Funciones.buscarPelicula(x);
