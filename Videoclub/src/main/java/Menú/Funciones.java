@@ -25,7 +25,7 @@ public class Funciones {
         x.mostrarDatosClientes();
     }
     
-    public static void mostarHistorialCliente(VideoClub x, String rut){
+    public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
         x.getClientFromClientXRut(rut).mostrarHistorial();
     }
@@ -152,7 +152,19 @@ public class Funciones {
         
     }
     
-    public static void buscarPelícula(){
-        
+    public static void buscarPelicula(VideoClub x){
+        System.out.println("Buscando pelicula XdXdXdXd");
+    }
+    
+    public static void desplegarMiFicha(VideoClub x, String usuario){
+        System.out.println("Desplegando mi ficha LOL");
+    }
+    
+    public static void historialCliente(VideoClub x){
+        System.out.println("Desplegando historial de: ");
+    }
+    
+    public static void buscarCliente(VideoClub x){
+        System.out.println("Buscando Cliente...LMFAO");
     }
 }
