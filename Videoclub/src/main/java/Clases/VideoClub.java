@@ -168,6 +168,13 @@ public class VideoClub {
                 return true;
         return false;
     }
+    public String obtenerIdXNombre(String nombre){
+        for (int j = 0; j < listaPeliculas.size() ; j++)
+            if(listaPeliculas.get(j).getNombre().equals(nombre))
+                return listaPeliculas.get(j).getId();
+        return null;
+    }
+
 
     public boolean existRUT(String rut){//Comprueba si el cliente esta ya guardada en base al RUT otorgado
         for (int j = 0; j < listaClientes.size() ; j++)
