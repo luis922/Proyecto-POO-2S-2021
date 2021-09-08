@@ -20,28 +20,30 @@ public class Interface {
             System.out.println("0)Finalizar programa");
     }
     public static void menúCliente(String usuario,VideoClub x){
-        Scanner input = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         //String id;//ingreso de id pelicula
         byte opción;
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
-            System.out.println("1)Mostrar catálogo de películas disponibles");
-            System.out.println("2)Desplegar mi historial completo");
-            System.out.println("3)Mostrar historial de arriendo de una pelicula");
+            System.out.println("1)Desplegar lista de peliculas");
+            System.out.println("2)Revisar mi historial");
+            System.out.println("3)Buscar película");
+            System.out.println("4)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
-            opción = input.nextByte();
-
+            opción = teclado.nextByte();
+            
             switch(opción){
                 case 1:
                     Funciones.listaPeliculas(x);
                     break;
                 case 2:
-                    Funciones.mostarHistorialCliente(x,usuario);
-                    break;
+                    Funciones.historialCliente(x,usuario);
                 case 3:
-          //          Funciones.mostrarHistorialPeli(x,usuario,id);
+                    Funciones.buscarPelicula(x);
                     break;
+                case 4:
+                    Funciones.desplegarMiFicha(x,usuario);
                 default:
                     System.out.println("Ingrese una opción valida");
                     break;
@@ -51,7 +53,7 @@ public class Interface {
         
     }
     public static void menúAdmin(VideoClub x){
-        Scanner input = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         
         byte opción;
         
@@ -62,8 +64,10 @@ public class Interface {
             System.out.println("3)Registrar Cliente");
             System.out.println("4)Registrar Pelicula");
             System.out.println("5)Desplegar historial de cliente");
+            System.out.println("6)Buscar Pelicula");
+            System.out.println("7)Buscar Cliente");
             System.out.println("0)Menú anterior");
-            opción = input.nextByte();
+            opción = teclado.nextByte();
             
             switch(opción){
                 case 1:
@@ -80,6 +84,12 @@ public class Interface {
                     break;
                 case 5:
                     //historialCliente(x,null);
+                    break;
+                case 6:
+                    Funciones.buscarPelicula(x);
+                    break;
+                case 7:
+                    Funciones.buscarCliente(x);
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida");

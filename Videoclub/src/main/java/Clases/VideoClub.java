@@ -181,12 +181,12 @@ public class VideoClub {
     
     Sus modos son:
     1 = Tamaño lista de clientes
-    2 = Tamaño lista de pelicula
+    2 = Tamaño lista de pelicula*/
     public int getSize(int modo){
         switch(modo){
             case 1: return listaClientes.size();
             case 2: return listaPeliculas.size();
         }
         return 0;
-    }*/
+    }
 }

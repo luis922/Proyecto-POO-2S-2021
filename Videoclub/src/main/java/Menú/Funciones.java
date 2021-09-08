@@ -6,7 +6,6 @@
 package Menú;
 
 import Clases.*;
-import Comprobadores.Comprobar;
 import java.util.Scanner;
 
 /**
@@ -57,32 +56,103 @@ public class Funciones {
         System.out.println("¡Cliente registrado exitosamente!");
     }
     
-    public static void registrarPelicula(VideoClub x){//Incompleto aún
+    public static void registrarPelicula(VideoClub x){//Incompleto aún, falta ranking e ingreso en la base
         Scanner teclado = new Scanner(System.in);
         Pelicula nueva = new Pelicula();
         System.out.println("Bienvenido al registro de peliculas, porfavor, introduzca el nombre de la película:");
         nueva.setNombre(teclado.nextLine());
         nueva.setDirector(ingresoDirectores(teclado));
+        nueva.setGeneros(ingresoGeneros(teclado));
+        System.out.println("Ingrese la Sinopsis:");
+        nueva.setSinopsis(teclado.nextLine());
+        System.out.println("Ingrese la duración en minutos:");
+        nueva.setDuraciónMin(teclado.nextShort());
+        System.out.println("Ingrese Año de estreno:");
+        nueva.setAñoEstreno(teclado.nextShort());
+        teclado.nextLine();
+        nueva.setActores(ingresoActores(teclado));
+        System.out.println("Ingrese la calidad de video del metraje:");
+        nueva.setCalidad(teclado.nextLine());
+        System.out.println("Ingrese cuantas unidades posee:");
+        nueva.setExistencias(teclado.nextShort());
+        teclado.nextLine();
+        nueva.setDisponibles(nueva.getExistencias());
+        System.out.println("Ingrese la Valuación *Entre 1.0 a 5.0*:");
+        nueva.setValuacion(ingresoValuacion(teclado));
+        nueva.setId(String.valueOf(x.getSize(2)));
+        x.addPeliToListaPelis(nueva);
+        x.addPeliToPelisXId(nueva.getId(), nueva);
+        System.out.println("¡Pelicula Ingresada Exitosamente!");
         
         
     }
     
     public static String[] ingresoDirectores(Scanner teclado){//Podría presentar ingresos erroneos
-        String directores[] = new String[5];
+        System.out.println("Ingrese la cantidad de directores");
+        byte cantidad = teclado.nextByte();
+        teclado.nextLine();
+        String directores[] = new String[cantidad];
         int contador = 0;
-        boolean continuar = true;
-        System.out.println("Ingrese el primer director");
+        System.out.println("Ingrese el primer Director:");
         
         do{
-            if(contador != 0) System.out.println("Ingrese el siguiente director:");
+            if(contador != 0) System.out.println("Ingrese el siguiente Director:");
             directores[contador] = teclado.nextLine();
             contador++;
-            System.out.println("¿Desea ingresar otro director? *Limite = 5*");
-            System.out.println("0)No\n1)Si");
-            if(teclado.nextByte()== 0) continuar = false;
-            teclado.nextLine();
-        }while(continuar && contador < 5);
-        
+        }while(contador < cantidad);
         return directores;
+        
+    }
+    
+    public static String[] ingresoGeneros(Scanner teclado){//Podría presentar ingresos erroneos
+        System.out.println("Ingrese la cantidad de géneros:");
+        byte cantidad = teclado.nextByte();
+        teclado.nextLine();
+        String generos[] = new String[cantidad];
+        int contador = 0;
+        System.out.println("Ingrese el primer Género:");
+        
+        do{
+            if(contador != 0) System.out.println("Ingrese el siguiente Género:");
+            generos[contador] = teclado.nextLine();
+            contador++;
+        }while(contador < cantidad);
+        
+        return generos;
+        
+    }
+    
+    public static String[] ingresoActores(Scanner teclado){
+        System.out.println("Ingrese la cantidad de actores a ingresar:");
+        byte cantidad = teclado.nextByte();
+        teclado.nextLine();
+        String actores[] = new String[cantidad];
+        int contador = 0;
+        System.out.println("Ingrese el primer Actor:");
+        
+        do{
+            if(contador != 0) System.out.println("Ingrese el siguiente Actor");
+            actores[contador] = teclado.nextLine();
+            contador++;
+        }while(contador < cantidad);
+        return actores;
+    }
+    
+    public static float ingresoValuacion(Scanner teclado){
+        float valuacion;
+        int contador = 0;
+        do{
+            if(contador != 0) System.out.println("Porfavor, ingrese la Valuacion en el formato solicitado");
+            valuacion = teclado.nextFloat();
+            teclado.nextLine();
+            contador++;
+        }while(Menú.Comprobar.formatoCorrectoValuacion(valuacion) != true);
+        
+        return valuacion;
+        
+    }
+    
+    public static void buscarPelícula(){
+        
     }
 }

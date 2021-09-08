@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Comprobadores;
+package Menú;
 import java.util.*;
 import Clases.*;
 /**
@@ -14,13 +14,13 @@ import Clases.*;
 
 public class Comprobar {
     public static String loginClientes(VideoClub x){
-        Scanner aux = new Scanner(System.in);
+        Scanner teclado = new Scanner(System.in);
         String rutIngresado;
         int i = 0;
         do{
             if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
             else System.out.println("Ingrese el rut con su respectivo \"-\": ");
-            rutIngresado = aux.nextLine();
+            rutIngresado = teclado.nextLine();
             i++;
         }while(formatoCorrectoRut(rutIngresado) != true || x.containsRUT(rutIngresado)==false);
         
@@ -39,4 +39,12 @@ public class Comprobar {
         }
         else return false;
     }
+    
+    public static boolean formatoCorrectoValuacion(float Valuacion){
+        
+        if(Valuacion <= 5 && Valuacion >= 1) return true;
+        
+        return false;
+    }
+        
 }
