@@ -177,14 +177,17 @@ public class Funciones {
     }
     
     public static void desplegarMiFicha(VideoClub x, String usuario){
-        System.out.println("Desplegando mi ficha LOL");
+        x.mostrarDatosClientes(usuario);
     }
     
     public static void historialCliente(VideoClub x){
-        System.out.println("Desplegando historial de: ");
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Ingrese el rut del cliente:");
+        String rut = teclado.nextLine();
+        x.getClientFromClientXRut(rut).mostrarHistorial();
     }
     
     public static void buscarCliente(VideoClub x){
         System.out.println("Buscando Cliente...LMFAO");
     }
-}
+}    
