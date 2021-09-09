@@ -15,14 +15,14 @@ public class Main {
         Cliente cliente = new Cliente();
 
 //------------------------------Lectura de datos desde archivos--------------------------------
-        LeerArchivoPeliculas(videoClub1,pelicula);
-        LeerArchivoClientes(videoClub1, cliente);
+        Funciones.LeerArchivoPeliculas(videoClub1, pelicula);
+        Funciones.LeerArchivoClientes(videoClub1, cliente);
 //---------------Imprime ciertos datos almacenados----------------------------------------------
         //videoClub1.mostrarDatosClientes();
 	//videoClub1.mostrarDatosClientes("10693359-1");
 	//videoClub1.mostrarDatosPeliculas();
 	//videoClub1.mostrarDatosPeliculas("3");
-        videoClub1.getClientFromClientXRut("19034223-3").mostrarHistorial();
+        //videoClub1.getClientFromClientXRut("19034223-3").mostrarHistorial();
 //----------------------------------------------------------------------------------------------  
        	//Menu arcaico por consola
 	Scanner entrada = new Scanner(System.in);
@@ -43,59 +43,5 @@ public class Main {
                     break;
             }
         }while(opción != 0);
-    }
-    
-    public static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
-        File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
-		Scanner scPel = new Scanner(flPeliculas);
-        String linea;
-        String[] arrayLineaPeliculas;
-        scPel.nextLine();
-		while(scPel.hasNextLine()){
-			linea = scPel.nextLine();
-			arrayLineaPeliculas = linea.split("\t");
-			//Guardar Datos en array de Peliculas
-			pelicula = new Pelicula();
-                        pelicula.setId(arrayLineaPeliculas[0]);
-			pelicula.setNombre(arrayLineaPeliculas[1]);
-			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[2]));
-			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[3]));
-			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[4]));
-			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[5]));
-			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[6]));
-			pelicula.setSinopsis(arrayLineaPeliculas[7]);
-			pelicula.setCalidad(arrayLineaPeliculas[8]);
-			pelicula.setDirector(arrayLineaPeliculas[9].split("_"));
-			pelicula.setActores(arrayLineaPeliculas[10].split("_"));
-			pelicula.setGeneros(arrayLineaPeliculas[11].split("_"));
-			videoClub.addPeliToListaPelis(pelicula);
-			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
-		}
-    }
-    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)throws FileNotFoundException{
-        File flClientes = new File("./src/main/java/data/clientes.tsv");
-        Scanner scCli = new Scanner(flClientes);
-        String linea;
-        String[] arrayLineaClientes;
-        scCli.nextLine();
-        Arriendo arriendo;
-        int i;
-	while(scCli.hasNextLine()){
-		linea = scCli.nextLine();
-		arrayLineaClientes = linea.split("\t");
-		//Guardar Datos en array de Clientes: [0]=nombre, [1]=rut, [2]=historial arriendos , [3]=pelPosesion, [4]=Deuda
-		cliente = new Cliente();
-		cliente.setNombre(arrayLineaClientes[0]);
-		cliente.setRut(arrayLineaClientes[1]);
-                for(i=0; i<arrayLineaClientes[2].split("_").length; i++){
-                    arriendo = new Arriendo();
-                    arriendo.setId(arrayLineaClientes[2].split("_")[i]);
-                    cliente.addArriendoToHistorial(arriendo);
-                    cliente.addToHistorialXid(arriendo);
-                }
-		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
-		videoClub.addClientToListaClients(cliente);
-		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
-		}
     }
 }
