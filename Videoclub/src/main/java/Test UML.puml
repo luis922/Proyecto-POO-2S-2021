@@ -2,9 +2,9 @@
 Main --> VideoClub
 Main --> Pelicula
 Main --> Cliente
-VideoClub  --> "Varios" Cliente
-VideoClub  --> "Varias" Pelicula
-Cliente  --> "Varios"Arriendo
+VideoClub  -->  Cliente
+VideoClub  -->  Pelicula
+Cliente  --> Arriendo
 
 class VideoClub{
     -String  nombreTienda
@@ -33,13 +33,15 @@ class VideoClub{
     +boolean containsRUT(String rut)
     +boolean existID(String id)
     +boolean existRUT(String rut)
-    +public String obtenerIdXNombre(String nombre)
+    +String obtenerIdXNombre(String nombre)
+    +int getSize(int modo)
 }
 
 class Cliente{
     -String nombre
     -String rut
-    -ArrayList<Arriendo> listaArriendos
+    -ArrayList<Arriendo> historialArriendos
+    -HashMap<String, Arriendo> historialXid
     -int deuda
 
     +Cliente()
@@ -51,6 +53,10 @@ class Cliente{
     +void addArriendoToHistorial(Arriendo arriendo)
     +int getDeuda()
     +void setDeuda(int deuda)
+    +void addToHistorialXid(Arriendo arriendo)
+    +void mostrarHistorial()
+    +void mostrarHistorial(String id)
+    +boolean existIDMap(String id)
 }
 
 class Pelicula{
@@ -103,8 +109,9 @@ class Arriendo{
     -String fechaArriendo
     -String fechaEntrega
     -boolean entregado
+    - int vecesArrendada;|
 
-    +Historial()
+    +Arriendo()
     +String getId()
     +void setId(String id)
     +float getValoracion()
@@ -115,6 +122,8 @@ class Arriendo{
     +void setFechaEntrega(String fechaEntrega)
     +boolean isEntregado()
     +void setEntregado(boolean entregado)
+    +void setVecesArrendada(int vecesArrendada)
+    +int getVecesArrendada()
 }
 
 class Main{

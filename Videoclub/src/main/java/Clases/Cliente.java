@@ -71,6 +71,7 @@ public class Cliente{
             System.out.println();
         }
     }
+
     public void mostrarHistorial(String id){
         if(historialXid.containsKey(id)) {
             System.out.println("ID pelicula: "+historialXid.get(id).getId());
