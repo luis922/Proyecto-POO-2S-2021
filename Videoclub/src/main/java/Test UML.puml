@@ -2,9 +2,13 @@
 Main --> VideoClub
 Main --> Pelicula
 Main --> Cliente
+Main --> Interface
+Main --> Funciones
+
 VideoClub  -->  Cliente
 VideoClub  -->  Pelicula
 Cliente  --> Arriendo
+Interface --> Funciones
 
 class VideoClub{
     -String  nombreTienda
@@ -136,5 +140,23 @@ class Interface{
     +static void login()
     +static void menúCliente(String usuario,VideoClub x)
     +static void menúAdmin(VideoClub x)
+}
+
+class Funciones{
+    + static void listaPeliculas(VideoClub x)
+    + static void listaClientes(VideoClub x)
+    + static void mostrarHistorialCliente(VideoClub x, String rut)
+    + static void mostrarHistorialPeli(VideoClub x, String rut)
+    + static void registrarCliente(VideoClub x)
+    + static void registrarPelicula(VideoClub x)
+    + static String[] ingresoDirectores(Scanner teclado)
+    + static String[] ingresoGeneros(Scanner teclado)
+    + static String[] ingresoActores(Scanner teclado)
+    + static float ingresoValuacion(Scanner teclado)
+    + static void buscarPelicula(VideoClub x)
+    + static void desplegarMiFicha(VideoClub x, String usuario)
+    + static void historialCliente(VideoClub x)
+    + static void buscarCliente(VideoClub x)
+
 }
 @enduml
