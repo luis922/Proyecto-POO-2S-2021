@@ -6,6 +6,8 @@
 package Menú;
 
 import Clases.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -28,6 +30,8 @@ public class Funciones {
     public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
         x.getClientFromClientXRut(rut).mostrarHistorial();
+        if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
+                System.out.println("Cliente no posee historial.");
     }
 
     public static void mostrarHistorialPeli(VideoClub x, String rut){
@@ -198,6 +202,8 @@ public class Funciones {
                 System.out.println("Ingrese rut nuevamente o '0' para terminar:");
             }
         }while(!rut.equals("0"));
+        if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
+                System.out.println("Cliente no posee historial.");
     }
     
     public static void buscarCliente(VideoClub x){
@@ -215,5 +221,58 @@ public class Funciones {
                 System.out.println("Ingrese rut nuevamente o '0' para terminar:");
             }
         }while(!rut.equals("0"));
+    }
+    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)throws FileNotFoundException{
+        File flClientes = new File("./src/main/java/data/clientes.tsv");
+        Scanner scCli = new Scanner(flClientes);
+        String linea;
+        String[] arrayLineaClientes;
+        scCli.nextLine();
+        Arriendo arriendo;
+        int i;
+	while(scCli.hasNextLine()){
+		linea = scCli.nextLine();
+		arrayLineaClientes = linea.split("\t");
+		//Guardar Datos en array de Clientes: [0]=nombre, [1]=rut, [2]=historial arriendos , [3]=pelPosesion, [4]=Deuda
+		cliente = new Cliente();
+		cliente.setNombre(arrayLineaClientes[0]);
+		cliente.setRut(arrayLineaClientes[1]);
+                for(i=0; i<arrayLineaClientes[2].split("_").length; i++){
+                    arriendo = new Arriendo();
+                    arriendo.setId(arrayLineaClientes[2].split("_")[i]);
+                    cliente.addArriendoToHistorial(arriendo);
+                    cliente.addToHistorialXid(arriendo);
+                }
+		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
+		videoClub.addClientToListaClients(cliente);
+		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
+		}
+    }
+    public static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
+        File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
+		Scanner scPel = new Scanner(flPeliculas);
+        String linea;
+        String[] arrayLineaPeliculas;
+        scPel.nextLine();
+		while(scPel.hasNextLine()){
+			linea = scPel.nextLine();
+			arrayLineaPeliculas = linea.split("\t");
+			//Guardar Datos en array de Peliculas
+			pelicula = new Pelicula();
+                        pelicula.setId(arrayLineaPeliculas[0]);
+			pelicula.setNombre(arrayLineaPeliculas[1]);
+			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[2]));
+			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[3]));
+			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[4]));
+			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[5]));
+			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[6]));
+			pelicula.setSinopsis(arrayLineaPeliculas[7]);
+			pelicula.setCalidad(arrayLineaPeliculas[8]);
+			pelicula.setDirector(arrayLineaPeliculas[9].split("_"));
+			pelicula.setActores(arrayLineaPeliculas[10].split("_"));
+			pelicula.setGeneros(arrayLineaPeliculas[11].split("_"));
+			videoClub.addPeliToListaPelis(pelicula);
+			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
+		}
     }
 }    
