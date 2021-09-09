@@ -33,6 +33,7 @@ class VideoClub{
     +boolean containsRUT(String rut)
     +boolean existID(String id)
     +boolean existRUT(String rut)
+    +public String obtenerIdXNombre(String nombre)
 }
 
 class Cliente{

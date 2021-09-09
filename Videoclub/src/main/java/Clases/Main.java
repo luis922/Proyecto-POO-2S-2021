@@ -3,7 +3,7 @@ package Clases;
 Solo compilar y ejecutar el main para obtener los datos desde los archivos
 y mostrar algunos de estos por pantalla
 */
-import Menú.Comprobar;
+
 import java.util.*; //Scanner, Arrays
 import java.io.*;
 import Menú.*;
@@ -33,10 +33,10 @@ public class Main {
             switch(opción){
                  case 1:
                      String rut = Comprobar.loginClientes(videoClub1);
-                    if (videoClub1.containsRUT(rut)) Menú.Interface.menúCliente(rut,videoClub1);
+                    if (videoClub1.containsRUT(rut)) Interface.menúCliente(rut,videoClub1);
                     break;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
                 case 2:
-                    Menú.Interface.menúAdmin(videoClub1);
+                    Interface.menúAdmin(videoClub1);
                     break;
                 default:
                     if(opción != 0) System.out.println("Ingrese una opción válida...");
