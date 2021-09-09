@@ -20,6 +20,10 @@ public class Cliente{
         this.deuda = 0;
         this.historialArriendos = new ArrayList();
     }
+    
+    public int getSizeHistorial(){
+        return historialArriendos.size();
+    }
 
     public String getNombre() {
         return nombre;
