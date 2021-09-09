@@ -165,14 +165,18 @@ public class Funciones {
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
         System.out.println("Ingrese nombre de la pelicula a buscar: ");
-        nombrePeli = teclado.nextLine();
-        String id = x.obtenerIdXNombre(nombrePeli);
-        if (id != null){
-            x.mostrarDatosPeliculas(id);
-        }
-        else{
-            System.out.println("Pelicula no registrada");
-        }
+        do{
+            nombrePeli = teclado.nextLine();
+            String id = x.obtenerIdXNombre(nombrePeli);
+            if (id != null){
+                x.mostrarDatosPeliculas(id);
+                break;
+            }
+            else{
+                System.out.println("Pelicula no registrada");
+                System.out.println("Ingrese nombre nuevamente o '0' para terminar");
+            }
+        }while(!nombrePeli.equals("0"));
     }
     
     public static void desplegarMiFicha(VideoClub x, String usuario){
@@ -185,14 +189,31 @@ public class Funciones {
         String rut;
         do{
             rut = teclado.nextLine();
-            if(x.existRUT(rut))
+            if(x.containsRUT(rut)){
                 x.getClientFromClientXRut(rut).mostrarHistorial();
-            else
-                System.out.println("Ingrese un rut valido: ");
-        }while(!x.existRUT(rut));
+                break;
+            }
+            else if (!rut.equals("0")){
+                System.out.println("Cliente no se encuentra registrado.");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar:");
+            }
+        }while(!rut.equals("0"));
     }
     
     public static void buscarCliente(VideoClub x){
-        System.out.println("Buscando Cliente...LMFAO");
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Ingrese el rut del cliente:");
+        String rut;
+        do{
+            rut = teclado.nextLine();
+            if(x.containsRUT(rut)){
+                x.mostrarDatosClientes(rut);
+                break;
+            }
+            else if (!rut.equals("0")){
+                System.out.println("Cliente no se encuentra registrado.");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar:");
+            }
+        }while(!rut.equals("0"));
     }
 }    
