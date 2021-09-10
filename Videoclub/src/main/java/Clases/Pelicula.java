@@ -25,6 +25,7 @@ public class Pelicula {
         return nombre;
     }
 
+//------------------SETTER/GETTER------------------    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
