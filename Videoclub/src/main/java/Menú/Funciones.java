@@ -27,13 +27,15 @@ public class Funciones {
         x.mostrarDatosClientes();
     }
     
+//------------------MOSTRAR HISTORIAL CLIENTE------------------ 
     public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
         x.getClientFromClientXRut(rut).mostrarHistorial();
         if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
                 System.out.println("Cliente no posee historial.");
     }
-
+    
+//------------------ MOSTRAR HISTORIAL PELICULA------------------ 
     public static void mostrarHistorialPeli(VideoClub x, String rut){
         Scanner teclado = new Scanner(System.in);
         String id;
@@ -50,6 +52,7 @@ public class Funciones {
         }while(!x.getClientFromClientXRut(rut).existIDMap(id));
     }
     
+//------------------REGISTRO NUEVO CLIENTE------------------    
     public static void registrarCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         Cliente nuevo = new Cliente();
@@ -69,6 +72,7 @@ public class Funciones {
         System.out.println("¡Cliente registrado exitosamente!");
     }
     
+//------------------REGISTRO NUEVA PELICULA------------------    
     public static void registrarPelicula(VideoClub x){//Incompleto aún, falta ranking e ingreso en la base
         Scanner teclado = new Scanner(System.in);
         Pelicula nueva = new Pelicula();
@@ -95,11 +99,10 @@ public class Funciones {
         nueva.setId(String.valueOf(x.getSize(2)));
         x.addPeliToListaPelis(nueva);
         x.addPeliToPelisXId(nueva.getId(), nueva);
-        System.out.println("¡Pelicula Ingresada Exitosamente!");
-        
-        
+        System.out.println("¡Pelicula Ingresada Exitosamente!");        
     }
     
+///---------Directores---------     
     public static String[] ingresoDirectores(Scanner teclado){//Podría presentar ingresos erroneos
         System.out.println("Ingrese la cantidad de directores");
         byte cantidad = teclado.nextByte();
@@ -113,8 +116,7 @@ public class Funciones {
             directores[contador] = teclado.nextLine();
             contador++;
         }while(contador < cantidad);
-        return directores;
-        
+        return directores;  
     }
     
     public static String[] ingresoGeneros(Scanner teclado){//Podría presentar ingresos erroneos
@@ -131,8 +133,7 @@ public class Funciones {
             contador++;
         }while(contador < cantidad);
         
-        return generos;
-        
+        return generos;      
     }
     
     public static String[] ingresoActores(Scanner teclado){
@@ -165,10 +166,11 @@ public class Funciones {
         
     }
     
+//------------------BUSQUEDA------------------ 
     public static void buscarPelicula(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
-        System.out.println("Ingrese nombre de la pelicula a buscar: ");
+        System.out.println("Ingrese nombre de la pelicula a buscar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
         do{
             nombrePeli = teclado.nextLine();
             String id = x.obtenerIdXNombre(nombrePeli);
@@ -178,7 +180,7 @@ public class Funciones {
             }
             else{
                 System.out.println("Pelicula no registrada");
-                System.out.println("Ingrese nombre nuevamente o '0' para terminar");
+                System.out.println("Ingrese nombre nuevamente o '0' para terminar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             }
         }while(!nombrePeli.equals("0"));
     }
@@ -189,7 +191,7 @@ public class Funciones {
     
     public static void historialCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el rut del cliente:");
+        System.out.println("Ingrese el rut del cliente:(20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         String rut;
         do{
             rut = teclado.nextLine();
@@ -199,7 +201,7 @@ public class Funciones {
             }
             else if (!rut.equals("0")){
                 System.out.println("Cliente no se encuentra registrado.");
-                System.out.println("Ingrese rut nuevamente o '0' para terminar:");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             }
         }while(!rut.equals("0"));
         if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
@@ -208,7 +210,7 @@ public class Funciones {
     
     public static void buscarCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el rut del cliente:");
+        System.out.println("Ingrese el rut del cliente: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         String rut;
         do{
             rut = teclado.nextLine();
@@ -218,10 +220,12 @@ public class Funciones {
             }
             else if (!rut.equals("0")){
                 System.out.println("Cliente no se encuentra registrado.");
-                System.out.println("Ingrese rut nuevamente o '0' para terminar:");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             }
         }while(!rut.equals("0"));
     }
+    
+//------------------LECTURA DE DATOS DESDE ARCHIVO------------------ 
     public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)throws FileNotFoundException{
         File flClientes = new File("./src/main/java/data/clientes.tsv");
         Scanner scCli = new Scanner(flClientes);
@@ -248,6 +252,7 @@ public class Funciones {
 		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
 		}
     }
+    
     public static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
         File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
 		Scanner scPel = new Scanner(flPeliculas);
