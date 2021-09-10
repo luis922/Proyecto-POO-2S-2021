@@ -11,7 +11,6 @@ import Clases.*;
  * @author sebas
  */
 
-
 public class Comprobar {
     public static String loginClientes(VideoClub x){
         Scanner teclado = new Scanner(System.in);
@@ -19,11 +18,10 @@ public class Comprobar {
         int i = 0;
         do{
             if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
-            else System.out.println("Ingrese el rut con su respectivo \"-\": ");
+            else System.out.println("Ingrese el rut con su respectivo \"-\": (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutIngresado = teclado.nextLine();
             i++;
-        }while(formatoCorrectoRut(rutIngresado) != true || x.containsRUT(rutIngresado)==false);
-        
+        }while(formatoCorrectoRut(rutIngresado) != true || x.containsRUT(rutIngresado)==false);        
         return rutIngresado;
     }
     
@@ -34,17 +32,10 @@ public class Comprobar {
             if(rut.charAt(i) == '-') guión++;
             if(Character.isDigit(rut.charAt(i)) == false) letras ++;
         }
-        if(guión == 1 && letras <= 1){
-            return true;
-        }
-        else return false;
+        return (guión == 1 && letras <= 1);
     }
     
     public static boolean formatoCorrectoValuacion(float Valuacion){
-        
-        if(Valuacion <= 5 && Valuacion >= 1) return true;
-        
-        return false;
-    }
-        
+        return (Valuacion <= 5 && Valuacion >= 1);
+    }     
 }
