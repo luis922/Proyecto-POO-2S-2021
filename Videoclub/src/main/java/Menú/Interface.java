@@ -20,6 +20,7 @@ public class Interface {
             System.out.println("2)Trabajador");
             System.out.println("0)Finalizar programa");
     }
+    
     //-------------------------MENU CLIENTE-----------------------------------------
     public static void menúCliente(String usuario,VideoClub x){
         Scanner teclado = new Scanner(System.in);
@@ -55,6 +56,7 @@ public class Interface {
         }while(opción != 0);
         
     }
+    
     //-------------------------MENU EMPLEADO-----------------------------------------
     public static void menúAdmin(VideoClub x){
         Scanner teclado = new Scanner(System.in);
