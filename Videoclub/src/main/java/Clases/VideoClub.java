@@ -17,6 +17,7 @@ public class VideoClub {
         clientesXRut = new HashMap<>();
     }
     
+//------------------MOSTRAR DATOS POR PANTALLA------------------
     public void mostrarDatosClientes(){
         int i;
         String rut;
@@ -108,6 +109,7 @@ public class VideoClub {
         System.out.println();
     }
     
+//------------------SETTER/GETTER------------------
     public String getNombreTienda() {
         return nombreTienda;
     }
@@ -123,7 +125,8 @@ public class VideoClub {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
+    
+//------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------
     public void addPeliToListaPelis(Pelicula peli) {
         if(!listaPeliculas.contains(peli))
             listaPeliculas.add(peli);
@@ -145,7 +148,8 @@ public class VideoClub {
     public void addPeliToPelisXId(String id, Pelicula peli) {
         pelisXId.put(id,peli);
     }
-
+    
+//------------------OBTENER ELEMENTOS DE ARRAYLIST/HASHMAP------------------
     public Cliente getClientFromClientXRut(String rut){
         return clientesXRut.get(rut);
     }
@@ -168,7 +172,8 @@ public class VideoClub {
                 return listaPeliculas.get(j).getId();
         return null;
     }
-
+    
+//------------------COMPROBADORES DE REGISTRO------------------
     public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
         return pelisXId.containsKey(id);
     }
