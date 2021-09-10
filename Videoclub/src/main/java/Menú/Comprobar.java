@@ -17,22 +17,31 @@ public class Comprobar {
         String rutIngresado;
         int i = 0;
         do{
-            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
-            else System.out.println("Ingrese el rut con su respectivo \"-\": (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            if(i != 0) 
+                System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
+            else 
+                System.out.println("Ingrese el rut con su respectivo \"-\": (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            
             rutIngresado = teclado.nextLine();
             i++;
-        }while(formatoCorrectoRut(rutIngresado) != true || x.containsRUT(rutIngresado)==false);        
+        }while(!formatoCorrectoRut(rutIngresado) || !x.containsRUT(rutIngresado));        
+        
         return rutIngresado;
     }
     
     public static boolean formatoCorrectoRut(String rut){
-        int guión = 0;
-        int letras = 0;
-        for(int i = 0;i < rut.length();i++){
-            if(rut.charAt(i) == '-') guión++;
-            if(Character.isDigit(rut.charAt(i)) == false) letras ++;
+        int i;
+        for(i=0; i<rut.length(); i++){
+            if(i<rut.length()-2 && !Character.isDigit(rut.charAt(i)))
+                return false;
+            else if(i == rut.length()-2 && rut.charAt(i) != '-'){
+                return false;
+            }
+            else if(i == rut.length()-1 && !Character.isDigit(rut.charAt(i)) && rut.charAt(i) != 'k' ){
+                return false;
+            }
         }
-        return (guión == 1 && letras <= 1);
+        return true;
     }
     
     public static boolean formatoCorrectoValuacion(float Valuacion){
