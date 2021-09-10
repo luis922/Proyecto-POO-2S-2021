@@ -5,7 +5,6 @@ y mostrar algunos de estos por pantalla
 */
 
 import java.util.*; //Scanner, Arrays
-import java.io.*;
 import Menú.*;
 
 public class Main {
