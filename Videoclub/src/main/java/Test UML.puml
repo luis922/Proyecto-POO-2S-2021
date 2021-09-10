@@ -1,14 +1,14 @@
 @startuml
-Main --> VideoClub
-Main --> Pelicula
-Main --> Cliente
-Main --> Interface
-Main --> Funciones
+Main "0..1" --> "0..*" VideoClub : Contiene
+Main "0..1" --> "0..*" Pelicula
+Main "0..1" --> "0..*" Cliente
+Main "0..1" --> "0..1" Interface: Incluye
+Main "0..1" --> "0..*" Funciones
 
-VideoClub  -->  Cliente
-VideoClub  -->  Pelicula
-Cliente  --> Arriendo
-Interface --> Funciones
+VideoClub "1" --> "0..*"  Cliente: Atender
+VideoClub "1" --> "1..*"  Pelicula:  Poseer
+Cliente "1" --> "0..*" Arriendo
+Interface "1" --> "1..*" Funciones: Tiene
 
 class VideoClub{
     -String  nombreTienda
@@ -132,10 +132,8 @@ class Arriendo{
 
 class Main{
     +static void main(String[] args)
-    +static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula)
-    +static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)
-
 }
+
 class Interface{
     +static void login()
     +static void menúCliente(String usuario,VideoClub x)
@@ -157,6 +155,7 @@ class Funciones{
     + static void desplegarMiFicha(VideoClub x, String usuario)
     + static void historialCliente(VideoClub x)
     + static void buscarCliente(VideoClub x)
-
+    + static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)
+    + static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula)
 }
 @enduml
