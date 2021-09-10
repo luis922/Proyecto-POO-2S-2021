@@ -17,7 +17,8 @@ public class Arriendo {
         entregado = true;
         vecesArrendada = 0;
     }
-
+    
+//------------------SETTER/GETTER------------------
     public String getId() {
         return id;
     }
