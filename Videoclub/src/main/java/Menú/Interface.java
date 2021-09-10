@@ -24,7 +24,7 @@ public class Interface {
     //-------------------------MENU CLIENTE-----------------------------------------
     public static void menúCliente(String usuario,VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        byte opción;
+        String opción;
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
@@ -33,19 +33,19 @@ public class Interface {
             System.out.println("3)Revisar historial de pelicula");
             System.out.println("4)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
-            opción = teclado.nextByte();
+            opción = teclado.nextLine();
             
             switch(opción){
-                case 1:
+                case "1":
                     Funciones.listaPeliculas(x);
                     break;
-                case 2:
+                case "2":
                     Funciones.mostrarHistorialCliente(x,usuario);
                     break;
-                case 3:
+                case "3":
                     Funciones.mostrarHistorialPeli(x, usuario);
                     break;
-                case 4:
+                case "4":
                     Funciones.desplegarMiFicha(x,usuario);
                     break;
                 default:
@@ -53,16 +53,14 @@ public class Interface {
                     break;
             }
             
-        }while(opción != 0);
+        }while(!opción.equals("0"));
         
     }
     
     //-------------------------MENU EMPLEADO-----------------------------------------
     public static void menúAdmin(VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        
-        byte opción;
-        
+        String opción;
         do{
             System.out.println("Menú Administrador");
             System.out.println("1)Desplegar lista de clientes");
@@ -73,28 +71,28 @@ public class Interface {
             System.out.println("6)Buscar Pelicula");
             System.out.println("7)Buscar Cliente");
             System.out.println("0)Menú anterior");
-            opción = teclado.nextByte();
+            opción = teclado.nextLine();
             
             switch(opción){
-                case 1:
+                case "1":
                     Funciones.listaClientes(x);
                     break;
-                case 2:
+                case "2":
                     Funciones.listaPeliculas(x);
                     break;
-                case 3:
+                case "3":
                     Funciones.registrarCliente(x);
                     break;
-                case 4:
+                case "4":
                     Funciones.registrarPelicula(x);
                     break;
-                case 5:
+                case "5":
                     Funciones.historialCliente(x);
                     break;
-                case 6:
+                case "6":
                     Funciones.buscarPelicula(x);
                     break;
-                case 7:
+                case "7":
                     Funciones.buscarCliente(x);
                     break;
                 default:
@@ -103,7 +101,7 @@ public class Interface {
                     
             }
             
-        }while(opción != 0);
+        }while(!opción.equals("0"));
                 
     }
 }
