@@ -24,7 +24,8 @@ public class Cliente{
     public int getSizeHistorial(){
         return historialArriendos.size();
     }
-
+    
+//------------------SETTER/GETTER------------------
     public String getNombre() {
         return nombre;
     }
@@ -41,10 +42,6 @@ public class Cliente{
         this.rut = rut;
     }
 
-    public void addArriendoToHistorial(Arriendo arriendo) {
-        historialArriendos.add(arriendo);
-    }
-
     public int getDeuda() {
         return deuda;
     }
@@ -52,11 +49,17 @@ public class Cliente{
     public void setDeuda(int deuda) {
         this.deuda = deuda;
     }
-
+    
+//------------------AGREGA ELEMENTOS A HISTORIAL------------------
     public void addToHistorialXid(Arriendo arriendo) {
         this.historialXid.put(arriendo.getId(), arriendo);
     }
-
+    
+    public void addArriendoToHistorial(Arriendo arriendo) {
+        historialArriendos.add(arriendo);
+    }
+    
+//------------------MOSTRAR HISTORIAL------------------
     public void mostrarHistorial(){
         for (int i = 0; i < historialArriendos.size(); i++) {
             System.out.println("ID pelicula: "+historialArriendos.get(i).getId());
@@ -96,6 +99,7 @@ public class Cliente{
             System.out.println("Ingrese una id valida");
     }
     
+//------------------COMPRUEBA------------------
     public boolean existIDMap(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
         return historialXid.containsKey(id);
     }
