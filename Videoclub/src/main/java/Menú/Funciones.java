@@ -38,18 +38,21 @@ public class Funciones {
 //------------------ MOSTRAR HISTORIAL PELICULA------------------ 
     public static void mostrarHistorialPeli(VideoClub x, String rut){
         Scanner teclado = new Scanner(System.in);
-        String id;
-        System.out.println("Ingrese el id de la pelicula cuyo historial de arriendo quiere revisar: ");
-
+        String nombre, id;
+        System.out.println("Ingrese el nombre de la pelicula cuyo historial de arriendo quiere revisar: ");
         do{
-            id = teclado.nextLine();
-            if(x.getClientFromClientXRut(rut).existIDMap(id)){
+            nombre = teclado.nextLine();
+            id = x.obtenerIdXNombre(nombre);
+            if(id != null){
                 System.out.println("Información obtenida");
                 x.getClientFromClientXRut(rut).mostrarHistorial(id);
+                break;
             }
-            else
-                System.out.println("Ingrese una id valida");
-        }while(!x.getClientFromClientXRut(rut).existIDMap(id));
+            else{
+                System.out.println("No se encuentra la pelicula en el historial.");
+                System.out.println("Ingrese nombre nuevamente o '0' para terminar.");
+            }
+        }while(!nombre.equals("0"));
     }
     
 //------------------REGISTRO NUEVO CLIENTE------------------    
