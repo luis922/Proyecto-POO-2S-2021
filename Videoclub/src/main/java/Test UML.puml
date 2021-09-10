@@ -1,13 +1,14 @@
 @startuml
+skinparam sequenceMessageAlign center
 Main "0..1" --> "0..*" VideoClub : Contiene
-Main "0..1" --> "0..*" Pelicula
-Main "0..1" --> "0..*" Cliente
+Main "0..1" --> "0..*" Pelicula: Utiliza
+Main "0..1" --> "0..*" Cliente: Usa
 Main "0..1" --> "0..1" Interface: Incluye
-Main "0..1" --> "0..*" Funciones
+Main "0..1" --> "0..*" Funciones: Llama
 
-VideoClub "1" --> "0..*"  Cliente: Atender
-VideoClub "1" --> "1..*"  Pelicula:  Poseer
-Cliente "1" --> "0..*" Arriendo
+VideoClub "1" --> "0..*"  Cliente: Atiende
+VideoClub "1" --> "1..*"  Pelicula:  Posee
+Cliente "1" --> "0..*" Arriendo: Accede
 Interface "1" --> "1..*" Funciones: Tiene
 
 class VideoClub{
@@ -113,7 +114,7 @@ class Arriendo{
     -String fechaArriendo
     -String fechaEntrega
     -boolean entregado
-    - int vecesArrendada;|
+    - int vecesArrendada;
 
     +Arriendo()
     +String getId()
