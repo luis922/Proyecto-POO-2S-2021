@@ -15,22 +15,25 @@ public class Comprobar {
     public static String loginClientes(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String rutIngresado;
-        int i = 0;
+        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         do{
-            if(i != 0) 
-                System.out.println("El rut ingresado no se encuentra en el formato solicitado/es inexistente...");
-            else 
-                System.out.println("Ingrese el rut con su respectivo \"-\": (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-            
             rutIngresado = teclado.nextLine();
-            i++;
-        }while(!formatoCorrectoRut(rutIngresado) || !x.containsRUT(rutIngresado));        
-        
-        return rutIngresado;
+            if(!formatoCorrectoRut(rutIngresado)){
+               System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
+            }
+            else if(!x.containsRUT(rutIngresado)){
+                System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
+            }
+            else 
+                return rutIngresado;           
+        }while(!rutIngresado.equals("0"));
+        return null;
     }
     
     public static boolean formatoCorrectoRut(String rut){
         int i;
+        if (rut.equals("0"))
+            return true;
         for(i=0; i<rut.length(); i++){
             if(i<rut.length()-2 && !Character.isDigit(rut.charAt(i)))
                 return false;
