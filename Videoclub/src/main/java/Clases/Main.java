@@ -31,9 +31,10 @@ public class Main {
             opción = entrada.nextByte();
             switch(opción){
                  case 1:
-                     String rut = Comprobar.loginClientes(videoClub1);
-                    if (videoClub1.containsRUT(rut)) Interface.menúCliente(rut,videoClub1);
-                    break;//Se llama a una función que verifique si el rut a ingresar está en la base de datos
+                    String rut = Comprobar.loginClientes(videoClub1);
+                    if(rut != null)
+                        Interface.menúCliente(rut,videoClub1);
+                    break;
                 case 2:
                     Interface.menúAdmin(videoClub1);
                     break;
