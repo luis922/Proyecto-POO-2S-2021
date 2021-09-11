@@ -30,9 +30,30 @@ public class Funciones {
 //------------------MOSTRAR HISTORIAL CLIENTE------------------ 
     public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
-        x.getClientFromClientXRut(rut).mostrarHistorial();
         if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
                 System.out.println("Cliente no posee historial.");
+        else
+            x.getClientFromClientXRut(rut).mostrarHistorial();
+    }
+    
+    public static void mostrarHistorialCliente(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Ingrese el rut del cliente:(20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+        String rut;
+        do{
+            rut = teclado.nextLine();
+            if(x.containsRUT(rut)){
+                if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
+                    System.out.println("Cliente no posee historial.");
+                else
+                    x.getClientFromClientXRut(rut).mostrarHistorial();
+                break;
+            }
+            else if (!rut.equals("0")){
+                System.out.println("Cliente no se encuentra registrado.");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            }
+        }while(!rut.equals("0"));
     }
     
 //------------------ MOSTRAR HISTORIAL PELICULA------------------ 
@@ -241,25 +262,6 @@ public class Funciones {
     
     public static void desplegarMiFicha(VideoClub x, String usuario){
         x.mostrarDatosClientes(usuario);
-    }
-    
-    public static void historialCliente(VideoClub x){
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el rut del cliente:(20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-        String rut;
-        do{
-            rut = teclado.nextLine();
-            if(x.containsRUT(rut)){
-                x.getClientFromClientXRut(rut).mostrarHistorial();
-                break;
-            }
-            else if (!rut.equals("0")){
-                System.out.println("Cliente no se encuentra registrado.");
-                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-            }
-        }while(!rut.equals("0"));
-        if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
-                System.out.println("Cliente no posee historial.");
     }
     
     public static void buscarCliente(VideoClub x){
