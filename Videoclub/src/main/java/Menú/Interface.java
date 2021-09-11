@@ -64,12 +64,13 @@ public class Interface {
         do{
             System.out.println("Menú Administrador");
             System.out.println("1)Desplegar lista de clientes");
-            System.out.println("2)Desplegar lista de peliculas");
+            System.out.println("2)Desplegar lista de películas");
             System.out.println("3)Registrar Cliente");
-            System.out.println("4)Registrar Pelicula");
+            System.out.println("4)Registrar Película");
             System.out.println("5)Desplegar historial de cliente");
-            System.out.println("6)Buscar Pelicula");
+            System.out.println("6)Buscar Película");
             System.out.println("7)Buscar Cliente");
+            System.out.println("8)Registrar Arriendo");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
@@ -94,6 +95,9 @@ public class Interface {
                     break;
                 case "7":
                     Funciones.buscarCliente(x);
+                    break;
+                case "8":
+                    Funciones.registrarArriendo(x);
                     break;
                 default:
                     System.out.println("Ingrese una opcion valida");
