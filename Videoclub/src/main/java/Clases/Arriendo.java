@@ -1,7 +1,7 @@
 package Clases;
 
 public class Arriendo {
-    private String id;
+    private String id; //key
     private float valoracion; //Numero de estrellas con la que el cliente valoro el film de 0 a 5
     private String fechaArriendo;
     private String fechaEntrega;
