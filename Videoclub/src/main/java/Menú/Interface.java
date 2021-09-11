@@ -28,9 +28,9 @@ public class Interface {
         do{
             String nombre = x.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
-            System.out.println("1)Desplegar catalogo de peliculas");
+            System.out.println("1)Desplegar catálogo de películas");
             System.out.println("2)Revisar mi historial");
-            System.out.println("3)Revisar historial de pelicula");
+            System.out.println("3)Revisar historial de película");
             System.out.println("4)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
