@@ -49,7 +49,10 @@ public class Cliente{
     public void setDeuda(int deuda) {
         this.deuda = deuda;
     }
-    
+
+    public Arriendo getArriendoXId(String id){
+        return historialXid.get(id);
+    }
 //------------------AGREGA ELEMENTOS A HISTORIAL------------------
     public void addToHistorialXid(Arriendo arriendo) {
         this.historialXid.put(arriendo.getId(), arriendo);
