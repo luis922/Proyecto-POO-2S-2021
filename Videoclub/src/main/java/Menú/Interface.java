@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Interface {
     public static void login(){
-            System.out.println("Por favor, seleccione tipo de Usuario: ");
+            System.out.println("Porfavor, seleccione tipo de Usuario: ");
             System.out.println("1)Cliente");
             System.out.println("2)Trabajador");
             System.out.println("0)Finalizar programa");
@@ -88,7 +88,7 @@ public class Interface {
                     Funciones.registrarPelicula(x);
                     break;
                 case "5":
-                    Funciones.mostrarHistorialCliente(x);
+                    Funciones.HistorialCliente(x);
                     break;
                 case "6":
                     Funciones.buscarPelicula(x);
