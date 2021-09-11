@@ -110,6 +110,7 @@ public class Funciones {
         String rut, nombrePeli, id;
         Arriendo arriendo;
         Scanner teclado = new Scanner(System.in);
+        String fechaEntrega, fechaArriendo; 
         do{
             System.out.println("Ingrese rut cliente que va a registrar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
@@ -126,13 +127,31 @@ public class Funciones {
                             System.out.println("No se encuentra la pelicula.");
                             continue;
                         }
-                        arriendo = new Arriendo();
-                        arriendo.setId(id);
-                        x.getClientFromClientXRut(rut).addToHistorialXid(arriendo);
-                        x.getClientFromClientXRut(rut).addArriendoToHistorial(arriendo);
+                        System.out.println("Ingrese fecha arriendo: dd/mm/aa");
+                        fechaArriendo = teclado.nextLine();
+                        System.out.println("Ingrese fecha entrega: dd/mm/aa");
+                        fechaEntrega = teclado.nextLine();
+                        if(!x.getClientFromClientXRut(rut).existIDMap(id)){//Primera vez q arrienda la pelicula.      
+                            arriendo = new Arriendo();
+                            arriendo.setId(id);
+                            arriendo.setFechaArriendo(fechaArriendo);
+                            arriendo.setFechaEntrega(fechaEntrega);
+                            arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
+                            arriendo.setEntregado(false);
+                            x.getClientFromClientXRut(rut).addToHistorialXid(arriendo);
+                            x.getClientFromClientXRut(rut).addArriendoToHistorial(arriendo);
+                        }
+                        else{//Ha arrendadoo antes la pelicula
+                            System.out.println("Cliente ha arrendado la pelicula antes, se actualizan los datos...");
+                            arriendo = x.getClientFromClientXRut(rut).getArriendoXId(id);
+                            arriendo.setFechaArriendo(fechaArriendo);
+                            arriendo.setFechaEntrega(fechaEntrega);
+                            arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
+                            arriendo.setEntregado(false);
+                        }
                     }
                 }while (!nombrePeli.equals("0"));
-            rut = "0";
+                rut = "0";
             }
         }while(!rut.equals("0"));
     }
