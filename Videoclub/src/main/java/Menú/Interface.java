@@ -88,7 +88,7 @@ public class Interface {
                     Funciones.registrarPelicula(x);
                     break;
                 case "5":
-                    Funciones.historialCliente(x);
+                    Funciones.mostrarHistorialCliente(x);
                     break;
                 case "6":
                     Funciones.buscarPelicula(x);
