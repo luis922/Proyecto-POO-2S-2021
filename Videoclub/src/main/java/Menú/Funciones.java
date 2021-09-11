@@ -39,7 +39,7 @@ public class Funciones {
     public static void mostrarHistorialPeli(VideoClub x, String rut){
         Scanner teclado = new Scanner(System.in);
         String nombre, id;
-        System.out.println("Ingrese el nombre de la pelicula cuyo historial de arriendo quiere revisar: ");
+        System.out.println("Ingrese el nombre de la pelicula cuyo historial de arriendo quiere revisar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
         do{
             nombre = teclado.nextLine();
             id = x.obtenerIdXNombre(nombre);
@@ -103,6 +103,38 @@ public class Funciones {
         x.addPeliToListaPelis(nueva);
         x.addPeliToPelisXId(nueva.getId(), nueva);
         System.out.println("¡Pelicula Ingresada Exitosamente!");        
+    }
+    
+//------------------REGISTRO NUEVO ARRIENDO------------------     
+    public static void registrarArriendo(VideoClub x){
+        String rut, nombrePeli, id;
+        Arriendo arriendo;
+        Scanner teclado = new Scanner(System.in);
+        do{
+            System.out.println("Ingrese rut cliente que va a registrar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            rut = teclado.nextLine();
+            if (!x.existRUT(rut)){
+                System.out.println("rut no registrado.");
+            }
+            else{
+                do{
+                    System.out.println("Ingrese nombre pelicula a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+                    nombrePeli = teclado.nextLine();
+                    id = x.obtenerIdXNombre(nombrePeli);
+                    if (!nombrePeli.equals("0")){
+                        if (id == null){
+                            System.out.println("No se encuentra la pelicula.");
+                            continue;
+                        }
+                        arriendo = new Arriendo();
+                        arriendo.setId(id);
+                        x.getClientFromClientXRut(rut).addToHistorialXid(arriendo);
+                        x.getClientFromClientXRut(rut).addArriendoToHistorial(arriendo);
+                    }
+                }while (!nombrePeli.equals("0"));
+            rut = "0";
+            }
+        }while(!rut.equals("0"));
     }
     
 ///---------Directores---------     
@@ -194,7 +226,7 @@ public class Funciones {
     
     public static void historialCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el rut del cliente:(20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+        System.out.println("Ingrese el rut del cliente:(20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         String rut;
         do{
             rut = teclado.nextLine();
@@ -204,7 +236,7 @@ public class Funciones {
             }
             else if (!rut.equals("0")){
                 System.out.println("Cliente no se encuentra registrado.");
-                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             }
         }while(!rut.equals("0"));
         if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
@@ -213,7 +245,7 @@ public class Funciones {
     
     public static void buscarCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el rut del cliente: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+        System.out.println("Ingrese el rut del cliente: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         String rut;
         do{
             rut = teclado.nextLine();
@@ -223,7 +255,7 @@ public class Funciones {
             }
             else if (!rut.equals("0")){
                 System.out.println("Cliente no se encuentra registrado.");
-                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844879-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+                System.out.println("Ingrese rut nuevamente o '0' para terminar: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             }
         }while(!rut.equals("0"));
     }
