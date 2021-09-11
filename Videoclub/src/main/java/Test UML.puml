@@ -9,7 +9,7 @@ Main "0..1" --> "0..*" Funciones: Llama
 VideoClub "1" --> "0..*"  Cliente: Atiende
 VideoClub "1" --> "1..*"  Pelicula:  Posee
 Cliente "1" --> "0..*" Arriendo: Accede
-Interface "1" --> "1..*" Funciones: Tiene
+Interface "1" --> "1..*" Funciones: Invoca
 
 class VideoClub{
     -String  nombreTienda
@@ -18,22 +18,28 @@ class VideoClub{
     -ArrayList<Cliente>   listaClientes
     -HashMap<String,Pelicula> pelisXId
     -HashMap<String,Cliente> clientesXRut
-
+    __
+    .. Constructor ..
     +VideoClub()
-    +void mostrarDatosPeliculas()
-    +void mostrarDatosClientes(String rut)
-    +void mostrarDatosPeliculas()
-    +void mostrarDatosPeliculas(String id)
+    .. Setter/Getter..
     +String getNombreTienda()
     +void setNombreTienda(String nombreTienda)
     +String getDireccion()
     +void setDireccion(String direccion)
+    .. Agregar a colecciones ..
     +void addPeliToListaPelis(Pelicula peli)
     +void addClientToListaClients( Cliente cliente)
     +void addClientToClientXRut(String rut, Cliente cliente)
     +void addPeliToPelisXId(String id, Pelicula peli)
+    .. Mostrar datos por pantalla..
+    +void mostrarDatosPeliculas()
+    +void mostrarDatosClientes(String rut)
+    +void mostrarDatosPeliculas()
+    +void mostrarDatosPeliculas(String id)
+    .. Obtener elementos de colecciones..
     +Cliente getClientFromClientXRut(String rut)
     +Pelicula getPeliFromPelisXId(String id)
+    .. Otros métodos ..
     +boolean containsID(String id)
     +boolean containsRUT(String rut)
     +boolean existID(String id)
