@@ -16,14 +16,7 @@ public class Main {
 //------------------------------Lectura de datos desde archivos--------------------------------
         Funciones.LeerArchivoPeliculas(videoClub1, pelicula);
         Funciones.LeerArchivoClientes(videoClub1, cliente);
-//---------------Imprime ciertos datos almacenados----------------------------------------------
-        //videoClub1.mostrarDatosClientes();
-	//videoClub1.mostrarDatosClientes("10693359-1");
-	//videoClub1.mostrarDatosPeliculas();
-	//videoClub1.mostrarDatosPeliculas("3");
-        //videoClub1.getClientFromClientXRut("19034223-3").mostrarHistorial();
-//----------------------------------------------------------------------------------------------  
-       	//Menu arcaico por consola
+//-------------------Menu  por consola------------------------------
 	Scanner entrada = new Scanner(System.in);
         byte opción;
         do{
