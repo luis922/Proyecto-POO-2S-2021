@@ -5,8 +5,9 @@ Main "0..1" --> "0..*" Pelicula: Utiliza
 Main "0..1" --> "0..*" Cliente: Usa
 Main "0..1" --> "0..1" Interface: Incluye
 Main "0..1" --> "0..*" Funciones: Llama
+Main "0..1" --> "0..1" Comprobar: Invoca
 
-VideoClub "1" --> "0..*"  Cliente: Atiende
+VideoClub "1..*" --> "0..*"  Cliente: Atiende
 VideoClub "1" --> "1..*"  Pelicula:  Posee
 Cliente "1" --> "0..*" Arriendo: Accede
 Interface "1" --> "1..*" Funciones: Invoca
@@ -54,9 +55,11 @@ class Cliente{
     -ArrayList<Arriendo> historialArriendos
     -HashMap<String, Arriendo> historialXid
     -int deuda
-
+    __
+    ..Constructor..
     +Cliente()
     +Cliente(String nombre, String rut)
+    ..Setter/Getter..
     +String getNombre()
     +void setNombre(String nombre)
     +String getRut()
@@ -64,10 +67,14 @@ class Cliente{
     +void addArriendoToHistorial(Arriendo arriendo)
     +int getDeuda()
     +void setDeuda(int deuda)
+    ..Otros métodos..
+    +Arriendo getArriendoXId(String id)
     +void addToHistorialXid(Arriendo arriendo)
+    +void addArriendoToHistorial(Arriendo arriendo)
     +void mostrarHistorial()
     +void mostrarHistorial(String id)
     +boolean existIDMap(String id)
+    +int getSizeHistorial()
 }
 
 class Pelicula{
@@ -84,8 +91,10 @@ class Pelicula{
     -String director[]
     -String actores[]
     -String generos[]
-
+    __
+    ..Constructor..
     +Pelicula()
+    ..Setter/Getter..
     +String getNombre()
     +void setNombre(String nombre)
     +String getId()
@@ -120,9 +129,11 @@ class Arriendo{
     -String fechaArriendo
     -String fechaEntrega
     -boolean entregado
-    - int vecesArrendada;
-
+    - int vecesArrendada
+    __
+    ..Constructor..
     +Arriendo()
+    ..Setter/Getter..
     +String getId()
     +void setId(String id)
     +float getValoracion()
@@ -131,9 +142,10 @@ class Arriendo{
     +void setFechaArriendo(String fechaArriendo)
     +String getFechaEntrega()
     +void setFechaEntrega(String fechaEntrega)
-    +boolean isEntregado()
     +void setEntregado(boolean entregado)
     +void setVecesArrendada(int vecesArrendada)
+    ..Otros métodos..
+    +boolean isEntregado()
     +int getVecesArrendada()
 }
 
@@ -151,18 +163,27 @@ class Funciones{
     + static void listaPeliculas(VideoClub x)
     + static void listaClientes(VideoClub x)
     + static void mostrarHistorialCliente(VideoClub x, String rut)
+    + static void mostrarHistorialCliente(VideoClub x)
     + static void mostrarHistorialPeli(VideoClub x, String rut)
     + static void registrarCliente(VideoClub x)
     + static void registrarPelicula(VideoClub x)
+    + static void registrarArriendo(VideoClub x)
     + static String[] ingresoDirectores(Scanner teclado)
     + static String[] ingresoGeneros(Scanner teclado)
     + static String[] ingresoActores(Scanner teclado)
     + static float ingresoValuacion(Scanner teclado)
     + static void buscarPelicula(VideoClub x)
     + static void desplegarMiFicha(VideoClub x, String usuario)
-    + static void historialCliente(VideoClub x)
     + static void buscarCliente(VideoClub x)
     + static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)
     + static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula)
+}
+
+class Comprobar{
+
+    +static String loginClientes(VideoClub x)
+    +static boolean formatoCorrectoRut(String rut)
+    +static boolean formatoCorrectoValuacion(float Valuacion)
+
 }
 @enduml
