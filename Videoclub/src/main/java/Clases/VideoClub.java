@@ -195,4 +195,18 @@ public class VideoClub {
         }
         return 0;
     }
+//------------------Eliminadores------------------
+    public void delPelicula(String id){
+        pelisXId.remove(id) ;
+        for(int i = 0;i < listaPeliculas.size();i++){
+            if (listaPeliculas.get(i).getId().equals(id)) listaPeliculas.remove(i);
+        }
+    }
+    
+    public void delCliente (String rut){
+        clientesXRut.remove(rut);
+        for(int i = 0;i < listaClientes.size();i++){
+            if(listaClientes.get(i).getRut().equals(rut)) listaClientes.remove(i);
+        }
+    }
 }

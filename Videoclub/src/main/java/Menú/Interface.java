@@ -71,6 +71,10 @@ public class Interface {
             System.out.println("6)Buscar Película");
             System.out.println("7)Buscar Cliente");
             System.out.println("8)Registrar Arriendo");
+            System.out.println("9)Eliminar Película");
+            System.out.println("10)Editar Película");
+            System.out.println("11)Eliminar cliente");
+            System.out.println("12)Editar cliente");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
@@ -99,6 +103,17 @@ public class Interface {
                 case "8":
                     Funciones.registrarArriendo(x);
                     break;
+                case "9":
+                    Funciones.eliminarPelicula(x);
+                    break;
+                case "10":
+                    Funciones.editarPelicula(x);
+                    break;
+                case "11":
+                    Funciones.eliminarCliente(x);
+                    break;
+                case "12":
+                    Funciones.editarCliente(x);
                 default:
                     System.out.println("Ingrese una opcion valida");
                     break;

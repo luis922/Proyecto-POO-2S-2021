@@ -177,8 +177,8 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
     
-///---------Directores---------     
-    public static String[] ingresoDirectores(Scanner teclado){//Podría presentar ingresos erroneos
+///---------Ingresos---------     
+    public static String[] ingresoDirectores(Scanner teclado){
         System.out.println("Ingrese la cantidad de directores");
         byte cantidad = teclado.nextByte();
         teclado.nextLine();
@@ -194,7 +194,7 @@ public class Funciones {
         return directores;  
     }
     
-    public static String[] ingresoGeneros(Scanner teclado){//Podría presentar ingresos erroneos
+    public static String[] ingresoGeneros(Scanner teclado){
         System.out.println("Ingrese la cantidad de géneros:");
         byte cantidad = teclado.nextByte();
         teclado.nextLine();
@@ -336,4 +336,62 @@ public class Funciones {
 			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
 		}
     }
-}    
+//------------------Eliminación------------------ 
+    public static void eliminarPelicula (VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String nombre;
+        int contador = 0;
+        System.out.println("Ingrese el nombre de la pelicula que desea eliminar:");
+        do{
+            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            nombre = teclado.nextLine();
+            contador++;
+        }while(x.containsID(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0") == false);
+        if(nombre.equals("0"));
+        else{
+            Pelicula ay = x.getPeliFromPelisXId(x.obtenerIdXNombre(nombre));
+            System.out.println("¿Está seguro de eliminar la película \"" + ay.getNombre() + "\" de la base de datos?\n1)Sí\n2)No");
+            
+            switch(teclado.nextLine()){
+                case "1":
+                    x.delPelicula(ay.getId());
+                    if(x.containsID(x.obtenerIdXNombre(nombre))) System.out.println("Operación Falló");//Dudo que se use pero podría ahorrarnos un dolor de cabeza
+                    else System.out.println("¡Operación realizada con exito!\nVolviendo al menú principal...");
+                    break;
+                case "2":
+                    System.out.println("Operación cancelada...\nVolviendo al menú principal...");
+                    break;
+            }
+        }
+        
+       
+    }
+    
+    public static void eliminarCliente(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String rut;
+        int contador = 0;
+        System.out.println("Ingrese el rut del usuario a eliminar:");
+        do{
+            if(contador != 0) System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
+            rut = teclado.nextLine();
+            contador++;
+        }while(x.containsRUT(rut) ==  false && rut.equals("0") == false);
+        if(rut.equals("0"));
+        else{
+            Cliente ay = x.getClientFromClientXRut(rut);
+            System.out.println("¿Está seguro de eliminar al Sr(a) \"" + ay.getNombre()+ "\" de la base de datos?\n1)Sí\n2)No");
+            
+            switch(teclado.nextLine()){
+                case "1":
+                    x.delCliente(rut);
+                    if(x.containsRUT(rut)) System.out.println("Operación Falló");//Same as the other
+                    else System.out.println("¡Operación realizada con exito!\nVolviendo al menú principal...");
+                    break;
+                case "2":
+                    System.out.println("Operación cancelada...\nVolviendo al menú principal...");
+                    break;
+            }
+        }
+    }
+}  
