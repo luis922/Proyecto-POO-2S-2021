@@ -126,8 +126,8 @@ public class Funciones {
         System.out.println("¡Pelicula Ingresada Exitosamente!");        
     }
     
-//------------------REGISTRO NUEVO ARRIENDO------------------     
-    public static void registrarArriendo(VideoClub x){
+//------------------REGISTRO NUEVO HISTORIAL------------------
+    public static void registrarHistorial(VideoClub x){
         String rut, nombrePeli, id;
         Arriendo arriendo;
         Scanner teclado = new Scanner(System.in);
@@ -160,11 +160,11 @@ public class Funciones {
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
                             arriendo.setEntregado(false);
                             x.getClientFromClientXRut(rut).addToHistorialXid(arriendo);
-                            x.getClientFromClientXRut(rut).addArriendoToHistorial(arriendo);
+                            x.getClientFromClientXRut(rut).addToHistorial(arriendo);
                         }
                         else{//Ha arrendadoo antes la pelicula
                             System.out.println("Cliente ha arrendado la pelicula antes, se actualizan los datos...");
-                            arriendo = x.getClientFromClientXRut(rut).getArriendoXId(id);
+                            arriendo = x.getClientFromClientXRut(rut).getHistorialXId(id);
                             arriendo.setFechaArriendo(fechaArriendo);
                             arriendo.setFechaEntrega(fechaEntrega);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
@@ -300,7 +300,7 @@ public class Funciones {
                 for(i=0; i<arrayLineaClientes[2].split("_").length; i++){
                     arriendo = new Arriendo();
                     arriendo.setId(arrayLineaClientes[2].split("_")[i]);
-                    cliente.addArriendoToHistorial(arriendo);
+                    cliente.addToHistorial(arriendo);
                     cliente.addToHistorialXid(arriendo);
                 }
 		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
@@ -373,7 +373,8 @@ public class Funciones {
         int contador = 0;
         System.out.println("Ingrese el rut del usuario a eliminar:");
         do{
-            if(contador != 0) System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
+            if(contador != 0)
+                System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
             rut = teclado.nextLine();
             contador++;
         }while(x.containsRUT(rut) ==  false && rut.equals("0") == false);

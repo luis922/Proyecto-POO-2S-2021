@@ -14,6 +14,8 @@ public class Cliente{
     public Cliente() {
         this.historialArriendos = new ArrayList();//Agrege esto
         this.historialXid = new HashMap<>();
+        arriendosActuales = new ArrayList();
+        arriendoXid = new HashMap();
     }
     
     public Cliente(String nombre, String rut){ //Para el ingreso de un cliente nuevo, no existente en la base de datos.
@@ -54,20 +56,28 @@ public class Cliente{
         this.deuda = deuda;
     }
 
-    public Arriendo getArriendoXId(String id){
+    public Arriendo getHistorialXId(String id){
         return historialXid.get(id);
+    }
+
+    public Arriendo getArriendoXId(String id){
+        return arriendoXid.get(id);
     }
 //------------------AGREGA ELEMENTOS A HISTORIAL------------------
     public void addToHistorialXid(Arriendo arriendo) {
         this.historialXid.put(arriendo.getId(), arriendo);
     }
     
-    public void addArriendoToHistorial(Arriendo arriendo) {
+    public void addToHistorial(Arriendo arriendo) {
         historialArriendos.add(arriendo);
     }
 
     public void addToArriendosActuales(Arriendo arriendo){
         arriendosActuales.add(arriendo);
+    }
+
+    public void addToArriendosXid(Arriendo arriendo){
+        arriendoXid.put(arriendo.getId(),arriendo);
     }
 //------------------MOSTRAR HISTORIAL------------------
     public void mostrarHistorial(){
@@ -117,4 +127,13 @@ public class Cliente{
     public boolean existIDArriendo(String id){
         return arriendoXid.containsKey(id);
     }
+//-----------------Otros-----------------------
+    public int getSize(int modo){
+        switch(modo){
+            case 1: return historialArriendos.size();
+            case 2: return arriendosActuales.size();
+        }
+        return 0;
+    }
+
 }
