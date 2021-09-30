@@ -394,4 +394,109 @@ public class Funciones {
             }
         }
     }
+	
+//-----------------------------ARRENDAR PELICULAS-------------------------------------------
+    public static Arriendo nuevoArriendo (VideoClub tienda, String rut){
+        String nombrePeli, id;
+        Arriendo arriendo = new Arriendo();
+        Scanner teclado = new Scanner(System.in);
+        do{
+            System.out.println("Ingrese nombre pelicula a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+            nombrePeli = teclado.nextLine();
+            id = tienda.obtenerIdXNombre(nombrePeli);
+            if (!nombrePeli.equals("0")){
+                if (id == null){
+                    System.out.println("No se encuentra la película en catálogo.");
+                }
+                else{
+                    if(tienda.getClientFromClientXRut(rut).existIDArriendo(id)){
+                        System.out.println("Solo se puede arrendar una copia de la misma película.");
+                    }
+                    else{
+                        if(tienda.getPeliFromPelisXId(id).getDisponibles() == 0){
+                            System.out.println("No hay copias de esta película disponibles.");
+                        }
+                        else{
+                            System.out.println("Ingrese fecha arriendo: dd/mm/aa");
+                            arriendo.setFechaArriendo(teclado.nextLine());
+                            System.out.println("Ingrese fecha entrega: dd/mm/aa");
+                            arriendo.setFechaEntrega(teclado.nextLine());
+                            arriendo.setId(id);
+                            arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
+                            arriendo.setEntregado(false);
+                            return arriendo;
+                        }
+                    }
+                }
+            }
+        }while (!nombrePeli.equals("0"));
+        return null;
+    }
+    public static void arrendar(VideoClub tienda, String rut){
+        Arriendo arriendo;
+        int aux = 0;
+        Scanner teclado = new Scanner(System.in);
+
+        if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
+            System.out.println("Primero debe pagar su deuda para poder arrendar otra película");
+            return;
+        }
+        if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
+            do{
+                arriendo = nuevoArriendo(tienda,rut);
+                if(arriendo != null){
+                    tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
+                    tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
+                    System.out.println("Película arrendada exitosamente.\n");
+                }
+                System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir y 0 para terminar]");
+                aux = teclado.nextInt();
+
+                if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
+                    System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+
+            }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0  );
+        }
+        else
+            System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+    }
+
+    public static void arrendar(VideoClub tienda){
+        Arriendo arriendo;
+        int aux;
+        String rut;
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+        rut = teclado.nextLine();
+        if (!tienda.existRUT(rut)){
+            System.out.println("rut no registrado.");
+        }
+        else{
+            if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
+                System.out.println("Primero debe pagar su deuda para poder arrendar otra película \n.");
+                return;
+            }
+            if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
+                do{
+                    arriendo = nuevoArriendo(tienda,rut);
+                    if(arriendo != null){
+                        tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
+                        tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
+                        System.out.println("Película arrendada exitosamente.\n");
+                    }
+                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir y 0 para terminar]");
+                    aux = teclado.nextInt();
+
+                    if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
+                        System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+
+                }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0);
+            }
+            else
+                System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+        }
+
+    }
+	
 }  
