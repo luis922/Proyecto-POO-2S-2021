@@ -8,31 +8,26 @@ import Clases.Pelicula;
 import Clases.VideoClub;
 import java.util.Scanner;
 
-/**
- *
- * @author sebas
- */
-
-
 public class Interface {
     public static void login(){
-            System.out.println("Por favor, seleccione tipo de Usuario: ");
+            System.out.println("Por favor, seleccione su rol: ");
             System.out.println("1)Cliente");
             System.out.println("2)Trabajador");
             System.out.println("0)Finalizar programa");
     }
     
     //-------------------------MENU CLIENTE-----------------------------------------
-    public static void menúCliente(String usuario,VideoClub tienda){
+    public static void menúCliente(String rut,VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
-            String nombre = tienda.getClientFromClientXRut(usuario).getNombre();
+            String nombre = tienda.getClientFromClientXRut(rut).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
             System.out.println("1)Desplegar catálogo de películas");
-            System.out.println("2)Revisar mi historial");
-            System.out.println("3)Revisar historial de película");
-            System.out.println("4)Desplegar mi ficha cliente");
+            System.out.println("2)Arrendar películas");
+            System.out.println("3)Revisar mi historial");
+            System.out.println("4)Revisar historial de película");
+            System.out.println("5)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
@@ -41,16 +36,20 @@ public class Interface {
                     Funciones.listaPeliculas(tienda);
                     break;
                 case "2":
-                    Funciones.mostrarHistorialCliente(tienda,usuario);
+                    Funciones.arrendar(tienda,rut);
                     break;
                 case "3":
-                    Funciones.mostrarHistorialPeli(tienda, usuario);
+                    Funciones.mostrarHistorialCliente(tienda,rut);
                     break;
                 case "4":
-                    Funciones.desplegarMiFicha(tienda,usuario);
+                    Funciones.mostrarHistorialPeli(tienda, rut);
+                    break;
+                case "5":
+                    Funciones.desplegarMiFicha(tienda,rut);
                     break;
                 default:
-                    System.out.println("Ingrese una opción valida");
+                    if(!opción.equals("0"))
+                        System.out.println("Ingrese una opción valida");
                     break;
             }
             
@@ -59,74 +58,135 @@ public class Interface {
     }
     
     //-------------------------MENU EMPLEADO-----------------------------------------
-    public static void menúAdmin(VideoClub x){
+    public static void menúAdmin(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
             System.out.println("Menú Administrador");
-            System.out.println("1)Desplegar lista de clientes\n2)Desplegar lista de películas");
-            System.out.println("3)Registrar Cliente\n4)Registrar Película");
-            System.out.println("5)Desplegar historial de cliente\n6)Buscar Película");
-            System.out.println("7)Buscar Cliente\n8)Registrar Arriendo");
-            System.out.println("9)Eliminar Película\n10)Editar Película");
-            System.out.println("11)Eliminar cliente\n12)Editar cliente");
+            System.out.println("1)Ingresar datos");
+            System.out.println("2)Mostrar datos");
+            System.out.println("3)Buscar datos");
+            System.out.println("4)Editar datos");
+            System.out.println("5)Arrendar películas");
             System.out.println("0)Menú anterior");
-            opción = teclado.nextLine();
             
-            switch(opción){
+            switch(opción = teclado.nextLine()){
                 case "1":
-                    Funciones.listaClientes(x);
+                    do{
+                        System.out.println("1)Registrar Cliente");
+                        System.out.println("2)Registrar Película");
+                        System.out.println("3)Registrar Historial");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.registrarCliente(tienda);
+                                break;
+                            case "2":
+                                Funciones.registrarPelicula(tienda);
+                                break;
+                            case "3":
+                                Funciones.registrarHistorial(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
                     break;
                 case "2":
-                    Funciones.listaPeliculas(x);
+                    do{
+                        System.out.println("1)Desplegar lista de clientes");
+                        System.out.println("2)Desplegar lista de películas");
+                        System.out.println("3)Desplegar historial de cliente");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.listaClientes(tienda);
+                                break;
+                            case "2":
+                                Funciones.listaPeliculas(tienda);
+                                break;
+                            case "3":
+                                Funciones.mostrarHistorialCliente(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
                     break;
                 case "3":
-                    Funciones.registrarCliente(x);
+                    do{
+                        System.out.println("1)Buscar Película");
+                        System.out.println("2)Buscar Cliente");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.buscarPelicula(tienda);
+                                break;
+                            case "2":
+                                Funciones.buscarCliente(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
                     break;
                 case "4":
-                    Funciones.registrarPelicula(x);
+                    do{
+                        System.out.println("1)Editar Película");
+                        System.out.println("2)Editar Cliente");
+                        System.out.println("3)Eliminar Película");
+                        System.out.println("4)Eliminar Cliente");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                menúEdiciónPelícula(tienda);
+                                break;
+                            case "2":
+                                menúEdiciónCliente(tienda);
+                                break;
+                            case "3":
+                                Funciones.eliminarPelicula(tienda);
+                                break;
+                            case "4":
+                                Funciones.eliminarCliente(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
                     break;
                 case "5":
-                    Funciones.mostrarHistorialCliente(x);
+                    Funciones.arrendar(tienda);
                     break;
-                case "6":
-                    Funciones.buscarPelicula(x);
-                    break;
-                case "7":
-                    Funciones.buscarCliente(x);
-                    break;
-                case "8":
-                    Funciones.registrarHistorial(x);
-                    break;
-                case "9":
-                    Funciones.eliminarPelicula(x);
-                    break;
-                case "10":
-                    menúEdiciónPelícula(x);
-                    break;
-                case "11":
-                    Funciones.eliminarCliente(x);
-                    break;
-                case "12":
-                    menúEdiciónCliente(x);
                 default:
-                    System.out.println("Ingrese una opcion valida");
+                    if(!opción.equals("0"))
+                        System.out.println("Ingrese una opción valida");
                     break;
-                    
             }
-            
         }while(!opción.equals("0"));
                 
     }
 //-------------------------EdiciónPelícula-----------------------------------------
-    public static void menúEdiciónPelícula(VideoClub x){
-        String nombre = Comprobar.loginPelicula(x);
+    public static void menúEdiciónPelícula(VideoClub tienda){
+        String nombre = Comprobar.loginPelicula(tienda);
         Scanner teclado = new Scanner(System.in);
         if(!nombre.equals("0")){
             String opcion;
-            Pelicula peli = x.getPeliFromPelisXId(nombre);
+            Pelicula peli = tienda.getPeliFromPelisXId(nombre);
             do{
-               x.mostrarDatosPeliculas(nombre);
+               tienda.mostrarDatosPeliculas(nombre);
                System.out.println("Seleccione que atributo desea modificar:");
                System.out.println("1)Nombre\n2)Año de Estreno");
                System.out.println("3)Duración\n4)Sinopsis");
@@ -179,7 +239,8 @@ public class Interface {
                         peli.setGeneros(Funciones.ingresoGeneros(teclado));
                         break;
                     default:
-                        System.out.println("Ingrese una opción valida");
+                        if(!opcion.equals("0"))
+                            System.out.println("Ingrese una opción valida");
                         break;
                }
               
@@ -187,39 +248,40 @@ public class Interface {
         }
     }
     //-------------------------EdiciónCliente-----------------------------------------
-    public static void menúEdiciónCliente(VideoClub x){
+    public static void menúEdiciónCliente(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
-        String cliente = Comprobar.loginClientes(x);
+        String cliente = Comprobar.loginClientes(tienda);
         String opcion;
         String rut,rutN;
         if(!cliente.equals("0")){
         do{
             
-            x.mostrarDatosClientes(cliente);
+            tienda.mostrarDatosClientes(cliente);
             System.out.println("Seleccione el atributo que desea modifcar:");
             System.out.println("1)Nombre del Cliente.\n2)Rut del cliente.");
             System.out.println("3)Deuda del cliente.\n0)Terminar Edición.");
             switch(opcion = teclado.nextLine()){
                 case "1":
                     System.out.println("Ingrese el Nuevo nombre del Cliente:");
-                    x.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
+                    tienda.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
                     break;
                 case "2":
                     System.out.println("Ingrese el nuevo rut del cliente:");
-                    rut = x.getClientFromClientXRut(cliente).getRut();
+                    rut = tienda.getClientFromClientXRut(cliente).getRut();
                     cliente = teclado.nextLine();
-                    x.getClientFromClientXRut(rut).setRut(cliente);
-                    x.addClientToClientXRut(cliente, x.getClientFromClientXRut(rut));
-                    x.delCliente(rut);
-                    System.out.println("sucxcesfull");
+                    tienda.getClientFromClientXRut(rut).setRut(cliente);
+                    tienda.addClientToClientXRut(cliente, tienda.getClientFromClientXRut(rut));
+                    tienda.delCliente(rut);
+                    System.out.println("Exitoso");
                     break;
                 case "3":
                     System.out.println("Ingrese el nuevo monto de deuda del cliente:");
-                    x.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
+                    tienda.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
                     teclado.nextLine();
                     break;
                 default:
-                    System.out.println("Ingrese una opción válida");
+                    if(!opcion.equals("0"))
+                        System.out.println("Ingrese una opción valida");
                     break;
             }
         }while(!opcion.equals("0"));
