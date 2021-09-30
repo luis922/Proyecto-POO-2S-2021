@@ -120,6 +120,10 @@ public class Cliente{
     }
     
 //------------------COMPRUEBA------------------
+    public boolean isEmptyArriendos(){
+        return arriendosActuales.isEmpty();
+    }
+
     public boolean existIDMap(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
         return historialXid.containsKey(id);
     }
