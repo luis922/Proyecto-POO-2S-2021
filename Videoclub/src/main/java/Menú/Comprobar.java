@@ -49,5 +49,24 @@ public class Comprobar {
     
     public static boolean formatoCorrectoValuacion(float Valuacion){
         return (Valuacion <= 5 && Valuacion >= 1);
-    }     
+    } 
+    
+    public static String loginPelicula(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String nombre;
+        int contador = 0;
+        System.out.println("Ingrese el nombre de la película que desea editar:");
+        
+        do{
+            
+            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            nombre = teclado.nextLine();
+            contador++;
+            
+        }while(x.containsID(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0"));
+        
+        if(nombre.equals("0")) return nombre;
+        
+        return x.obtenerIdXNombre(nombre);
+    }    
 }
