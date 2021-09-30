@@ -151,7 +151,7 @@ public class Funciones {
                         fechaArriendo = LocalDate.parse(teclado.nextLine());
                         System.out.println("Ingrese fecha entrega: yyyy/mm/dd");
                         fechaEntrega = LocalDate.parse(teclado.nextLine());
-                        if(!x.getClientFromClientXRut(rut).existIDMap(id)){//Primera vez q arrienda la pelicula.      
+                        if(!x.getClientFromClientXRut(rut).existIDHistorial(id)){//Primera vez q arrienda la pelicula.
                             arriendo = new Arriendo();
                             arriendo.setId(id);
                             arriendo.setFechaArriendo(fechaArriendo);
@@ -417,9 +417,9 @@ public class Funciones {
                             System.out.println("No hay copias de esta película disponibles.");
                         }
                         else{
-                            System.out.println("Ingrese fecha arriendo: dd/mm/aa");
+                            System.out.println("Ingrese fecha arriendo: yyyy/mm/dd");
                             arriendo.setFechaArriendo(LocalDate.parse(teclado.nextLine()));
-                            System.out.println("Ingrese fecha entrega: dd/mm/aa");
+                            System.out.println("Ingrese fecha entrega: yyyy/mm/dd");
                             arriendo.setFechaEntrega(LocalDate.parse(teclado.nextLine()));
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
@@ -498,5 +498,103 @@ public class Funciones {
         }
 
     }
-	
+//----------------------------------DEVOLVER PELICULA----------------------------------------
+    public static void devolverArriendo(VideoClub tienda, String rut){//Menu cliente
+        Scanner teclado = new Scanner(System.in);
+        long diasAtraso;
+        String nombrePeli, id;
+        Cliente cliente = tienda.getClientFromClientXRut(rut);
+        Arriendo eliminado;
+
+        do {
+            System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]");
+            nombrePeli = teclado.nextLine();
+            id = tienda.obtenerIdXNombre(nombrePeli);
+            if(!cliente.existIDArriendo(id)){
+                System.out.println("Esta película no se encuentra arrendada por usted.");
+            }
+            else{
+                diasAtraso = ChronoUnit.DAYS.between(LocalDate.now(),cliente.getArriendoXId(id).getFechaEntrega());
+
+                eliminado = cliente.delArriendo2(id);
+                System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
+                eliminado.setValoracion(teclado.nextFloat());
+                eliminado.setEntregado(true);
+                if(!cliente.existIDHistorial(id)){
+                    cliente.addToHistorial(eliminado);
+                    cliente.addToArriendosXid(eliminado);
+                }
+                else{
+                    System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
+                    cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada()+1);
+                    cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
+                    cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                }
+
+                System.out.println("Película devuelta exitosamente.");
+
+                if(diasAtraso >0){
+                    cliente.setDeuda((int)diasAtraso*500);
+                }
+            }
+        }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
+
+        if(cliente.getDeuda() > 0)
+            System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
+                               "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
+    }
+
+    public static void devolverArriendo(VideoClub tienda){//Menu Admin
+        int aux = 1;
+        Scanner teclado = new Scanner(System.in);
+        long diasAtraso;
+        String nombrePeli, id,rut;
+        Cliente cliente;
+        Arriendo eliminado;
+
+        do {
+            System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            rut = teclado.nextLine();
+            if (!tienda.existRUT(rut)){
+                System.out.println("rut no registrado.");
+            }
+            else{
+                cliente = tienda.getClientFromClientXRut(rut);
+                do{
+                    System.out.println("Ingrese el nombre del arriendo que desea devolver.");
+                    nombrePeli = teclado.nextLine();
+                    id = tienda.obtenerIdXNombre(nombrePeli);
+                    if(!cliente.existIDArriendo(id)){
+                        System.out.println("Esta película no se encuentra arrendada por usted.");
+                    }
+                    else {
+                        diasAtraso = ChronoUnit.DAYS.between(LocalDate.now(), cliente.getArriendoXId(id).getFechaEntrega());
+
+                        eliminado = cliente.delArriendo2(id);
+                        System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
+                        eliminado.setValoracion(teclado.nextFloat());
+                        eliminado.setEntregado(true);
+                        if (!cliente.existIDHistorial(id)) {
+                            cliente.addToHistorial(eliminado);
+                            cliente.addToArriendosXid(eliminado);
+                        } else {
+                            System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
+                            cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada() + 1);
+                            cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
+                            cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                        }
+                        System.out.println("Película devuelta exitosamente.");
+                        if(diasAtraso >0){
+                            cliente.setDeuda((int)diasAtraso*500);
+                        }
+                    }
+                }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
+                rut = "0";
+                if(cliente.getDeuda() > 0)
+                    System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
+                            "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
+            }
+        }while(!rut.equals("0"));
+    }
+
 }  
