@@ -22,11 +22,11 @@ public class Interface {
     }
     
     //-------------------------MENU CLIENTE-----------------------------------------
-    public static void menúCliente(String usuario,VideoClub x){
+    public static void menúCliente(String usuario,VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
-            String nombre = x.getClientFromClientXRut(usuario).getNombre();
+            String nombre = tienda.getClientFromClientXRut(usuario).getNombre();
             System.out.println("Bienvenido Sr(a) " + nombre);
             System.out.println("1)Desplegar catálogo de películas");
             System.out.println("2)Revisar mi historial");
@@ -37,16 +37,16 @@ public class Interface {
             
             switch(opción){
                 case "1":
-                    Funciones.listaPeliculas(x);
+                    Funciones.listaPeliculas(tienda);
                     break;
                 case "2":
-                    Funciones.mostrarHistorialCliente(x,usuario);
+                    Funciones.mostrarHistorialCliente(tienda,usuario);
                     break;
                 case "3":
-                    Funciones.mostrarHistorialPeli(x, usuario);
+                    Funciones.mostrarHistorialPeli(tienda, usuario);
                     break;
                 case "4":
-                    Funciones.desplegarMiFicha(x,usuario);
+                    Funciones.desplegarMiFicha(tienda,usuario);
                     break;
                 default:
                     System.out.println("Ingrese una opción valida");
@@ -58,7 +58,7 @@ public class Interface {
     }
     
     //-------------------------MENU EMPLEADO-----------------------------------------
-    public static void menúAdmin(VideoClub x){
+    public static void menúAdmin(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
@@ -80,40 +80,41 @@ public class Interface {
             
             switch(opción){
                 case "1":
-                    Funciones.listaClientes(x);
+                    Funciones.listaClientes(tienda);
                     break;
                 case "2":
-                    Funciones.listaPeliculas(x);
+                    Funciones.listaPeliculas(tienda);
                     break;
                 case "3":
-                    Funciones.registrarCliente(x);
+                    Funciones.registrarCliente(tienda);
                     break;
                 case "4":
-                    Funciones.registrarPelicula(x);
+                    Funciones.registrarPelicula(tienda);
                     break;
                 case "5":
-                    Funciones.mostrarHistorialCliente(x);
+                    Funciones.mostrarHistorialCliente(tienda);
                     break;
                 case "6":
-                    Funciones.buscarPelicula(x);
+                    Funciones.buscarPelicula(tienda);
                     break;
                 case "7":
-                    Funciones.buscarCliente(x);
+                    Funciones.buscarCliente(tienda);
                     break;
                 case "8":
-                    Funciones.registrarArriendo(x);
+                    Funciones.registrarArriendo(tienda);
                     break;
                 case "9":
-                    Funciones.eliminarPelicula(x);
+                    Funciones.eliminarPelicula(tienda);
                     break;
                 case "10":
-                    Funciones.editarPelicula(x);
+                  //  Funciones.editarPelicula(tienda);
                     break;
                 case "11":
-                    Funciones.eliminarCliente(x);
+                    Funciones.eliminarCliente(tienda);
                     break;
                 case "12":
-                    Funciones.editarCliente(x);
+                  //  Funciones.editarCliente(tienda);
+                    break;
                 default:
                     System.out.println("Ingrese una opcion valida");
                     break;
