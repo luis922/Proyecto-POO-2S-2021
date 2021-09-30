@@ -88,7 +88,7 @@ public class Funciones {
             if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado, porfavor. ingreselo nuevamente.");
             nuevo.setRut(teclado.nextLine());
             i++;
-        }while(Comprobar.formatoCorrectoRut(nuevo.getRut()) != true);
+        }while(!Comprobar.formatoCorrectoRut(nuevo.getRut()));
         
         x.addClientToListaClients(nuevo);
         x.addClientToClientXRut(nuevo.getRut(), nuevo);
@@ -181,7 +181,7 @@ public class Funciones {
         System.out.println("Ingrese la cantidad de directores");
         byte cantidad = teclado.nextByte();
         teclado.nextLine();
-        String directores[] = new String[cantidad];
+        String []directores = new String[cantidad];
         int contador = 0;
         System.out.println("Ingrese el primer Director:");
         
@@ -197,7 +197,7 @@ public class Funciones {
         System.out.println("Ingrese la cantidad de géneros:");
         byte cantidad = teclado.nextByte();
         teclado.nextLine();
-        String generos[] = new String[cantidad];
+        String []generos = new String[cantidad];
         int contador = 0;
         System.out.println("Ingrese el primer Género:");
         
@@ -214,7 +214,7 @@ public class Funciones {
         System.out.println("Ingrese la cantidad de actores a ingresar:");
         byte cantidad = teclado.nextByte();
         teclado.nextLine();
-        String actores[] = new String[cantidad];
+        String []actores = new String[cantidad];
         int contador = 0;
         System.out.println("Ingrese el primer Actor:");
         
@@ -234,7 +234,7 @@ public class Funciones {
             valuacion = teclado.nextFloat();
             teclado.nextLine();
             contador++;
-        }while(Menú.Comprobar.formatoCorrectoValuacion(valuacion) != true);
+        }while(!Menú.Comprobar.formatoCorrectoValuacion(valuacion));
         
         return valuacion;
         
@@ -345,9 +345,8 @@ public class Funciones {
             if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
             nombre = teclado.nextLine();
             contador++;
-        }while(x.containsID(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0") == false);
-        if(nombre.equals("0"));
-        else{
+        }while(!x.containsID(x.obtenerIdXNombre(nombre)) && !nombre.equals("0"));
+        if(!nombre.equals("0")){
             Pelicula ay = x.getPeliFromPelisXId(x.obtenerIdXNombre(nombre));
             System.out.println("¿Está seguro de eliminar la película \"" + ay.getNombre() + "\" de la base de datos?\n1)Sí\n2)No");
             
@@ -376,9 +375,8 @@ public class Funciones {
                 System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
             rut = teclado.nextLine();
             contador++;
-        }while(x.containsRUT(rut) ==  false && rut.equals("0") == false);
-        if(rut.equals("0"));
-        else{
+        }while(!x.containsRUT(rut) && !rut.equals("0"));
+        if(!rut.equals("0")) {
             Cliente ay = x.getClientFromClientXRut(rut);
             System.out.println("¿Está seguro de eliminar al Sr(a) \"" + ay.getNombre()+ "\" de la base de datos?\n1)Sí\n2)No");
             
@@ -434,7 +432,7 @@ public class Funciones {
     }
     public static void arrendar(VideoClub tienda, String rut){
         Arriendo arriendo;
-        int aux = 0;
+        int aux;
         Scanner teclado = new Scanner(System.in);
 
         if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
@@ -449,7 +447,7 @@ public class Funciones {
                     tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
                     System.out.println("Película arrendada exitosamente.\n");
                 }
-                System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir y 0 para terminar]");
+                System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
                 aux = teclado.nextInt();
 
                 if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
@@ -485,7 +483,7 @@ public class Funciones {
                         tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
                         System.out.println("Película arrendada exitosamente.\n");
                     }
-                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir y 0 para terminar]");
+                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
                     aux = teclado.nextInt();
 
                     if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
@@ -545,7 +543,6 @@ public class Funciones {
     }
 
     public static void devolverArriendo(VideoClub tienda){//Menu Admin
-        int aux = 1;
         Scanner teclado = new Scanner(System.in);
         long diasAtraso;
         String nombrePeli, id,rut;
@@ -596,5 +593,52 @@ public class Funciones {
             }
         }while(!rut.equals("0"));
     }
+//---------------------------------PAGAR DEUDA-----------------------------
+    public static void pagarDeuda(Cliente cliente){//Menu cliente
+        int monto;
+        Scanner teclado = new Scanner(System.in);
 
+        if(cliente.getDeuda()>0){
+            System.out.println("Usted tiene una deuda de $"+cliente.getDeuda());
+            do {
+                System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
+                monto = teclado.nextInt();
+            }while(cliente.getDeuda()-monto !=0);
+            cliente.setDeuda(0);
+            System.out.println("Su deuda ha sido cancelada exitosamente.");
+        }
+        else
+            System.out.println("Usted no registra deuda con nosotros.");
+    }
+
+    public static void pagarDeuda(VideoClub tienda){//Menu Admin
+        int monto;
+        Scanner teclado = new Scanner(System.in);
+        String rut;
+
+        do {
+            System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+            rut = teclado.nextLine();
+            if (!tienda.existRUT(rut)){
+                System.out.println("rut no registrado.");
+            }
+            else{
+                if(tienda.getClientFromClientXRut(rut).getDeuda()>0){
+                    System.out.println("Cliente tiene una deuda de $"+tienda.getClientFromClientXRut(rut).getDeuda());
+                    do {
+                        System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
+                        monto = teclado.nextInt();
+                    }while(tienda.getClientFromClientXRut(rut).getDeuda()-monto !=0);
+                    tienda.getClientFromClientXRut(rut).setDeuda(0);
+                    System.out.println("Deuda de cliente ha sido cancelada exitosamente.");
+                }
+                else
+                    System.out.println("Cliente no registra deuda con nosotros.");
+                System.out.println("¿Desea cancelar la deuda de otro cliente?[Ingrese 1 para seguir o 0 para terminar]");
+                rut = teclado.nextLine();
+            }
+        }while(!rut.equals("0"));
+    }
+//---------------------RECOMENDAR PELICULA----------------------------------
+    
 }  
