@@ -124,7 +124,7 @@ public class Cliente{
         return arriendosActuales.isEmpty();
     }
 
-    public boolean existIDMap(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
+    public boolean existIDHistorial(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
         return historialXid.containsKey(id);
     }
 
@@ -143,8 +143,23 @@ public class Cliente{
     public void delArriendo(String id){
         arriendoXid.remove(id);
         for(int i = 0; i< arriendosActuales.size(); i++){
-            if(arriendosActuales.get(i).getId().equals(id))
+            if(arriendosActuales.get(i).getId().equals(id)) {
                 arriendosActuales.remove(i);
+                return;
+            }
         }
+    }
+
+    public Arriendo delArriendo2(String id){
+        Arriendo eliminado;
+        arriendoXid.remove(id);
+        for(int i = 0; i< arriendosActuales.size(); i++){
+            if(arriendosActuales.get(i).getId().equals(id)) {
+                eliminado = arriendosActuales.get(i);
+                arriendosActuales.remove(i);
+                return eliminado;
+            }
+        }
+        return null;
     }
 }

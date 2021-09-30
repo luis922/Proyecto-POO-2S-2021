@@ -9,7 +9,7 @@ public class Arriendo {
     private LocalDate fechaEntrega;  //yyyy-mm-dd
     private boolean entregado;       //TRUE si la pelicula fue devuelta, False en el caso contrario
     private int vecesArrendada;
-    //Hacer una coleccion de un objeto que contenga fecha de arriendo, entrega y valoracion.
+    //Hacer una coleccion de un objeto que contenga fecha de arriendo, entrega y valoracion, para tener un registro historico.
 
     public Arriendo(){
         id = null;
