@@ -7,6 +7,8 @@ public class Cliente{
     private String rut;
     private ArrayList<Arriendo> historialArriendos; //Coleccion de objetos 1 anidación.
     private HashMap<String, Arriendo> historialXid;
+    private ArrayList<Arriendo> arriendosActuales; //Contiene las peliculas arrendadas actuales
+    private HashMap<String, Arriendo> arriendoXid;
     private int deuda;
 
     public Cliente() {
@@ -19,6 +21,8 @@ public class Cliente{
         this.rut = rut;
         this.deuda = 0;
         this.historialArriendos = new ArrayList();
+        arriendosActuales = new ArrayList();
+        arriendoXid = new HashMap();
     }
     
     public int getSizeHistorial(){
@@ -61,7 +65,10 @@ public class Cliente{
     public void addArriendoToHistorial(Arriendo arriendo) {
         historialArriendos.add(arriendo);
     }
-    
+
+    public void addToArriendosActuales(Arriendo arriendo){
+        arriendosActuales.add(arriendo);
+    }
 //------------------MOSTRAR HISTORIAL------------------
     public void mostrarHistorial(){
         for (int i = 0; i < historialArriendos.size(); i++) {
@@ -105,5 +112,9 @@ public class Cliente{
 //------------------COMPRUEBA------------------
     public boolean existIDMap(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
         return historialXid.containsKey(id);
+    }
+
+    public boolean existIDArriendo(String id){
+        return arriendoXid.containsKey(id);
     }
 }
