@@ -9,11 +9,10 @@ import Clases.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-/**
- *
- * @author sebas
- */
+
 public class Funciones {
     
     public static void listaPeliculas(VideoClub x){
@@ -131,7 +130,7 @@ public class Funciones {
         String rut, nombrePeli, id;
         Arriendo arriendo;
         Scanner teclado = new Scanner(System.in);
-        String fechaEntrega, fechaArriendo; 
+        LocalDate fechaEntrega, fechaArriendo;
         do{
             System.out.println("Ingrese rut cliente que va a registrar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
@@ -148,10 +147,10 @@ public class Funciones {
                             System.out.println("No se encuentra la pelicula.");
                             continue;
                         }
-                        System.out.println("Ingrese fecha arriendo: dd/mm/aa");
-                        fechaArriendo = teclado.nextLine();
-                        System.out.println("Ingrese fecha entrega: dd/mm/aa");
-                        fechaEntrega = teclado.nextLine();
+                        System.out.println("Ingrese fecha arriendo: yyyy/mm/dd");
+                        fechaArriendo = LocalDate.parse(teclado.nextLine());
+                        System.out.println("Ingrese fecha entrega: yyyy/mm/dd");
+                        fechaEntrega = LocalDate.parse(teclado.nextLine());
                         if(!x.getClientFromClientXRut(rut).existIDMap(id)){//Primera vez q arrienda la pelicula.      
                             arriendo = new Arriendo();
                             arriendo.setId(id);
@@ -419,9 +418,9 @@ public class Funciones {
                         }
                         else{
                             System.out.println("Ingrese fecha arriendo: dd/mm/aa");
-                            arriendo.setFechaArriendo(teclado.nextLine());
+                            arriendo.setFechaArriendo(LocalDate.parse(teclado.nextLine()));
                             System.out.println("Ingrese fecha entrega: dd/mm/aa");
-                            arriendo.setFechaEntrega(teclado.nextLine());
+                            arriendo.setFechaEntrega(LocalDate.parse(teclado.nextLine()));
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
                             arriendo.setEntregado(false);

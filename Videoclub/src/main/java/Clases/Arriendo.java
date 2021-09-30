@@ -1,11 +1,13 @@
 package Clases;
 
+import java.time.LocalDate;
+
 public class Arriendo {
-    private String id; //key
-    private float valoracion; //Numero de estrellas con la que el cliente valoro el film de 0 a 5
-    private String fechaArriendo;
-    private String fechaEntrega;
-    private boolean entregado; //TRUE si la pelicula fue devuelta, False en el caso contrario
+    private String id;               //key
+    private float valoracion;        //Numero de estrellas con la que el cliente valoro el film de 0 a 5
+    private LocalDate fechaArriendo; //yyyy-mm-dd
+    private LocalDate fechaEntrega;  //yyyy-mm-dd
+    private boolean entregado;       //TRUE si la pelicula fue devuelta, False en el caso contrario
     private int vecesArrendada;
     //Hacer una coleccion de un objeto que contenga fecha de arriendo, entrega y valoracion.
 
@@ -35,19 +37,19 @@ public class Arriendo {
         this.valoracion = valoracion;
     }
 
-    public String getFechaArriendo() {
+    public LocalDate getFechaArriendo() {
         return fechaArriendo;
     }
 
-    public void setFechaArriendo(String fechaArriendo) {
+    public void setFechaArriendo(LocalDate fechaArriendo) {
         this.fechaArriendo = fechaArriendo;
     }
 
-    public String getFechaEntrega() {
+    public LocalDate getFechaEntrega() {
         return fechaEntrega;
     }
 
-    public void setFechaEntrega(String fechaEntrega) {
+    public void setFechaEntrega(LocalDate fechaEntrega) {
         this.fechaEntrega = fechaEntrega;
     }
 
