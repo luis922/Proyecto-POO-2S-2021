@@ -135,5 +135,12 @@ public class Cliente{
         }
         return 0;
     }
-
+//--------------Eliminar----------------------
+    public void delArriendo(String id){
+        arriendoXid.remove(id);
+        for(int i = 0; i< arriendosActuales.size(); i++){
+            if(arriendosActuales.get(i).getId().equals(id))
+                arriendosActuales.remove(i);
+        }
+    }
 }
