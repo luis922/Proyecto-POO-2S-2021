@@ -228,4 +228,15 @@ public class VideoClub {
         }
         return peli;
     }
+
+//---------------OTROS----------------------------------------------
+    public boolean containsGenero (String id, String genero){
+        for (int i = 0; i < pelisXId.get(id).getGeneros().length; i++) {
+            if(pelisXId.get(id).getGeneros()[i].equals(genero))
+                return true;
+        }
+        return false;
+    }
+
+
 }

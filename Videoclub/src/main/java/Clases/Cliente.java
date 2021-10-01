@@ -162,4 +162,26 @@ public class Cliente{
         }
         return null;
     }
+//-----------------------------------------------------------------------------
+    public int contarGeneroEnHistorial(VideoClub tienda,String genero){
+        //cuenta cuantas veces se ha visto una pelicula que contenga la categoria ingresada, esta puede ser la categoría principal o no
+        int contador = 0;
+        for (int i = 0; i <historialArriendos.size() ; i++) {
+           if(tienda.containsGenero(historialArriendos.get(i).getId(),genero))
+               contador += historialArriendos.get(i).getVecesArrendada();
+        }
+        return contador;
+    }
+    public String generoMasVisto(VideoClub tienda){
+        String genero = null, generoPrincipal;
+        int vecesVista = 0;
+        for (int i = 0; i <historialArriendos.size() ; i++) {
+            generoPrincipal = tienda.getPeliFromPelisXId(historialArriendos.get(i).getId()).getGeneros()[0];
+            if (genero == null || contarGeneroEnHistorial(tienda,generoPrincipal) > vecesVista){
+                genero = generoPrincipal;
+                vecesVista = contarGeneroEnHistorial(tienda,generoPrincipal);
+            }
+        }
+        return genero;
+    }
 }
