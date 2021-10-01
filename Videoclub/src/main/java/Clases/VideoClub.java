@@ -228,6 +228,32 @@ public class VideoClub {
         }
         return peli;
     }
+    public String peliMejorEvaluada(String genero){
+        //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
+        String peli = null;
+        float valoracion = 0;
+        for(int i =0;i<listaPeliculas.size();i++){
+            if( (peli == null || listaPeliculas.get(i).getValuacion() > valoracion) && containsGenero(listaPeliculas.get(i).getId(),genero)){
+                peli = listaPeliculas.get(i).getNombre();
+                valoracion = listaPeliculas.get(i).getValuacion();
+            }
+        }
+        return peli;
+    }
+
+    public String peliMejorEvaluada(String genero,ArrayList<String> ids, float valoracion){
+        //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
+        String peli = null;
+        for(int i =0;i<listaPeliculas.size();i++){
+            if( (peli == null || listaPeliculas.get(i).getValuacion() > valoracion) && containsGenero(listaPeliculas.get(i).getId(),genero)){
+                if(!ids.contains(listaPeliculas.get(i).getId())){//Si no se ha arrendado
+                    peli = listaPeliculas.get(i).getNombre();
+                    valoracion = listaPeliculas.get(i).getValuacion();
+                }
+            }
+        }
+        return peli;
+    }
 
 //---------------OTROS----------------------------------------------
     public boolean containsGenero (String id, String genero){
@@ -237,6 +263,5 @@ public class VideoClub {
         }
         return false;
     }
-
 
 }

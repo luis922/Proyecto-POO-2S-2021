@@ -8,6 +8,7 @@ package Menú;
 import Clases.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -640,5 +641,29 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
 //---------------------RECOMENDAR PELICULA----------------------------------
-    
+    public static void recomendarPelicula(VideoClub tienda, String rut){
+        String genero,peli = null;
+        ArrayList<String> ids = new ArrayList<String>();
+        Scanner teclado = new Scanner(System.in);
+        float valoracion;
+        if(tienda.getClientFromClientXRut(rut).getSize(1) == 0) //Si no tiene historial de arriendos
+            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda, "+ tienda.peliMejorEvaluada());
+        else{
+            genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
+            System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");
+            valoracion = teclado.nextFloat();
+            do {
+                if(tienda.getClientFromClientXRut(rut).existIDHistorial(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero,ids,valoracion)))){
+                    //Si la pelicula ya esta registrada en historial, no se recomienda
+                    ids.add(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero)));
+                    //Y se descarta para ser la peli mejor evaluada
+                }
+                else
+                    peli = tienda.peliMejorEvaluada(genero,ids,valoracion);
+            }while(peli == null && tienda.peliMejorEvaluada(genero,ids,valoracion)!= null);
+
+            if(peli == null || tienda.peliMejorEvaluada(genero,ids,valoracion)== null)
+                System.out.println("No tenemos una película para recomendarle según los datos disponibles.");
+        }
+    }
 }  
