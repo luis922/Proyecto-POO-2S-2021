@@ -209,4 +209,17 @@ public class VideoClub {
             if(listaClientes.get(i).getRut().equals(rut)) listaClientes.remove(i);
         }
     }
+//---------------------------CLASIFICACION DE OBJETOS--------------------------------
+    public String peliMejorEvaluada(){
+        //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
+        String peli = null;
+        float valoracion = 0;
+        for(int i =0;i<listaPeliculas.size();i++){
+            if(peli == null || listaPeliculas.get(i).getValuacion() > valoracion){
+                peli = listaPeliculas.get(i).getNombre();
+                valoracion = listaPeliculas.get(i).getValuacion();
+            }
+        }
+        return peli;
+    }
 }
