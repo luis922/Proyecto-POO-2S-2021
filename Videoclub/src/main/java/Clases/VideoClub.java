@@ -199,14 +199,20 @@ public class VideoClub {
     public void delPelicula(String id){
         pelisXId.remove(id) ;
         for(int i = 0;i < listaPeliculas.size();i++){
-            if (listaPeliculas.get(i).getId().equals(id)) listaPeliculas.remove(i);
+            if (listaPeliculas.get(i).getId().equals(id)) {
+                listaPeliculas.remove(i);
+                return;
+            }
         }
     }
     
     public void delCliente (String rut){
         clientesXRut.remove(rut);
         for(int i = 0;i < listaClientes.size();i++){
-            if(listaClientes.get(i).getRut().equals(rut)) listaClientes.remove(i);
+            if(listaClientes.get(i).getRut().equals(rut)){
+                listaClientes.remove(i);
+                return;
+            }
         }
     }
 //---------------------------CLASIFICACION DE OBJETOS--------------------------------
