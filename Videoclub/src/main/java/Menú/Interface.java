@@ -22,12 +22,16 @@ public class Interface {
         String opción;
         do{
             String nombre = tienda.getClientFromClientXRut(rut).getNombre();
+            System.out.println();
             System.out.println("Bienvenido Sr(a) " + nombre);
             System.out.println("1)Desplegar catálogo de películas");
             System.out.println("2)Arrendar películas");
-            System.out.println("3)Revisar mi historial");
-            System.out.println("4)Revisar historial de película");
-            System.out.println("5)Desplegar mi ficha cliente");
+            System.out.println("3)Devolver películas");
+            System.out.println("4)Pagar deuda");
+            System.out.println("5)Receibir una recomendación");
+            System.out.println("6)Revisar mi historial");
+            System.out.println("7)Revisar historial de película");
+            System.out.println("8)Desplegar mi ficha cliente");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
@@ -39,12 +43,21 @@ public class Interface {
                     Funciones.arrendar(tienda,rut);
                     break;
                 case "3":
-                    Funciones.mostrarHistorialCliente(tienda,rut);
+                    Funciones.devolverArriendo(tienda,rut);
                     break;
                 case "4":
-                    Funciones.mostrarHistorialPeli(tienda, rut);
+                    Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
                     break;
                 case "5":
+                    Funciones.recomendarPelicula(tienda,rut);
+                    break;
+                case "6":
+                    Funciones.mostrarHistorialCliente(tienda,rut);
+                    break;
+                case "7":
+                    Funciones.mostrarHistorialPeli(tienda, rut);
+                    break;
+                case "8":
                     Funciones.desplegarMiFicha(tienda,rut);
                     break;
                 default:

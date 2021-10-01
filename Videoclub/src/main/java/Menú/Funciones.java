@@ -33,7 +33,7 @@ public class Funciones {
         if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
                 System.out.println("Cliente no posee historial.");
         else
-            x.getClientFromClientXRut(rut).mostrarHistorial();
+            x.getClientFromClientXRut(rut).mostrarHistorial(x);
     }
     
     public static void mostrarHistorialCliente(VideoClub x){
@@ -46,7 +46,7 @@ public class Funciones {
                 if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
                     System.out.println("Cliente no posee historial.");
                 else
-                    x.getClientFromClientXRut(rut).mostrarHistorial();
+                    x.getClientFromClientXRut(rut).mostrarHistorial(x);
                 break;
             }
             else if (!rut.equals("0")){
@@ -67,6 +67,7 @@ public class Funciones {
             if(id != null){
                 System.out.println("Información obtenida");
                 x.getClientFromClientXRut(rut).mostrarHistorial(id);
+                System.out.println();
                 break;
             }
             else{
@@ -148,9 +149,9 @@ public class Funciones {
                             System.out.println("No se encuentra la pelicula.");
                             continue;
                         }
-                        System.out.println("Ingrese fecha arriendo: yyyy/mm/dd");
+                        System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
                         fechaArriendo = LocalDate.parse(teclado.nextLine());
-                        System.out.println("Ingrese fecha entrega: yyyy/mm/dd");
+                        System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-06");
                         fechaEntrega = LocalDate.parse(teclado.nextLine());
                         if(!x.getClientFromClientXRut(rut).existIDHistorial(id)){//Primera vez q arrienda la pelicula.
                             arriendo = new Arriendo();
@@ -416,9 +417,9 @@ public class Funciones {
                             System.out.println("No hay copias de esta película disponibles.");
                         }
                         else{
-                            System.out.println("Ingrese fecha arriendo: yyyy/mm/dd");
+                            System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
                             arriendo.setFechaArriendo(LocalDate.parse(teclado.nextLine()));
-                            System.out.println("Ingrese fecha entrega: yyyy/mm/dd");
+                            System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-06");
                             arriendo.setFechaEntrega(LocalDate.parse(teclado.nextLine()));
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
@@ -431,6 +432,7 @@ public class Funciones {
         }while (!nombrePeli.equals("0"));
         return null;
     }
+
     public static void arrendar(VideoClub tienda, String rut){
         Arriendo arriendo;
         int aux;
@@ -497,7 +499,7 @@ public class Funciones {
         }
 
     }
-//----------------------------------DEVOLVER PELICULA----------------------------------------
+//-----------------------------DEVOLVER PELICULA----------------------------------------
     public static void devolverArriendo(VideoClub tienda, String rut){//Menu cliente
         Scanner teclado = new Scanner(System.in);
         long diasAtraso;
@@ -506,18 +508,19 @@ public class Funciones {
         Arriendo eliminado;
 
         do {
-            System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]");
+            System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
+                    "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             nombrePeli = teclado.nextLine();
             id = tienda.obtenerIdXNombre(nombrePeli);
             if(!cliente.existIDArriendo(id)){
                 System.out.println("Esta película no se encuentra arrendada por usted.");
             }
             else{
-                diasAtraso = ChronoUnit.DAYS.between(LocalDate.now(),cliente.getArriendoXId(id).getFechaEntrega());
+                diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
 
                 eliminado = cliente.delArriendo2(id);
                 System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
-                eliminado.setValoracion(teclado.nextFloat());
+                eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
                 eliminado.setEntregado(true);
                 if(!cliente.existIDHistorial(id)){
                     cliente.addToHistorial(eliminado);
@@ -528,6 +531,7 @@ public class Funciones {
                     cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada()+1);
                     cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
                     cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                    cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
                 }
 
                 System.out.println("Película devuelta exitosamente.");
@@ -541,6 +545,7 @@ public class Funciones {
         if(cliente.getDeuda() > 0)
             System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
                                "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
+
     }
 
     public static void devolverArriendo(VideoClub tienda){//Menu Admin
@@ -559,7 +564,8 @@ public class Funciones {
             else{
                 cliente = tienda.getClientFromClientXRut(rut);
                 do{
-                    System.out.println("Ingrese el nombre del arriendo que desea devolver.");
+                    System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
+                            "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
                     nombrePeli = teclado.nextLine();
                     id = tienda.obtenerIdXNombre(nombrePeli);
                     if(!cliente.existIDArriendo(id)){
@@ -594,7 +600,7 @@ public class Funciones {
             }
         }while(!rut.equals("0"));
     }
-//---------------------------------PAGAR DEUDA-----------------------------
+//-------------------------------PAGAR DEUDA-----------------------------
     public static void pagarDeuda(Cliente cliente){//Menu cliente
         int monto;
         Scanner teclado = new Scanner(System.in);
@@ -640,7 +646,7 @@ public class Funciones {
             }
         }while(!rut.equals("0"));
     }
-//---------------------RECOMENDAR PELICULA----------------------------------
+//-----------------------------RECOMENDAR PELICULA----------------------------------
     public static void recomendarPelicula(VideoClub tienda, String rut){
         String genero,peli = null;
         ArrayList<String> ids = new ArrayList<String>();
@@ -651,7 +657,7 @@ public class Funciones {
         else{
             genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
             System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");
-            valoracion = teclado.nextFloat();
+            valoracion = Float.parseFloat(teclado.nextLine());
             do {
                 if(tienda.getClientFromClientXRut(rut).existIDHistorial(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero,ids,valoracion)))){
                     //Si la pelicula ya esta registrada en historial, no se recomienda

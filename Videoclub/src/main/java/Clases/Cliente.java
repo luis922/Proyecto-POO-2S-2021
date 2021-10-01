@@ -80,9 +80,10 @@ public class Cliente{
         arriendoXid.put(arriendo.getId(),arriendo);
     }
 //------------------MOSTRAR HISTORIAL------------------
-    public void mostrarHistorial(){
+    public void mostrarHistorial(VideoClub tienda){
         for (int i = 0; i < historialArriendos.size(); i++) {
-            System.out.println("ID pelicula: "+historialArriendos.get(i).getId());
+            System.out.println("Nombre película: "+ tienda.getPeliFromPelisXId(historialArriendos.get(i).getId()).getNombre());
+            System.out.println("ID película: "+historialArriendos.get(i).getId());
             System.out.print("Valoración : ");
             if(!historialArriendos.get(i).isEntregado())
                 System.out.println("N0 REGISTRADA");
@@ -90,6 +91,7 @@ public class Cliente{
                 System.out.println(historialArriendos.get(i).getValoracion());
             System.out.println("Fecha de arriendo: "+historialArriendos.get(i).getFechaArriendo());
             System.out.println("Fecha de entrega: "+historialArriendos.get(i).getFechaEntrega());
+            System.out.println("Veces arrendada: "+historialArriendos.get(i).getVecesArrendada());
             System.out.print("Estado de entrega: ");
             if(historialArriendos.get(i).isEntregado())
                 System.out.println(" ENTREGADO");
