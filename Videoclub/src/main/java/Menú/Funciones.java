@@ -30,7 +30,7 @@ public class Funciones {
 //------------------MOSTRAR HISTORIAL CLIENTE------------------ 
     public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
-        if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
+        if (x.getClientFromClientXRut(rut).getSize(1) == 0)
                 System.out.println("Cliente no posee historial.");
         else
             x.getClientFromClientXRut(rut).mostrarHistorial(x);
@@ -43,7 +43,7 @@ public class Funciones {
         do{
             rut = teclado.nextLine();
             if(x.containsRUT(rut)){
-                if (x.getClientFromClientXRut(rut).getSizeHistorial() == 0)
+                if (x.getClientFromClientXRut(rut).getSize(1) == 0)
                     System.out.println("Cliente no posee historial.");
                 else
                     x.getClientFromClientXRut(rut).mostrarHistorial(x);
