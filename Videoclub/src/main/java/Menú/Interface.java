@@ -80,7 +80,7 @@ public class Interface {
                         System.out.println("1)Arrendar películas");
                         System.out.println("2)Devolver películas");
                         System.out.println("3)Pagar deuda");
-                        System.out.println("4)Receibir una recomendación");
+                        System.out.println("4)Recibir una recomendación");
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
