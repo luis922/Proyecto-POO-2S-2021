@@ -63,6 +63,9 @@ public class Cliente{
     public Arriendo getArriendoXId(String id){
         return arriendoXid.get(id);
     }
+    public Arriendo getArriendo(int i){
+        return arriendosActuales.get(i);
+    }
 //------------------AGREGA ELEMENTOS A HISTORIAL------------------
     public void addToHistorialXid(Arriendo arriendo) {
         this.historialXid.put(arriendo.getId(), arriendo);
