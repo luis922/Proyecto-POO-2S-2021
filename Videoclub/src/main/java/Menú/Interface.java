@@ -9,6 +9,29 @@ import Clases.VideoClub;
 import java.util.Scanner;
 
 public class Interface {
+
+    public static void inicioMenu(VideoClub tienda){
+        Scanner entrada = new Scanner(System.in);
+        byte opción;
+        do{
+            login();
+            opción = entrada.nextByte();
+            switch(opción){
+                case 1:
+                    String rut = Comprobar.loginClientes(tienda);
+                    if(rut != null)
+                        menúCliente(rut,tienda);
+                    break;
+                case 2:
+                    menúAdmin(tienda);
+                    break;
+                default:
+                    if(opción != 0) System.out.println("Ingrese una opción válida...");
+                    break;
+            }
+        }while(opción != 0);
+    }
+
     public static void login(){
             System.out.println("Por favor, seleccione su rol: ");
             System.out.println("1)Cliente");
@@ -75,17 +98,19 @@ public class Interface {
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
+            System.out.println();
             System.out.println("Menú Administrador");
             System.out.println("1)Ingresar datos");
             System.out.println("2)Mostrar datos");
             System.out.println("3)Buscar datos");
             System.out.println("4)Editar datos");
-            System.out.println("5)Arrendar películas");
+            System.out.println("5)Servicios para cliente");
             System.out.println("0)Menú anterior");
             
             switch(opción = teclado.nextLine()){
                 case "1":
                     do{
+                        System.out.println();
                         System.out.println("1)Registrar Cliente");
                         System.out.println("2)Registrar Película");
                         System.out.println("3)Registrar Historial");
@@ -110,6 +135,7 @@ public class Interface {
                     break;
                 case "2":
                     do{
+                        System.out.println();
                         System.out.println("1)Desplegar lista de clientes");
                         System.out.println("2)Desplegar lista de películas");
                         System.out.println("3)Desplegar historial de cliente");
@@ -134,6 +160,7 @@ public class Interface {
                     break;
                 case "3":
                     do{
+                        System.out.println();
                         System.out.println("1)Buscar Película");
                         System.out.println("2)Buscar Cliente");
                         System.out.println("0)Menú anterior");
@@ -154,6 +181,7 @@ public class Interface {
                     break;
                 case "4":
                     do{
+                        System.out.println();
                         System.out.println("1)Editar Película");
                         System.out.println("2)Editar Cliente");
                         System.out.println("3)Eliminar Película");
@@ -181,7 +209,29 @@ public class Interface {
                     opción =" ";//Para que vuelva al menu anterior
                     break;
                 case "5":
-                    Funciones.arrendar(tienda);
+                    do{
+                        System.out.println();
+                        System.out.println("1)Arrendar Película");
+                        System.out.println("2)Devolver Película");
+                        System.out.println("3)Pagar deuda");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.arrendar(tienda);;
+                                break;
+                            case "2":
+                                Funciones.devolverArriendo(tienda);
+                                break;
+                            case "3":
+                                Funciones.pagarDeuda(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
                     break;
                 default:
                     if(!opción.equals("0"))
@@ -265,39 +315,39 @@ public class Interface {
         Scanner teclado = new Scanner(System.in);
         String cliente = Comprobar.loginClientes(tienda);
         String opcion;
-        String rut,rutN;
+        String rut;
         if(!cliente.equals("0")){
-        do{
-            
-            tienda.mostrarDatosClientes(cliente);
-            System.out.println("Seleccione el atributo que desea modifcar:");
-            System.out.println("1)Nombre del Cliente.\n2)Rut del cliente.");
-            System.out.println("3)Deuda del cliente.\n0)Terminar Edición.");
-            switch(opcion = teclado.nextLine()){
-                case "1":
-                    System.out.println("Ingrese el Nuevo nombre del Cliente:");
-                    tienda.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
-                    break;
-                case "2":
-                    System.out.println("Ingrese el nuevo rut del cliente:");
-                    rut = tienda.getClientFromClientXRut(cliente).getRut();
-                    cliente = teclado.nextLine();
-                    tienda.getClientFromClientXRut(rut).setRut(cliente);
-                    tienda.addClientToClientXRut(cliente, tienda.getClientFromClientXRut(rut));
-                    tienda.delCliente(rut);
-                    System.out.println("Exitoso");
-                    break;
-                case "3":
-                    System.out.println("Ingrese el nuevo monto de deuda del cliente:");
-                    tienda.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
-                    teclado.nextLine();
-                    break;
-                default:
-                    if(!opcion.equals("0"))
-                        System.out.println("Ingrese una opción valida");
-                    break;
-            }
-        }while(!opcion.equals("0"));
+            do{
+
+                tienda.mostrarDatosClientes(cliente);
+                System.out.println("Seleccione el atributo que desea modifcar:");
+                System.out.println("1)Nombre del Cliente.\n2)Rut del cliente.");
+                System.out.println("3)Deuda del cliente.\n0)Terminar Edición.");
+                switch(opcion = teclado.nextLine()){
+                    case "1":
+                        System.out.println("Ingrese el Nuevo nombre del Cliente:");
+                        tienda.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
+                        break;
+                    case "2":
+                        System.out.println("Ingrese el nuevo rut del cliente:");
+                        rut = tienda.getClientFromClientXRut(cliente).getRut();
+                        cliente = teclado.nextLine();
+                        tienda.getClientFromClientXRut(rut).setRut(cliente);
+                        tienda.addClientToClientXRut(cliente, tienda.getClientFromClientXRut(rut));
+                        tienda.delCliente(rut);
+                        System.out.println("Exitoso");
+                        break;
+                    case "3":
+                        System.out.println("Ingrese el nuevo monto de deuda del cliente:");
+                        tienda.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
+                        teclado.nextLine();
+                        break;
+                    default:
+                        if(!opcion.equals("0"))
+                            System.out.println("Ingrese una opción valida");
+                        break;
+                }
+            }while(!opcion.equals("0"));
         }
     }
 }

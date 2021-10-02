@@ -572,11 +572,11 @@ public class Funciones {
                         System.out.println("Esta película no se encuentra arrendada por usted.");
                     }
                     else {
-                        diasAtraso = ChronoUnit.DAYS.between(LocalDate.now(), cliente.getArriendoXId(id).getFechaEntrega());
+                        diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
 
                         eliminado = cliente.delArriendo2(id);
                         System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
-                        eliminado.setValoracion(teclado.nextFloat());
+                        eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
                         eliminado.setEntregado(true);
                         if (!cliente.existIDHistorial(id)) {
                             cliente.addToHistorial(eliminado);
@@ -586,6 +586,7 @@ public class Funciones {
                             cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada() + 1);
                             cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
                             cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                            cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
                         }
                         System.out.println("Película devuelta exitosamente.");
                         if(diasAtraso >0){
@@ -595,7 +596,7 @@ public class Funciones {
                 }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
                 rut = "0";
                 if(cliente.getDeuda() > 0)
-                    System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
+                    System.out.println("Debido a la entrega atrasada de una o más películas, ahora el cliente acumula una " +
                             "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
             }
         }while(!rut.equals("0"));
@@ -641,8 +642,7 @@ public class Funciones {
                 }
                 else
                     System.out.println("Cliente no registra deuda con nosotros.");
-                System.out.println("¿Desea cancelar la deuda de otro cliente?[Ingrese 1 para seguir o 0 para terminar]");
-                rut = teclado.nextLine();
+                rut = "0";
             }
         }while(!rut.equals("0"));
     }
