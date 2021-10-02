@@ -8,13 +8,10 @@ import Menú.*;
 
 public class Main {
     public static void main(String[] args) throws Exception{
-	    VideoClub videoClub1 = new VideoClub();
-        Pelicula pelicula = new Pelicula();
-        Cliente cliente = new Cliente();
-
+	VideoClub videoClub1 = new VideoClub();
 //------------------Lectura de datos desde archivos--------------------------------
-        Funciones.LeerArchivoPeliculas(videoClub1, pelicula);
-        Funciones.LeerArchivoClientes(videoClub1, cliente);
+        Funciones.LeerArchivoPeliculas(videoClub1);
+        Funciones.LeerArchivoClientes(videoClub1);
 //-------------------Menu  por consola------------------------------
 	    Interface.inicioMenu(videoClub1);
     }
