@@ -269,11 +269,11 @@ public class VideoClub {
     //----------------------ESCRITURA DE ARCHIVOS-----------------------
     public void escribirArchivoDeudores(){
         try{
-            FileWriter file = new FileWriter("./reportes/deudores.csv");//Agregar direccion
+            FileWriter file = new FileWriter("./reportes/deudores.csv"); //Agregar direccion
             file.write("Nombre,rut,deuda\n");
             for(Cliente c: listaClientes){
-                if(c.getDeuda() > 0){
-                    file.write(c.getNombre() + "," + c.getRut() + "," + c.getDeuda() + "\n");//Formato de escritura
+                if(c.getDeuda() > 0){ //Verifica que contenga deuda para agregarlo al archivo
+                    file.write(c.getNombre() + "," + c.getRut() + "," + c.getDeuda() + "\n"); //Formato de escritura
                 }
             }
             file.close();
