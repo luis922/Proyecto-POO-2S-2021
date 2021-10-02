@@ -220,27 +220,27 @@ public class VideoClub {
 //---------------------------CLASIFICACION DE OBJETOS--------------------------------
     public String peliMejorEvaluada(){
         //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
-        String peli = null;
+        String idPeli = null;
         float valoracion = 0;
         for(int i =0;i<listaPeliculas.size();i++){
-            if(peli == null || listaPeliculas.get(i).getValuacion() > valoracion){
-                peli = listaPeliculas.get(i).getNombre();
+            if(idPeli == null || listaPeliculas.get(i).getValuacion() > valoracion){
+                idPeli = listaPeliculas.get(i).getId();
                 valoracion = listaPeliculas.get(i).getValuacion();
             }
         }
-        return peli;
+        return idPeli;
     }
     public String peliMejorEvaluada(String genero){
         //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
-        String peli = null;
+        String idPeli = null;
         float valoracion = 0;
         for(int i =0;i<listaPeliculas.size();i++){
-            if( (peli == null || listaPeliculas.get(i).getValuacion() > valoracion) && containsGenero(listaPeliculas.get(i).getId(),genero)){
-                peli = listaPeliculas.get(i).getNombre();
+            if( (idPeli == null || listaPeliculas.get(i).getValuacion() > valoracion) && containsGenero(listaPeliculas.get(i).getId(),genero)){
+                idPeli = listaPeliculas.get(i).getId();
                 valoracion = listaPeliculas.get(i).getValuacion();
             }
         }
-        return peli;
+        return idPeli;
     }
 
    /* public String peliMejorEvaluada(String genero,ArrayList<String> ids, float valoracion){
