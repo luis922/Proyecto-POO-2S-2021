@@ -74,7 +74,7 @@ public class VideoClub {
                 else
                     System.out.print(pelisXId.get(id).getDirector()[j] + ", ");
             }
-
+            System.out.print("Generos: ");
             for(j=0; j<pelisXId.get(id).getGeneros().length;j++ ) {
                 if (j == (pelisXId.get(id).getGeneros().length - 1))
                     System.out.println(pelisXId.get(id).getGeneros()[j]);
@@ -110,7 +110,7 @@ public class VideoClub {
             else
                 System.out.print(pelisXId.get(id).getDirector()[j] + ", ");
         }
-
+        System.out.print("Generos: ");
         for(j=0; j<pelisXId.get(id).getGeneros().length;j++ ) {
             if (j == (pelisXId.get(id).getGeneros().length - 1))
                 System.out.println(pelisXId.get(id).getGeneros()[j]);
@@ -259,7 +259,7 @@ public class VideoClub {
 
 //---------------OTROS----------------------------------------------
     public boolean containsGenero (String id, String genero){
-        for (int i = 0; i < pelisXId.get(id).getGeneros().length; i++) {
+        for (int i = 0; i < pelisXId.get(id).getGeneros().length; i++) {            
             if(pelisXId.get(id).getGeneros()[i].equals(genero))
                 return true;
         }
