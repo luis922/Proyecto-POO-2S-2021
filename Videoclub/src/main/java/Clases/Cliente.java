@@ -27,10 +27,6 @@ public class Cliente{
         arriendoXid = new HashMap();
     }
     
-    public int getSizeHistorial(){
-        return historialArriendos.size();
-    }
-    
 //------------------SETTER/GETTER------------------
     public String getNombre() {
         return nombre;
