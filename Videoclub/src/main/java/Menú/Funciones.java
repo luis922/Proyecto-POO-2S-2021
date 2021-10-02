@@ -663,7 +663,8 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
 //-----------------------------RECOMENDAR PELICULA----------------------------------
-    public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
+    //Por implementar
+   /* public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
         String genero,peli = null;
         ArrayList<String> ids = new ArrayList<>();
         Scanner teclado = new Scanner(System.in);
@@ -688,5 +689,5 @@ public class Funciones {
             if(peli == null || tienda.peliMejorEvaluada(genero,ids,valoracion)== null)
                 System.out.println("No tenemos una película para recomendarle según los datos disponibles.");
         }
-    }
+    }*/
 }  

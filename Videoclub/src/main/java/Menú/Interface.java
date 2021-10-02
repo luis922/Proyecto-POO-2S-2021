@@ -80,7 +80,7 @@ public class Interface {
                         System.out.println("1)Arrendar películas");
                         System.out.println("2)Devolver películas");
                         System.out.println("3)Pagar deuda");
-                        System.out.println("4)Recibir una recomendación");
+                      //  System.out.println("4)Recibir una recomendación");
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
@@ -92,9 +92,9 @@ public class Interface {
                             case "3":
                                 Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
                                 break;
-                            case "4":
+                           /* case "4":
                                 Funciones.recomendarPelicula(tienda,rut);
-                                break;
+                                break;*/
                             default:
                                 if(!opción.equals("0"))
                                     System.out.println("Ingrese una opción valida");
