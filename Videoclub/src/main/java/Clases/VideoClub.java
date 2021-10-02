@@ -17,6 +17,22 @@ public class VideoClub {
         pelisXId = new HashMap<>();
         clientesXRut = new HashMap<>();
     }
+//------------------SETTER/GETTER------------------
+    public String getNombreTienda() {
+        return nombreTienda;
+    }
+
+    public void setNombreTienda(String nombreTienda) {
+        this.nombreTienda = nombreTienda;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
     
 //------------------MOSTRAR DATOS POR PANTALLA------------------
     public void mostrarDatosClientes(){
@@ -110,23 +126,6 @@ public class VideoClub {
         }
         System.out.println("Copias disponibles: "+pelisXId.get(id).getDisponibles());
         System.out.println();
-    }
-    
-//------------------SETTER/GETTER------------------
-    public String getNombreTienda() {
-        return nombreTienda;
-    }
-
-    public void setNombreTienda(String nombreTienda) {
-        this.nombreTienda = nombreTienda;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
     
 //------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------
@@ -244,7 +243,7 @@ public class VideoClub {
         return peli;
     }
 
-    public String peliMejorEvaluada(String genero,ArrayList<String> ids, float valoracion){
+   /* public String peliMejorEvaluada(String genero,ArrayList<String> ids, float valoracion){
         //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
         String peli = null;
         for(int i =0;i<listaPeliculas.size();i++){
@@ -256,7 +255,7 @@ public class VideoClub {
             }
         }
         return peli;
-    }
+    }*/
 
 //---------------OTROS----------------------------------------------
     public boolean containsGenero (String id, String genero){

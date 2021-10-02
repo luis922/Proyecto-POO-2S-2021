@@ -19,15 +19,15 @@ public class Pelicula {
     private String actores[];  //Arreglo que contiene los nombres de los actores(Compacto sin plibre)
     private String generos[];  //Arreglo que contiene los nombres de los generos(Compacto sin plibre)
     
-    public Pelicula(){}       
-
-    public String getNombre() {
-        return nombre;
-    }
+    public Pelicula(){}
 
 //------------------SETTER/GETTER------------------    
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public String getId() {
