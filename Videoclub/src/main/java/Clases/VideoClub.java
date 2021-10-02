@@ -269,11 +269,10 @@ public class VideoClub {
     //----------------------ESCRITURA DE ARCHIVOS-----------------------
     public void escribirArchivoDeudores(){
         try{
-            FileWriter file = new FileWriter("./reportes/deudores.csv"); //Agregar direccion
-            file.write("Nombre,rut,deuda\n");
+            FileWriter file = new FileWriter("./Reportes/deudores.csv"); //Agregar direccion
             for(Cliente c: listaClientes){
                 if(c.getDeuda() > 0){ //Verifica que contenga deuda para agregarlo al archivo
-                    file.write(c.getNombre() + "," + c.getRut() + "," + c.getDeuda() + "\n"); //Formato de escritura
+                    file.write("Nombre Cliente: " + c.getNombre() + "   rut: " + c.getRut() + "   Deuda: " + c.getDeuda() + "\n"); //Formato de escritura
                 }
             }
             file.close();
@@ -286,10 +285,9 @@ public class VideoClub {
     }
     public void escribirArchivoArriendosActuales(){
         try{
-            FileWriter file = new FileWriter("./reportes/peliculasEnArriendo.csv");//Agregar direccion
+            FileWriter file = new FileWriter("./Reportes/peliculasEnArriendo.csv");//Agregar direccion
             String peliculas;
             int i;
-            file.write("Nombre,rut,peliculas\n");
             for(Cliente c: listaClientes){
                 if(!c.isEmptyArriendos()){
                     peliculas = "";
@@ -297,9 +295,9 @@ public class VideoClub {
                         if (i==0)
                             peliculas += pelisXId.get(c.getArriendo(i).getId()).getNombre();
                         else
-                            peliculas += "/" + pelisXId.get(c.getArriendo(i).getId()).getNombre();
+                            peliculas += ", " + pelisXId.get(c.getArriendo(i).getId()).getNombre();//Formato de escritura de peliculas
                     }
-                    file.write(c.getNombre() + "," + c.getRut() + "," + peliculas + "\n");//Formato de escritura
+                    file.write("Nombre Cliente: " +  c.getNombre() + "   rut: " + c.getRut() + "   lista de peliculas arrendadas: " + peliculas + "\n");//Formato de escritura
                 }
             }
             file.close();
