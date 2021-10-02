@@ -424,6 +424,7 @@ public class Funciones {
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
                             arriendo.setEntregado(false);
+                            tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()-1));
                             return arriendo;
                         }
                     }
@@ -449,8 +450,11 @@ public class Funciones {
                     tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
                     tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
                     System.out.println("Película arrendada exitosamente.\n");
+                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
                 }
-                System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
+                else{
+                    System.out.println("Arriendo no realizado.[Ingrese 0 para salir]");
+                }
                 aux = teclado.nextInt();
 
                 if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
@@ -485,8 +489,11 @@ public class Funciones {
                         tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
                         tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
                         System.out.println("Película arrendada exitosamente.\n");
+                        System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
                     }
-                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
+                    else{
+                        System.out.println("Arriendo no realizado.[Ingrese 0 para salir]");
+                    }
                     aux = teclado.nextInt();
 
                     if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
@@ -506,7 +513,10 @@ public class Funciones {
         String nombrePeli, id;
         Cliente cliente = tienda.getClientFromClientXRut(rut);
         Arriendo eliminado;
-
+        if(cliente.isEmptyArriendos()){
+            System.out.println("Usted no tiene películas arrendadas con nosotros.");
+            return;
+        }
         do {
             System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
                     "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
@@ -517,6 +527,7 @@ public class Funciones {
             }
             else{
                 diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
+                tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
 
                 eliminado = cliente.delArriendo2(id);
                 System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
@@ -563,6 +574,10 @@ public class Funciones {
             }
             else{
                 cliente = tienda.getClientFromClientXRut(rut);
+                if(cliente.isEmptyArriendos()){
+                    System.out.println("Usted no tiene películas arrendadas con nosotros.");
+                    return;
+                }
                 do{
                     System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
                             "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
@@ -573,6 +588,7 @@ public class Funciones {
                     }
                     else {
                         diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
+                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
 
                         eliminado = cliente.delArriendo2(id);
                         System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
@@ -647,13 +663,14 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
 //-----------------------------RECOMENDAR PELICULA----------------------------------
-    public static void recomendarPelicula(VideoClub tienda, String rut){
+    public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
         String genero,peli = null;
         ArrayList<String> ids = new ArrayList<String>();
         Scanner teclado = new Scanner(System.in);
         float valoracion;
+
         if(tienda.getClientFromClientXRut(rut).getSize(1) == 0) //Si no tiene historial de arriendos
-            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda, "+ tienda.peliMejorEvaluada());
+            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda: "+ tienda.peliMejorEvaluada());
         else{
             genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
             System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");

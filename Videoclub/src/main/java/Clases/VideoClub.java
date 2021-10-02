@@ -71,6 +71,7 @@ public class VideoClub {
                 else
                     System.out.print(pelisXId.get(id).getActores()[j]+", ");
             }
+            System.out.println("Copias disponibles: "+listaPeliculas.get(i).getDisponibles());
             System.out.println();
         }
     }
@@ -106,6 +107,7 @@ public class VideoClub {
             else
                 System.out.print(pelisXId.get(id).getActores()[j]+", ");
         }
+        System.out.println("Copias disponibles: "+pelisXId.get(id).getDisponibles());
         System.out.println();
     }
     
