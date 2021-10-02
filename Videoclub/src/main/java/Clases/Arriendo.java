@@ -6,7 +6,7 @@ public class Arriendo {
     private String id;               //key
     private float valoracion;        //Numero de estrellas con la que el cliente valoro el film de 0 a 5
     private LocalDate fechaArriendo; //yyyy-mm-dd
-    private LocalDate fechaEntrega;  //yyyy-mm-dd
+    private LocalDate fechaEntrega;  //yyyy-mm-dd fecha de devolución
     private boolean entregado;       //TRUE si la pelicula fue devuelta, False en el caso contrario
     private int vecesArrendada;
     //Hacer una coleccion de un objeto que contenga fecha de arriendo, entrega y valoracion, para tener un registro historico.
