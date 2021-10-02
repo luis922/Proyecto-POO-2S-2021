@@ -11,32 +11,31 @@ import java.util.Scanner;
 public class Interface {
 
     public static void inicioMenu(VideoClub tienda){
-        Scanner entrada = new Scanner(System.in);
-        byte opción;
+        Scanner teclado = new Scanner(System.in);
+        String opción;
         do{
-            login();
-            opción = entrada.nextByte();
-            switch(opción){
-                case 1:
-                    String rut = Comprobar.loginClientes(tienda);
-                    if(rut != null)
-                        menúCliente(rut,tienda);
-                    break;
-                case 2:
-                    menúAdmin(tienda);
-                    break;
-                default:
-                    if(opción != 0) System.out.println("Ingrese una opción válida...");
-                    break;
-            }
-        }while(opción != 0);
-    }
-
-    public static void login(){
+            System.out.println();
             System.out.println("Por favor, seleccione su rol: ");
             System.out.println("1)Cliente");
             System.out.println("2)Trabajador");
             System.out.println("0)Finalizar programa");
+            opción = teclado.nextLine();
+
+            switch(opción){
+                case "1":
+                    String rut = Comprobar.loginClientes(tienda);
+                    if(rut != null)
+                        menúCliente(rut,tienda);
+                    break;
+                case "2":
+                    menúAdmin(tienda);
+                    break;
+                default:
+                    if(!opción.equals("0"))
+                        System.out.println("Ingrese una opción válida...");
+                    break;
+            }
+        }while(!opción.equals("0"));
     }
     
     //-------------------------MENU CLIENTE-----------------------------------------
@@ -46,7 +45,7 @@ public class Interface {
         do{
             String nombre = tienda.getClientFromClientXRut(rut).getNombre();
             System.out.println();
-            System.out.println("Bienvenido Sr(a) " + nombre);
+            System.out.println("Bienvenido Sr(a) " + nombre +"\n");
             System.out.println("1)Desplegar catálogo de películas");
             System.out.println("2)Arrendar películas");
             System.out.println("3)Devolver películas");
