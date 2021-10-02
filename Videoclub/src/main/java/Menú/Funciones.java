@@ -283,59 +283,61 @@ public class Funciones {
     }
     
 //------------------LECTURA DE DATOS DESDE ARCHIVO------------------ 
-    public static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)throws FileNotFoundException{
-        File flClientes = new File("./src/main/java/data/clientes.tsv");
+    public static void LeerArchivoClientes(VideoClub videoClub)throws FileNotFoundException{
+        File flClientes = new File("./src/main/java/data/clientes.tsv"); //Abre el archivo a leer
         Scanner scCli = new Scanner(flClientes);
-        String linea;
-        String[] arrayLineaClientes;
-        scCli.nextLine();
+        String linea; //Almacena la linea que se esta leyendo
+        String[] arrayLineaClientes; //Lista almacena la linea leida separados por tabulaciones
+        scCli.nextLine(); //Salta la primera linea
         Arriendo arriendo;
+        Cliente cliente;
         int i;
 	while(scCli.hasNextLine()){
-		linea = scCli.nextLine();
-		arrayLineaClientes = linea.split("\t");
-		//Guardar Datos en array de Clientes: [0]=nombre, [1]=rut, [2]=historial arriendos , [3]=pelPosesion, [4]=Deuda
-		cliente = new Cliente();
-		cliente.setNombre(arrayLineaClientes[0]);
-		cliente.setRut(arrayLineaClientes[1]);
-                for(i=0; i<arrayLineaClientes[2].split("_").length; i++){
-                    arriendo = new Arriendo();
-                    arriendo.setId(arrayLineaClientes[2].split("_")[i]);
-                    cliente.addToHistorial(arriendo);
-                    cliente.addToHistorialXid(arriendo);
-                }
-		cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
-		videoClub.addClientToListaClients(cliente);
-		videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente);
-		}
+            linea = scCli.nextLine(); //Lee la linea siguiente
+            arrayLineaClientes = linea.split("\t"); //Separa la linea en base a las tabulaciones
+            //Guardar Datos en array de Clientes: [0]=nombre, [1]=rut, [2]=historial arriendos , [3]=pelPosesion, [4]=Deuda
+            cliente = new Cliente();
+            cliente.setNombre(arrayLineaClientes[0]);
+            cliente.setRut(arrayLineaClientes[1]);
+            for(i=0; i<arrayLineaClientes[2].split("_").length; i++){ //Recorre la lista de de los sarriendos separados por "_"
+                arriendo = new Arriendo();
+                arriendo.setId(arrayLineaClientes[2].split("_")[i]);
+                cliente.addToHistorial(arriendo); //Agrega el arriendo a la lista
+                cliente.addToHistorialXid(arriendo); //Agrega el arriendo al hashmap
+            }
+            cliente.setDeuda(Integer.parseInt(arrayLineaClientes[4]));
+            videoClub.addClientToListaClients(cliente); //Agrega cliente a la lista de clientes
+            videoClub.addClientToClientXRut(arrayLineaClientes[1], cliente); //Agrega el cliente al hashmap
+            }
     }
     
-    public static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula) throws FileNotFoundException{
-        File flPeliculas = new File("./src/main/java/data/peliculas.tsv");
-		Scanner scPel = new Scanner(flPeliculas);
-        String linea;
-        String[] arrayLineaPeliculas;
-        scPel.nextLine();
-		while(scPel.hasNextLine()){
-			linea = scPel.nextLine();
-			arrayLineaPeliculas = linea.split("\t");
-			//Guardar Datos en array de Peliculas
-			pelicula = new Pelicula();
-                        pelicula.setId(arrayLineaPeliculas[0]);
-			pelicula.setNombre(arrayLineaPeliculas[1]);
-			pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[2]));
-			pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[3]));
-			pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[4]));
-			pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[5]));
-			pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[6]));
-			pelicula.setSinopsis(arrayLineaPeliculas[7]);
-			pelicula.setCalidad(arrayLineaPeliculas[8]);
-			pelicula.setDirector(arrayLineaPeliculas[9].split("_"));
-			pelicula.setActores(arrayLineaPeliculas[10].split("_"));
-			pelicula.setGeneros(arrayLineaPeliculas[11].split("_"));
-			videoClub.addPeliToListaPelis(pelicula);
-			videoClub.addPeliToPelisXId(pelicula.getId(),pelicula);
-		}
+    public static void LeerArchivoPeliculas(VideoClub videoClub) throws FileNotFoundException{
+        File flPeliculas = new File("./src/main/java/data/peliculas.tsv"); //Abre archivo a leer
+	Scanner scPel = new Scanner(flPeliculas);
+        String linea; //Almacena la linea que se esta leyendo
+        String[] arrayLineaPeliculas; //Lista almacena la linea leida separados por tabulaciones
+        scPel.nextLine(); //Salta la primera linea
+        Pelicula pelicula;
+        while(scPel.hasNextLine()){
+                linea = scPel.nextLine(); //Lee la linea siguiente
+                arrayLineaPeliculas = linea.split("\t"); //Separa la linea en base a las tabulaciones
+                //Guardar Datos en array de Peliculas
+                pelicula = new Pelicula();
+                pelicula.setId(arrayLineaPeliculas[0]);
+                pelicula.setNombre(arrayLineaPeliculas[1]);
+                pelicula.setExistencias(Short.parseShort(arrayLineaPeliculas[2]));
+                pelicula.setDisponibles(Short.parseShort(arrayLineaPeliculas[3]));
+                pelicula.setValuacion(Float.parseFloat(arrayLineaPeliculas[4]));
+                pelicula.setAñoEstreno(Short.parseShort(arrayLineaPeliculas[5]));
+                pelicula.setDuraciónMin(Short.parseShort(arrayLineaPeliculas[6]));
+                pelicula.setSinopsis(arrayLineaPeliculas[7]);
+                pelicula.setCalidad(arrayLineaPeliculas[8]);
+                pelicula.setDirector(arrayLineaPeliculas[9].split("_"));
+                pelicula.setActores(arrayLineaPeliculas[10].split("_"));
+                pelicula.setGeneros(arrayLineaPeliculas[11].split("_"));
+                videoClub.addPeliToListaPelis(pelicula); //Agrega la pelicula a la lista de peliculas
+                videoClub.addPeliToPelisXId(pelicula.getId(),pelicula); //Agrega la pelicula al hashmap
+        }
     }
 //------------------Eliminación------------------ 
     public static void eliminarPelicula (VideoClub x){
@@ -363,8 +365,6 @@ public class Funciones {
                     break;
             }
         }
-        
-       
     }
     
     public static void eliminarCliente(VideoClub x){
@@ -665,7 +665,7 @@ public class Funciones {
 //-----------------------------RECOMENDAR PELICULA----------------------------------
     public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
         String genero,peli = null;
-        ArrayList<String> ids = new ArrayList<String>();
+        ArrayList<String> ids = new ArrayList<>();
         Scanner teclado = new Scanner(System.in);
         float valoracion;
 
