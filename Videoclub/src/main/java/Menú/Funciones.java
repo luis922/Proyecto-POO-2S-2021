@@ -527,8 +527,10 @@ public class Funciones {
             }
             else{
                 diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
+                //Calcula dias transcurridos entre dos fechas
                 tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
-
+                //Se agrega una copia más a las disponibles
+                
                 eliminado = cliente.delArriendo2(id);
                 System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
                 eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
@@ -588,7 +590,9 @@ public class Funciones {
                     }
                     else {
                         diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
-                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1)); //Se agrega una copia más a las disponibles
+                        //Calcula dias transcurridos entre dos fechas
+                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
+                        //Se agrega una copia más a las disponibles
 
                         eliminado = cliente.delArriendo2(id);
                         System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
