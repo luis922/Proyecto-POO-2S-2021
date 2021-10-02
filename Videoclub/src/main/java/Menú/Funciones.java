@@ -588,7 +588,7 @@ public class Funciones {
                     }
                     else {
                         diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
-                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
+                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1)); //Se agrega una copia más a las disponibles
 
                         eliminado = cliente.delArriendo2(id);
                         System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");

@@ -46,50 +46,94 @@ public class Interface {
             String nombre = tienda.getClientFromClientXRut(rut).getNombre();
             System.out.println();
             System.out.println("Bienvenido Sr(a) " + nombre +"\n");
-            System.out.println("1)Desplegar catálogo de películas");
-            System.out.println("2)Arrendar películas");
-            System.out.println("3)Devolver películas");
-            System.out.println("4)Pagar deuda");
-            System.out.println("5)Receibir una recomendación");
-            System.out.println("6)Revisar mi historial");
-            System.out.println("7)Revisar historial de película");
-            System.out.println("8)Desplegar mi ficha cliente");
+            System.out.println("1)Películas");
+            System.out.println("2)Servicios para cliente");
+            System.out.println("3)Información usuario");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
             switch(opción){
                 case "1":
-                    Funciones.listaPeliculas(tienda);
+                    do{
+                        System.out.println();
+                        System.out.println("1)Desplegar catálogo de películas");
+                        System.out.println("2)Buscar Película");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.listaPeliculas(tienda);
+                                break;
+                            case "2":
+                                Funciones.buscarPelicula(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Evita que se vuelva al menu de inicio
                     break;
                 case "2":
-                    Funciones.arrendar(tienda,rut);
+                    do{
+                        System.out.println();
+                        System.out.println("1)Arrendar películas");
+                        System.out.println("2)Devolver películas");
+                        System.out.println("3)Pagar deuda");
+                        System.out.println("4)Receibir una recomendación");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.arrendar(tienda,rut);
+                                break;
+                            case "2":
+                                Funciones.devolverArriendo(tienda,rut);
+                                break;
+                            case "3":
+                                Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
+                                break;
+                            case "4":
+                                Funciones.recomendarPelicula(tienda,rut);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Evita que se vuelva al menu de inicio
                     break;
                 case "3":
-                    Funciones.devolverArriendo(tienda,rut);
-                    break;
-                case "4":
-                    Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
-                    break;
-                case "5":
-                    Funciones.recomendarPelicula(tienda,rut);
-                    break;
-                case "6":
-                    Funciones.mostrarHistorialCliente(tienda,rut);
-                    break;
-                case "7":
-                    Funciones.mostrarHistorialPeli(tienda, rut);
-                    break;
-                case "8":
-                    Funciones.desplegarMiFicha(tienda,rut);
+                    do{
+                        System.out.println();
+                        System.out.println("1)Desplegar mi ficha cliente");
+                        System.out.println("2)Revisar mi historial");
+                        System.out.println("3)Revisar historial de película");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                Funciones.desplegarMiFicha(tienda,rut);
+                                break;
+                            case "2":
+                                Funciones.mostrarHistorialCliente(tienda,rut);
+                                break;
+                            case "3":
+                                Funciones.mostrarHistorialPeli(tienda, rut);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Evita que se vuelva al menu de inicio
                     break;
                 default:
                     if(!opción.equals("0"))
                         System.out.println("Ingrese una opción valida");
                     break;
             }
-            
         }while(!opción.equals("0"));
-        
     }
     
     //-------------------------MENU EMPLEADO-----------------------------------------
