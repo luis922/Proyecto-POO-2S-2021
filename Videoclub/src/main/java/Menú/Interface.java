@@ -148,6 +148,7 @@ public class Interface {
             System.out.println("3)Buscar datos");
             System.out.println("4)Editar datos");
             System.out.println("5)Servicios para cliente");
+            System.out.println("6)Generar reportes");
             System.out.println("0)Menú anterior");
             
             switch(opción = teclado.nextLine()){
@@ -267,6 +268,26 @@ public class Interface {
                                 break;
                             case "3":
                                 Funciones.pagarDeuda(tienda);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Para que vuelva al menu anterior
+                    break;
+                case "6":
+                    do{
+                        System.out.println("1)Deudores");
+                        System.out.println("2)Peliculas en arriendo");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                tienda.escribirArchivoDeudores();
+                                break;
+                            case "2":
+                                tienda.escribirArchivoArriendosActuales();
                                 break;
                             default:
                                 if(!opción.equals("0"))
