@@ -1,5 +1,6 @@
 package Clases;
 import java.util.*;
+import java.io.*;
 
 public class VideoClub {
     private String nombreTienda;
@@ -265,5 +266,48 @@ public class VideoClub {
         }
         return false;
     }
-
+    //----------------------ESCRITURA DE ARCHIVOS-----------------------
+    public void escribirArchivoDeudores(){
+        try{
+            FileWriter file = new FileWriter("deudores.csv");//Agregar direccion
+            file.write("Nombre,rut,deuda\n");
+            for(Cliente c: listaClientes){
+                if(c.getDeuda() > 0){
+                    file.write(c.getNombre() + "," + c.getRut() + "," + c.getDeuda() + "\n");//Formato de escritura
+                }
+            }
+            file.close();
+            System.out.println("Archivo escrito correctamente");
+        }
+        catch(IOException e){
+            System.out.println("Error al escribir");
+            e.printStackTrace();
+        }
+    }
+    public void escribirArchivoArriendosActuales(){
+        try{
+            FileWriter file = new FileWriter("peliculasEnArriendo.csv");//Agregar direccion
+            String peliculas;
+            int i;
+            file.write("Nombre,rut,peliculas\n");
+            for(Cliente c: listaClientes){
+                if(!c.isEmptyArriendos()){
+                    peliculas = "";
+                    for(i=0; i<c.getSize(2); i++){
+                        if (i==0)
+                            peliculas += pelisXId.get(c.getArriendo(i).getId()).getNombre();
+                        else
+                            peliculas += "/" + pelisXId.get(c.getArriendo(i).getId()).getNombre();
+                    }
+                    file.write(c.getNombre() + "," + c.getRut() + "," + peliculas + "\n");//Formato de escritura
+                }
+            }
+            file.close();
+            System.out.println("Archivo escrito correctamente");
+        }
+        catch(IOException e){
+            System.out.println("Error al escribir");
+            e.printStackTrace();
+        }
+    }
 }
