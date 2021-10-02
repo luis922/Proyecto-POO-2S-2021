@@ -8,8 +8,8 @@ public class VideoClub {
     private ArrayList<Pelicula> listaPeliculas;//Coleccion de objetos 1 anidación
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
 
-    private HashMap<String,Pelicula> pelisXId;       //Key es ID pelicula
-    private HashMap<String,Cliente> clientesXRut; //Key es Rut cliente
+    private HashMap<String,Pelicula> pelisXId;   //Key es ID pelicula
+    private HashMap<String,Cliente> clientesXRut;//Key es Rut cliente
 
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
