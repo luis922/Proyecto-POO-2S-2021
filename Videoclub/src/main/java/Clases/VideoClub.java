@@ -266,14 +266,30 @@ public class VideoClub {
         }
         return false;
     }
-    //----------------------ESCRITURA DE ARCHIVOS-----------------------
+ //----------------------ESCRITURA DE ARCHIVOS-----------------------
     public void escribirArchivoDeudores(){
+        int cantDeudores = 0;
+        long deudaTotal = 0;
         try{
             FileWriter file = new FileWriter("./Reportes/deudores.csv"); //Agregar direccion
             for(Cliente c: listaClientes){
-                if(c.getDeuda() > 0){ //Verifica que contenga deuda para agregarlo al archivo
-                    file.write("Nombre Cliente: " + c.getNombre() + "   rut: " + c.getRut() + "   Deuda: " + c.getDeuda() + "\n"); //Formato de escritura
+                if(c.getDeuda()>0){
+                    cantDeudores++;
+                    deudaTotal += c.getDeuda();
                 }
+            }
+            if(cantDeudores > 0){
+                file.write("Cantidad de deudores: " + cantDeudores + "   Monto total de la deuda: " + deudaTotal + "\n\n");
+                file.write("Detalle de los deudores: \n");
+                for(Cliente c: listaClientes){
+                    if(c.getDeuda() > 0){ //Verifica que contenga deuda para agregarlo al archivo
+                        file.write("Nombre: " + c.getNombre() + "   rut: " + c.getRut() + "   Deuda: " + c.getDeuda() + "\n"); //Formato de escritura
+                    }
+                }
+            }
+            else{
+                System.out.println("No existen deudores.");
+                file.write("No existen deudores");
             }
             file.close();
             System.out.println("Archivo escrito correctamente");
@@ -297,7 +313,7 @@ public class VideoClub {
                         else
                             peliculas += ", " + pelisXId.get(c.getArriendo(i).getId()).getNombre();//Formato de escritura de peliculas
                     }
-                    file.write("Nombre Cliente: " +  c.getNombre() + "   rut: " + c.getRut() + "   lista de peliculas arrendadas: " + peliculas + "\n");//Formato de escritura
+                    file.write("Cliente: " +  c.getNombre() + "   rut: " + c.getRut() + "   lista de peliculas arrendadas: " + peliculas + "\n");//Formato de escritura
                 }
             }
             file.close();
