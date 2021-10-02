@@ -49,6 +49,7 @@ public class Interface {
             System.out.println("1)Películas");
             System.out.println("2)Servicios para cliente");
             System.out.println("3)Información usuario");
+            System.out.println("4)Recomendar pelicula");
             System.out.println("0)Menú anterior");
             opción = teclado.nextLine();
             
@@ -92,9 +93,6 @@ public class Interface {
                             case "3":
                                 Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
                                 break;
-                           /* case "4":
-                                Funciones.recomendarPelicula(tienda,rut);
-                                break;*/
                             default:
                                 if(!opción.equals("0"))
                                     System.out.println("Ingrese una opción valida");
@@ -119,6 +117,29 @@ public class Interface {
                                 break;
                             case "3":
                                 Funciones.mostrarHistorialPeli(tienda, rut);
+                                break;
+                            default:
+                                if(!opción.equals("0"))
+                                    System.out.println("Ingrese una opción valida");
+                                break;
+                        }
+                    }while(!opción.equals("0"));
+                    opción =" ";//Evita que se vuelva al menu de inicio
+                    break;
+                case "4":
+                    do{
+                        System.out.println();
+                        System.out.println("1)Mejor evaluada");
+                        System.out.println("2)Mejor evaluada por genero");
+                        System.out.println("0)Menú anterior");
+                        switch (opción = teclado.nextLine()){
+                            case "1":
+                                tienda.mostrarDatosPeliculas(tienda.peliMejorEvaluada());
+                                break;
+                            case "2":
+                                System.out.println("Ingrese genero a buscar: (Animacion, Accion, Ciencia Ficcion, Comedia, Aventura, Drama, Romance, Crimen)");    
+                                opción = teclado.nextLine();
+                                tienda.mostrarDatosPeliculas(tienda.peliMejorEvaluada(opción));
                                 break;
                             default:
                                 if(!opción.equals("0"))
