@@ -269,7 +269,7 @@ public class VideoClub {
     //----------------------ESCRITURA DE ARCHIVOS-----------------------
     public void escribirArchivoDeudores(){
         try{
-            FileWriter file = new FileWriter("deudores.csv");//Agregar direccion
+            FileWriter file = new FileWriter("./reportes/deudores.csv");//Agregar direccion
             file.write("Nombre,rut,deuda\n");
             for(Cliente c: listaClientes){
                 if(c.getDeuda() > 0){
@@ -286,7 +286,7 @@ public class VideoClub {
     }
     public void escribirArchivoArriendosActuales(){
         try{
-            FileWriter file = new FileWriter("peliculasEnArriendo.csv");//Agregar direccion
+            FileWriter file = new FileWriter("./reportes/peliculasEnArriendo.csv");//Agregar direccion
             String peliculas;
             int i;
             file.write("Nombre,rut,peliculas\n");
