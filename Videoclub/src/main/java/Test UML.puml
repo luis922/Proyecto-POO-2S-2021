@@ -33,7 +33,7 @@ class VideoClub{
     +void addClientToClientXRut(String rut, Cliente cliente)
     +void addPeliToPelisXId(String id, Pelicula peli)
     .. Mostrar datos por pantalla..
-    +void mostrarDatosPeliculas()
+    +void mostrarDatosClientes()
     +void mostrarDatosClientes(String rut)
     +void mostrarDatosPeliculas()
     +void mostrarDatosPeliculas(String id)
@@ -47,6 +47,13 @@ class VideoClub{
     +boolean existRUT(String rut)
     +String obtenerIdXNombre(String nombre)
     +int getSize(int modo)
+    +void delPelicula(String id)
+    +void delCliente(String rut)
+    + String peliMejorEvaluada()
+    + String peliMejorEvaluada(String genero)
+    + bollean constainsGenero(String id, String genero)
+    + void escribirArchivoDeudores()
+    + void escribirArriendosActuales()
 }
 
 class Cliente{
@@ -54,6 +61,8 @@ class Cliente{
     -String rut
     -ArrayList<Arriendo> historialArriendos
     -HashMap<String, Arriendo> historialXid
+    -ArrayList<Arriendo> arriendosActuales;
+    -HashMap<String, Arriendo> arriendoXid;
     -int deuda
     __
     ..Constructor..
@@ -67,14 +76,24 @@ class Cliente{
     +void addArriendoToHistorial(Arriendo arriendo)
     +int getDeuda()
     +void setDeuda(int deuda)
+    + Arriendo getArriendoXId(String id)
+    + Arriendo getArriendo(int i)
+    + Arriendo getHistorialXId(String id)
     ..Otros métodos..
-    +Arriendo getArriendoXId(String id)
     +void addToHistorialXid(Arriendo arriendo)
-    +void addArriendoToHistorial(Arriendo arriendo)
-    +void mostrarHistorial()
+    +void addToHistorial(Arriendo arriendo)
+    +void addToArriendosActuales(Arriendo arriendo)
+    +void addToArriendoXid(Arriendo arriendo)
+    +void mostrarHistorial(VideoClub tienda)
     +void mostrarHistorial(String id)
-    +boolean existIDMap(String id)
-    +int getSizeHistorial()
+    +boolean isEmptyArriendo()
+    +boolean existIDHistorial(String id)
+    +boolean existIDArriendo(String id)
+    +int getSize(int modo)
+    +void delArriendo(String id)
+    +Arriendo delArriendo2(String id)
+    +int contarGeneroEnHistorial(VideoClub tienda, String genero)
+    +String generoMasVisto(VideoClub tienda)
 }
 
 class Pelicula{
@@ -126,10 +145,10 @@ class Pelicula{
 class Arriendo{
     -String id
     -float valoracion
-    -String fechaArriendo
-    -String fechaEntrega
+    -LocalDate fechaArriendo
+    -LocalDate fechaEntrega
     -boolean entregado
-    - int vecesArrendada
+    -int vecesArrendada
     __
     ..Constructor..
     +Arriendo()
@@ -138,12 +157,13 @@ class Arriendo{
     +void setId(String id)
     +float getValoracion()
     +void setValoracion(float valoracion)
-    +String getFechaArriendo()
-    +void setFechaArriendo(String fechaArriendo)
-    +String getFechaEntrega()
-    +void setFechaEntrega(String fechaEntrega)
+    +LocalDate getFechaArriendo()
+    +void setFechaArriendo(LocalDate fechaArriendo)
+    +LocalDate getFechaEntrega()
+    +void setFechaEntrega(LocalDate fechaEntrega)
     +void setEntregado(boolean entregado)
     +void setVecesArrendada(int vecesArrendada)
+    +int getVecesArrendada()
     ..Otros métodos..
     +boolean isEntregado()
     +int getVecesArrendada()
@@ -154,9 +174,11 @@ class Main{
 }
 
 class Interface{
-    +static void login()
+    +static void inicioMenu(VideoClub tienda)
     +static void menúCliente(String usuario,VideoClub x)
     +static void menúAdmin(VideoClub x)
+    +static void menúEdiciónPelicula(VideoClub tienda)
+    +static void menúEdiciónCliente(VideoClub tienda)
 }
 
 class Funciones{
@@ -167,7 +189,7 @@ class Funciones{
     + static void mostrarHistorialPeli(VideoClub x, String rut)
     + static void registrarCliente(VideoClub x)
     + static void registrarPelicula(VideoClub x)
-    + static void registrarArriendo(VideoClub x)
+    + static void registrarHistorial(VideoClub x)
     + static String[] ingresoDirectores(Scanner teclado)
     + static String[] ingresoGeneros(Scanner teclado)
     + static String[] ingresoActores(Scanner teclado)
@@ -175,8 +197,17 @@ class Funciones{
     + static void buscarPelicula(VideoClub x)
     + static void desplegarMiFicha(VideoClub x, String usuario)
     + static void buscarCliente(VideoClub x)
-    + static void LeerArchivoClientes(VideoClub videoClub, Cliente cliente)
-    + static void LeerArchivoPeliculas(VideoClub videoClub, Pelicula pelicula)
+    + static void LeerArchivoClientes(VideoClub videoClub)
+    + static void LeerArchivoPeliculas(VideoClub videoClub)
+    + static void eliminarPelicula(VideoClub x)
+    + static void eliminarCliente(VideoClub x)
+    + static Arriendo nuevoArriendo(VideoClub tienda, String rut)
+    + static void arrendar(VideoClub tienda, String rut)
+    + static void arrendar(VideoClub tienda)
+    + static void devolverArriendo((VideoClub tienda, String rut)
+    + static void devolverArriendo((VideoClub tienda)
+    + static void pagarDeuda( Cliente cliente)
+    + static void pagarDeuda(VideoClub tienda)
 }
 
 class Comprobar{
@@ -184,6 +215,7 @@ class Comprobar{
     +static String loginClientes(VideoClub x)
     +static boolean formatoCorrectoRut(String rut)
     +static boolean formatoCorrectoValuacion(float Valuacion)
+    +static String loginPelicula(VideoClub x)
 
 }
 @enduml
