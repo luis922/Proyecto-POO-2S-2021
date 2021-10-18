@@ -6,6 +6,10 @@
 package Clases;
 
 public class Trabajador extends Persona implements Transacciones{
+    String cargo;
+    int sueldo;
+    int vecesArriendosAtrasados;
+    
     public void arrendar(){
     }
     public void devolverArriendo(){
