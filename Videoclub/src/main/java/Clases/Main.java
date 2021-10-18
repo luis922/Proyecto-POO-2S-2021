@@ -13,6 +13,6 @@ public class Main {
         Funciones.LeerArchivoPeliculas(videoClub1);
         Funciones.LeerArchivoClientes(videoClub1);
 //-------------------Menu  por consola------------------------------
-	    Interface.inicioMenu(videoClub1);
+	    MenuTienda.inicioMenu(videoClub1);
     }
 }
