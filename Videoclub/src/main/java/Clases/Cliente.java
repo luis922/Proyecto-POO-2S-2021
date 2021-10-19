@@ -2,66 +2,29 @@ package Clases;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Cliente{
-    private String nombre;
-    private String rut;
+public class Cliente extends Persona{
     private ArrayList<Arriendo> historialArriendos; //Coleccion de objetos 1 anidación.
     private HashMap<String, Arriendo> historialXid;
-    private ArrayList<Arriendo> arriendosActuales; //Contiene las peliculas arrendadas actuales
-    private HashMap<String, Arriendo> arriendoXid;
-    private int deuda;
+    //Podria aplicarse un descuento al primer arriendo
 
     public Cliente() {
-        this.historialArriendos = new ArrayList();//Agrege esto
-        this.historialXid = new HashMap<>();
-        arriendosActuales = new ArrayList();
-        arriendoXid = new HashMap();
+        super();
+        historialArriendos = new ArrayList<>();
+        historialXid = new HashMap<>();
     }
     
     public Cliente(String nombre, String rut){ //Para el ingreso de un cliente nuevo, no existente en la base de datos.
-        this.nombre = nombre;
-        this.rut = rut;
-        this.deuda = 0;
-        this.historialArriendos = new ArrayList();
-        arriendosActuales = new ArrayList();
-        arriendoXid = new HashMap();
+        super(nombre, rut);
+        historialArriendos = new ArrayList<>();
+        historialXid = new HashMap<>();
     }
     
-//------------------SETTER/GETTER------------------
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public int getDeuda() {
-        return deuda;
-    }
-
-    public void setDeuda(int deuda) {
-        this.deuda = deuda;
-    }
+//------------------SETTER/GETTER---------------------------------
 
     public Arriendo getHistorialXId(String id){
         return historialXid.get(id);
     }
 
-    public Arriendo getArriendoXId(String id){
-        return arriendoXid.get(id);
-    }
-    public Arriendo getArriendo(int i){
-        return arriendosActuales.get(i);
-    }
 //------------------AGREGA ELEMENTOS A HISTORIAL------------------
     public void addToHistorialXid(Arriendo arriendo) {
         this.historialXid.put(arriendo.getId(), arriendo);
@@ -71,14 +34,9 @@ public class Cliente{
         historialArriendos.add(arriendo);
     }
 
-    public void addToArriendosActuales(Arriendo arriendo){
-        arriendosActuales.add(arriendo);
-    }
-
-    public void addToArriendosXid(Arriendo arriendo){
-        arriendoXid.put(arriendo.getId(),arriendo);
-    }
 //------------------MOSTRAR HISTORIAL------------------
+
+    //Muestra todas las películas arrendadas y sus datos
     public void mostrarHistorial(VideoClub tienda){
         for (int i = 0; i < historialArriendos.size(); i++) {
             System.out.println("Nombre película: "+ tienda.getPeliFromPelisXId(historialArriendos.get(i).getId()).getNombre());
@@ -100,6 +58,7 @@ public class Cliente{
         }
     }
 
+    //Muestra el historial de arriendo de una película
     public void mostrarHistorial(String id){
         if(historialXid.containsKey(id)) {
             System.out.println("ID pelicula: "+historialXid.get(id).getId());
@@ -121,25 +80,11 @@ public class Cliente{
     }
     
 //------------------COMPRUEBA------------------
-    public boolean isEmptyArriendos(){
-        return arriendosActuales.isEmpty();
-    }
 
     public boolean existIDHistorial(String id){//Comprueba si la pelicula ya fue arrendada en base al ID otorgado
         return historialXid.containsKey(id);
     }
 
-    public boolean existIDArriendo(String id){
-        return arriendoXid.containsKey(id);
-    }
-//-----------------Otros-----------------------
-    public int getSize(int modo){
-        switch(modo){
-            case 1: return historialArriendos.size();
-            case 2: return arriendosActuales.size();
-        }
-        return 0;
-    }
 //--------------Eliminar----------------------
     public void delArriendo(String id){
         arriendoXid.remove(id);
@@ -163,7 +108,26 @@ public class Cliente{
         }
         return null;
     }
-//-----------------------------------------------------------------------------
+
+//-------------------IMPLEMENTACION METODO ABSTRACTO---------------------------
+    @Override
+    public void identificacion() {
+        System.out.print("Nombre: "+nombre+" Rut: "+rut+" Tipo Cliente: ");
+        if (arriendosActuales.isEmpty() && historialArriendos.isEmpty())
+            System.out.println("NUEVO");
+        else
+            System.out.println("ANTIGUO");
+    }
+
+//-----------------Otros-----------------------
+    public int getSize(int modo){
+        switch(modo){
+            case 1: return historialArriendos.size();
+            case 2: return arriendosActuales.size();
+        }
+        return 0;
+    }
+
     public int contarGeneroEnHistorial(VideoClub tienda,String genero){
         //cuenta cuantas veces se ha visto una pelicula que contenga la categoria ingresada, esta puede ser la categoría principal o no
         int contador = 0;
@@ -173,6 +137,7 @@ public class Cliente{
         }
         return contador;
     }
+
     public String generoMasVisto(VideoClub tienda){
         String genero = null, generoPrincipal;
         int vecesVista = 0;
@@ -185,4 +150,5 @@ public class Cliente{
         }
         return genero;
     }
+
 }
