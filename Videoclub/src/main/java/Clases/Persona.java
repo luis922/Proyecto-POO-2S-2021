@@ -7,9 +7,13 @@ public abstract class Persona {
     protected String nombre;
     protected String rut;
     protected int deuda;
-    protected ArrayList<Arriendo> arriendosActuales; //Contiene las peliculas arrendadas actuales
+    protected ArrayList<Arriendo> arriendosActuales; //Contiene las películas arrendadas actuales
     protected HashMap<String, Arriendo> arriendoXid;
 
+    public Persona(){
+        arriendosActuales = new ArrayList<>();
+        arriendoXid = new HashMap<>();
+    }
     public Persona(String nombre, String rut){
         this.nombre = nombre;
         this.rut = rut;
