@@ -231,7 +231,7 @@ public class VideoClub {
         return idPeli;
     }
     public String peliMejorEvaluada(String genero){
-        //retorna el nombre de la pelicula mejor evaluada, si todas tienen la misma valoracion se retorna la que primero se encuentra
+        //retorna el nombre de la pelicula mejor evaluada POR GENERO, si todas tienen la misma valoracion se retorna la que primero se encuentra
         String idPeli = null;
         float valoracion = 0;
         for(int i =0;i<listaPeliculas.size();i++){
