@@ -16,4 +16,11 @@ public class Trabajador extends Persona implements Transacciones{
     }
     public void pagarDeuda(){
     }
+
+//-------------------IMPLEMENTACION METODO ABSTRACTO---------------------------
+    @Override
+    public void identificacion() {
+        System.out.println("Nombre: "+nombre+" Rut: "+rut+" Cargo de empleado: "+cargo);
+    }
+
 }
