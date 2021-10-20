@@ -420,6 +420,7 @@ public class Funciones {
                             System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
                             arriendo.setFechaArriendo(LocalDate.parse(teclado.nextLine()));
                             System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-06");
+                            //Agregar comprobación para evitar que se ingresen fechas de entregas anteriores a la de arriendo
                             arriendo.setFechaEntrega(LocalDate.parse(teclado.nextLine()));
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
@@ -432,38 +433,6 @@ public class Funciones {
             }
         }while (!nombrePeli.equals("0"));
         return null;
-    }
-
-    public static void arrendar(VideoClub tienda, String rut){
-        Arriendo arriendo;
-        int aux;
-        Scanner teclado = new Scanner(System.in);
-
-        if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
-            System.out.println("Primero debe pagar su deuda para poder arrendar otra película");
-            return;
-        }
-        if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
-            do{
-                arriendo = nuevoArriendo(tienda,rut);
-                if(arriendo != null){
-                    tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
-                    tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
-                    System.out.println("Película arrendada exitosamente.\n");
-                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
-                }
-                else{
-                    System.out.println("Arriendo no realizado.[Ingrese 0 para salir]");
-                }
-                aux = teclado.nextInt();
-
-                if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
-                    System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
-
-            }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0  );
-        }
-        else
-            System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
     }
 
     public static void arrendar(VideoClub tienda){
@@ -507,59 +476,6 @@ public class Funciones {
 
     }
 //-----------------------------DEVOLVER PELICULA----------------------------------------
-    public static void devolverArriendo(VideoClub tienda, String rut){//Menu cliente
-        Scanner teclado = new Scanner(System.in);
-        long diasAtraso;
-        String nombrePeli, id;
-        Cliente cliente = tienda.getClientFromClientXRut(rut);
-        Arriendo eliminado;
-        if(cliente.isEmptyArriendos()){
-            System.out.println("Usted no tiene películas arrendadas con nosotros.");
-            return;
-        }
-        do {
-            System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
-                    "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
-            nombrePeli = teclado.nextLine();
-            id = tienda.obtenerIdXNombre(nombrePeli);
-            if(!cliente.existIDArriendo(id)){
-                System.out.println("Esta película no se encuentra arrendada por usted.");
-            }
-            else{
-                diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
-                //Calcula dias transcurridos entre dos fechas
-                tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
-                //Se agrega una copia más a las disponibles
-
-                eliminado = cliente.delArriendo2(id);
-                System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
-                eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
-                eliminado.setEntregado(true);
-                if(!cliente.existIDHistorial(id)){
-                    cliente.addToHistorial(eliminado);
-                    cliente.addToArriendosXid(eliminado);
-                }
-                else{
-                    System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
-                    cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada()+1);
-                    cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
-                    cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
-                    cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
-                }
-
-                System.out.println("Película devuelta exitosamente.");
-
-                if(diasAtraso >0){
-                    cliente.setDeuda((int)diasAtraso*500);
-                }
-            }
-        }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
-
-        if(cliente.getDeuda() > 0)
-            System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
-                               "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
-
-    }
 
     public static void devolverArriendo(VideoClub tienda){//Menu Admin
         Scanner teclado = new Scanner(System.in);
@@ -622,22 +538,6 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
 //-------------------------------PAGAR DEUDA-----------------------------
-    public static void pagarDeuda(Cliente cliente){//Menu cliente
-        int monto;
-        Scanner teclado = new Scanner(System.in);
-
-        if(cliente.getDeuda()>0){
-            System.out.println("Usted tiene una deuda de $"+cliente.getDeuda());
-            do {
-                System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
-                monto = teclado.nextInt();
-            }while(cliente.getDeuda()-monto !=0);
-            cliente.setDeuda(0);
-            System.out.println("Su deuda ha sido cancelada exitosamente.");
-        }
-        else
-            System.out.println("Usted no registra deuda con nosotros.");
-    }
 
     public static void pagarDeuda(VideoClub tienda){//Menu Admin
         int monto;
