@@ -2,8 +2,7 @@
 package Clases;
 
 public interface Transacciones {
-    public void arrendar();
-    public void devolverArriendo();
-    
+    public void arrendar(VideoClub tienda);
+    public void devolverArriendo(VideoClub tienda);
     public void pagarDeuda();
 }
