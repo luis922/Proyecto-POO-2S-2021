@@ -58,8 +58,8 @@ public class MenuTienda {
                         System.out.println();
                         System.out.println("1)Desplegar catálogo de películas");
                         System.out.println("2)Buscar Película");
-                        System.out.println("3)Recomendar pelicula");
-                        System.out.println("4)Recomendar pelicula por genero");
+                        System.out.println("3)Recomendar película");
+                        System.out.println("4)Recomendar película por genero");
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
@@ -94,13 +94,13 @@ public class MenuTienda {
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
-                                Funciones.arrendar(tienda,rut);
+                                tienda.getClientFromClientXRut(rut).arrendar(tienda);
                                 break;
                             case "2":
-                                Funciones.devolverArriendo(tienda,rut);
+                                tienda.getClientFromClientXRut(rut).devolverArriendo(tienda);
                                 break;
                             case "3":
-                                Funciones.pagarDeuda(tienda.getClientFromClientXRut(rut));
+                                tienda.getClientFromClientXRut(rut).pagarDeuda();
                                 break;
                             default:
                                 if(!opción.equals("0"))
