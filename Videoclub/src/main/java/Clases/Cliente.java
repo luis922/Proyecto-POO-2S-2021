@@ -1,8 +1,15 @@
 package Clases;
+
+
+import Menú.Funciones;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona implements Transacciones{
     private ArrayList<Arriendo> historialArriendos; //Coleccion de objetos 1 anidación.
     private HashMap<String, Arriendo> historialXid;
     //Podria aplicarse un descuento al primer arriendo
@@ -109,7 +116,7 @@ public class Cliente extends Persona{
         return null;
     }
 
-//-------------------IMPLEMENTACION METODO ABSTRACTO---------------------------
+//-------------------IMPLEMENTACION METODO ABSTRACTO/SOBREESCRITURA---------------------------
     @Override
     public void identificacion() {
         System.out.print("Nombre: "+nombre+" Rut: "+rut+" Tipo Cliente: ");
@@ -118,7 +125,109 @@ public class Cliente extends Persona{
         else
             System.out.println("ANTIGUO");
     }
+    @Override
+    public void arrendar(VideoClub tienda){
+        Arriendo arriendo;
+        int aux;
+        Scanner teclado = new Scanner(System.in);
 
+        if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
+            System.out.println("Primero debe pagar su deuda para poder arrendar otra película");
+            return;
+        }
+        if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
+            do{
+                arriendo = Funciones.nuevoArriendo(tienda,rut);
+                if(arriendo != null){
+                    tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
+                    tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
+                    System.out.println("Película arrendada exitosamente.\n");
+                    System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
+                }
+                else{
+                    System.out.println("Arriendo no realizado.[Ingrese 0 para salir]");
+                }
+                aux = teclado.nextInt();
+
+                if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
+                    System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+
+            }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0  );
+        }
+        else
+            System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
+    }
+    @Override
+    public void devolverArriendo(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        long diasAtraso;
+        String nombrePeli, id;
+        Cliente cliente = tienda.getClientFromClientXRut(rut);
+        Arriendo eliminado;
+        if(cliente.isEmptyArriendos()){
+            System.out.println("Usted no tiene películas arrendadas con nosotros.");
+            return;
+        }
+        do {
+            System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
+                    "(Killer Bean Forever, Bob Esponja: La Película, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+            nombrePeli = teclado.nextLine();
+            id = tienda.obtenerIdXNombre(nombrePeli);
+            if(!cliente.existIDArriendo(id)){
+                System.out.println("Esta película no se encuentra arrendada por usted.");
+            }
+            else{
+                diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(), LocalDate.now());
+                //Calcula dias transcurridos entre dos fechas, puede ser un numero positivo(no atraso), nega
+                tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
+                //Se agrega una copia más a las disponibles
+
+                eliminado = cliente.delArriendo2(id);
+                System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
+                eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
+                eliminado.setEntregado(true);
+                if(!cliente.existIDHistorial(id)){
+                    cliente.addToHistorial(eliminado);
+                    cliente.addToArriendosXid(eliminado);
+                }
+                else{
+                    System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
+                    cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada()+1);
+                    cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
+                    cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                    cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
+                }
+
+                System.out.println("Película devuelta exitosamente.");
+
+                if(diasAtraso >0){
+                    cliente.setDeuda((int)diasAtraso*500);
+                }
+            }
+        }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
+
+        if(cliente.getDeuda() > 0)
+            System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
+                    "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
+
+    }
+
+    public void pagarDeuda(){//Menu cliente
+        int monto;
+        Scanner teclado = new Scanner(System.in);
+
+        if(getDeuda()>0){
+            System.out.println("Usted tiene una deuda de $"+getDeuda());
+            do {
+                System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
+                monto = teclado.nextInt();
+            }while(getDeuda()-monto !=0);
+            setDeuda(0);
+            System.out.println("Su deuda ha sido cancelada exitosamente.");
+        }
+        else
+            System.out.println("Usted no registra deuda con nosotros.");
+    }
 //-----------------Otros-----------------------
     public int getSize(int modo){
         switch(modo){
