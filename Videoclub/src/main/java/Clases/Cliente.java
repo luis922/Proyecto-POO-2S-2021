@@ -92,30 +92,6 @@ public class Cliente extends Persona implements Transacciones{
         return historialXid.containsKey(id);
     }
 
-//--------------Eliminar----------------------
-    public void delArriendo(String id){
-        arriendoXid.remove(id);
-        for(int i = 0; i< arriendosActuales.size(); i++){
-            if(arriendosActuales.get(i).getId().equals(id)) {
-                arriendosActuales.remove(i);
-                return;
-            }
-        }
-    }
-
-    public Arriendo delArriendo2(String id){
-        Arriendo eliminado;
-        arriendoXid.remove(id);
-        for(int i = 0; i< arriendosActuales.size(); i++){
-            if(arriendosActuales.get(i).getId().equals(id)) {
-                eliminado = arriendosActuales.get(i);
-                arriendosActuales.remove(i);
-                return eliminado;
-            }
-        }
-        return null;
-    }
-
 //-------------------IMPLEMENTACION METODO ABSTRACTO/SOBREESCRITURA---------------------------
     @Override
     public void identificacion() {
@@ -131,16 +107,16 @@ public class Cliente extends Persona implements Transacciones{
         int aux;
         Scanner teclado = new Scanner(System.in);
 
-        if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
+        if(getDeuda() > 0) {
             System.out.println("Primero debe pagar su deuda para poder arrendar otra película");
             return;
         }
-        if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
+        if(getSize(2) < 3){
             do{
                 arriendo = Funciones.nuevoArriendo(tienda,rut);
                 if(arriendo != null){
-                    tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
-                    tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
+                    addToArriendosActuales(arriendo);
+                    addToArriendosXid(arriendo);
                     System.out.println("Película arrendada exitosamente.\n");
                     System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
                 }
@@ -149,10 +125,10 @@ public class Cliente extends Persona implements Transacciones{
                 }
                 aux = teclado.nextInt();
 
-                if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
+                if(getSize(2) == 3)
                     System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
 
-            }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0  );
+            }while(getSize(2) < 3 && aux != 0  );
         }
         else
             System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
@@ -162,9 +138,8 @@ public class Cliente extends Persona implements Transacciones{
         Scanner teclado = new Scanner(System.in);
         long diasAtraso;
         String nombrePeli, id;
-        Cliente cliente = tienda.getClientFromClientXRut(rut);
         Arriendo eliminado;
-        if(cliente.isEmptyArriendos()){
+        if(isEmptyArriendos()){
             System.out.println("Usted no tiene películas arrendadas con nosotros.");
             return;
         }
@@ -173,42 +148,42 @@ public class Cliente extends Persona implements Transacciones{
                     "(Killer Bean Forever, Bob Esponja: La Película, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             nombrePeli = teclado.nextLine();
             id = tienda.obtenerIdXNombre(nombrePeli);
-            if(!cliente.existIDArriendo(id)){
+            if(!existIDArriendo(id)){
                 System.out.println("Esta película no se encuentra arrendada por usted.");
             }
             else{
-                diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(), LocalDate.now());
+                diasAtraso = ChronoUnit.DAYS.between(getArriendoXId(id).getFechaEntrega(), LocalDate.now());
                 //Calcula dias transcurridos entre dos fechas, puede ser un numero positivo(no atraso), nega
                 tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
                 //Se agrega una copia más a las disponibles
 
-                eliminado = cliente.delArriendo2(id);
+                eliminado = delArriendo2(id);
                 System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
                 eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
                 eliminado.setEntregado(true);
-                if(!cliente.existIDHistorial(id)){
-                    cliente.addToHistorial(eliminado);
-                    cliente.addToArriendosXid(eliminado);
+                if(!existIDHistorial(id)){
+                    addToHistorial(eliminado);
+                    addToArriendosXid(eliminado);
                 }
                 else{
                     System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
-                    cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada()+1);
-                    cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
-                    cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
-                    cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
+                    getHistorialXId(id).setVecesArrendada(getHistorialXId(id).getVecesArrendada()+1);
+                    getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
+                    getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
+                    getHistorialXId(id).setValoracion(eliminado.getValoracion());
                 }
 
                 System.out.println("Película devuelta exitosamente.");
 
                 if(diasAtraso >0){
-                    cliente.setDeuda((int)diasAtraso*500);
+                    setDeuda((int)diasAtraso*500);
                 }
             }
-        }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
+        }while(!isEmptyArriendos() && !nombrePeli.equals("0"));
 
-        if(cliente.getDeuda() > 0)
+        if(getDeuda() > 0)
             System.out.println("Debido a la entrega atrasada de una o más películas, ahora usted acumula una " +
-                    "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
+                    "deuda de $"+ getDeuda()+" la cual debe cancelar.");
 
     }
 

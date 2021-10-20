@@ -77,6 +77,30 @@ public abstract class Persona {
         return arriendoXid.containsKey(id);
     }
 
+//------------------ELIMINACION----------------------
+    public void delArriendo(String id){
+        arriendoXid.remove(id);
+        for(int i = 0; i< arriendosActuales.size(); i++){
+            if(arriendosActuales.get(i).getId().equals(id)) {
+                arriendosActuales.remove(i);
+                return;
+            }
+        }
+    }
+    //Retorna objeto eliminado
+    public Arriendo delArriendo2(String id){
+        Arriendo eliminado;
+        arriendoXid.remove(id);
+        for(int i = 0; i< arriendosActuales.size(); i++){
+            if(arriendosActuales.get(i).getId().equals(id)) {
+                eliminado = arriendosActuales.get(i);
+                arriendosActuales.remove(i);
+                return eliminado;
+            }
+        }
+        return null;
+    }
+
 //-----------------ABSTRACTO------------------------------------
 
     public abstract void identificacion();
