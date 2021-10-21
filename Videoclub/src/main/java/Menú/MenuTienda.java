@@ -60,6 +60,7 @@ public class MenuTienda {
                         System.out.println("2)Buscar Película");
                         System.out.println("3)Recomendar película");
                         System.out.println("4)Recomendar película por genero");
+                        System.out.println("5)Desplegar catálogo por Filtros");
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
@@ -75,6 +76,9 @@ public class MenuTienda {
                                 System.out.println("Ingrese genero a buscar: (Animacion, Accion, Ciencia Ficcion, Comedia, Aventura, Drama, Romance, Crimen)");    
                                 opción = teclado.nextLine();
                                 tienda.mostrarDatosPeliculas(tienda.peliMejorEvaluada(opción));
+                                break;
+                            case "5":
+                                menúFiltros(tienda);
                                 break;
                             default:
                                 if(!opción.equals("0"))
@@ -420,5 +424,52 @@ public class MenuTienda {
                 }
             }while(!opcion.equals("0"));
         }
+    }
+     //-------------------------Filtrado-----------------------------------------
+    public static void menúFiltros(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        String opción;
+        
+        do{
+            System.out.println("Seleccione el filtro que desea implementar:");
+            System.out.println("1)Rango de años");
+            System.out.println("2)Rango de Valuación");
+            System.out.println("3)Género");
+            System.out.println("4)Disponibles");
+            System.out.println("5)Director");
+            System.out.println("6)Calidad");
+            System.out.println("7)Rango de duración");
+            System.out.println("0)Volver al menú anterior");
+            
+            switch(opción = teclado.nextLine()){
+                case "1":
+                    Funciones.filtradoPorAño(tienda);//No avisa si no se encontró nada
+                    break;
+                case "2":
+                    Funciones.filtradoPorValuación(tienda);
+                    break;
+                case "3":
+                    Funciones.filtradoPorGénero(tienda);
+                    break;
+                case "4":
+                    Funciones.filtradoDisponibles(tienda);
+                    break;
+                case "5":
+                    Funciones.filtradoDirector(tienda);
+                    break;
+                case "6":
+                    Funciones.filtradoCalidad(tienda);
+                    break;
+                case "7":
+                    Funciones.filtradoDuración(tienda);
+                    break;
+                default:
+                    if(!opción.equals("0"))
+                        System.out.println("Porfavor, ingrese una opción Válida");
+                    break;
+            
+            }
+            
+        }while(opción.equals("0"));
     }
 }
