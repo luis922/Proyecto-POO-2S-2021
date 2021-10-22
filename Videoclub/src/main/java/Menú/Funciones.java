@@ -8,13 +8,13 @@ package Menú;
 import Clases.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 
 public class Funciones {
+
     
     public static void listaPeliculas(VideoClub x){
         System.out.println("Listado de películas: ");
@@ -26,8 +26,68 @@ public class Funciones {
         System.out.println("Listado de Clientes: ");
         x.mostrarDatosClientes();
     }
-    
-//------------------MOSTRAR HISTORIAL CLIENTE------------------ 
+
+//-----------------COMPROBAR-----------------------------------
+
+    public static String loginClientes(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String rutIngresado;
+        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
+        do{
+            rutIngresado = teclado.nextLine();
+            if(!formatoCorrectoRut(rutIngresado)){
+                System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
+            }
+            else if(!x.containsRUT(rutIngresado)){
+                System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
+            }
+            else
+                return rutIngresado;
+        }while(!rutIngresado.equals("0"));
+        return null;
+    }
+
+    public static boolean formatoCorrectoRut(String rut){
+        int i;
+        if (rut.equals("0"))
+            return true;
+        for(i=0; i<rut.length(); i++){
+            if(i<rut.length()-2 && !Character.isDigit(rut.charAt(i)))
+                return false;
+            else if(i == rut.length()-2 && rut.charAt(i) != '-'){
+                return false;
+            }
+            else if(i == rut.length()-1 && !Character.isDigit(rut.charAt(i)) && rut.charAt(i) != 'k' ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean formatoCorrectoValuacion(float Valuacion){
+        return (Valuacion <= 5 && Valuacion >= 1);
+    }
+
+    public static String loginPelicula(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String nombre;
+        int contador = 0;
+        System.out.println("Ingrese el nombre de la película que desea editar:");
+
+        do{
+
+            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            nombre = teclado.nextLine();
+            contador++;
+
+        }while(x.containsID(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0"));
+
+        if(nombre.equals("0")) return nombre;
+
+        return x.obtenerIdXNombre(nombre);
+    }
+
+//------------------MOSTRAR HISTORIAL CLIENTE------------------
     public static void mostrarHistorialCliente(VideoClub x, String rut){
         System.out.println("Información sobre las peliculas arrendadas");
         if (x.getClientFromClientXRut(rut).getSize(1) == 0)
@@ -90,7 +150,7 @@ public class Funciones {
             if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado, porfavor. ingreselo nuevamente.");
             nuevo.setRut(teclado.nextLine());
             i++;
-        }while(!Comprobar.formatoCorrectoRut(nuevo.getRut()));
+        }while(!formatoCorrectoRut(nuevo.getRut()));
         
         x.addClientToListaClients(nuevo);
         x.addClientToClientXRut(nuevo.getRut(), nuevo);
@@ -178,7 +238,7 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
     
-///---------Ingresos---------     
+///-----------------INGRESOS---------------------------------------
     public static String[] ingresoDirectores(Scanner teclado){
         System.out.println("Ingrese la cantidad de directores");
         byte cantidad = teclado.nextByte();
@@ -236,7 +296,7 @@ public class Funciones {
             valuacion = teclado.nextFloat();
             teclado.nextLine();
             contador++;
-        }while(!Menú.Comprobar.formatoCorrectoValuacion(valuacion));
+        }while(!formatoCorrectoValuacion(valuacion));
         
         return valuacion;
         

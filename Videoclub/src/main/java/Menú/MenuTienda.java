@@ -23,7 +23,7 @@ public class MenuTienda {
 
             switch(opción){
                 case "1":
-                    String rut = Comprobar.loginClientes(tienda);
+                    String rut = Funciones.loginClientes(tienda);
                     if(rut != null)
                         menúCliente(rut,tienda);
                     break;
@@ -318,7 +318,7 @@ public class MenuTienda {
     }
 //-------------------------EdiciónPelícula-----------------------------------------
     public static void menúEdiciónPelícula(VideoClub tienda){
-        String nombre = Comprobar.loginPelicula(tienda);
+        String nombre = Funciones.loginPelicula(tienda);
         Scanner teclado = new Scanner(System.in);
         if(!nombre.equals("0")){
             String opcion;
@@ -388,7 +388,7 @@ public class MenuTienda {
     //-------------------------EdiciónCliente-----------------------------------------
     public static void menúEdiciónCliente(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
-        String cliente = Comprobar.loginClientes(tienda);
+        String cliente = Funciones.loginClientes(tienda);
         String opcion;
         String rut;
         if(!cliente.equals("0")){
