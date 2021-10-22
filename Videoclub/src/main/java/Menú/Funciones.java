@@ -77,7 +77,7 @@ public class Funciones {
         }while(!nombre.equals("0"));
     }
     
-//------------------REGISTRO NUEVO CLIENTE------------------    
+//------------------REGISTRO NUEVO CLIENTE----------------------
     public static void registrarCliente(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         Cliente nuevo = new Cliente();
@@ -97,7 +97,7 @@ public class Funciones {
         System.out.println("¡Cliente registrado exitosamente!");
     }
     
-//------------------REGISTRO NUEVA PELICULA------------------    
+//------------------REGISTRO NUEVA PELICULA----------------------
     public static void registrarPelicula(VideoClub x){//Incompleto aún, falta ranking e ingreso en la base
         Scanner teclado = new Scanner(System.in);
         Pelicula nueva = new Pelicula();
@@ -127,7 +127,7 @@ public class Funciones {
         System.out.println("¡Pelicula Ingresada Exitosamente!");        
     }
     
-//------------------REGISTRO NUEVO HISTORIAL------------------
+//------------------REGISTRO NUEVO HISTORIAL---------------------
     public static void registrarHistorial(VideoClub x){
         String rut, nombrePeli, id;
         Arriendo arriendo;
@@ -242,7 +242,7 @@ public class Funciones {
         
     }
     
-//------------------BUSQUEDA------------------ 
+//------------------BUSQUEDA---------------------------------------
     public static void buscarPelicula(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
@@ -282,7 +282,7 @@ public class Funciones {
         }while(!rut.equals("0"));
     }
     
-//------------------LECTURA DE DATOS DESDE ARCHIVO------------------ 
+//------------------LECTURA DE DATOS DESDE ARCHIVO-----------------
     public static void LeerArchivoClientes(VideoClub videoClub)throws FileNotFoundException{
         File flClientes = new File("./src/main/java/data/clientes.tsv"); //Abre el archivo a leer
         Scanner scCli = new Scanner(flClientes);
@@ -395,7 +395,7 @@ public class Funciones {
         }
     }
 	
-//-----------------------------ARRENDAR PELICULAS-------------------------------------------
+//-----------------------------ARRENDAR PELICULAS--------------------------------------
     public static Arriendo nuevoArriendo (VideoClub tienda, String rut){
         String nombrePeli, id;
         Arriendo arriendo = new Arriendo();
@@ -475,7 +475,7 @@ public class Funciones {
         }
 
     }
-//-----------------------------DEVOLVER PELICULA----------------------------------------
+//-----------------------------DEVOLVER PELICULA---------------------------------------
 
     public static void devolverArriendo(VideoClub tienda){//Menu Admin
         Scanner teclado = new Scanner(System.in);
@@ -537,7 +537,7 @@ public class Funciones {
             }
         }while(!rut.equals("0"));
     }
-//-------------------------------PAGAR DEUDA-----------------------------
+//-------------------------------PAGAR DEUDA-------------------------------------------
 
     public static void pagarDeuda(VideoClub tienda){//Menu Admin
         int monto;
@@ -566,39 +566,14 @@ public class Funciones {
             }
         }while(!rut.equals("0"));
     }
-//-----------------------------RECOMENDAR PELICULA----------------------------------
-    //Por implementar
-   /* public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
-        String genero,peli = null;
-        ArrayList<String> ids = new ArrayList<>();
-        Scanner teclado = new Scanner(System.in);
-        float valoracion;
 
-        if(tienda.getClientFromClientXRut(rut).getSize(1) == 0) //Si no tiene historial de arriendos
-            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda: "+ tienda.peliMejorEvaluada());
-        else{
-            genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
-            System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");
-            valoracion = Float.parseFloat(teclado.nextLine());
-            do {
-                if(tienda.getClientFromClientXRut(rut).existIDHistorial(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero,ids,valoracion)))){
-                    //Si la pelicula ya esta registrada en historial, no se recomienda
-                    ids.add(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero)));
-                    //Y se descarta para ser la peli mejor evaluada
-                }
-                else
-                    peli = tienda.peliMejorEvaluada(genero,ids,valoracion);
-            }while(peli == null && tienda.peliMejorEvaluada(genero,ids,valoracion)!= null);
-
-            if(peli == null || tienda.peliMejorEvaluada(genero,ids,valoracion)== null)
-                System.out.println("No tenemos una película para recomendarle según los datos disponibles.");
-        }
-    }*/
+//-----------------------------FILTRAR PELÍCULAS---------------------------------------
+    
     public static void filtradoPorAño(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         int i = 0,aux = 0;
         short desde, hasta,año;
-        
+
         do{
             if(i != 0) System.out.println("Ingrese un rango valido");
             System.out.println("Ingrese el añó de inicio:");
@@ -608,7 +583,7 @@ public class Funciones {
             teclado.nextLine();
             i++;
         }while(desde > hasta);
-        
+
         for (i = 0;i < tienda.getSize(2); i++){
             año = tienda.getPeliFromPelisXId(Integer.toString(i)).getAñoEstreno();
             if(año <= hasta && año >= desde){
@@ -618,12 +593,12 @@ public class Funciones {
         }
         System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
     }
-    
+
     public static void filtradoPorValuación(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         int i = 0,aux = 0;
         float desde, hasta,valuación;
-        
+
         do{
             if(i != 0) System.out.println("Ingrese un rango valido");
             System.out.println("**El sistema de Valuación funciona entre 0.1 y 5.0**");
@@ -634,7 +609,7 @@ public class Funciones {
             teclado.nextLine();
             i++;
         }while(desde > hasta && desde > 5 && desde < 0 && hasta > 5 && hasta < 0 );
-        
+
         for(i = 0; i < tienda.getSize(1); i++){
             valuación = tienda.getPeliFromPelisXId(Integer.toString(i)).getValuacion();
             if(valuación <= hasta && valuación >= desde){
@@ -645,7 +620,7 @@ public class Funciones {
         
         System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
     }
-    
+
     public static void filtradoPorGénero(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         int cont = 0;
@@ -782,5 +757,34 @@ public class Funciones {
         }
         System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
     }
+//-----------------------------RECOMENDAR PELICULA----------------------------------
+    //Por implementar
+   /* public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
+        String genero,peli = null;
+        ArrayList<String> ids = new ArrayList<>();
+        Scanner teclado = new Scanner(System.in);
+        float valoracion;
+
+        if(tienda.getClientFromClientXRut(rut).getSize(1) == 0) //Si no tiene historial de arriendos
+            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda: "+ tienda.peliMejorEvaluada());
+        else{
+            genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
+            System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");
+            valoracion = Float.parseFloat(teclado.nextLine());
+            do {
+                if(tienda.getClientFromClientXRut(rut).existIDHistorial(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero,ids,valoracion)))){
+                    //Si la pelicula ya esta registrada en historial, no se recomienda
+                    ids.add(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero)));
+                    //Y se descarta para ser la peli mejor evaluada
+                }
+                else
+                    peli = tienda.peliMejorEvaluada(genero,ids,valoracion);
+            }while(peli == null && tienda.peliMejorEvaluada(genero,ids,valoracion)!= null);
+
+            if(peli == null || tienda.peliMejorEvaluada(genero,ids,valoracion)== null)
+                System.out.println("No tenemos una película para recomendarle según los datos disponibles.");
+        }
+    }*/
+
 }  
 
