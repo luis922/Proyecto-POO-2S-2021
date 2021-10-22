@@ -596,7 +596,7 @@ public class Funciones {
     }*/
     public static void filtradoPorAño(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
-        int i = 0;
+        int i = 0,aux = 0;
         short desde, hasta,año;
         
         do{
@@ -611,13 +611,17 @@ public class Funciones {
         
         for (i = 0;i < tienda.getSize(2); i++){
             año = tienda.getPeliFromPelisXId(Integer.toString(i)).getAñoEstreno();
-            if(año <= hasta && año >= desde) tienda.mostrarDatosPeliculas(Integer.toString(i));
-        }         
+            if(año <= hasta && año >= desde){
+                tienda.mostrarDatosPeliculas(Integer.toString(i));
+                aux++;
+            }
+        }
+        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
     }
     
     public static void filtradoPorValuación(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
-        int i = 0;
+        int i = 0,aux = 0;
         float desde, hasta,valuación;
         
         do{
@@ -633,8 +637,13 @@ public class Funciones {
         
         for(i = 0; i < tienda.getSize(1); i++){
             valuación = tienda.getPeliFromPelisXId(Integer.toString(i)).getValuacion();
-            if(valuación <= hasta && valuación >= desde) tienda.mostrarDatosPeliculas(Integer.toString(i));
+            if(valuación <= hasta && valuación >= desde){
+                tienda.mostrarDatosPeliculas(Integer.toString(i));
+                aux++;
+            }
         }
+        
+        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
     }
     
     public static void filtradoPorGénero(VideoClub tienda){
@@ -649,17 +658,129 @@ public class Funciones {
             género = teclado.nextLine();
             System.out.println("leído");
             
-            for(int i = 0; i < tienda.getSize(2); i++){
-                generos = tienda.getPeliFromPelisXId(Integer.toString(i)).getGeneros();
-                for(int j = 0; j < generos.length;j++){
-                    if(género.equals(generos[j])){
-                        cont++;
-                        tienda.mostrarDatosPeliculas(Integer.toString(i));
+            if(!género.equals("0")){
+                for(int i = 0; i < tienda.getSize(2); i++){
+                    generos = tienda.getPeliFromPelisXId(Integer.toString(i)).getGeneros();
+                    for(int j = 0; j < generos.length;j++){
+                        if(género.equals(generos[j])){
+                            cont++;
+                            tienda.mostrarDatosPeliculas(Integer.toString(i));
+                        }
                     }
                 }
             }
-            iteraciones++;
-        }while(cont == 0);
+            
+            iteraciones++; 
+        }while(cont == 0 && !género.equals("0"));
+        if(cont != 0) System.out.println("Se encontraron " + cont + " peliculas con el parametro ingresado");
+    }
+    
+    public static void filtradoDisponibles(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        byte opción,aux = 0;
+        int i = 0;
+        do{
+            if(i != 0) System.out.println("Ingrese una opción valida...");
+            System.out.println("Seleccione Disponibilidad:");
+            System.out.println("1)Disponibles\n2)No disponibles");
+            opción = teclado.nextByte();
+            teclado.nextLine();
+            i++;
+        }while(opción != 1 && opción != 2);
+        
+        for(i = 0; i < tienda.getSize(2); i++){
+            
+            switch(opción){
+                
+                case 1:
+                    if(tienda.getPeliFromPelisXId(Integer.toString(i)).getExistencias() > 0){
+                        tienda.mostrarDatosPeliculas(Integer.toString(i));
+                        aux++;
+                    }
+                    break;
+                case 2:
+                    if(tienda.getPeliFromPelisXId(Integer.toString(i)).getExistencias() == 0){
+                        tienda.mostrarDatosPeliculas(Integer.toString(i));
+                        aux++;
+                    }
+                    break;     
+            }
+        }
+        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
+    }
+    
+    public static void filtradoDirector(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        int cont = 0,i = 0,j;
+        String []directores;
+        String director;
+        do{
+            if(i != 0) System.out.println("El director no se encuentra en nuestro catálogo, intentelo nuevamente");
+            System.out.println("Ingrese el director a buscar: **Ingrese 0 para salir**");
+            director = teclado.nextLine();
+            
+            for(i = 0; i < tienda.getSize(2); i++){
+                directores = tienda.getPeliFromPelisXId(Integer.toString(i)).getDirector();
+                
+                for(j = 0; j < directores.length; j++){
+                    if(director.equals(directores[j])){
+                        tienda.mostrarDatosPeliculas(Integer.toString(i));
+                        cont++;
+                    }
+                }
+            }
+            i++;
+        }while(cont == 0 && !director.equals("0"));
+        
+        if(cont != 0) System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+    }
+    
+    public static void filtradoCalidad(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        int cont = 0,i = 0;
+        String calidad;
+        
+        do{
+            if(i != 0) System.out.println("La calidad no se encuentra en nuestro catalogo, intentelo nuevamente");
+            System.out.println("Ingrese la calidad a buscar **Ingrese 0 para salir**");
+            calidad = teclado.nextLine();
+            
+            for(i = 0; i < tienda.getSize(2); i++){
+                
+                if(calidad.equals(tienda.getPeliFromPelisXId(Integer.toString(i)).getCalidad())){
+                    cont++;
+                    tienda.mostrarDatosPeliculas(Integer.toString(i));
+                }
+            }
+            i++;
+        }while(cont == 0 && !calidad.equals("0"));
+        
+        if(cont != 0) System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+    }
+    
+    public static void filtradoDuración(VideoClub tienda){
+        Scanner teclado = new Scanner(System.in);
+        int i = 0, cont = 0;
+        short desde,hasta,minutos;
+        
+        do{
+            if( i != 0) System.out.println("Introduzca un rango valido");
+            System.out.println("Ingrese la menor cantidad de minutos:");
+            desde = teclado.nextShort();
+            System.out.println("Ingrese la mayor cantidad de minutos:");
+            hasta = teclado.nextShort();
+            
+        }while(desde > hasta);
+        
+        for(i = 0; i < tienda.getSize(2); i++){
+            minutos = tienda.getPeliFromPelisXId(Integer.toString(i)).getDuraciónMin();
+            
+            if(minutos <= hasta && minutos >= desde){
+                cont++;
+                tienda.mostrarDatosPeliculas(Integer.toString(i));
+            }
+        }
+        System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
     }
 }  
 

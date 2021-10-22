@@ -435,15 +435,15 @@ public class MenuTienda {
             System.out.println("1)Rango de años");
             System.out.println("2)Rango de Valuación");
             System.out.println("3)Género");
-            System.out.println("4)Disponibles");
+            System.out.println("4)Disponibilidad");
             System.out.println("5)Director");
-            System.out.println("6)Calidad");
+            System.out.println("6)Calidad de imagen");
             System.out.println("7)Rango de duración");
             System.out.println("0)Volver al menú anterior");
             
             switch(opción = teclado.nextLine()){
                 case "1":
-                    Funciones.filtradoPorAño(tienda);//No avisa si no se encontró nada
+                    Funciones.filtradoPorAño(tienda);
                     break;
                 case "2":
                     Funciones.filtradoPorValuación(tienda);
