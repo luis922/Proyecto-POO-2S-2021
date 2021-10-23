@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 
 
 public class Funciones {
@@ -28,7 +29,23 @@ public class Funciones {
     }
 
 //-----------------COMPROBAR-----------------------------------
-
+    public static String loginTrabajadores(VideoClub x){
+        Scanner teclado = new Scanner(System.in);
+        String rutIngresado;
+        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: rut (1-1, 2-2");
+        do{
+            rutIngresado = teclado.nextLine();
+            if(!formatoCorrectoRut(rutIngresado)){
+                System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
+            }
+            else if(!x.containsRutTrabajadores(rutIngresado)){
+                System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
+            }
+            else
+                return rutIngresado;
+        }while(!rutIngresado.equals("0"));
+        return null;
+    }
     public static String loginClientes(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String rutIngresado;
@@ -399,6 +416,27 @@ public class Funciones {
                 videoClub.addPeliToPelisXId(pelicula.getId(),pelicula); //Agrega la pelicula al hashmap
         }
     }
+    public static void LeerArchivoTrabajadores(VideoClub tienda) throws FileNotFoundException{
+        File flTrabajadores = new File("./src/main/java/data/trabajadores.tsv"); //Abre archivo a leer
+	Scanner scTra = new Scanner(flTrabajadores);
+        String linea; //Almacena la linea que se esta leyendo
+        String[] arrayLineaTrabajadores; //Lista almacena la linea leida separados por tabulaciones
+        scTra.nextLine(); //Salta la primera linea
+        Trabajador trabajador;
+        while(scTra.hasNextLine()){
+                linea = scTra.nextLine(); //Lee la linea siguiente
+                arrayLineaTrabajadores = linea.split("\t"); //Separa la linea en base a las tabulaciones
+                //Guardar Datos en array de Peliculas
+                trabajador = new Trabajador();
+                trabajador.setNombre(arrayLineaTrabajadores[0]);
+                trabajador.setRut(arrayLineaTrabajadores[1]);
+                trabajador.setCargo(arrayLineaTrabajadores[2]);
+                trabajador.setSueldo(Integer.parseInt(arrayLineaTrabajadores[3]));
+                trabajador.setVecesArriendosAtrasados(Integer.parseInt(arrayLineaTrabajadores[4]));
+                trabajador.setDeuda(Integer.parseInt(arrayLineaTrabajadores[5]));
+                tienda.addTrabajadorToTrabajadoresXRut(trabajador.getRut(),trabajador); //Agrega la pelicula al hashmap
+        }
+    }
 //------------------Eliminación------------------ 
     public static void eliminarPelicula (VideoClub x){
         Scanner teclado = new Scanner(System.in);
@@ -493,109 +531,6 @@ public class Funciones {
             }
         }while (!nombrePeli.equals("0"));
         return null;
-    }
-
-    public static void arrendar(VideoClub tienda){
-        Arriendo arriendo;
-        int aux;
-        String rut;
-        Scanner teclado = new Scanner(System.in);
-
-        System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-        rut = teclado.nextLine();
-        if (!tienda.existRUT(rut)){
-            System.out.println("rut no registrado.");
-        }
-        else{
-            if(tienda.getClientFromClientXRut(rut).getDeuda() > 0) {
-                System.out.println("Primero debe pagar su deuda para poder arrendar otra película \n.");
-                return;
-            }
-            if(tienda.getClientFromClientXRut(rut).getSize(2) < 3){
-                do{
-                    arriendo = nuevoArriendo(tienda,rut);
-                    if(arriendo != null){
-                        tienda.getClientFromClientXRut(rut).addToArriendosActuales(arriendo);
-                        tienda.getClientFromClientXRut(rut).addToArriendosXid(arriendo);
-                        System.out.println("Película arrendada exitosamente.\n");
-                        System.out.println("¿Desea arrendar otra película?[Ingrese 1 para seguir o 0 para terminar]");
-                    }
-                    else{
-                        System.out.println("Arriendo no realizado.[Ingrese 0 para salir]");
-                    }
-                    aux = teclado.nextInt();
-
-                    if(tienda.getClientFromClientXRut(rut).getSize(2) == 3)
-                        System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
-
-                }while(tienda.getClientFromClientXRut(rut).getSize(2) < 3 && aux != 0);
-            }
-            else
-                System.out.println("Limite de arriendos alcanzado, no se pueden arrendar más películas. \n");
-        }
-
-    }
-//-----------------------------DEVOLVER PELICULA---------------------------------------
-
-    public static void devolverArriendo(VideoClub tienda){//Menu Admin
-        Scanner teclado = new Scanner(System.in);
-        long diasAtraso;
-        String nombrePeli, id,rut;
-        Cliente cliente;
-        Arriendo eliminado;
-
-        do {
-            System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-            rut = teclado.nextLine();
-            if (!tienda.existRUT(rut)){
-                System.out.println("rut no registrado.");
-            }
-            else{
-                cliente = tienda.getClientFromClientXRut(rut);
-                if(cliente.isEmptyArriendos()){
-                    System.out.println("Usted no tiene películas arrendadas con nosotros.");
-                    return;
-                }
-                do{
-                    System.out.println("Ingrese el nombre del arriendo que desea devolver.[Ingrese 0 para salir]: " +
-                            "(Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
-                    nombrePeli = teclado.nextLine();
-                    id = tienda.obtenerIdXNombre(nombrePeli);
-                    if(!cliente.existIDArriendo(id)){
-                        System.out.println("Esta película no se encuentra arrendada por usted.");
-                    }
-                    else {
-                        diasAtraso = ChronoUnit.DAYS.between(cliente.getArriendoXId(id).getFechaEntrega(),LocalDate.now());
-                        //Calcula dias transcurridos entre dos fechas
-                        tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
-                        //Se agrega una copia más a las disponibles
-
-                        eliminado = cliente.delArriendo2(id);
-                        System.out.println("¿Qué valoración le da a la película?[de 0.0 a 5.0]");
-                        eliminado.setValoracion(Float.parseFloat(teclado.nextLine()));
-                        eliminado.setEntregado(true);
-                        if (!cliente.existIDHistorial(id)) {
-                            cliente.addToHistorial(eliminado);
-                            cliente.addToArriendosXid(eliminado);
-                        } else {
-                            System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
-                            cliente.getHistorialXId(id).setVecesArrendada(cliente.getHistorialXId(id).getVecesArrendada() + 1);
-                            cliente.getHistorialXId(id).setFechaArriendo(eliminado.getFechaArriendo());
-                            cliente.getHistorialXId(id).setFechaEntrega(eliminado.getFechaEntrega());
-                            cliente.getHistorialXId(id).setValoracion(eliminado.getValoracion());
-                        }
-                        System.out.println("Película devuelta exitosamente.");
-                        if(diasAtraso >0){
-                            cliente.setDeuda((int)diasAtraso*500);
-                        }
-                    }
-                }while(!cliente.isEmptyArriendos() && !nombrePeli.equals("0"));
-                rut = "0";
-                if(cliente.getDeuda() > 0)
-                    System.out.println("Debido a la entrega atrasada de una o más películas, ahora el cliente acumula una " +
-                            "deuda de $"+ cliente.getDeuda()+" la cual debe cancelar.");
-            }
-        }while(!rut.equals("0"));
     }
 //-------------------------------PAGAR DEUDA-------------------------------------------
 
