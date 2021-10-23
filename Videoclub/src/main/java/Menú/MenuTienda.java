@@ -28,7 +28,9 @@ public class MenuTienda {
                         menúCliente(rut,tienda);
                     break;
                 case "2":
-                    menúAdmin(tienda);
+                    String rutTra = Funciones.loginTrabajadores(tienda);
+                    if(rutTra != null)
+                        menúAdmin(rutTra,tienda);
                     break;
                 default:
                     if(!opción.equals("0"))
@@ -104,7 +106,7 @@ public class MenuTienda {
                                 tienda.getClientFromClientXRut(rut).devolverArriendo(tienda);
                                 break;
                             case "3":
-                                tienda.getClientFromClientXRut(rut).pagarDeuda();
+                                tienda.getClientFromClientXRut(rut).pagarDeuda(tienda);
                                 break;
                             default:
                                 if(!opción.equals("0"))
@@ -148,7 +150,7 @@ public class MenuTienda {
     }
     
     //-------------------------MENU EMPLEADO-----------------------------------------
-    public static void menúAdmin(VideoClub tienda){
+    public static void menúAdmin(String rutTra, VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
@@ -205,6 +207,8 @@ public class MenuTienda {
                             case "3":
                                 Funciones.mostrarHistorialCliente(tienda);
                                 break;
+                            case "4":
+                                tienda.mostrarDatosTrabajadores("1-1");
                             default:
                                 if(!opción.equals("0"))
                                     System.out.println("Ingrese una opción valida");
@@ -272,13 +276,13 @@ public class MenuTienda {
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
-                                Funciones.arrendar(tienda);;
+                                tienda.getTrabajadorFromTrabajadoresXRut(rutTra).arrendar(tienda);;
                                 break;
                             case "2":
-                                Funciones.devolverArriendo(tienda);
+                                tienda.getTrabajadorFromTrabajadoresXRut(rutTra).devolverArriendo(tienda);
                                 break;
                             case "3":
-                                Funciones.pagarDeuda(tienda);
+                                tienda.getTrabajadorFromTrabajadoresXRut(rutTra).pagarDeuda(tienda);
                                 break;
                             default:
                                 if(!opción.equals("0"))
