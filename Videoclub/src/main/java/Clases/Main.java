@@ -12,6 +12,7 @@ public class Main {
 //------------------Lectura de datos desde archivos--------------------------------
         Funciones.LeerArchivoPeliculas(videoClub1);
         Funciones.LeerArchivoClientes(videoClub1);
+        Funciones.LeerArchivoTrabajadores(videoClub1);
 //-------------------Menu  por consola------------------------------
 	    MenuTienda.inicioMenu(videoClub1);
     }
