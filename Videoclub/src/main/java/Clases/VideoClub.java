@@ -10,12 +10,14 @@ public class VideoClub {
 
     private HashMap<String,Pelicula> pelisXId;   //Key es ID pelicula
     private HashMap<String,Cliente> clientesXRut;//Key es Rut cliente
+    private HashMap<String, Trabajador> trabajadoresXRut;
 
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
         listaClientes = new ArrayList<>();
         pelisXId = new HashMap<>();
         clientesXRut = new HashMap<>();
+        trabajadoresXRut = new HashMap<>();
     }
 //------------------SETTER/GETTER------------------
     public String getNombreTienda() {
@@ -52,6 +54,13 @@ public class VideoClub {
         System.out.println("Datos del cliente rut " + rut);
         System.out.println("Nombre: " + clientesXRut.get(rut).getNombre());
         System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
+        System.out.println();
+    }
+    //ASDADFASDFGASDGFASFASDFASDFSADFASDFA SDFAS DFSAD FASDF ASDF ASDF ASDF ASDF ASDFASDF ASDF ASDF ASDFSAD F
+    public void mostrarDatosTrabajadores(String rut){
+        System.out.println("Datos del trabajador rut " + rut);
+        System.out.println("Nombre: " + trabajadoresXRut.get(rut).getNombre());
+        System.out.println("Deuda: " + trabajadoresXRut.get(rut).getDeuda());
         System.out.println();
     }
     
@@ -150,6 +159,9 @@ public class VideoClub {
     public void addPeliToPelisXId(String id, Pelicula peli) {
         pelisXId.put(id,peli);
     }
+    public void addTrabajadorToTrabajadoresXRut(String id, Trabajador trabajador){
+        trabajadoresXRut.put(id, trabajador);
+    }
     
 //------------------OBTENER ELEMENTOS DE ARRAYLIST/HASHMAP------------------
     public Cliente getClientFromClientXRut(String rut){
@@ -173,6 +185,12 @@ public class VideoClub {
             if(listaPeliculas.get(j).getNombre().equals(nombre))
                 return listaPeliculas.get(j).getId();
         return null;
+    }
+    public boolean containsRutTrabajadores(String rut){
+        return trabajadoresXRut.containsKey(rut);
+    }
+    public Trabajador getTrabajadorFromTrabajadoresXRut(String id){
+        return trabajadoresXRut.get(id);
     }
     
 //------------------COMPROBADORES DE REGISTRO------------------
