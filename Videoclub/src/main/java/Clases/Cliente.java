@@ -186,8 +186,8 @@ public class Cliente extends Persona implements Transacciones{
                     "deuda de $"+ getDeuda()+" la cual debe cancelar.");
 
     }
-
-    public void pagarDeuda(){//Menu cliente
+    @Override
+    public void pagarDeuda(VideoClub tienda){//Menu cliente
         int monto;
         Scanner teclado = new Scanner(System.in);
 
