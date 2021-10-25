@@ -13,6 +13,7 @@ public class MenuTienda {
     public static void inicioMenu(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
+        Funciones.llenarPresentes(tienda,"1-1");
         do{
             System.out.println();
             System.out.println("Por favor, seleccione su rol: ");
@@ -42,6 +43,7 @@ public class MenuTienda {
                     break;
             }
         }while(!opción.equals("0"));
+        tienda.mostrarPresentes();
     }
     
 //-------------------------MENU CLIENTE-----------------------------------------
