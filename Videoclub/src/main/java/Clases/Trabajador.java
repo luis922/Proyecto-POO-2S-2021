@@ -45,7 +45,7 @@ public class Trabajador extends Persona implements Transacciones{
 
         System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         rutCliente = teclado.nextLine();
-        if (!tienda.containsRUT(rutCliente)){
+        if (!tienda.containsRutClientes(rutCliente)){
             System.out.println("rut no registrado.");
         }
         else{
@@ -88,7 +88,7 @@ public class Trabajador extends Persona implements Transacciones{
         do {
             System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
-            if (!tienda.containsRUT(rutCliente)){
+            if (!tienda.containsRutClientes(rutCliente)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -147,7 +147,7 @@ public class Trabajador extends Persona implements Transacciones{
         do {
             System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
-            if (!tienda.containsRUT(rutCliente)){
+            if (!tienda.containsRutClientes(rutCliente)){
                 System.out.println("rut no registrado.");
             }
             else{
