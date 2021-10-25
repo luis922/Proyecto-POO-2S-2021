@@ -13,13 +13,13 @@ public class VideoClub {
     private HashMap<String,Trabajador> trabajadoresXRut;
     private HashMap<String,Persona> presentesXRut; //Personas que estuvieron presentes en la tienda durante la ejecución
 
-
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
         listaClientes = new ArrayList<>();
         pelisXId = new HashMap<>();
         clientesXRut = new HashMap<>();
         trabajadoresXRut = new HashMap<>();
+        presentesXRut = new HashMap<>();
     }
 //------------------SETTER/GETTER------------------
     public String getNombreTienda() {
@@ -193,9 +193,12 @@ public class VideoClub {
         System.out.println("Copias disponibles: "+pelisXId.get(id).getDisponibles());
         System.out.println();
     }
-    
 
-    
+    public void mostrarPresentes(){
+        System.out.println("Personas que hoy entraron a la tienda:");;
+        presentesXRut.forEach((rut,people) -> System.out.println(people.getNombre()));
+    }
+
 //------------------OBTENER IDs------------------ 
     public String obtenerIdXNombre(String nombre){
         for (int j = 0; j < listaPeliculas.size() ; j++)
