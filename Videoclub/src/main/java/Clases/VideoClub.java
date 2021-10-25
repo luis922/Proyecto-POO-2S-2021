@@ -72,8 +72,8 @@ public class VideoClub {
     public void addPeliToPelisXId(String id, Pelicula peli) {
         pelisXId.put(id,peli);
     }
-    public void addTrabajadorToTrabajadoresXRut(String id, Trabajador trabajador){
-        trabajadoresXRut.put(id, trabajador);
+    public void addTrabajadorToTrabajadoresXRut(String rut, Trabajador trabajador){
+        trabajadoresXRut.put(rut, trabajador);
     }
 
     public void addPersonaToPresentesXRut(String rut, Persona people){
@@ -102,13 +102,23 @@ public class VideoClub {
 
     public void mostrarDatosTrabajadores(){
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese datos del trabajador que se quiere mostrar.\n");
-        String rut = teclado.nextLine();
-        System.out.println("Datos del trabajador rut " + rut);
-        System.out.println("Nombre: " + trabajadoresXRut.get(rut).getNombre());
-        System.out.println("Cargo: " + trabajadoresXRut.get(rut).getCargo());
-        System.out.println("Sueldo: " + trabajadoresXRut.get(rut).getSueldo());
-        System.out.println();
+        System.out.println("Ingrese datos del trabajador que se quiere mostrar.(1-1, 2-2, 3-3, 4-4, 0 para terminar.)\n");
+        String rut;
+        do{
+            rut = teclado.nextLine();
+            if(!containsRutTrabajadores(rut)){
+                if(!rut.equals("0"))
+                    System.out.println("Rut ingresado no es valido.");
+            }
+            else{
+                System.out.println("Datos del trabajador rut " + rut);
+                System.out.println("Nombre: " + trabajadoresXRut.get(rut).getNombre());
+                System.out.println("Cargo: " + trabajadoresXRut.get(rut).getCargo());
+                System.out.println("Sueldo: " + trabajadoresXRut.get(rut).getSueldo());
+                System.out.println();
+                rut = "0";
+            }
+        }while(!rut.equals("0"));
     }
     
     public void mostrarDatosPeliculas(){
@@ -204,16 +214,20 @@ public class VideoClub {
         return false;
     }
     
-    public boolean containsID(String id){
+    public boolean containsIdPeliculas(String id){
         return pelisXId.containsKey(id);
     }
 
-    public boolean containsRUT(String rut){
+    public boolean containsRutClientes(String rut){
         return clientesXRut.containsKey(rut);
     }
     
     public boolean containsRutTrabajadores(String rut){
         return trabajadoresXRut.containsKey(rut);
+    }
+    
+    public boolean containsRutPresentes(String rut){
+        return presentesXRut.containsKey(rut);
     }
     
 /*------------------OBTENER TAMANNOS ARRAYS------------------
