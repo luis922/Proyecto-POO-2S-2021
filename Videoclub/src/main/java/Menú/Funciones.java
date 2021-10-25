@@ -10,8 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
+
 
 
 public class Funciones {

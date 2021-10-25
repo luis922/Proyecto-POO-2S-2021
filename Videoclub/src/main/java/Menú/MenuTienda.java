@@ -276,7 +276,7 @@ public class MenuTienda {
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
-                                tienda.getTrabajadorFromTrabajadoresXRut(rutTra).arrendar(tienda);;
+                                tienda.getTrabajadorFromTrabajadoresXRut(rutTra).arrendar(tienda);
                                 break;
                             case "2":
                                 tienda.getTrabajadorFromTrabajadoresXRut(rutTra).devolverArriendo(tienda);
