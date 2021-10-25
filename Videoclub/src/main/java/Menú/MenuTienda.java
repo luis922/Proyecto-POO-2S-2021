@@ -24,13 +24,17 @@ public class MenuTienda {
             switch(opción){
                 case "1":
                     String rut = Funciones.loginClientes(tienda);
-                    if(rut != null)
-                        menúCliente(rut,tienda);
+                    if(rut != null) {
+                        menúCliente(rut, tienda);
+                        Funciones.llenarPresentes(tienda,rut);
+                    }
                     break;
                 case "2":
                     String rutTra = Funciones.loginTrabajadores(tienda);
-                    if(rutTra != null)
-                        menúAdmin(rutTra,tienda);
+                    if(rutTra != null) {
+                        menúAdmin(rutTra, tienda);
+                        Funciones.llenarPresentes(tienda,rutTra);
+                    }
                     break;
                 default:
                     if(!opción.equals("0"))
