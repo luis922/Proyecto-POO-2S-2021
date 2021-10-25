@@ -160,7 +160,10 @@ public class MenuTienda {
         Scanner teclado = new Scanner(System.in);
         String opción;
         do{
+            String nombre = tienda.getTrabajadorFromTrabajadoresXRut(rutTra).getNombre();
+            String cargo = tienda.getTrabajadorFromTrabajadoresXRut(rutTra).getCargo(); 
             System.out.println();
+            System.out.println("Bienvenido " + cargo + " " + nombre + "\n");
             System.out.println("Menú Administrador");
             System.out.println("1)Ingresar datos");
             System.out.println("2)Mostrar datos");
