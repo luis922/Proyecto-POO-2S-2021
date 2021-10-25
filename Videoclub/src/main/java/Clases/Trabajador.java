@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Clases;
 
 import static Menú.Funciones.nuevoArriendo;
@@ -14,7 +9,6 @@ public class Trabajador extends Persona implements Transacciones{
     String cargo;
     int sueldo;
     int vecesArriendosAtrasados;
-    
     
     public Trabajador(){
         cargo = null;
@@ -35,7 +29,7 @@ public class Trabajador extends Persona implements Transacciones{
     public String getCargo(){
         return cargo; 
     }
-    public int setSueldo(){
+    public int getSueldo(){
         return sueldo; 
     }
     public int setVecesArriendosAtrasados(){
@@ -51,7 +45,7 @@ public class Trabajador extends Persona implements Transacciones{
 
         System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         rutCliente = teclado.nextLine();
-        if (!tienda.existRUT(rutCliente)){
+        if (!tienda.containsRUT(rutCliente)){
             System.out.println("rut no registrado.");
         }
         else{
@@ -94,7 +88,7 @@ public class Trabajador extends Persona implements Transacciones{
         do {
             System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
-            if (!tienda.existRUT(rutCliente)){
+            if (!tienda.containsRUT(rutCliente)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -153,7 +147,7 @@ public class Trabajador extends Persona implements Transacciones{
         do {
             System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
-            if (!tienda.existRUT(rutCliente)){
+            if (!tienda.containsRUT(rutCliente)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -178,5 +172,4 @@ public class Trabajador extends Persona implements Transacciones{
     public void identificacion() {
         System.out.println("Nombre: "+nombre+" Rut: "+rut+" Cargo de empleado: "+cargo);
     }
-
 }
