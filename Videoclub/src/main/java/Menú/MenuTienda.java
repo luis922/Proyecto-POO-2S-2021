@@ -210,6 +210,7 @@ public class MenuTienda {
                                 break;
                             case "4":
                                 tienda.mostrarDatosTrabajadores();
+                                break;
                             default:
                                 if(!opción.equals("0"))
                                     System.out.println("Ingrese una opción valida");
