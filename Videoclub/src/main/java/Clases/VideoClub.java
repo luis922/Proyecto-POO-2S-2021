@@ -10,7 +10,9 @@ public class VideoClub {
 
     private HashMap<String,Pelicula> pelisXId;   //Key es ID pelicula
     private HashMap<String,Cliente> clientesXRut;//Key es Rut cliente
-    private HashMap<String, Trabajador> trabajadoresXRut;
+    private HashMap<String,Trabajador> trabajadoresXRut;
+    private HashMap<String,Persona> presentesXRut; //Personas que estuvieron presentes en la tienda durante la ejecución
+
 
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
@@ -72,6 +74,10 @@ public class VideoClub {
     }
     public void addTrabajadorToTrabajadoresXRut(String id, Trabajador trabajador){
         trabajadoresXRut.put(id, trabajador);
+    }
+
+    public void addPersonaToPresentesXRut(String rut, Persona people){
+        presentesXRut.put(rut, people);
     }
 //------------------MOSTRAR DATOS POR PANTALLA------------------
     public void mostrarDatosClientes(){
