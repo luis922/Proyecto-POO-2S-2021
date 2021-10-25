@@ -95,7 +95,7 @@ public class Cliente extends Persona implements Transacciones{
 //-------------------IMPLEMENTACION METODO ABSTRACTO/SOBREESCRITURA---------------------------
     @Override
     public void identificacion() {
-        System.out.print("Nombre: "+nombre+" Rut: "+rut+" Tipo Cliente: ");
+        System.out.print("Nombre: "+nombre+"\t Rut: "+rut+"\t Tipo Cliente: ");
         if (arriendosActuales.isEmpty() && historialArriendos.isEmpty())
             System.out.println("NUEVO");
         else
