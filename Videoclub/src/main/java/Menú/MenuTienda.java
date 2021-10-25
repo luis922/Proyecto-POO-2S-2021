@@ -40,7 +40,7 @@ public class MenuTienda {
         }while(!opción.equals("0"));
     }
     
-    //-------------------------MENU CLIENTE-----------------------------------------
+//-------------------------MENU CLIENTE-----------------------------------------
     public static void menúCliente(String rut,VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
@@ -149,7 +149,7 @@ public class MenuTienda {
         }while(!opción.equals("0"));
     }
     
-    //-------------------------MENU EMPLEADO-----------------------------------------
+//-------------------------MENU EMPLEADO-----------------------------------------
     public static void menúAdmin(String rutTra, VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
@@ -196,6 +196,7 @@ public class MenuTienda {
                         System.out.println("1)Desplegar lista de clientes");
                         System.out.println("2)Desplegar lista de películas");
                         System.out.println("3)Desplegar historial de cliente");
+                        System.out.println("4)Desplegar datos trabajador");
                         System.out.println("0)Menú anterior");
                         switch (opción = teclado.nextLine()){
                             case "1":
@@ -208,7 +209,7 @@ public class MenuTienda {
                                 Funciones.mostrarHistorialCliente(tienda);
                                 break;
                             case "4":
-                                tienda.mostrarDatosTrabajadores("1-1");
+                                tienda.mostrarDatosTrabajadores();
                             default:
                                 if(!opción.equals("0"))
                                     System.out.println("Ingrese una opción valida");
@@ -389,7 +390,7 @@ public class MenuTienda {
             }while(!opcion.equals("0"));
         }
     }
-    //-------------------------EdiciónCliente-----------------------------------------
+//-------------------------EdiciónCliente-----------------------------------------
     public static void menúEdiciónCliente(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String cliente = Funciones.loginClientes(tienda);
@@ -429,7 +430,7 @@ public class MenuTienda {
             }while(!opcion.equals("0"));
         }
     }
-     //-------------------------Filtrado-----------------------------------------
+ //-------------------------Filtrado-----------------------------------------
     public static void menúFiltros(VideoClub tienda){
         Scanner teclado = new Scanner(System.in);
         String opción;
