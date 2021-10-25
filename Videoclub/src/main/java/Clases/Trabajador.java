@@ -35,7 +35,7 @@ public class Trabajador extends Persona implements Transacciones{
     public int setVecesArriendosAtrasados(){
         return vecesArriendosAtrasados;
     }
-    //-------------------------------------------
+    //-------------------IMPREMENTACION FUNCIONES INTERFACE TRANSACCIONES------------------------
     @Override
     public void arrendar(VideoClub tienda){
         Arriendo arriendo;
