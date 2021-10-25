@@ -196,7 +196,7 @@ public class VideoClub {
 
     public void mostrarPresentes(){
         System.out.println("Personas que hoy entraron a la tienda:");
-        presentesXRut.forEach((rut,people) -> System.out.println(people.getNombre()));//Recorre HashMap
+        presentesXRut.forEach((rut,people) -> people.identificacion());//Recorre HashMap
     }
 
 //------------------OBTENER IDs------------------ 
