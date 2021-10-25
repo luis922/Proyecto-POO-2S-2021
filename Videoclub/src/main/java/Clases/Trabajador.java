@@ -1,6 +1,6 @@
 package Clases;
 
-import static Menú.Funciones.nuevoArriendo;
+import Menú.Funciones;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
@@ -42,20 +42,20 @@ public class Trabajador extends Persona implements Transacciones{
         int aux;
         String rutCliente;
         Scanner teclado = new Scanner(System.in);
-
         System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
         rutCliente = teclado.nextLine();
         if (!tienda.containsRutClientes(rutCliente)){
             System.out.println("rut no registrado.");
         }
         else{
+            Funciones.llenarPresentes(tienda, rutCliente);
             if(tienda.getClientFromClientXRut(rutCliente).getDeuda() > 0) {
                 System.out.println("Primero debe pagar su deuda para poder arrendar otra película \n.");
                 return;
             }
             if(tienda.getClientFromClientXRut(rutCliente).getSize(2) < 3){
                 do{
-                    arriendo = nuevoArriendo(tienda,rutCliente);
+                    arriendo = Funciones.nuevoArriendo(tienda,rutCliente);
                     if(arriendo != null){
                         tienda.getClientFromClientXRut(rutCliente).addToArriendosActuales(arriendo);
                         tienda.getClientFromClientXRut(rutCliente).addToArriendosXid(arriendo);
@@ -84,7 +84,6 @@ public class Trabajador extends Persona implements Transacciones{
         String nombrePeli, id, rutCliente;
         Cliente cliente;
         Arriendo eliminado;
-
         do {
             System.out.println("Ingrese rut cliente que va a arrendar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
@@ -92,6 +91,7 @@ public class Trabajador extends Persona implements Transacciones{
                 System.out.println("rut no registrado.");
             }
             else{
+                Funciones.llenarPresentes(tienda, rutCliente);
                 cliente = tienda.getClientFromClientXRut(rutCliente);
                 if(cliente.isEmptyArriendos()){
                     System.out.println("Usted no tiene películas arrendadas con nosotros.");
@@ -143,7 +143,6 @@ public class Trabajador extends Persona implements Transacciones{
         int monto;
         Scanner teclado = new Scanner(System.in);
         String rutCliente;
-
         do {
             System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rutCliente = teclado.nextLine();
@@ -151,6 +150,7 @@ public class Trabajador extends Persona implements Transacciones{
                 System.out.println("rut no registrado.");
             }
             else{
+                Funciones.llenarPresentes(tienda, rutCliente);
                 if(tienda.getClientFromClientXRut(rutCliente).getDeuda()>0){
                     System.out.println("Cliente tiene una deuda de $"+tienda.getClientFromClientXRut(rutCliente).getDeuda());
                     do {
