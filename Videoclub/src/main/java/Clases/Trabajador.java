@@ -16,7 +16,7 @@ public class Trabajador extends Persona implements Transacciones{
         vecesArriendosAtrasados = 0;
     }
     
-    //----------------------SETTER/GETTER---------------------
+//----------------------SETTER/GETTER---------------------
     public void setCargo(String cargo){
         this.cargo = cargo; 
     }
@@ -35,7 +35,7 @@ public class Trabajador extends Persona implements Transacciones{
     public int setVecesArriendosAtrasados(){
         return vecesArriendosAtrasados;
     }
-    //-------------------IMPREMENTACION FUNCIONES INTERFACE TRANSACCIONES------------------------
+//-------------------IMPREMENTACION FUNCIONES INTERFACE TRANSACCIONES------------------------
     @Override
     public void arrendar(VideoClub tienda){
         Arriendo arriendo;
@@ -170,6 +170,6 @@ public class Trabajador extends Persona implements Transacciones{
 //-------------------IMPLEMENTACION METODO ABSTRACTO---------------------------
     @Override
     public void identificacion() {
-        System.out.println("Nombre: "+nombre+" Rut: "+rut+" Cargo de empleado: "+cargo);
+        System.out.println("Nombre: "+nombre+"\t Rut: "+rut+"\t Cargo de empleado: "+cargo);
     }
 }
