@@ -21,11 +21,11 @@ public abstract class Persona {
         arriendosActuales = new ArrayList<>();
         arriendoXid = new HashMap<>();
     }
+    
 //------------------SETTER/GETTER------------------
-
     public String getNombre() {
-    return nombre;
-}
+        return nombre;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -102,7 +102,5 @@ public abstract class Persona {
     }
 
 //-----------------ABSTRACTO------------------------------------
-
     public abstract void identificacion();
-
 }
