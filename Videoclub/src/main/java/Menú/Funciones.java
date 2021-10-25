@@ -755,9 +755,6 @@ public class Funciones {
 //-----------------------------OTROS------------------------------------------------
     public static void llenarPresentes (VideoClub tienda, String rut){
 
-        if(!tienda.containsRutPresentes("1-1"))//Agrega al jefe de local (siempre presente)
-            tienda.addPersonaToPresentesXRut("1-1",tienda.getTrabajadorFromTrabajadoresXRut("1-1"));
-
         if(tienda.containsRutTrabajadores(rut) && !tienda.containsRutPresentes(rut))
             tienda.addPersonaToPresentesXRut(rut,tienda.getTrabajadorFromTrabajadoresXRut(rut));
         else
