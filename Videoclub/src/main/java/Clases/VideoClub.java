@@ -36,6 +36,43 @@ public class VideoClub {
         this.direccion = direccion;
     }
     
+    public Cliente getClientFromClientXRut(String rut){
+        return clientesXRut.get(rut);
+    }
+
+    public Pelicula getPeliFromPelisXId(String id) {
+        return pelisXId.get(id);
+    }
+
+    public Trabajador getTrabajadorFromTrabajadoresXRut(String id){
+        return trabajadoresXRut.get(id);
+    }
+    
+    //------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------
+    public void addPeliToListaPelis(Pelicula peli) {
+        if(!listaPeliculas.contains(peli))
+            listaPeliculas.add(peli);
+        else
+            System.out.println("La pelicula \""+peli.getNombre()+ "\" ya esta almacenada");
+    }
+
+    public void addClientToListaClients( Cliente cliente) {
+        if(!listaClientes.contains(cliente))
+            listaClientes.add(cliente);
+        else
+            System.out.println("El cliente de rut "+cliente.getRut()+" ya esta almacenado");
+    }
+    
+    public void addClientToClientXRut(String rut, Cliente cliente){
+        clientesXRut.put(rut,cliente);
+    }
+
+    public void addPeliToPelisXId(String id, Pelicula peli) {
+        pelisXId.put(id,peli);
+    }
+    public void addTrabajadorToTrabajadoresXRut(String id, Trabajador trabajador){
+        trabajadoresXRut.put(id, trabajador);
+    }
 //------------------MOSTRAR DATOS POR PANTALLA------------------
     public void mostrarDatosClientes(){
         int i;
@@ -56,11 +93,15 @@ public class VideoClub {
         System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
         System.out.println();
     }
-    //ASDADFASDFGASDGFASFASDFASDFSADFASDFA SDFAS DFSAD FASDF ASDF ASDF ASDF ASDF ASDFASDF ASDF ASDF ASDFSAD F
-    public void mostrarDatosTrabajadores(String rut){
+
+    public void mostrarDatosTrabajadores(){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Ingrese datos del trabajador que se quiere mostrar.\n");
+        String rut = teclado.nextLine();
         System.out.println("Datos del trabajador rut " + rut);
         System.out.println("Nombre: " + trabajadoresXRut.get(rut).getNombre());
-        System.out.println("Deuda: " + trabajadoresXRut.get(rut).getDeuda());
+        System.out.println("Cargo: " + trabajadoresXRut.get(rut).getCargo());
+        System.out.println("Sueldo: " + trabajadoresXRut.get(rut).getSueldo());
         System.out.println();
     }
     
@@ -137,41 +178,26 @@ public class VideoClub {
         System.out.println();
     }
     
-//------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------
-    public void addPeliToListaPelis(Pelicula peli) {
-        if(!listaPeliculas.contains(peli))
-            listaPeliculas.add(peli);
-        else
-            System.out.println("La pelicula \""+peli.getNombre()+ "\" ya esta almacenada");
-    }
 
-    public void addClientToListaClients( Cliente cliente) {
-        if(!listaClientes.contains(cliente))
-            listaClientes.add(cliente);
-        else
-            System.out.println("El cliente de rut "+cliente.getRut()+" ya esta almacenado");
+    
+//------------------OBTENER IDs------------------ 
+    public String obtenerIdXNombre(String nombre){
+        for (int j = 0; j < listaPeliculas.size() ; j++)
+            if(listaPeliculas.get(j).getNombre().equals(nombre))
+                return listaPeliculas.get(j).getId();
+        return null;
     }
     
-    public void addClientToClientXRut(String rut, Cliente cliente){
-        clientesXRut.put(rut,cliente);
-    }
-
-    public void addPeliToPelisXId(String id, Pelicula peli) {
-        pelisXId.put(id,peli);
-    }
-    public void addTrabajadorToTrabajadoresXRut(String id, Trabajador trabajador){
-        trabajadoresXRut.put(id, trabajador);
+    
+//------------------COMPROBADORES DE REGISTRO------------------
+    public boolean containsGenero (String id, String genero){
+        for (int i = 0; i < pelisXId.get(id).getGeneros().length; i++) {            
+            if(pelisXId.get(id).getGeneros()[i].equals(genero))
+                return true;
+        }
+        return false;
     }
     
-//------------------OBTENER ELEMENTOS DE ARRAYLIST/HASHMAP------------------
-    public Cliente getClientFromClientXRut(String rut){
-        return clientesXRut.get(rut);
-    }
-
-    public Pelicula getPeliFromPelisXId(String id) {
-        return pelisXId.get(id);
-    }
-
     public boolean containsID(String id){
         return pelisXId.containsKey(id);
     }
@@ -180,29 +206,11 @@ public class VideoClub {
         return clientesXRut.containsKey(rut);
     }
     
-    public String obtenerIdXNombre(String nombre){
-        for (int j = 0; j < listaPeliculas.size() ; j++)
-            if(listaPeliculas.get(j).getNombre().equals(nombre))
-                return listaPeliculas.get(j).getId();
-        return null;
-    }
     public boolean containsRutTrabajadores(String rut){
         return trabajadoresXRut.containsKey(rut);
     }
-    public Trabajador getTrabajadorFromTrabajadoresXRut(String id){
-        return trabajadoresXRut.get(id);
-    }
     
-//------------------COMPROBADORES DE REGISTRO------------------
-    public boolean existID(String id){//Comprueba si la pelicula esta ya guardada en base al ID otorgado
-        return pelisXId.containsKey(id);
-    }
-
-    public boolean existRUT(String rut){//Comprueba si el cliente esta ya guardada en base al RUT otorgado
-        return clientesXRut.containsKey(rut);
-    }
-    
-    /*Función para obtener tamaños de los Arrays
+/*------------------OBTENER TAMANNOS ARRAYS------------------
     "listaClientes" y "listaPeliculas"
     
     Sus modos son:
@@ -274,15 +282,7 @@ public class VideoClub {
         }
         return peli;
     }*/
-
-//---------------OTROS----------------------------------------------
-    public boolean containsGenero (String id, String genero){
-        for (int i = 0; i < pelisXId.get(id).getGeneros().length; i++) {            
-            if(pelisXId.get(id).getGeneros()[i].equals(genero))
-                return true;
-        }
-        return false;
-    }
+  
  //----------------------ESCRITURA DE ARCHIVOS-----------------------
     public void escribirArchivoDeudores(){
         int cantDeudores = 0;
