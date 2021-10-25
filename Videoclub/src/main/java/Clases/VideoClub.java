@@ -195,7 +195,7 @@ public class VideoClub {
     }
 
     public void mostrarPresentes(){
-        System.out.println("Personas que hoy entraron a la tienda:");;
+        System.out.println("Personas que hoy entraron a la tienda:");
         presentesXRut.forEach((rut,people) -> System.out.println(people.getNombre()));
     }
 
