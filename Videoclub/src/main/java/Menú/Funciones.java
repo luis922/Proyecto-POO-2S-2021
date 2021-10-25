@@ -31,7 +31,7 @@ public class Funciones {
     public static String loginTrabajadores(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String rutIngresado;
-        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: rut (1-1, 2-2");
+        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: rut (1-1, 2-2, 3-3, 4-4)");
         do{
             rutIngresado = teclado.nextLine();
             if(!formatoCorrectoRut(rutIngresado)){
@@ -212,7 +212,7 @@ public class Funciones {
         do{
             System.out.println("Ingrese rut cliente que va a registrar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
-            if (!x.existRUT(rut)){
+            if (!x.containsRUT(rut)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -541,7 +541,7 @@ public class Funciones {
         do {
             System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
-            if (!tienda.existRUT(rut)){
+            if (!tienda.containsRUT(rut)){
                 System.out.println("rut no registrado.");
             }
             else{
