@@ -54,7 +54,7 @@ public class Funciones {
             if(!formatoCorrectoRut(rutIngresado)){
                 System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
             }
-            else if(!x.containsRUT(rutIngresado)){
+            else if(!x.containsRutClientes(rutIngresado)){
                 System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
             }
             else
@@ -96,7 +96,7 @@ public class Funciones {
             nombre = teclado.nextLine();
             contador++;
 
-        }while(x.containsID(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0"));
+        }while(x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0"));
 
         if(nombre.equals("0")) return nombre;
 
@@ -118,7 +118,7 @@ public class Funciones {
         String rut;
         do{
             rut = teclado.nextLine();
-            if(x.containsRUT(rut)){
+            if(x.containsRutClientes(rut)){
                 if (x.getClientFromClientXRut(rut).getSize(1) == 0)
                     System.out.println("Cliente no posee historial.");
                 else
@@ -212,7 +212,7 @@ public class Funciones {
         do{
             System.out.println("Ingrese rut cliente que va a registrar['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
-            if (!x.containsRUT(rut)){
+            if (!x.containsRutClientes(rut)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -347,7 +347,7 @@ public class Funciones {
         String rut;
         do{
             rut = teclado.nextLine();
-            if(x.containsRUT(rut)){
+            if(x.containsRutClientes(rut)){
                 x.mostrarDatosClientes(rut);
                 break;
             }
@@ -446,7 +446,7 @@ public class Funciones {
             if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
             nombre = teclado.nextLine();
             contador++;
-        }while(!x.containsID(x.obtenerIdXNombre(nombre)) && !nombre.equals("0"));
+        }while(!x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) && !nombre.equals("0"));
         if(!nombre.equals("0")){
             Pelicula ay = x.getPeliFromPelisXId(x.obtenerIdXNombre(nombre));
             System.out.println("¿Está seguro de eliminar la película \"" + ay.getNombre() + "\" de la base de datos?\n1)Sí\n2)No");
@@ -454,7 +454,7 @@ public class Funciones {
             switch(teclado.nextLine()){
                 case "1":
                     x.delPelicula(ay.getId());
-                    if(x.containsID(x.obtenerIdXNombre(nombre))) System.out.println("Operación Falló");//Dudo que se use pero podría ahorrarnos un dolor de cabeza
+                    if(x.containsIdPeliculas(x.obtenerIdXNombre(nombre))) System.out.println("Operación Falló");//Dudo que se use pero podría ahorrarnos un dolor de cabeza
                     else System.out.println("¡Operación realizada con exito!\nVolviendo al menú principal...");
                     break;
                 case "2":
@@ -474,7 +474,7 @@ public class Funciones {
                 System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
             rut = teclado.nextLine();
             contador++;
-        }while(!x.containsRUT(rut) && !rut.equals("0"));
+        }while(!x.containsRutClientes(rut) && !rut.equals("0"));
         if(!rut.equals("0")) {
             Cliente ay = x.getClientFromClientXRut(rut);
             System.out.println("¿Está seguro de eliminar al Sr(a) \"" + ay.getNombre()+ "\" de la base de datos?\n1)Sí\n2)No");
@@ -482,7 +482,7 @@ public class Funciones {
             switch(teclado.nextLine()){
                 case "1":
                     x.delCliente(rut);
-                    if(x.containsRUT(rut)) System.out.println("Operación Falló");//Same as the other
+                    if(x.containsRutClientes(rut)) System.out.println("Operación Falló");//Same as the other
                     else System.out.println("¡Operación realizada con exito!\nVolviendo al menú principal...");
                     break;
                 case "2":
@@ -541,7 +541,7 @@ public class Funciones {
         do {
             System.out.println("Ingrese rut cliente que va a cancelar deuda['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
             rut = teclado.nextLine();
-            if (!tienda.containsRUT(rut)){
+            if (!tienda.containsRutClientes(rut)){
                 System.out.println("rut no registrado.");
             }
             else{
@@ -751,6 +751,20 @@ public class Funciones {
         }
         System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
     }
+
+//-----------------------------OTROS------------------------------------------------
+    public static void llenarPresentes (VideoClub tienda, String rut){
+
+        if(!tienda.containsRutPresentes("1-1"))//Agrega al jefe de local (siempre presente)
+            tienda.addPersonaToPresentesXRut("1-1",tienda.getTrabajadorFromTrabajadoresXRut("1-1"));
+
+        if(tienda.containsRutTrabajadores(rut) && !tienda.containsRutPresentes(rut))
+            tienda.addPersonaToPresentesXRut(rut,tienda.getTrabajadorFromTrabajadoresXRut(rut));
+        else
+            if(tienda.containsRutClientes(rut) && !tienda.containsRutPresentes(rut))
+                tienda.addPersonaToPresentesXRut(rut,tienda.getClientFromClientXRut(rut));
+    }
+
 //-----------------------------RECOMENDAR PELICULA----------------------------------
     //Por implementar
    /* public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
