@@ -684,7 +684,7 @@ public class Funciones {
         String []directores;
         String director;
         do{
-            if(i != 0) System.out.println("El director no se encuentra en nuestro catálogo, intentelo nuevamente");
+            if(i != 0) System.out.println("El director no se encuentra en nuestro catálogo, inténtelo nuevamente");
             System.out.println("Ingrese el director a buscar: **Ingrese 0 para salir**");
             director = teclado.nextLine();
             
