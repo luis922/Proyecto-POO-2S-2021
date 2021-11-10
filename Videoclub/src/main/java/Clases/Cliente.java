@@ -1,7 +1,7 @@
 package Clases;
 
 
-import Menú.Funciones;
+import Menu.Funciones;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

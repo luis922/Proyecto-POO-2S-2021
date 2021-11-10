@@ -4,7 +4,8 @@ Solo compilar y ejecutar el main para obtener los datos desde los archivos
 y acceder a funcionalidades del menu
 */
 
-import Menú.*;
+import Menu.MenuTienda;
+import Menu.Funciones;
 
 public class Main {
     public static void main(String[] args) throws Exception{
