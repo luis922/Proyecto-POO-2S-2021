@@ -1,4 +1,6 @@
-Nombre,rut,deuda
-Nombre Cliente: Sebastián Villalón   rut: 20844870-6   Deuda: 5000
-Nombre Cliente: Heinz Beckers   rut: 19034223-3   Deuda: 40000
-Nombre Cliente: Nicolas Cage   rut: 10693359-1   Deuda: 1000
+Cantidad de deudores: 3   Monto total de la deuda: 46000
+
+Detalle de los deudores: 
+Nombre: Sebastián Villalón   rut: 20844870-6   Deuda: 5000
+Nombre: Heinz Beckers   rut: 19034223-3   Deuda: 40000
+Nombre: Nicolas Cage   rut: 10693359-1   Deuda: 1000
