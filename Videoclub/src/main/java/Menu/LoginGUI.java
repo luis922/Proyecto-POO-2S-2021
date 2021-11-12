@@ -1,8 +1,7 @@
 
 package Menu;
 import Clases.VideoClub;
-import java.util.Arrays;
-import java.util.ArrayList;
+import Menu.Admin.*;
 
 public class LoginGUI extends javax.swing.JFrame{
     VideoClub tienda;
@@ -165,7 +164,7 @@ public class LoginGUI extends javax.swing.JFrame{
                 mensaje.setText("Rut no pertenece a un Trabajador.");
                 return;
             }
-            AdminGUI aGUI = new AdminGUI();
+            AdminGUI aGUI = new AdminGUI(this.rut, this.tienda);
             this.setVisible(false);
             aGUI.setVisible(true);
         }
