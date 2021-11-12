@@ -60,8 +60,8 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="BoxAdmin" max="32767" attributes="0"/>
-                              <Component id="BoxCliente" pref="107" max="32767" attributes="0"/>
+                              <Component id="boxAdmin" max="32767" attributes="0"/>
+                              <Component id="boxCliente" pref="107" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
@@ -88,12 +88,12 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="radioButtonCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BoxCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boxCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="radioButtonAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BoxAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boxAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="mensaje" min="-2" pref="21" max="-2" attributes="0"/>
@@ -150,38 +150,27 @@
     </Component>
     <Component class="javax.swing.JLabel" name="mensaje">
     </Component>
-    <Component class="javax.swing.JComboBox" name="BoxCliente">
+    <Component class="javax.swing.JComboBox" name="boxCliente">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="20844870-6"/>
-            <StringItem index="1" value="15442310-9"/>
-            <StringItem index="2" value="19034223-3"/>
-            <StringItem index="3" value="10693359-1"/>
-            <StringItem index="4" value="20378533-k"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BoxClienteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boxClienteActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="BoxAdmin">
+    <Component class="javax.swing.JComboBox" name="boxAdmin">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="1-1"/>
-            <StringItem index="1" value="2-2"/>
-            <StringItem index="2" value="3-3"/>
-            <StringItem index="3" value="4-4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="BoxAdminItemStateChanged"/>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="boxAdminItemStateChanged"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

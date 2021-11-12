@@ -434,6 +434,7 @@ public class Funciones {
                 trabajador.setVecesArriendosAtrasados(Integer.parseInt(arrayLineaTrabajadores[4]));
                 trabajador.setDeuda(Integer.parseInt(arrayLineaTrabajadores[5]));
                 tienda.addTrabajadorToTrabajadoresXRut(trabajador.getRut(),trabajador); //Agrega la pelicula al hashmap
+                tienda.addTrabajadorToListaTrabajadores(trabajador);
         }
     }
 //------------------Eliminación------------------ 

@@ -1,5 +1,7 @@
 package Clases;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 import java.io.*;
 
 public class VideoClub {
@@ -7,6 +9,7 @@ public class VideoClub {
     private String direccion;
     private ArrayList<Pelicula> listaPeliculas;//Coleccion de objetos 1 anidación
     private ArrayList<Cliente> listaClientes;  //Coleccion de objetos 2 anidaciones
+    private ArrayList<Trabajador> listaTrabajadores;
 
     private HashMap<String,Pelicula> pelisXId;   //Key es ID pelicula
     private HashMap<String,Cliente> clientesXRut;//Key es Rut cliente
@@ -16,6 +19,7 @@ public class VideoClub {
     public VideoClub(){ //constructor
         listaPeliculas = new ArrayList<>();
         listaClientes = new ArrayList<>();
+        listaTrabajadores = new ArrayList<>();
         pelisXId = new HashMap<>();
         clientesXRut = new HashMap<>();
         trabajadoresXRut = new HashMap<>();
@@ -41,6 +45,10 @@ public class VideoClub {
     public Cliente getClientFromClientXRut(String rut){
         return clientesXRut.get(rut);
     }
+    
+    public Cliente getClientexIndex(int i){
+        return listaClientes.get(i);
+    }
 
     public Pelicula getPeliFromPelisXId(String id) {
         return pelisXId.get(id);
@@ -48,6 +56,9 @@ public class VideoClub {
 
     public Trabajador getTrabajadorFromTrabajadoresXRut(String id){
         return trabajadoresXRut.get(id);
+    }
+    public Trabajador getTrabajadorXIndex(int i){
+        return listaTrabajadores.get(i);
     }
     
     //------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------
@@ -74,6 +85,10 @@ public class VideoClub {
     }
     public void addTrabajadorToTrabajadoresXRut(String rut, Trabajador trabajador){
         trabajadoresXRut.put(rut, trabajador);
+    }
+    
+    public void addTrabajadorToListaTrabajadores(Trabajador trabajador){
+        listaTrabajadores.add(trabajador);
     }
 
     public void addPersonaToPresentesXRut(String rut, Persona people){
@@ -243,6 +258,7 @@ public class VideoClub {
         switch(modo){
             case 1: return listaClientes.size();
             case 2: return listaPeliculas.size();
+            case 3: return listaTrabajadores.size();
         }
         return 0;
     }
