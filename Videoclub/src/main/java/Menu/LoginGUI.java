@@ -140,11 +140,11 @@ public class LoginGUI extends javax.swing.JFrame{
     private void myInitComponents(){
         this.setLocationRelativeTo(null);
         //int i;
-        /*
+        
         for (int i=0; i<tienda.getSize(3); i++){
             boxAdmin.addItem(tienda.getTrabajadorXIndex(i).getRut());
         }
-        
+        /*
         for (int i=0; i<tienda.getSize(1); i++){
             boxCliente.addItem(tienda.getClientexIndex(i).getRut());
         }*/
@@ -158,7 +158,7 @@ public class LoginGUI extends javax.swing.JFrame{
                 return;
             }
             ClienteGUI cGUI = new ClienteGUI();
-            this.setVisible(false);
+            this.dispose();
             cGUI.setVisible(true);
         }
         if (radioButtonAdmin.isSelected()){
@@ -167,7 +167,7 @@ public class LoginGUI extends javax.swing.JFrame{
                 return;
             }
             AdminGUI aGUI = new AdminGUI(this.rut, this.tienda);
-            this.setVisible(false);
+            this.dispose();
             aGUI.setVisible(true);
         }
     }//GEN-LAST:event_buttonAceptarActionPerformed

@@ -1,5 +1,6 @@
 package Menu.Admin;
 
+import Menu.LoginGUI;
 import Clases.Pelicula;
 import Clases.VideoClub;
 import javax.swing.*;
@@ -12,14 +13,12 @@ public class AdminGestion extends JFrame implements ActionListener {
     private JButton[] workButtons;
     private VideoClub local;
     private String rutEmpleado;
-    private boolean cerrada;
 
     public AdminGestion(String rut,VideoClub tienda){
         super("Menú Gestión de datos");
 
         local = tienda;
         rutEmpleado = rut;
-        cerrada = false;
 
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,10 +44,6 @@ public class AdminGestion extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public boolean isCerrada() {
-        return cerrada;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         setVisible(false);
@@ -67,7 +62,8 @@ public class AdminGestion extends JFrame implements ActionListener {
                     setVisible(true);
                 }
                 else{
-                    cerrada = false;
+                    new AdminGUI(rutEmpleado, local).setVisible(true);
+                    setVisible(false);
                     dispose();
                 }
             }
