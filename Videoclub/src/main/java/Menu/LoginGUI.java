@@ -1,15 +1,16 @@
 
 package Menu;
 import Clases.VideoClub;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 public class LoginGUI extends javax.swing.JFrame{
     VideoClub tienda;
     String rut;
     public LoginGUI(VideoClub t) {
         initComponents();
+        this.tienda = t; 
         myInitComponents();
-        this.tienda = t;
-        
     }
 
    
@@ -24,8 +25,8 @@ public class LoginGUI extends javax.swing.JFrame{
         textFieldRut = new javax.swing.JTextField();
         buttonSalir = new javax.swing.JButton();
         mensaje = new javax.swing.JLabel();
-        BoxCliente = new javax.swing.JComboBox<>();
-        BoxAdmin = new javax.swing.JComboBox<>();
+        boxCliente = new javax.swing.JComboBox<>();
+        boxAdmin = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("VideoClub");
@@ -66,17 +67,15 @@ public class LoginGUI extends javax.swing.JFrame{
             }
         });
 
-        BoxCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20844870-6", "15442310-9", "19034223-3", "10693359-1", "20378533-k" }));
-        BoxCliente.addActionListener(new java.awt.event.ActionListener() {
+        boxCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BoxClienteActionPerformed(evt);
+                boxClienteActionPerformed(evt);
             }
         });
 
-        BoxAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1-1", "2-2", "3-3", "4-4" }));
-        BoxAdmin.addItemListener(new java.awt.event.ItemListener() {
+        boxAdmin.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                BoxAdminItemStateChanged(evt);
+                boxAdminItemStateChanged(evt);
             }
         });
 
@@ -102,8 +101,8 @@ public class LoginGUI extends javax.swing.JFrame{
                                     .addComponent(radioButtonAdmin)
                                     .addGap(11, 11, 11)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(BoxAdmin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BoxCliente, 0, 107, Short.MAX_VALUE))
+                                .addComponent(boxAdmin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(boxCliente, 0, 107, Short.MAX_VALUE))
                             .addGap(150, 150, 150)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(textFieldRut, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,11 +121,11 @@ public class LoginGUI extends javax.swing.JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioButtonCliente)
-                    .addComponent(BoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioButtonAdmin)
-                    .addComponent(BoxAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(boxAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -141,6 +140,13 @@ public class LoginGUI extends javax.swing.JFrame{
     
     private void myInitComponents(){
         this.setLocationRelativeTo(null);
+        int i;
+        for (i=0; i<tienda.getSize(3); i++){
+            boxAdmin.addItem(tienda.getTrabajadorXIndex(i).getRut());
+        }
+        for (i =0; i<tienda.getSize(1); i++){
+            boxCliente.addItem(tienda.getClientexIndex(i).getRut());
+        }
     }
     
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
@@ -173,16 +179,16 @@ public class LoginGUI extends javax.swing.JFrame{
         textFieldRut.setText("");
     }//GEN-LAST:event_textFieldRutMouseClicked
 
-    private void BoxAdminItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_BoxAdminItemStateChanged
-        textFieldRut.setText(BoxAdmin.getSelectedItem().toString());
+    private void boxAdminItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxAdminItemStateChanged
+        textFieldRut.setText(boxAdmin.getSelectedItem().toString());
         radioButtonAdmin.setSelected(true);
         
-    }//GEN-LAST:event_BoxAdminItemStateChanged
+    }//GEN-LAST:event_boxAdminItemStateChanged
 
-    private void BoxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxClienteActionPerformed
-        textFieldRut.setText(BoxCliente.getSelectedItem().toString());
+    private void boxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxClienteActionPerformed
+        textFieldRut.setText(boxCliente.getSelectedItem().toString());
         radioButtonCliente.setSelected(true);
-    }//GEN-LAST:event_BoxClienteActionPerformed
+    }//GEN-LAST:event_boxClienteActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         textFieldRut.setText("Ingrese rut");
@@ -226,8 +232,8 @@ public class LoginGUI extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> BoxAdmin;
-    private javax.swing.JComboBox<String> BoxCliente;
+    private javax.swing.JComboBox<String> boxAdmin;
+    private javax.swing.JComboBox<String> boxCliente;
     private javax.swing.JButton buttonAceptar;
     private javax.swing.ButtonGroup buttonGroupLogin;
     private javax.swing.JButton buttonSalir;
