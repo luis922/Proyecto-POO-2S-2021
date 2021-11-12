@@ -30,7 +30,7 @@ public class LoginGUI extends javax.swing.JFrame{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("VideoClub");
-        setBackground(new java.awt.Color(55, 55, 55));
+        setBackground(new java.awt.Color(18, 52, 86));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         addMouseListener(new java.awt.event.MouseAdapter() {
