@@ -6,6 +6,7 @@ y acceder a funcionalidades del menu
 
 import Menu.MenuTienda;
 import Menu.Funciones;
+import Menu.LoginGUI;
 
 public class Main {
     public static void main(String[] args) throws Exception{
@@ -15,6 +16,10 @@ public class Main {
         Funciones.LeerArchivoClientes(videoClub1);
         Funciones.LeerArchivoTrabajadores(videoClub1);
 //-------------------Menu  por consola------------------------------
-	MenuTienda.inicioMenu(videoClub1);
+	java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginGUI(videoClub1).setVisible(true);
+            }
+        });
     }
 }

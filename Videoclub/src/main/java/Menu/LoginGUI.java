@@ -139,13 +139,15 @@ public class LoginGUI extends javax.swing.JFrame{
     
     private void myInitComponents(){
         this.setLocationRelativeTo(null);
-        int i;
-        for (i=0; i<tienda.getSize(3); i++){
+        //int i;
+        /*
+        for (int i=0; i<tienda.getSize(3); i++){
             boxAdmin.addItem(tienda.getTrabajadorXIndex(i).getRut());
         }
-        for (i =0; i<tienda.getSize(1); i++){
+        
+        for (int i=0; i<tienda.getSize(1); i++){
             boxCliente.addItem(tienda.getClientexIndex(i).getRut());
-        }
+        }*/
     }
     
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
@@ -193,42 +195,6 @@ public class LoginGUI extends javax.swing.JFrame{
         textFieldRut.setText("Ingrese rut");
     }//GEN-LAST:event_formMouseClicked
 
-   
-    public static void main(String args[]) throws Exception {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        VideoClub tienda = new VideoClub();
-        Funciones.LeerArchivoPeliculas(tienda);
-        Funciones.LeerArchivoClientes(tienda);
-        Funciones.LeerArchivoTrabajadores(tienda);
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginGUI(tienda).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxAdmin;
