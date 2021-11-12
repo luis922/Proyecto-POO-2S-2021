@@ -1,6 +1,6 @@
 package Clases;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Scanner;
 import java.io.*;
 
@@ -57,8 +57,14 @@ public class VideoClub {
     public Trabajador getTrabajadorFromTrabajadoresXRut(String id){
         return trabajadoresXRut.get(id);
     }
-    public Trabajador getTrabajadorXIndex(int i){
-        return listaTrabajadores.get(i);
+    
+    public String[] getRutTrabajadores(){
+        String[] rutTrabajadores = trabajadoresXRut.keySet().toArray(new String[trabajadoresXRut.size()]);
+        return rutTrabajadores;
+    }
+    public String[] getRutClientes(){
+         String[] rutClientes = clientesXRut.keySet().toArray(new String[clientesXRut.size()]);
+        return rutClientes;
     }
     
     //------------------AGREGAR ELEMENTOS A ARRAYLIST/HASHMAP------------------

@@ -2,6 +2,7 @@
 package Menu;
 import Clases.VideoClub;
 import Menu.Admin.*;
+import java.util.*;
 
 public class LoginGUI extends javax.swing.JFrame{
     VideoClub tienda;
@@ -139,15 +140,15 @@ public class LoginGUI extends javax.swing.JFrame{
     
     private void myInitComponents(){
         this.setLocationRelativeTo(null);
-        //int i;
-        
-        for (int i=0; i<tienda.getSize(3); i++){
-            boxAdmin.addItem(tienda.getTrabajadorXIndex(i).getRut());
+        int i;
+        String[] ruts = tienda.getRutTrabajadores();
+        for (i=0; i<ruts.length; i++){
+            boxAdmin.addItem(ruts[i]);
         }
-        /*
-        for (int i=0; i<tienda.getSize(1); i++){
-            boxCliente.addItem(tienda.getClientexIndex(i).getRut());
-        }*/
+        ruts = tienda.getRutClientes();
+        for (i=0; i<ruts.length; i++){
+            boxCliente.addItem(ruts[i]);
+        }
     }
     
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
