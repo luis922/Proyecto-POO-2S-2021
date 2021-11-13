@@ -1,22 +1,24 @@
 package Menu.Admin;
 
 import Clases.VideoClub;
+import Menú.Funciones;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ServiciosClientes extends JFrame implements ActionListener {
+public class GestionDatos extends JFrame implements ActionListener {
 
     private JButton[] workButtons;
     private VideoClub local;
     private String rutEmpleado;
 
-    public ServiciosClientes(String rut, VideoClub tienda){
-        super("Menú Servicios clientes");
+    public GestionDatos(String rut, VideoClub tienda){
+        super("Menú Gestión de datos");
 
-        rutEmpleado = rut;
         local = tienda;
+        rutEmpleado = rut;
 
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,9 +27,9 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(0x123456));
 
         workButtons = new JButton[4];
-        workButtons[0] = new JButton("Arrendar Película");
-        workButtons[1] = new JButton("Devolver Película");
-        workButtons[2] = new JButton("Pagar deuda");
+        workButtons[0] = new JButton("Ingresar datos");
+        workButtons[1] = new JButton("Mostrar datos");
+        workButtons[2] = new JButton("Editar datos");
         workButtons[3] = new JButton("Volver");
 
         int margen = 0;
@@ -40,21 +42,20 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         }
 
         setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == workButtons[0]){
-            local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(local);;
+            new RegistrarDatos(rutEmpleado, local);
         }
         else{
             if (e.getSource() == workButtons[1]){
-                local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).devolverArriendo(local);
+                new MostrarDatos(rutEmpleado, local);
             }
             else{
                 if (e.getSource() == workButtons[2]){
-                    local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
+                    new EditarDatos(rutEmpleado, local);
                 }
                 else{
                     dispose();
@@ -62,6 +63,6 @@ public class ServiciosClientes extends JFrame implements ActionListener {
                 }
             }
         }
-
+        dispose();
     }
 }

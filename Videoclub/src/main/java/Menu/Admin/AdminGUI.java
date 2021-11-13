@@ -1,4 +1,6 @@
 package Menu.Admin;
+
+import Menu.LoginGUI;
 import Clases.VideoClub;
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ public class AdminGUI extends JFrame implements ActionListener {
 
 
     public AdminGUI(String rut, VideoClub tienda) {
-        super("Menú empleado");
+        super("Menú Edición de datos");
 
         rutEmpleado = rut;
         local = tienda;
@@ -23,7 +25,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(0x123456));
 
-
+  
         workButtons = new JButton[4];
         workButtons[0] = new JButton("Gestión de datos");
         workButtons[1] = new JButton("Servicios para cliente");
@@ -44,10 +46,8 @@ public class AdminGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        boolean visible = false;
-        setVisible(false);
         if (e.getSource() == workButtons[0]){
-            AdminGestion menuGestion = new AdminGestion(rutEmpleado,local);
+            new GestionDatos(rutEmpleado,local);
         }
         else{
             if (e.getSource() == workButtons[1]){
@@ -55,15 +55,15 @@ public class AdminGUI extends JFrame implements ActionListener {
             }
             else{
                 if (e.getSource() == workButtons[2]){
-                    new GenerarReportes(local);
+                    new GenerarReportes(rutEmpleado, local);
                 }
                 else{
-                    this.dispose();
+                    dispose();
+                    new GestionDatos(rutEmpleado, local);
                 }
             }
         }
-
-
+        dispose();
     }
 
 

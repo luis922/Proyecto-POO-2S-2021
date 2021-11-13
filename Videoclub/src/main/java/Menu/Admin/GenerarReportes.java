@@ -9,13 +9,15 @@ import java.awt.event.ActionListener;
 
 public class GenerarReportes extends JFrame implements ActionListener {
 
+    private String rutEmpleado;
     private VideoClub local;
     private JButton[] workButtons;
 
-    public GenerarReportes(VideoClub tienda){
+    public GenerarReportes(String rut, VideoClub tienda){
         super("Menú Generar reportes");
 
         local = tienda;
+        rutEmpleado = rut;
 
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +52,8 @@ public class GenerarReportes extends JFrame implements ActionListener {
                 local.escribirArchivoArriendosActuales();
             }
             else{
-                this.dispose();
+                dispose();
+                new AdminGUI(rutEmpleado, local);
             }
         }
     }
