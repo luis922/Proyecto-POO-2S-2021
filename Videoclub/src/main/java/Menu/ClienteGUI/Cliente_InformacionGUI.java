@@ -165,12 +165,12 @@ public class Cliente_InformacionGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(rBDesplegarFicha.isSelected()){
-            MostrarDatosGUIClientes mdc = new MostrarDatosGUIClientes(tienda, rut,"cliente");
+            MostrarDatosGUI mdc = new MostrarDatosGUI(tienda, rut,"cliente");
             mdc.setVisible(true);  
         }
         
         if(rBRevisarHistorial.isSelected()){
-            MostrarDatosGUIClientes mhc = new MostrarDatosGUIClientes(tienda, rut, "historial");
+            MostrarDatosGUI mhc = new MostrarDatosGUI(tienda, rut, "historial");
             mhc.setVisible(true);
             
         }

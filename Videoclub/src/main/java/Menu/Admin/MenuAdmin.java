@@ -2,7 +2,7 @@ package Menu.Admin;
 
 import Clases.Pelicula;
 import Clases.VideoClub;
-import Menu.FuncionesGUI.MostrarTodasLasPeliculasGUI;
+import Menu.FuncionesGUI.MostrarDatosGUI;
 import Menu.LoginGUI;
 import Menú.Funciones;
 
@@ -311,7 +311,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){
-                            MostrarTodasLasPeliculasGUI mTPGUI = new MostrarTodasLasPeliculasGUI(tienda);
+                            MostrarDatosGUI mTPGUI = new MostrarDatosGUI(tienda, "peliculas");
                             mTPGUI.setVisible(true);
                         }
                         else{

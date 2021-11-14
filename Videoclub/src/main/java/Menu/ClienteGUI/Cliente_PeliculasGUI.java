@@ -174,7 +174,7 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         // TODO add your handling code here:
         if(rbDesplegar.isSelected()){
-            MostrarDatosGUIClientes mTPGUI = new MostrarDatosGUIClientes(tienda, "peliculas");
+            MostrarDatosGUI mTPGUI = new MostrarDatosGUI(tienda, "peliculas");
             mTPGUI.setVisible(true);
             
         }
