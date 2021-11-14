@@ -161,7 +161,38 @@ public class MenuAdmin extends JFrame implements ActionListener {
         InfoMenu menuSiguiente;
         switch (nombreVentana) {
             case "Menú Empleado":{
-                if(){
+                if(e.getSource() != botonesActuales[3]){
+                    if (e.getSource() == botonesActuales[0]){
+                        nameVentana = "Menú Gestión de datos";
+                        nameFrame = "Menú Gestión de datos";
+                        botonesNextMenu = new JButton[4];
+                        botonesNextMenu[0] = new JButton("Ingresar datos");
+                        botonesNextMenu[1] = new JButton("Mostrar datos");
+                        botonesNextMenu[2] = new JButton("Editar datos");
+                        botonesNextMenu[3] = new JButton("Volver");
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            nameVentana = "Menú Servicios clientes";
+                            nameFrame = "Menú Servicios clientes";
+                            botonesNextMenu = new JButton[4];
+                            botonesNextMenu[0] = new JButton("Arrendar Película");
+                            botonesNextMenu[1] = new JButton("Devolver Película");
+                            botonesNextMenu[2] = new JButton("Pagar deuda");
+                            botonesNextMenu[3] = new JButton("Volver");
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                nameVentana = "Menú Generar reportes";
+                                nameFrame = "Menú Generar reportes";
+                                botonesNextMenu = new JButton[3];
+                                botonesNextMenu[0] = new JButton("Deudores");
+                                botonesNextMenu[1] = new JButton("Películas en arriendo");
+                                botonesNextMenu[2] = new JButton("Volver");
+                            }
+                        }
+                    }
+                    dispose();
                     menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
                     new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
                 }
@@ -169,37 +200,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     dispose();
                     new LoginGUI(tienda).setVisible(true);
                 }
-                if (e.getSource() == botonesActuales[0]){
-                    nameVentana = "Menú Servicios clientes";
-                    nameFrame = "Menú Servicios clientes";
-                    workButtons = new JButton[4];
-                    workButtons[0] = new JButton("Ingresar datos");
-                    workButtons[1] = new JButton("Mostrar datos");
-                    workButtons[2] = new JButton("Editar datos");
-                    workButtons[3] = new JButton("Volver");
-                }
-                else{
-                    if (e.getSource() == botonesActuales[1]){
-                        nameVentana = "Menú Servicios clientes";
-                        nameFrame = "Menú Servicios clientes";
-                        workButtons = new JButton[4];
-                        workButtons[0] = new JButton("Arrendar Película");
-                        workButtons[1] = new JButton("Devolver Película");
-                        workButtons[2] = new JButton("Pagar deuda");
-                        workButtons[3] = new JButton("Volver");
-                    }
-                    else{
-                        if (e.getSource() == botonesActuales[2]){
-                            nameVentana = "Menú Generar reportes";
-                            nameFrame = "Menú Generar reportes";
-                            botonesNextMenu = new JButton[3];
-                            botonesNextMenu[0] = new JButton("Deudores");
-                            botonesNextMenu[1] = new JButton("Películas en arriendo");
-                            botonesNextMenu[2] = new JButton("Volver");
-                        }
-                    }
-                }
-                dispose();
                 break;
             }
             case "Menú Generar reportes":{
@@ -239,6 +239,51 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     new MenuAdmin(rutEmpleado, tienda);
                 }
                 break;
+            }
+            case "Menú Gestión de datos":{
+                if (e.getSource() != botonesActuales[3]){
+                    if (e.getSource() == botonesActuales[0]){
+                        nameVentana = "Menú Registro de datos";
+                        nameFrame = "Menú Registro de datos";
+                        botonesNextMenu = new JButton[4];
+                        botonesNextMenu[0] = new JButton("Registrar Cliente");
+                        botonesNextMenu[1] = new JButton("Registrar Película");
+                        botonesNextMenu[2] = new JButton("Registrar Historial");
+                        botonesNextMenu[3] = new JButton("Volver");
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            nameVentana = "Menú Mostrar datos";
+                            nameFrame = "Menú Mostrar datos";
+                            botonesNextMenu = new JButton[5];
+                            botonesNextMenu[0] = new JButton("Desplegar lista de clientes");
+                            botonesNextMenu[1] = new JButton("Desplegar lista de películas");
+                            botonesNextMenu[2] = new JButton("Desplegar historial de cliente");
+                            botonesNextMenu[3] = new JButton("Desplegar datos trabajador");
+                            botonesNextMenu[4] = new JButton("Volver");
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                nameVentana = "Menú Edición de datos";
+                                nameFrame = "Menú Edición de datos";
+                                botonesNextMenu = new JButton[5];
+                                botonesNextMenu[0] = new JButton("Editar Película");
+                                botonesNextMenu[1] = new JButton("Editar Cliente");
+                                botonesNextMenu[2] = new JButton("Eliminar Película");
+                                botonesNextMenu[3] = new JButton("Eliminar Cliente");
+                                botonesNextMenu[4] = new JButton("Volver");
+                            }
+                        }
+                    }
+                    dispose();
+                    menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                }
+                else{
+                    dispose();
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                }
+                dispose();
             }
 
         }
