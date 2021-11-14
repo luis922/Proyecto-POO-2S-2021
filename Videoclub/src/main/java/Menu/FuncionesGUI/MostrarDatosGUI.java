@@ -3,7 +3,7 @@ package Menu.FuncionesGUI;
 
 import Clases.VideoClub;
 import Menu.Funciones;
-
+import javax.swing.*;
 
 public class MostrarDatosGUI extends javax.swing.JFrame {
     VideoClub tienda;
@@ -37,9 +37,7 @@ public class MostrarDatosGUI extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         bCerrar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
