@@ -6,8 +6,8 @@ import Menu.ClienteGUI.*;
 import java.util.*;
 
 public class LoginGUI extends javax.swing.JFrame{
-    VideoClub tienda;
-    String rut;
+    private VideoClub tienda;
+    private String rut;
     public LoginGUI(VideoClub t) {
         initComponents();
         this.tienda = t; 
