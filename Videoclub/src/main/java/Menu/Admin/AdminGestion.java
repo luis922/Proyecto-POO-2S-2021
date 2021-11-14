@@ -63,7 +63,6 @@ public class AdminGestion extends JFrame implements ActionListener {
                 }
                 else{
                     new AdminGUI(rutEmpleado, local).setVisible(true);
-                    setVisible(false);
                     dispose();
                 }
             }

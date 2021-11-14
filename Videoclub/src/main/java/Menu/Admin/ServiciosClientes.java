@@ -59,7 +59,8 @@ public class ServiciosClientes extends JFrame implements ActionListener {
                     local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
                 }
                 else{
-                    this.dispose();
+                    new AdminGUI(rutEmpleado, local).setVisible(true);
+                    dispose();
                 }
             }
         }
