@@ -87,8 +87,9 @@ public class EdicionClientes extends JFrame implements ActionListener {
             }
             System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
         }
-        else
+        else {
             dispose();
             new EditarDatos(rutEmpleado, local);
+        }
     }
 }

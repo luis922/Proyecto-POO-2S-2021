@@ -1,13 +1,16 @@
 package Menu.Admin;
 
+import Clases.Pelicula;
 import Clases.VideoClub;
+import Menu.FuncionesGUI.MostrarTodasLasPeliculasGUI;
 import Menu.LoginGUI;
+import Menú.Funciones;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Scanner;
 
 public class MenuAdmin extends JFrame implements ActionListener {
 
@@ -17,7 +20,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
     private String nombreVentana, nombreFrame;
     InfoMenu menuActual, menuAnterior;
 
-    public MenuAdmin(String rut, VideoClub tienda) {
+    public MenuAdmin(String rut, VideoClub tienda) { //Menu llamado por LoginGUI y menus de menu empleado
         super("Menú Empleado");
 
         rutEmpleado = rut;
@@ -62,7 +65,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 
         setVisible(true);
     }
-
+    //Menú llamado por otro menú distinto de LoginGUI
     public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre) {
         super(menu.getNameVentana());
 
@@ -147,16 +150,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
     }
 
     private InfoMenu guardarInfoMenu(String tituloVenta, String tituloFrame, JButton[] arrayBoton){
-        InfoMenu menu = new InfoMenu(arrayBoton);;
+        InfoMenu menu = new InfoMenu(arrayBoton);
         menu.setBotones(arrayBoton);
-        menu.setNameVentana(nombreVentana);
-        menu.setNameFrame(nombreFrame);
+        menu.setNameVentana(tituloVenta);
+        menu.setNameFrame(tituloFrame);
         return  menu;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String nameVentana, nameFrame;
+        String nameVentana, nameFrame ;
         JButton[] botonesNextMenu;
         InfoMenu menuSiguiente;
         switch (nombreVentana) {
@@ -182,14 +185,12 @@ public class MenuAdmin extends JFrame implements ActionListener {
                             botonesNextMenu[3] = new JButton("Volver");
                         }
                         else{
-                            if (e.getSource() == botonesActuales[2]){
-                                nameVentana = "Menú Generar reportes";
-                                nameFrame = "Menú Generar reportes";
-                                botonesNextMenu = new JButton[3];
-                                botonesNextMenu[0] = new JButton("Deudores");
-                                botonesNextMenu[1] = new JButton("Películas en arriendo");
-                                botonesNextMenu[2] = new JButton("Volver");
-                            }
+                            nameVentana = "Menú Generar reportes";
+                            nameFrame = "Menú Generar reportes";
+                            botonesNextMenu = new JButton[3];
+                            botonesNextMenu[0] = new JButton("Deudores");
+                            botonesNextMenu[1] = new JButton("Películas en arriendo");
+                            botonesNextMenu[2] = new JButton("Volver");
                         }
                     }
                     dispose();
@@ -220,7 +221,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
             case "Menú Servicios clientes":{
                 if (e.getSource() != botonesActuales[3]){
                     if (e.getSource() == botonesActuales[0]){
-                        tienda.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(tienda);;
+                        tienda.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(tienda);
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){
@@ -260,20 +261,17 @@ public class MenuAdmin extends JFrame implements ActionListener {
                             botonesNextMenu[1] = new JButton("Desplegar lista de películas");
                             botonesNextMenu[2] = new JButton("Desplegar historial de cliente");
                             botonesNextMenu[3] = new JButton("Desplegar datos trabajador");
-                            botonesNextMenu[4] = new JButton("Volver");
                         }
                         else{
-                            if (e.getSource() == botonesActuales[2]){
-                                nameVentana = "Menú Edición de datos";
-                                nameFrame = "Menú Edición de datos";
-                                botonesNextMenu = new JButton[5];
-                                botonesNextMenu[0] = new JButton("Editar Película");
-                                botonesNextMenu[1] = new JButton("Editar Cliente");
-                                botonesNextMenu[2] = new JButton("Eliminar Película");
-                                botonesNextMenu[3] = new JButton("Eliminar Cliente");
-                                botonesNextMenu[4] = new JButton("Volver");
-                            }
+                            nameVentana = "Menú Edición de datos";
+                            nameFrame = "Menú Edición de datos";
+                            botonesNextMenu = new JButton[5];
+                            botonesNextMenu[0] = new JButton("Editar Película");
+                            botonesNextMenu[1] = new JButton("Editar Cliente");
+                            botonesNextMenu[2] = new JButton("Eliminar Película");
+                            botonesNextMenu[3] = new JButton("Eliminar Cliente");
                         }
+                        botonesNextMenu[4] = new JButton("Volver");
                     }
                     dispose();
                     menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
@@ -281,38 +279,219 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
+                    new MenuAdmin(rutEmpleado, tienda);
+                }
+                break;
+            }
+            case "Menú Registro de datos":{
+                if (e.getSource() != botonesActuales[3]){
+                    if (e.getSource() == botonesActuales[0]){
+                        new registrarCliente(tienda);
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            Funciones.registrarPelicula(tienda);
+                        }
+                        else {
+                            Funciones.registrarHistorial(tienda);
+                        }
+                    }
+                        System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+                }
+                else{
+                    dispose();
                     new MenuAdmin(rutEmpleado, tienda, menuAnterior);
                 }
-                dispose();
+                break;
+            }
+            case "Menú Mostrar datos":{
+                if (e.getSource() != botonesActuales[4]){
+                    if (e.getSource() == botonesActuales[0]){
+                        Funciones.listaClientes(tienda);
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            MostrarTodasLasPeliculasGUI mTPGUI = new MostrarTodasLasPeliculasGUI(tienda);
+                            mTPGUI.setVisible(true);
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                Funciones.mostrarHistorialCliente(tienda);
+                            }
+                            else{
+                                tienda.mostrarDatosTrabajadores();
+                            }
+                        }
+                    }
+                    System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+                }
+                else{
+                    dispose();
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                }
+                break;
+            }
+            case "Menú Edición de datos":{
+                if (e.getSource() != botonesActuales[4]){
+                    if (e.getSource() == botonesActuales[0]){
+                        nameVentana = "Menú Editar datos de película";
+                        nameFrame = "Menú Edición datos de película";
+                        botonesNextMenu = new JButton[11];
+                        botonesNextMenu[0] = new JButton("Nombre");
+                        botonesNextMenu[1] = new JButton("Año de Estreno");
+                        botonesNextMenu[2] = new JButton("Duración");
+                        botonesNextMenu[3] = new JButton("Sinopsis");
+                        botonesNextMenu[4] = new JButton("Existencias");
+                        botonesNextMenu[5] = new JButton("Valoración");
+                        botonesNextMenu[6] = new JButton("Calidad");
+                        botonesNextMenu[7] = new JButton("Directores");
+                        botonesNextMenu[8] = new JButton("Actores");
+                        botonesNextMenu[9] = new JButton("Géneros");
+                        botonesNextMenu[10] = new JButton("Volver");
+                        menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                        dispose();
+                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            nameVentana = "Menú Edición de datos del cliente";
+                            nameFrame = "Menú Edición de datos del cliente";
+                            botonesNextMenu = new JButton[4];
+                            botonesNextMenu[0] = new JButton("Nombre del Cliente");
+                            botonesNextMenu[1] = new JButton("Rut del cliente");
+                            botonesNextMenu[2] = new JButton("Deuda del cliente");
+                            botonesNextMenu[3] = new JButton("Volver");
+                            menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                            dispose();
+                            new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                Funciones.eliminarPelicula(tienda);
+                            }
+                            else{
+                                Funciones.eliminarCliente(tienda);
+                            }
+                            System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+                        }
+                    }
+                }
+                else{
+                    dispose();
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                }
+                break;
+            }
+            case "Menú Editar datos de película":{
+                if (e.getSource() != botonesActuales[10]){
+                    Scanner teclado = new Scanner(System.in);
+                    String nombre = Funciones.loginPelicula(tienda);
+                    Pelicula peli = tienda.getPeliFromPelisXId(nombre);
+
+                    if (e.getSource() == botonesActuales[0]){
+                        System.out.println("Ingrese el nuevo nombre:");
+                        peli.setNombre(teclado.nextLine());
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            System.out.println("Ingrese el nuevo Año de Estreno:");
+                            peli.setAñoEstreno(teclado.nextShort());
+                            teclado.nextLine();
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                System.out.println("Ingrese la nueva duración:");
+                                peli.setDuraciónMin(teclado.nextShort());
+                                teclado.nextLine();
+                            }
+                            else{
+                                if (e.getSource() == botonesActuales[3]){
+                                    System.out.println("Ingrese la nueva Sinopsis:");
+                                    peli.setSinopsis(teclado.nextLine());
+                                }
+                                else{
+                                    if (e.getSource() == botonesActuales[4]){
+                                        System.out.println("Ingrese la nueva cantidad:");
+                                        peli.setExistencias(teclado.nextShort());
+                                        peli.setDisponibles((short)(peli.getDisponibles() - peli.getExistencias()));
+                                    }
+                                    else{
+                                        if (e.getSource() == botonesActuales[5]){
+                                            System.out.println("Ingrese la nueva Valoración:");
+                                            peli.setValuacion(Funciones.ingresoValuacion(teclado));
+                                        }
+                                        else{
+                                            if (e.getSource() == botonesActuales[6]){
+                                                System.out.println("Ingrese la nueva Calidad:");
+                                                peli.setCalidad(teclado.nextLine());
+                                            }
+                                            else{
+                                                if (e.getSource() == botonesActuales[7]){
+                                                    System.out.println("Ingrese el/los nuevos directores:");
+                                                    peli.setDirector(Funciones.ingresoDirectores(teclado));
+                                                }
+                                                else{
+                                                    if (e.getSource() == botonesActuales[8]){
+                                                        System.out.println("Ingrese el/los nuevos actores:");
+                                                        peli.setActores(Funciones.ingresoActores(teclado));
+                                                    }
+                                                    else{
+                                                            System.out.println("Ingrese el/los nuevos géneros:");
+                                                            peli.setGeneros(Funciones.ingresoGeneros(teclado));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+                }
+                else{
+                    dispose();
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                }
+                break;
+            }
+            case "Menú Edición de datos del cliente":{
+                if(e.getSource() != botonesActuales[3]){
+                    Scanner teclado = new Scanner(System.in);
+                    String cliente = Funciones.loginClientes(tienda);
+                    String rut;
+                    tienda.mostrarDatosClientes(cliente);
+                    if (e.getSource() == botonesActuales[0]){
+                        System.out.println("Ingrese el Nuevo nombre del Cliente:");
+                        tienda.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
+                    }
+                    else{
+                        if (e.getSource() == botonesActuales[1]){
+                            System.out.println("Ingrese el nuevo rut del cliente:");
+                            rut = tienda.getClientFromClientXRut(cliente).getRut();
+                            cliente = teclado.nextLine();
+                            tienda.getClientFromClientXRut(rut).setRut(cliente);
+                            tienda.addClientToClientXRut(cliente, tienda.getClientFromClientXRut(rut));
+                            tienda.delCliente(rut);
+                        }
+                        else{
+                            if (e.getSource() == botonesActuales[2]){
+                                System.out.println("Ingrese el nuevo monto de deuda del cliente:");
+                                tienda.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
+                            }
+
+                        }
+                    }
+                    System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+                }
+                else {
+                    dispose();
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                }
+                break;
             }
 
         }
+
     }
 }
-
-
-/*case "":{
-                nombreFrame = "";
-                break;
-            }
-            case "":{
-                nombreFrame = "";
-                break;
-            }
-            case "":{
-                nombreFrame = "";
-                break;
-            }
-            case "":{
-                nombreFrame = "";
-                break;
-            }
-            case "":{
-                nombreFrame = "";
-                break;
-            }
-            case "":{
-                nombreFrame = "";
-                break;/*Hacer clase MenuGeneral
-
-            }*/
