@@ -7,7 +7,7 @@ package Menu.ClienteGUI;
 
 import Clases.Cliente;
 import Clases.VideoClub;
-import Menu.FuncionesGUI.DesplegarMiFichaGUI;
+import Menu.FuncionesGUI.*;
 
 /**
  *
@@ -165,15 +165,13 @@ public class Cliente_InformacionGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(rBDesplegarFicha.isSelected()){
-            DesplegarMiFichaGUI dMFGUI = new DesplegarMiFichaGUI(rut,tienda);
-            dMFGUI.setVisible(true);
-            
-            
-            
+            MostrarDatosGUIClientes mdc = new MostrarDatosGUIClientes(tienda, rut,"cliente");
+            mdc.setVisible(true);  
         }
         
         if(rBRevisarHistorial.isSelected()){
-            
+            MostrarDatosGUIClientes mhc = new MostrarDatosGUIClientes(tienda, rut, "historial");
+            mhc.setVisible(true);
             
         }
         

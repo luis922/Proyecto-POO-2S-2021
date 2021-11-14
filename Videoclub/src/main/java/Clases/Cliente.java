@@ -64,6 +64,28 @@ public class Cliente extends Persona implements Transacciones{
             System.out.println();
         }
     }
+    
+    public String retornarHistorialCliente(VideoClub tienda){
+        String datos = "";
+        for (Arriendo arriendo : historialArriendos) {
+            datos += "Nombre película: " + tienda.getPeliFromPelisXId(arriendo.getId()).getNombre();
+            datos += "\nID película: " + arriendo.getId();
+            datos += "\nValoración : ";
+            if(!arriendo.isEntregado())
+                datos += "N0 REGISTRADA";
+            else
+                datos += arriendo.getValoracion();
+            datos += "\nFecha de arriendo: "+ arriendo.getFechaArriendo();
+            datos += "\nFecha de entrega: " + arriendo.getFechaEntrega();
+            datos += "\nVeces arrendada: "  + arriendo.getVecesArrendada();
+            datos += "\nEstado de entrega: ";
+            if(arriendo.isEntregado())
+                datos += " ENTREGADO\n\n";
+            else
+                datos += " NO ENTREGADO\n\n";
+        }
+        return datos;
+    }
 
     //Muestra el historial de arriendo de una película
     public void mostrarHistorial(String id){

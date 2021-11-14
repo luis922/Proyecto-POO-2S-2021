@@ -1,24 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Menu.ClienteGUI;
 
 import Clases.VideoClub;
 import Menu.FuncionesGUI.*;
 
-/**
- *
- * @author sebas
- */
 public class Cliente_PeliculasGUI extends javax.swing.JFrame {
     VideoClub tienda;
     String rut;
-
-    /**
-     * Creates new form Cliente_PeliculasGUI
-     */
     public Cliente_PeliculasGUI(String r,VideoClub t) {
         this.setLocationRelativeTo(null);
         this.tienda = t;

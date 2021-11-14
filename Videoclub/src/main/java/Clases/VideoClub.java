@@ -120,6 +120,12 @@ public class VideoClub {
         System.out.println("Deuda: " + clientesXRut.get(rut).getDeuda());
         System.out.println();
     }
+    
+    public String retornarDatosClientes(String rut){
+        return ("Datos del cliente rut " + rut + 
+                "\nNombre: " + clientesXRut.get(rut).getNombre() +
+                "\nDeuda: " + clientesXRut.get(rut).getDeuda());
+    }
 
     public void mostrarDatosTrabajadores(){
         Scanner teclado = new Scanner(System.in);

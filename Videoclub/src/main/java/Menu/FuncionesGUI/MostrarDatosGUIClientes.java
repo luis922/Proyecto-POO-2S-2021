@@ -8,6 +8,7 @@ import Menu.Funciones;
 public class MostrarDatosGUIClientes extends javax.swing.JFrame {
     VideoClub tienda;
     String modo;
+    String rut;
 
     public MostrarDatosGUIClientes(VideoClub t, String modo) {
         this.setLocationRelativeTo(null);
@@ -15,6 +16,14 @@ public class MostrarDatosGUIClientes extends javax.swing.JFrame {
         this.modo = modo;
         initComponents();
     }
+    public MostrarDatosGUIClientes(VideoClub t, String rut, String modo) {
+        this.setLocationRelativeTo(null);
+        this.tienda = t;
+        this.modo = modo;
+        this.rut = rut;
+        initComponents();
+    }
+    
 
     private MostrarDatosGUIClientes() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -30,17 +39,29 @@ public class MostrarDatosGUIClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Todas las Películas"));
+        
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         if(modo.equals("peliculas")){
+            jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Peliculas"));
             jTextArea1.setText(Funciones.formateoTodasLasPelículas(tienda));
+        }
+        else if(modo.equals("cliente")){
+            jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos cliente"));
+            jTextArea1.setText(tienda.retornarDatosClientes(rut));
+        }
+        else if(modo.equals("historial")){
+            jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos cliente"));
+            jTextArea1.setText(tienda.getClientFromClientXRut(rut).retornarHistorialCliente(tienda));
+        }
+        else if(modo.equals("historialPelicula")){
+            jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Historial Pelicula"));
+            jTextArea1.setText("");
         }
         else{
             jTextArea1.setText("Especificar que mostrar");
         }
-        jTextArea1.setText(Funciones.formateoTodasLasPelículas(tienda));
         jScrollPane1.setViewportView(jTextArea1);
 
         bCerrar.setText("Cerrar");
