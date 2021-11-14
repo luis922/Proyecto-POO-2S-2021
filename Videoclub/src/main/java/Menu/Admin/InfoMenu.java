@@ -21,8 +21,13 @@ public class InfoMenu {
         this.nameFrame = nameFrame;
     }
 
-    public void setBotones(JButton[] botones) {
-        this.botones = botones;
+    public void setBotones(JButton[] botons) {
+        //De esta manera se evita que se le agregue más de una acción a un botón si es que se volviese a acceder a un menú
+        JButton[] nuevo = new JButton[botons.length];
+        for (int i = 0; i < botones.length; i++) {
+            nuevo[i] = new JButton(botons[i].getText());
+        }
+        this.botones = nuevo;
     }
 
     public String getNameVentana() {
