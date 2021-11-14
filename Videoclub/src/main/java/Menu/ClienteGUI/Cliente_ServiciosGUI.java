@@ -2,6 +2,7 @@
 package Menu.ClienteGUI;
 
 import Clases.VideoClub;
+import Menu.Funciones; 
 
 public class Cliente_ServiciosGUI extends javax.swing.JFrame {
     VideoClub tienda;
@@ -149,29 +150,29 @@ public class Cliente_ServiciosGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         if(rBArrendar.isSelected()){
-            
+            tienda.getClientFromClientXRut(rut).arrendar(tienda);
         }
         
         if(rBDevolver.isSelected()){
-            
+            tienda.getClientFromClientXRut(rut).devolverArriendo(tienda);
         }
         
         if(rBPagar.isSelected()){
-            
+            tienda.getClientFromClientXRut(rut).pagarDeuda(tienda);
         }
         
     }//GEN-LAST:event_bSiguienteActionPerformed
 
     private void rBArrendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBArrendarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_rBArrendarActionPerformed
 
     private void rBDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBDevolverActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_rBDevolverActionPerformed
 
     private void rBPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBPagarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_rBPagarActionPerformed
 
 

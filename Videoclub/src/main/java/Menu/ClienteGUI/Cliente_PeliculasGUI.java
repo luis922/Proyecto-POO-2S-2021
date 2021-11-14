@@ -37,6 +37,7 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
         rBRecomendar = new javax.swing.JRadioButton();
         rBRecomendarGen = new javax.swing.JRadioButton();
         rBDesplegarFiltros = new javax.swing.JRadioButton();
+        listaGeneros = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +99,8 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
             }
         });
 
+        listaGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Animacion", "Accion", "Ciencia Ficcion", "Comedia", "Aventura", "Drama", "Romance" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,9 +111,12 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
                     .addComponent(rbDesplegar)
                     .addComponent(rBBuscar)
                     .addComponent(rBRecomendar)
-                    .addComponent(rBRecomendarGen)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(rBRecomendarGen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(listaGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(rBDesplegarFiltros))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +128,9 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rBRecomendar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rBRecomendarGen)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rBRecomendarGen)
+                    .addComponent(listaGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(rBDesplegarFiltros))
         );
@@ -185,11 +193,11 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
         }
         
         if(rBRecomendar.isSelected()){
-            
+            tienda.mostrarDatosPeliculas(tienda.peliMejorEvaluada());
         }
         
         if(rBRecomendarGen.isSelected()){
-            
+            tienda.mostrarDatosPeliculas(tienda.peliMejorEvaluada(listaGeneros.getSelectedItem().toString()));
         }
         
         if(rBDesplegarFiltros.isSelected()){
@@ -211,8 +219,7 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
 
     private void rBRecomendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRecomendarActionPerformed
         // TODO add your handling code here:
-        DesplegarPeliculaGUI dPGUI = new DesplegarPeliculaGUI(tienda,tienda.peliMejorEvaluada());
-        dPGUI.setVisible(true);
+        
     }//GEN-LAST:event_rBRecomendarActionPerformed
 
     private void rBRecomendarGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRecomendarGenActionPerformed
@@ -230,6 +237,7 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox<String> listaGeneros;
     private javax.swing.JButton menuAnterior;
     private javax.swing.JRadioButton rBBuscar;
     private javax.swing.JRadioButton rBDesplegarFiltros;

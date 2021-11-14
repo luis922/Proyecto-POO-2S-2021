@@ -106,10 +106,14 @@
                       <Component id="rbDesplegar" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rBBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="rBRecomendar" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="rBRecomendarGen" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="rBRecomendarGen" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="listaGeneros" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="rBDesplegarFiltros" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="195" max="32767" attributes="0"/>
+                  <EmptySpace pref="111" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -123,7 +127,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="rBRecomendar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="rBRecomendarGen" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="rBRecomendarGen" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="listaGeneros" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="rBDesplegarFiltros" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -185,6 +192,24 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBDesplegarFiltrosActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="listaGeneros">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="7">
+                <StringItem index="0" value="Animacion"/>
+                <StringItem index="1" value="Accion"/>
+                <StringItem index="2" value="Ciencia Ficcion"/>
+                <StringItem index="3" value="Comedia"/>
+                <StringItem index="4" value="Aventura"/>
+                <StringItem index="5" value="Drama"/>
+                <StringItem index="6" value="Romance"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

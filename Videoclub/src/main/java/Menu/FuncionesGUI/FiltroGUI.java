@@ -139,10 +139,20 @@ public class FiltroGUI extends javax.swing.JFrame {
 
         tAInput2.setColumns(20);
         tAInput2.setRows(5);
+        tAInput2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tAInput2MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tAInput2);
 
         tAInput1.setColumns(20);
         tAInput1.setRows(5);
+        tAInput1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tAInput1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tAInput1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -424,23 +434,18 @@ public class FiltroGUI extends javax.swing.JFrame {
         }
         
         if(rBRangoDeDuracion.isSelected()){
-            
-            if(input1.matches("[0-9]+") && input1.length() >= 2 && input2.matches("[0-9]+") && input2.length() >= 2){
-                
+            if(input1.matches("\\d+") && input2.matches("\\d+")){
                 if(Integer.parseInt(input1) <= Integer.parseInt(input2)){
-                    
-                
                     for(i = 0; i < tienda.getSize(2); i++){
                         extraido = tienda.getPeliFromPelisXId(Integer.toString(i)).getDuraciónMin();
-            
-                        if(extraido <= Integer.parseInt(input1) && extraido >= Integer.parseInt(input2)){
+                        if(extraido >= Integer.parseInt(input1) && extraido <= Integer.parseInt(input2)){
                             aux++;
                             tienda.mostrarDatosPeliculas(Integer.toString(i));
                         }
                     }
                     System.out.println("Se encontraron " + aux + " pelicula con el parametro ingresado");
                     tAInput1.setText(input1 + "\n*Observe la consola*");
-                    tAInput2.setText(input2 + " *Observe la consola*");
+                    tAInput2.setText(input2 + "\n*Observe la consola*");
                 }else{
                     tAInput1.setText("Ingrese un rango valido");
                     tAInput2.setText("Ingrese un rango valido");
@@ -451,6 +456,14 @@ public class FiltroGUI extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_bSiguienteActionPerformed
+
+    private void tAInput1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAInput1MouseClicked
+        tAInput1.setText("");
+    }//GEN-LAST:event_tAInput1MouseClicked
+
+    private void tAInput2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAInput2MouseClicked
+        tAInput2.setText("");
+    }//GEN-LAST:event_tAInput2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
