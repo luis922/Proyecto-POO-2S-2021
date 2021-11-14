@@ -178,9 +178,8 @@ public class LoginGUI extends javax.swing.JFrame{
                 mensaje.setText("Rut no pertenece a un Trabajador.");
                 return;
             }
-            AdminGUI aGUI = new AdminGUI(this.rut, this.tienda);
+            new MenuAdmin(this.rut, this.tienda);
             this.dispose();
-            aGUI.setVisible(true);
         }
     }//GEN-LAST:event_buttonAceptarActionPerformed
 
