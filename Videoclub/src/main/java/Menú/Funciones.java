@@ -92,7 +92,7 @@ public class Funciones {
 
         do{
 
-            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            if(contador != 0) System.out.println("La película ingresada no se encuentra en nuestro registro, inténtelo nuevamente\n(ingrese \"0\" para cancelar)");
             nombre = teclado.nextLine();
             contador++;
 
@@ -105,7 +105,7 @@ public class Funciones {
 
 //------------------MOSTRAR HISTORIAL CLIENTE------------------
     public static void mostrarHistorialCliente(VideoClub x, String rut){
-        System.out.println("Información sobre las peliculas arrendadas");
+        System.out.println("Información sobre las películas arrendadas");
         if (x.getClientFromClientXRut(rut).getSize(1) == 0)
                 System.out.println("Cliente no posee historial.");
         else
@@ -136,7 +136,7 @@ public class Funciones {
     public static void mostrarHistorialPeli(VideoClub x, String rut){
         Scanner teclado = new Scanner(System.in);
         String nombre, id;
-        System.out.println("Ingrese el nombre de la pelicula cuyo historial de arriendo quiere revisar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+        System.out.println("Ingrese el nombre de la película cuyo historial de arriendo quiere revisar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
         do{
             nombre = teclado.nextLine();
             id = x.obtenerIdXNombre(nombre);
@@ -147,7 +147,7 @@ public class Funciones {
                 break;
             }
             else{
-                System.out.println("No se encuentra la pelicula en el historial.");
+                System.out.println("No se encuentra la película en el historial.");
                 System.out.println("Ingrese nombre nuevamente o '0' para terminar.");
             }
         }while(!nombre.equals("0"));
@@ -177,7 +177,7 @@ public class Funciones {
     public static void registrarPelicula(VideoClub x){//Incompleto aún, falta ranking e ingreso en la base
         Scanner teclado = new Scanner(System.in);
         Pelicula nueva = new Pelicula();
-        System.out.println("Bienvenido al registro de peliculas, porfavor, introduzca el nombre de la película:");
+        System.out.println("Bienvenido al registro de películas, por favor, introduzca el nombre de la película:");
         nueva.setNombre(teclado.nextLine());
         nueva.setDirector(ingresoDirectores(teclado));
         nueva.setGeneros(ingresoGeneros(teclado));
@@ -200,7 +200,7 @@ public class Funciones {
         nueva.setId(String.valueOf(x.getSize(2)));
         x.addPeliToListaPelis(nueva);
         x.addPeliToPelisXId(nueva.getId(), nueva);
-        System.out.println("¡Pelicula Ingresada Exitosamente!");        
+        System.out.println("¡Película Ingresada Exitosamente!");        
     }
     
 //------------------REGISTRO NUEVO HISTORIAL---------------------
@@ -217,12 +217,12 @@ public class Funciones {
             }
             else{
                 do{
-                    System.out.println("Ingrese nombre pelicula a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+                    System.out.println("Ingrese nombre película a registrar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La película, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
                     nombrePeli = teclado.nextLine();
                     id = x.obtenerIdXNombre(nombrePeli);
                     if (!nombrePeli.equals("0")){
                         if (id == null){
-                            System.out.println("No se encuentra la pelicula.");
+                            System.out.println("No se encuentra la película.");
                             continue;
                         }
                         System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
@@ -240,7 +240,7 @@ public class Funciones {
                             x.getClientFromClientXRut(rut).addToHistorial(arriendo);
                         }
                         else{//Ha arrendadoo antes la pelicula
-                            System.out.println("Cliente ha arrendado la pelicula antes, se actualizan los datos...");
+                            System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
                             arriendo = x.getClientFromClientXRut(rut).getHistorialXId(id);
                             arriendo.setFechaArriendo(fechaArriendo);
                             arriendo.setFechaEntrega(fechaEntrega);
@@ -308,7 +308,7 @@ public class Funciones {
         float valuacion;
         int contador = 0;
         do{
-            if(contador != 0) System.out.println("Porfavor, ingrese la Valuacion en el formato solicitado");
+            if(contador != 0) System.out.println("Por favor, ingrese la valoración en el formato solicitado");
             valuacion = teclado.nextFloat();
             teclado.nextLine();
             contador++;
@@ -322,7 +322,7 @@ public class Funciones {
     public static void buscarPelicula(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
-        System.out.println("Ingrese nombre de la pelicula a buscar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+        System.out.println("Ingrese nombre de la película a buscar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
         do{
             nombrePeli = teclado.nextLine();
             String id = x.obtenerIdXNombre(nombrePeli);
@@ -331,7 +331,7 @@ public class Funciones {
                 break;
             }
             else{
-                System.out.println("Pelicula no registrada");
+                System.out.println("Película no registrada");
                 System.out.println("Ingrese nombre nuevamente o '0' para terminar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             }
         }while(!nombrePeli.equals("0"));
@@ -441,9 +441,9 @@ public class Funciones {
         Scanner teclado = new Scanner(System.in);
         String nombre;
         int contador = 0;
-        System.out.println("Ingrese el nombre de la pelicula que desea eliminar:");
+        System.out.println("Ingrese el nombre de la película que desea eliminar:");
         do{
-            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            if(contador != 0) System.out.println("La película ingresada no se encuentra en nuestro registro, inténtelo nuevamente\n(ingrese \"0\" para cancelar)");
             nombre = teclado.nextLine();
             contador++;
         }while(!x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) && !nombre.equals("0"));
@@ -498,7 +498,7 @@ public class Funciones {
         Arriendo arriendo = new Arriendo();
         Scanner teclado = new Scanner(System.in);
         do{
-            System.out.println("Ingrese nombre pelicula a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+            System.out.println("Ingrese nombre película a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             nombrePeli = teclado.nextLine();
             id = tienda.obtenerIdXNombre(nombrePeli);
             if (!nombrePeli.equals("0")){
@@ -585,7 +585,7 @@ public class Funciones {
                 aux++;
             }
         }
-        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
+        System.out.println("Se encontraron " + aux + " películas con el parámetro ingresado");
     }
 
     public static void filtradoPorValuación(VideoClub tienda){
@@ -612,7 +612,7 @@ public class Funciones {
             }
         }
         
-        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
+        System.out.println("Se encontraron " + aux + " películas con el parámetro ingresado");
     }
 
     public static void filtradoPorGénero(VideoClub tienda){
@@ -641,7 +641,7 @@ public class Funciones {
             
             iteraciones++; 
         }while(cont == 0 && !género.equals("0"));
-        if(cont != 0) System.out.println("Se encontraron " + cont + " peliculas con el parametro ingresado");
+        if(cont != 0) System.out.println("Se encontraron " + cont + " películas con el parámetro ingresado");
     }
     
     public static void filtradoDisponibles(VideoClub tienda){
@@ -675,7 +675,7 @@ public class Funciones {
                     break;     
             }
         }
-        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
+        System.out.println("Se encontraron " + aux + " películas con el parámetro ingresado");
     }
     
     public static void filtradoDirector(VideoClub tienda){
@@ -701,7 +701,7 @@ public class Funciones {
             i++;
         }while(cont == 0 && !director.equals("0"));
         
-        if(cont != 0) System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+        if(cont != 0) System.out.println("Se encontraron " + cont + " película con el parámetro ingresado");
     }
     
     public static void filtradoCalidad(VideoClub tienda){
@@ -710,7 +710,7 @@ public class Funciones {
         String calidad;
         
         do{
-            if(i != 0) System.out.println("La calidad no se encuentra en nuestro catalogo, intentelo nuevamente");
+            if(i != 0) System.out.println("La calidad no se encuentra en nuestro catalogo, inténtelo nuevamente");
             System.out.println("Ingrese la calidad a buscar **Ingrese 0 para salir**");
             calidad = teclado.nextLine();
             
@@ -724,7 +724,7 @@ public class Funciones {
             i++;
         }while(cont == 0 && !calidad.equals("0"));
         
-        if(cont != 0) System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+        if(cont != 0) System.out.println("Se encontraron " + cont + " película con el parámetro ingresado");
     }
     
     public static void filtradoDuración(VideoClub tienda){
@@ -749,7 +749,7 @@ public class Funciones {
                 tienda.mostrarDatosPeliculas(Integer.toString(i));
             }
         }
-        System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+        System.out.println("Se encontraron " + cont + " película con el parámetro ingresado");
     }
 
 //-----------------------------OTROS------------------------------------------------
