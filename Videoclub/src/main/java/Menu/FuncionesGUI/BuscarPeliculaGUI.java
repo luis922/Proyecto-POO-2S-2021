@@ -20,6 +20,7 @@ public class BuscarPeliculaGUI extends javax.swing.JFrame {
      */
     public BuscarPeliculaGUI(VideoClub t) {
         this.tienda = t;
+        this.setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -54,6 +55,11 @@ public class BuscarPeliculaGUI extends javax.swing.JFrame {
         });
 
         tFPelicula.setText("Ingrese el nombre de la película a buscar");
+        tFPelicula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tFPeliculaMouseClicked(evt);
+            }
+        });
         tFPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tFPeliculaActionPerformed(evt);
@@ -127,6 +133,10 @@ public class BuscarPeliculaGUI extends javax.swing.JFrame {
             mensaje.setText("Pelicula no encontrada");
         }
     }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void tFPeliculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tFPeliculaMouseClicked
+        tFPelicula.setText("");
+    }//GEN-LAST:event_tFPeliculaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
