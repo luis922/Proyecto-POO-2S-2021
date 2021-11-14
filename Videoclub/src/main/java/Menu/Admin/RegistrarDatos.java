@@ -3,20 +3,20 @@ package Menu.Admin;
 import Clases.VideoClub;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import Menú.Funciones;
 
-public class ServiciosClientes extends JFrame implements ActionListener {
+public class RegistrarDatos extends JFrame implements ActionListener {
 
     private JButton[] workButtons;
     private VideoClub local;
     private String rutEmpleado;
 
-    public ServiciosClientes(String rut, VideoClub tienda){
-        super("Menú Servicios clientes");
+    public RegistrarDatos(String rut, VideoClub tienda){
+        super("Menú Registro de datos");
 
-        rutEmpleado = rut;
         local = tienda;
+        rutEmpleado = rut;
 
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,9 +25,9 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(0x123456));
 
         workButtons = new JButton[4];
-        workButtons[0] = new JButton("Arrendar Película");
-        workButtons[1] = new JButton("Devolver Película");
-        workButtons[2] = new JButton("Pagar deuda");
+        workButtons[0] = new JButton("Registrar Cliente");
+        workButtons[1] = new JButton("Registrar Película");
+        workButtons[2] = new JButton("Registrar Historial");
         workButtons[3] = new JButton("Volver");
 
         int margen = 0;
@@ -40,28 +40,26 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         }
 
         setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == workButtons[0]){
-            local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(local);;
+            new registrarCliente(local);
         }
         else{
             if (e.getSource() == workButtons[1]){
-                local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).devolverArriendo(local);
+                Funciones.registrarPelicula(local);
             }
             else{
                 if (e.getSource() == workButtons[2]){
-                    local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
+                    Funciones.registrarHistorial(local);
                 }
                 else{
                     dispose();
-                    new AdminGUI(rutEmpleado, local);
+                    new GestionDatos(rutEmpleado, local);
                 }
             }
         }
-
     }
 }

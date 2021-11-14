@@ -1,22 +1,25 @@
 package Menu.Admin;
 
 import Clases.VideoClub;
+import Menu.Funciones.*;
+import Menú.Funciones;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ServiciosClientes extends JFrame implements ActionListener {
+public class BuscarDatos extends JFrame implements ActionListener {
 
     private JButton[] workButtons;
     private VideoClub local;
     private String rutEmpleado;
 
-    public ServiciosClientes(String rut, VideoClub tienda){
-        super("Menú Servicios clientes");
+    public BuscarDatos(String rut, VideoClub tienda){
+        super("Menú Búsqueda de datos");
 
-        rutEmpleado = rut;
         local = tienda;
+        rutEmpleado = rut;
 
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,11 +27,10 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(0x123456));
 
-        workButtons = new JButton[4];
-        workButtons[0] = new JButton("Arrendar Película");
-        workButtons[1] = new JButton("Devolver Película");
-        workButtons[2] = new JButton("Pagar deuda");
-        workButtons[3] = new JButton("Volver");
+        workButtons = new JButton[3];
+        workButtons[0] = new JButton("Buscar Película");
+        workButtons[1] = new JButton("Buscar Cliente");
+        workButtons[2] = new JButton("Volver");
 
         int margen = 0;
         for (int i = 0; i < workButtons.length ; i++) {
@@ -40,28 +42,21 @@ public class ServiciosClientes extends JFrame implements ActionListener {
         }
 
         setVisible(true);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == workButtons[0]){
-            local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(local);;
+            Funciones.buscarPelicula(local);
         }
         else{
             if (e.getSource() == workButtons[1]){
-                local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).devolverArriendo(local);
+                Funciones.buscarCliente(local);
             }
             else{
-                if (e.getSource() == workButtons[2]){
-                    local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
-                }
-                else{
-                    dispose();
-                    new AdminGUI(rutEmpleado, local);
-                }
+                dispose();
+                new GestionDatos(rutEmpleado, local);
             }
         }
-
     }
 }

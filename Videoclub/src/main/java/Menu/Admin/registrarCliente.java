@@ -14,16 +14,19 @@ public class registrarCliente extends JFrame implements ActionListener {
     private JLabel nombreLabel,rutLabel, instructionLabel;
     private JButton ingresarBoton;
     private JTextField nombreCampo, rutCampo;
+    private boolean estado;
 
     public registrarCliente(VideoClub tienda)  {
         super("Agregar nuevo cliente");
 
         local = tienda;
+        estado = true;
 
         setLayout(null);
         setSize(500,200);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setBackground(new Color(0x123456));
 
         instructionLabel = new JLabel("<html>Ingrese el nombre y rut (sin puntos y con guión)<br>del nuevo cliente." +
