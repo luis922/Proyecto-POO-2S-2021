@@ -1,8 +1,6 @@
 package Menu.Admin;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class InfoMenu {
     private String nameVentana;
