@@ -14,7 +14,7 @@ public class MostrarDatos extends JFrame implements ActionListener {
     private String rutEmpleado;
 
     public MostrarDatos(String rut, VideoClub tienda){
-        super("Menú Gestión de datos");
+        super("Menú Mostrar datos");
 
         local = tienda;
         rutEmpleado = rut;
@@ -36,8 +36,8 @@ public class MostrarDatos extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(0x123456));
 
-        JLabel nombreMenu = new JLabel("Menú Gestión de datos", SwingConstants.CENTER);
-        nombreMenu.setBounds(100, nombreMenuY, 200, 40);
+        JLabel nombreMenu = new JLabel("Menú Mostrar datos", SwingConstants.CENTER);
+        nombreMenu.setBounds(0, nombreMenuY, 400, 40);
         nombreMenu.setForeground(new Color(255,255,255));
         nombreMenu.setFont(new Font(null,Font.ITALIC, 20));
         add(nombreMenu);

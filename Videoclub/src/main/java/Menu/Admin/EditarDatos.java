@@ -38,7 +38,7 @@ public class EditarDatos extends JFrame implements ActionListener {
         getContentPane().setBackground(new Color(0x123456));
 
         JLabel nombreMenu = new JLabel("Menú Edición de datos", SwingConstants.CENTER);
-        nombreMenu.setBounds(100, nombreMenuY, 200, 40);
+        nombreMenu.setBounds(0, nombreMenuY, 400, 40);
         nombreMenu.setForeground(new Color(255,255,255));
         nombreMenu.setFont(new Font(null,Font.ITALIC, 20));
         add(nombreMenu);
