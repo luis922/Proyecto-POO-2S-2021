@@ -224,6 +224,8 @@ public class Cliente_PeliculasGUI extends javax.swing.JFrame {
 
     private void rBRecomendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRecomendarActionPerformed
         // TODO add your handling code here:
+        DesplegarPeliculaGUI dPGUI = new DesplegarPeliculaGUI(tienda,tienda.peliMejorEvaluada());
+        dPGUI.setVisible(true);
     }//GEN-LAST:event_rBRecomendarActionPerformed
 
     private void rBRecomendarGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBRecomendarGenActionPerformed
