@@ -21,25 +21,35 @@ public class EdicionClientes extends JFrame implements ActionListener {
         local = tienda;
         rutEmpleado = rut;
 
-        setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600,800);
-        setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(0x123456));
-
         workButtons = new JButton[4];
         workButtons[0] = new JButton("Nombre del Cliente");
         workButtons[1] = new JButton("Rut del cliente");
         workButtons[2] = new JButton("Deuda del cliente");
         workButtons[3] = new JButton("Volver");
 
+        int alto = 50 * workButtons.length + 5 * (workButtons.length-1) + 200;
+        int botonY = (alto -(50 * workButtons.length + 5 * (workButtons.length-1)))/2 - (5 * (workButtons.length-1))/2;
+        int nombreMenuY = botonY/2 - 20;
+
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400,alto);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(0x123456));
+
+        JLabel nombreMenu = new JLabel("Menú Edición de datos del cliente", SwingConstants.CENTER);
+        nombreMenu.setBounds(100, nombreMenuY, 300, 40);
+        nombreMenu.setForeground(new Color(255,255,255));
+        nombreMenu.setFont(new Font(null,Font.ITALIC, 20));
+        add(nombreMenu);
+
         int margen = 0;
         for (int i = 0; i < workButtons.length ; i++) {
             workButtons[i].setFocusable(false);
-            workButtons[i].setBounds(200,200+margen,200,100);
+            workButtons[i].setBounds(100, botonY +margen,200,50);
             workButtons[i].addActionListener(this);
             add(workButtons[i]);
-            margen += 110;
+            margen += 55;
         }
 
         setVisible(true);
@@ -47,34 +57,37 @@ public class EdicionClientes extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Scanner teclado = new Scanner(System.in);
-        String cliente = Funciones.loginClientes(local);
-        String rut;
-        local.mostrarDatosClientes(cliente);
-        if (e.getSource() == workButtons[0]){
-            System.out.println("Ingrese el Nuevo nombre del Cliente:");
-            local.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
-        }
-        else{
-            if (e.getSource() == workButtons[1]){
-                System.out.println("Ingrese el nuevo rut del cliente:");
-                rut = local.getClientFromClientXRut(cliente).getRut();
-                cliente = teclado.nextLine();
-                local.getClientFromClientXRut(rut).setRut(cliente);
-                local.addClientToClientXRut(cliente, local.getClientFromClientXRut(rut));
-                local.delCliente(rut);
+
+        if(e.getSource() != workButtons[3]){
+            Scanner teclado = new Scanner(System.in);
+            String cliente = Funciones.loginClientes(local);
+            String rut;
+            local.mostrarDatosClientes(cliente);
+            if (e.getSource() == workButtons[0]){
+                System.out.println("Ingrese el Nuevo nombre del Cliente:");
+                local.getClientFromClientXRut(cliente).setNombre(teclado.nextLine());
             }
             else{
-                if (e.getSource() == workButtons[2]){
-                    System.out.println("Ingrese el nuevo monto de deuda del cliente:");
-              //      int deuda = Integer.parseInt(new JTextField().getText());
-                    local.getClientFromClientXRut(cliente).setDeuda(Integer.parseInt(new JTextField().getText()));
+                if (e.getSource() == workButtons[1]){
+                    System.out.println("Ingrese el nuevo rut del cliente:");
+                    rut = local.getClientFromClientXRut(cliente).getRut();
+                    cliente = teclado.nextLine();
+                    local.getClientFromClientXRut(rut).setRut(cliente);
+                    local.addClientToClientXRut(cliente, local.getClientFromClientXRut(rut));
+                    local.delCliente(rut);
                 }
                 else{
-                    dispose();
-                    new EditarDatos(rutEmpleado, local);
+                    if (e.getSource() == workButtons[2]){
+                        System.out.println("Ingrese el nuevo monto de deuda del cliente:");
+                        local.getClientFromClientXRut(cliente).setDeuda(teclado.nextInt());
+                    }
+
                 }
             }
+            System.out.printf("Edición realizada.\nVuelva a la interfaz gráfica");
         }
+        else
+            dispose();
+            new EditarDatos(rutEmpleado, local);
     }
 }

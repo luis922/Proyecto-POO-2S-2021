@@ -20,12 +20,6 @@ public class EditarDatos extends JFrame implements ActionListener {
         local = tienda;
         rutEmpleado = rut;
 
-        setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600,800);
-        setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(0x123456));
-
         workButtons = new JButton[5];
         workButtons[0] = new JButton("Editar Película");
         workButtons[1] = new JButton("Editar Cliente");
@@ -33,13 +27,29 @@ public class EditarDatos extends JFrame implements ActionListener {
         workButtons[3] = new JButton("Eliminar Cliente");
         workButtons[4] = new JButton("Volver");
 
+        int alto = 50 * workButtons.length + 5 * (workButtons.length-1) + 200;
+        int botonY = (alto -(50 * workButtons.length + 5 * (workButtons.length-1)))/2 - (5 * (workButtons.length-1))/2;
+        int nombreMenuY = botonY/2 - 20;
+
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400,alto);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(0x123456));
+
+        JLabel nombreMenu = new JLabel("Menú Edición de datos", SwingConstants.CENTER);
+        nombreMenu.setBounds(100, nombreMenuY, 200, 40);
+        nombreMenu.setForeground(new Color(255,255,255));
+        nombreMenu.setFont(new Font(null,Font.ITALIC, 20));
+        add(nombreMenu);
+
         int margen = 0;
         for (int i = 0; i < workButtons.length ; i++) {
             workButtons[i].setFocusable(false);
-            workButtons[i].setBounds(200,200+margen,200,100);
+            workButtons[i].setBounds(100, botonY +margen,200,50);
             workButtons[i].addActionListener(this);
             add(workButtons[i]);
-            margen += 110;
+            margen += 55;
         }
 
         setVisible(true);
@@ -48,10 +58,12 @@ public class EditarDatos extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == workButtons[0]){
+            dispose();
             new EdicionPelicula(rutEmpleado, local);
         }
         else{
             if (e.getSource() == workButtons[1]){
+                dispose();
                 new EdicionClientes(rutEmpleado, local);
             }
             else{
@@ -59,7 +71,7 @@ public class EditarDatos extends JFrame implements ActionListener {
                     Funciones.eliminarPelicula(local);
                 }
                 else{
-                    if (e.getSource() == workButtons[2]){
+                    if (e.getSource() == workButtons[3]){
                         Funciones.eliminarCliente(local);
                     }
                     else{
@@ -69,6 +81,5 @@ public class EditarDatos extends JFrame implements ActionListener {
                 }
             }
         }
-        dispose();
     }
 }

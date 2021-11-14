@@ -22,12 +22,6 @@ public class EdicionPelicula extends JFrame implements ActionListener {
         local = tienda;
         rutEmpleado = rut;
 
-        setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600,800);
-        setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(0x123456));
-
         workButtons = new JButton[11];
         workButtons[0] = new JButton("Nombre");
         workButtons[1] = new JButton("Año de Estreno");
@@ -41,10 +35,26 @@ public class EdicionPelicula extends JFrame implements ActionListener {
         workButtons[9] = new JButton("Géneros");
         workButtons[10] = new JButton("Volver");
 
+        int alto = 50 * workButtons.length + 5 * (workButtons.length-1) + 200;
+        int botonY = (alto -(50 * workButtons.length + 5 * (workButtons.length-1)))/2 - (5 * (workButtons.length-1))/2;
+        int nombreMenuY = botonY/2 - 20;
+
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400,alto);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(0x123456));
+
+        JLabel nombreMenu = new JLabel("Menú Edición datos de película", SwingConstants.CENTER);
+        nombreMenu.setBounds(100, nombreMenuY, 200, 40);
+        nombreMenu.setForeground(new Color(255,255,255));
+        nombreMenu.setFont(new Font(null,Font.ITALIC, 20));
+        add(nombreMenu);
+
         int margen = 0;
         for (int i = 0; i < workButtons.length ; i++) {
             workButtons[i].setFocusable(false);
-            workButtons[i].setBounds(200,100+margen,200,50);
+            workButtons[i].setBounds(100, botonY +margen,200,50);
             workButtons[i].addActionListener(this);
             add(workButtons[i]);
             margen += 55;
@@ -55,64 +65,64 @@ public class EdicionPelicula extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Scanner teclado = new Scanner(System.in);
-        String nombre = Funciones.loginPelicula(local);
-        Pelicula peli = local.getPeliFromPelisXId(nombre);
-        if (e.getSource() == workButtons[0]){
-            System.out.println("Ingrese el nuevo nombre:");
-            peli.setNombre(teclado.nextLine());
-        }
-        else{
-            if (e.getSource() == workButtons[1]){
-                System.out.println("Ingrese el nuevo Año de Estreno:");
-                peli.setAñoEstreno(teclado.nextShort());
-                teclado.nextLine();
+
+        if (e.getSource() != workButtons[10]){
+            Scanner teclado = new Scanner(System.in);
+            String nombre = Funciones.loginPelicula(local);
+            Pelicula peli = local.getPeliFromPelisXId(nombre);
+
+            if (e.getSource() == workButtons[0]){
+                System.out.println("Ingrese el nuevo nombre:");
+                peli.setNombre(teclado.nextLine());
             }
             else{
-                if (e.getSource() == workButtons[2]){
-                    System.out.println("Ingrese la nueva duración:");
-                    peli.setDuraciónMin(teclado.nextShort());
+                if (e.getSource() == workButtons[1]){
+                    System.out.println("Ingrese el nuevo Año de Estreno:");
+                    peli.setAñoEstreno(teclado.nextShort());
                     teclado.nextLine();
                 }
                 else{
-                    if (e.getSource() == workButtons[3]){
-                        System.out.println("Ingrese la nueva Sinopsis:");
-                        peli.setSinopsis(teclado.nextLine());
+                    if (e.getSource() == workButtons[2]){
+                        System.out.println("Ingrese la nueva duración:");
+                        peli.setDuraciónMin(teclado.nextShort());
+                        teclado.nextLine();
                     }
                     else{
-                        if (e.getSource() == workButtons[4]){
-                            System.out.println("Ingrese la nueva cantidad:");
-                            peli.setExistencias(teclado.nextShort());
-                            peli.setDisponibles((short)(peli.getDisponibles() - peli.getExistencias()));
+                        if (e.getSource() == workButtons[3]){
+                            System.out.println("Ingrese la nueva Sinopsis:");
+                            peli.setSinopsis(teclado.nextLine());
                         }
                         else{
-                            if (e.getSource() == workButtons[5]){
-                                System.out.println("Ingrese la nueva Valoración:");
-                                peli.setValuacion(Funciones.ingresoValuacion(teclado));
+                            if (e.getSource() == workButtons[4]){
+                                System.out.println("Ingrese la nueva cantidad:");
+                                peli.setExistencias(teclado.nextShort());
+                                peli.setDisponibles((short)(peli.getDisponibles() - peli.getExistencias()));
                             }
                             else{
-                                if (e.getSource() == workButtons[6]){
-                                    System.out.println("Ingrese la nueva Calidad:");
-                                    peli.setCalidad(teclado.nextLine());
+                                if (e.getSource() == workButtons[5]){
+                                    System.out.println("Ingrese la nueva Valoración:");
+                                    peli.setValuacion(Funciones.ingresoValuacion(teclado));
                                 }
                                 else{
-                                    if (e.getSource() == workButtons[7]){
-                                        System.out.println("Ingrese el/los nuevos directores:");
-                                        peli.setDirector(Funciones.ingresoDirectores(teclado));
+                                    if (e.getSource() == workButtons[6]){
+                                        System.out.println("Ingrese la nueva Calidad:");
+                                        peli.setCalidad(teclado.nextLine());
                                     }
                                     else{
-                                        if (e.getSource() == workButtons[8]){
-                                            System.out.println("Ingrese el/los nuevos actores:");
-                                            peli.setActores(Funciones.ingresoActores(teclado));
+                                        if (e.getSource() == workButtons[7]){
+                                            System.out.println("Ingrese el/los nuevos directores:");
+                                            peli.setDirector(Funciones.ingresoDirectores(teclado));
                                         }
                                         else{
-                                            if (e.getSource() == workButtons[9]){
-                                                System.out.println("Ingrese el/los nuevos géneros:");
-                                                peli.setGeneros(Funciones.ingresoGeneros(teclado));
+                                            if (e.getSource() == workButtons[8]){
+                                                System.out.println("Ingrese el/los nuevos actores:");
+                                                peli.setActores(Funciones.ingresoActores(teclado));
                                             }
                                             else{
-                                                dispose();
-                                                new EditarDatos(rutEmpleado, local);
+                                                if (e.getSource() == workButtons[9]){
+                                                    System.out.println("Ingrese el/los nuevos géneros:");
+                                                    peli.setGeneros(Funciones.ingresoGeneros(teclado));
+                                                }
                                             }
                                         }
                                     }
@@ -122,6 +132,11 @@ public class EdicionPelicula extends JFrame implements ActionListener {
                     }
                 }
             }
+            System.out.printf("Edición realizada.\nVuelva a la interfaz gráfica");
+        }
+        else{
+            dispose();
+            new EditarDatos(rutEmpleado, local);
         }
     }
 }
