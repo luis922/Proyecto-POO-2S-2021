@@ -30,7 +30,7 @@ public class AdminGUI extends JFrame implements ActionListener {
         workButtons[0] = new JButton("Gestión de datos");
         workButtons[1] = new JButton("Servicios para cliente");
         workButtons[2] = new JButton("Generar reportes");
-        workButtons[3] = new JButton("Volver");
+        workButtons[3] = new JButton("Volver a Login");
 
         int margen = 0;
         for (int i = 0; i < workButtons.length ; i++) {
@@ -59,7 +59,7 @@ public class AdminGUI extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new GestionDatos(rutEmpleado, local);
+                    new LoginGUI(local).setVisible(true);
                 }
             }
         }
