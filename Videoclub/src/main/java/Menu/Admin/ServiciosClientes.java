@@ -55,23 +55,25 @@ public class ServiciosClientes extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == workButtons[0]){
-            local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(local);;
-        }
-        else{
-            if (e.getSource() == workButtons[1]){
-                local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).devolverArriendo(local);
+        if (e.getSource() != workButtons[3]){
+            if (e.getSource() == workButtons[0]){
+                local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).arrendar(local);;
             }
             else{
-                if (e.getSource() == workButtons[2]){
-                    local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
+                if (e.getSource() == workButtons[1]){
+                    local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).devolverArriendo(local);
                 }
                 else{
-                    dispose();
-                    new AdminGUI(rutEmpleado, local);
+                    if (e.getSource() == workButtons[2]){
+                        local.getTrabajadorFromTrabajadoresXRut(rutEmpleado).pagarDeuda(local);
+                    }
                 }
             }
+            System.out.printf("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
         }
-
+        else{
+            dispose();
+            new AdminGUI(rutEmpleado, local);
+        }
     }
 }

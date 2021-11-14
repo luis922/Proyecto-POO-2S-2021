@@ -69,10 +69,12 @@ public class EditarDatos extends JFrame implements ActionListener {
             else{
                 if (e.getSource() == workButtons[2]){
                     Funciones.eliminarPelicula(local);
+                    System.out.printf("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
                 }
                 else{
                     if (e.getSource() == workButtons[3]){
                         Funciones.eliminarCliente(local);
+                        System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
                     }
                     else{
                         dispose();

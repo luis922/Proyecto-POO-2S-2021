@@ -84,7 +84,7 @@ public class EdicionClientes extends JFrame implements ActionListener {
 
                 }
             }
-            System.out.printf("Edición realizada.\nVuelva a la interfaz gráfica");
+            System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
         }
         else
             dispose();

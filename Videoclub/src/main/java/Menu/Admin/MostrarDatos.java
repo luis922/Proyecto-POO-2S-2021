@@ -56,27 +56,30 @@ public class MostrarDatos extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == workButtons[0]){
-            Funciones.listaClientes(local);
-        }
-        else{
-            if (e.getSource() == workButtons[1]){
-                Funciones.listaPeliculas(local);
+        if (e.getSource() != workButtons[4]){
+            if (e.getSource() == workButtons[0]){
+                Funciones.listaClientes(local);
             }
             else{
-                if (e.getSource() == workButtons[2]){
-                    Funciones.mostrarHistorialCliente(local);
+                if (e.getSource() == workButtons[1]){
+                    Funciones.listaPeliculas(local);
                 }
                 else{
-                    if (e.getSource() == workButtons[3]){
-                        local.mostrarDatosTrabajadores();
+                    if (e.getSource() == workButtons[2]){
+                        Funciones.mostrarHistorialCliente(local);
                     }
                     else{
-                        dispose();
-                        new GestionDatos(rutEmpleado, local);
+                        if (e.getSource() == workButtons[3]){
+                            local.mostrarDatosTrabajadores();
+                        }
                     }
                 }
             }
+            System.out.print("Ejecución de método realizada con éxito\nVuelva a la interfaz gráfica");
+        }
+        else{
+            dispose();
+            new GestionDatos(rutEmpleado, local);
         }
     }
 }
