@@ -32,7 +32,8 @@ public class AdminGUI extends JFrame implements ActionListener {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,alto);
-        setLocationRelativeTo(null);
+        setResizable(false);
+        setLocationRelativeTo(null);        
         getContentPane().setBackground(new Color(0x123456));
 
         JLabel nombreMenu = new JLabel("Menú Empleado", SwingConstants.CENTER);

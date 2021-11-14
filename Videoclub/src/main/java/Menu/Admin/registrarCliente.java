@@ -22,6 +22,7 @@ public class registrarCliente extends JFrame implements ActionListener {
 
         setLayout(null);
         setSize(500,200);
+        setResizable(false);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

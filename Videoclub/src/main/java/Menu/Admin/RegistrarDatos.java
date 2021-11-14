@@ -31,6 +31,7 @@ public class RegistrarDatos extends JFrame implements ActionListener {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400,alto);
+        setResizable(false);
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(0x123456));
 
