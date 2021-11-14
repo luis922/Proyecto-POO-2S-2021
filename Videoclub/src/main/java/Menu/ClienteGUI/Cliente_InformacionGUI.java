@@ -8,6 +8,7 @@ package Menu.ClienteGUI;
 import Clases.Cliente;
 import Clases.VideoClub;
 import Menu.FuncionesGUI.*;
+import Menu.Funciones;
 
 /**
  *
@@ -17,9 +18,6 @@ public class Cliente_InformacionGUI extends javax.swing.JFrame {
     VideoClub tienda;
     String rut;
 
-    /**
-     * Creates new form Cliente_InformacionGUI
-     */
     public Cliente_InformacionGUI(String r, VideoClub t) {
         this.setLocationRelativeTo(null);
         this.tienda = t;
@@ -86,7 +84,7 @@ public class Cliente_InformacionGUI extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rBRevisarHistorialPeliculas);
-        rBRevisarHistorialPeliculas.setText("Revisar Historial de Peliculas");
+        rBRevisarHistorialPeliculas.setText("Revisar Historial de una Pelicula");
         rBRevisarHistorialPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rBRevisarHistorialPeliculasActionPerformed(evt);
@@ -176,7 +174,7 @@ public class Cliente_InformacionGUI extends javax.swing.JFrame {
         }
         
         if(rBRevisarHistorialPeliculas.isSelected()){
-            
+            Funciones.mostrarHistorialPeli(tienda, rut);
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
