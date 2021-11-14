@@ -762,6 +762,68 @@ public class Funciones {
             if(tienda.containsRutClientes(rut) && !tienda.containsRutPresentes(rut))
                 tienda.addPersonaToPresentesXRut(rut,tienda.getClientFromClientXRut(rut));
     }
+    
+ //-----------------------------Formateos para GUI----------------------------------
+    public static String formateoSinopsis(String sinopsis){
+        String nuevaSinopsis = "";
+        String [] spliteado = sinopsis.split(" ");
+        int contador = 0;
+        
+         for (int i = 0; i < spliteado.length;i++){
+               nuevaSinopsis = nuevaSinopsis.concat(spliteado[i]);
+               contador++;
+               if(contador == 12 ){
+                   nuevaSinopsis = nuevaSinopsis.concat("\n");
+                   contador = 0;
+               }else{
+                   nuevaSinopsis = nuevaSinopsis.concat(" ");
+               }
+             
+         }
+        return nuevaSinopsis;
+    }
+    
+    public static String comaFormateado(String[] array){
+        String comaFormateo = "";
+        
+        for(int i = 0; i < array.length;i++){
+            comaFormateo = comaFormateo.concat(array[i]);
+            if(i  < array.length-1){
+                comaFormateo = comaFormateo.concat(", ");
+            }
+        }
+        return comaFormateo;
+    }
+    
+    public static String formateoTodasLasPelículas(VideoClub tienda) {
+        String todasLasPeliculas = "";
+        Pelicula aux;
+        
+        for(int i = 0; i < tienda.getSize(2);i++){
+            aux = tienda.getPeliFromPelisXId(Integer.toString(i));
+            todasLasPeliculas = todasLasPeliculas.concat("Id: " + aux.getId() + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Nombre: " + aux.getNombre() + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Año de estreno: " + aux.getAñoEstreno()+ "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Duracion: " + aux.getDuraciónMin() + " minutos\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Calidad: " + aux.getCalidad() + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Puntuacion: " + aux.getValuacion()+ " de 5\n\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Sinopsis: " + Funciones.formateoSinopsis(aux.getSinopsis()) + "\n\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Director(s): " + Funciones.comaFormateado(aux.getDirector()) + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Generos: " + Funciones.comaFormateado(aux.getGeneros()) + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Actores: " + Funciones.comaFormateado(aux.getActores()) + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Copias disponibles: " + aux.getDisponibles() + "\n\n\n\n");
+                        
+        }
+        return todasLasPeliculas;
+    }
+    
+
+}
+
+
+
+    
+    
 
 //-----------------------------RECOMENDAR PELICULA----------------------------------
     //Por implementar
@@ -792,5 +854,4 @@ public class Funciones {
         }
     }*/
 
-}  
 

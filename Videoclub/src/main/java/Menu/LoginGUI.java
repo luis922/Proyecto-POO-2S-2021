@@ -2,6 +2,7 @@
 package Menu;
 import Clases.VideoClub;
 import Menu.Admin.*;
+import Menu.ClienteGUI.*;
 import java.util.*;
 
 public class LoginGUI extends javax.swing.JFrame{
@@ -49,6 +50,11 @@ public class LoginGUI extends javax.swing.JFrame{
         buttonGroupLogin.add(radioButtonCliente);
         radioButtonCliente.setSelected(true);
         radioButtonCliente.setText("Cliente");
+        radioButtonCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonClienteActionPerformed(evt);
+            }
+        });
 
         buttonGroupLogin.add(radioButtonAdmin);
         radioButtonAdmin.setText("Administrador");
@@ -57,6 +63,11 @@ public class LoginGUI extends javax.swing.JFrame{
         textFieldRut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 textFieldRutMouseClicked(evt);
+            }
+        });
+        textFieldRut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldRutActionPerformed(evt);
             }
         });
 
@@ -158,7 +169,7 @@ public class LoginGUI extends javax.swing.JFrame{
                 mensaje.setText("Cliente no se encuentra registrado.");
                 return;
             }
-            ClienteGUI cGUI = new ClienteGUI();
+            ClienteGUI cGUI = new ClienteGUI(rut,tienda);
             this.dispose();
             cGUI.setVisible(true);
         }
@@ -195,6 +206,14 @@ public class LoginGUI extends javax.swing.JFrame{
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         textFieldRut.setText("Ingrese rut");
     }//GEN-LAST:event_formMouseClicked
+
+    private void textFieldRutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldRutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldRutActionPerformed
+
+    private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioButtonClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
