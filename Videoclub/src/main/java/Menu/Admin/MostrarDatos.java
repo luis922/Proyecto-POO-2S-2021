@@ -2,7 +2,7 @@ package Menu.Admin;
 
 import Clases.VideoClub;
 import Menu.Funciones;
-import Menu.FuncionesGUI.MostrarTodasLasPeliculasGUI;
+import Menu.FuncionesGUI.MostrarDatosGUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,7 +64,7 @@ public class MostrarDatos extends JFrame implements ActionListener {
             }
             else{
                 if (e.getSource() == workButtons[1]){
-                    MostrarTodasLasPeliculasGUI mTPGUI = new MostrarTodasLasPeliculasGUI(local);
+                    MostrarDatosGUI mTPGUI = new MostrarDatosGUI(local,"peliculas");
                     mTPGUI.setVisible(true);
                 }
                 else{
