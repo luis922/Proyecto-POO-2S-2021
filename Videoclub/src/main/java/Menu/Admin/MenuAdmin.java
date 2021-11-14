@@ -65,7 +65,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
 
         setVisible(true);
     }
-    //Menú llamado por otro menú distinto de LoginGUI
+
     public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre) {
         super(menu.getNameVentana());
 
@@ -286,7 +286,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
             case "Menú Registro de datos":{
                 if (e.getSource() != botonesActuales[3]){
                     if (e.getSource() == botonesActuales[0]){
-                        new registrarCliente(tienda);
+                        new RegistrarCliente(tienda);
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){

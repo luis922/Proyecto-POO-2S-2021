@@ -8,14 +8,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class registrarCliente extends JFrame implements ActionListener {
+public class RegistrarCliente extends JFrame implements ActionListener {
 
     private VideoClub local;
     private JLabel nombreLabel,rutLabel, instructionLabel;
     private JButton ingresarBoton;
     private JTextField nombreCampo, rutCampo;
 
-    public registrarCliente(VideoClub tienda)  {
+    public RegistrarCliente(VideoClub tienda)  {
         super("Agregar nuevo cliente");
 
         local = tienda;

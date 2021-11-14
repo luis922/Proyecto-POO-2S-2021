@@ -57,7 +57,7 @@ public class RegistrarDatos extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() != workButtons[3]){
             if (e.getSource() == workButtons[0]){
-                new registrarCliente(local);
+                new RegistrarCliente(local);
             }
             else{
                 if (e.getSource() == workButtons[1]){
