@@ -15,11 +15,13 @@ public class Main {
         Funciones.LeerArchivoPeliculas(videoClub1);
         Funciones.LeerArchivoClientes(videoClub1);
         Funciones.LeerArchivoTrabajadores(videoClub1);
-//-------------------Menu  por consola------------------------------
+//-------------------Interfaz Grafica------------------------------
 	java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginGUI(videoClub1).setVisible(true);
             }
         });
+//-------------------Menu por Consola------------------------------  
+        //MenuTienda.inicioMenu(videoClub1);
     }
 }

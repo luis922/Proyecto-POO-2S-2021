@@ -4,7 +4,7 @@ import Clases.Pelicula;
 import Clases.VideoClub;
 import Menu.FuncionesGUI.MostrarDatosGUI;
 import Menu.LoginGUI;
-import Menú.Funciones;
+import Menu.Funciones;
 
 import javax.swing.*;
 import java.awt.*;

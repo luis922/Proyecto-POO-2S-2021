@@ -2,7 +2,7 @@ package Menu.Admin;
 
 import Clases.VideoClub;
 import Clases.Cliente;
-import Menú.Funciones;
+import Menu.Funciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
