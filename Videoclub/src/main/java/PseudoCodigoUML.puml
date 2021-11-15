@@ -1,16 +1,18 @@
 @startuml
 skinparam sequenceMessageAlign center
-Main "0..1" --> "0..*" VideoClub : Contiene
-Main "0..1" --> "0..*" Pelicula: Utiliza
-Main "0..1" --> "0..*" Cliente: Usa
-Main "0..1" --> "0..1" Interface: Incluye
-Main "0..1" --> "0..*" Funciones: Llama
-Main "0..1" --> "0..1" Comprobar: Invoca
+Main "0..1" -> "0..*" VideoClub : Contiene
+Main "0..1" -> "0..*" Pelicula: Utiliza
+Main "0..1" -> "0..*" Cliente: Usa
+Main "0..1" -> "0..*" Funciones: Llama
+Main "0..1" -> "0..1" MenuTienda: Invoca
 
-VideoClub "1..*" --> "0..*"  Cliente: Atiende
-VideoClub "1" --> "1..*"  Pelicula:  Posee
-Cliente "1" --> "0..*" Arriendo: Accede
-Interface "1" --> "1..*" Funciones: Invoca
+VideoClub "1..*" -> "0..*"  Cliente: Atiende
+VideoClub "1" -> "1..*"  Pelicula:  Posee
+Cliente "1" -> "0..*" Arriendo: Accede
+MenuTienda "1" -> "1..*" Funciones: Invoca
+
+
+
 
 class VideoClub{
     -String  nombreTienda
@@ -56,26 +58,15 @@ class VideoClub{
     + void escribirArriendosActuales()
 }
 
-class Cliente{
-    -String nombre
-    -String rut
-    -ArrayList<Arriendo> historialArriendos
-    -HashMap<String, Arriendo> historialXid
-    -ArrayList<Arriendo> arriendosActuales;
-    -HashMap<String, Arriendo> arriendoXid;
-    -int deuda
+class Cliente extends Persona implements Transacciones {
+    - ArrayList<Arriendo> historialArriendos; //Coleccion de objetos 1 anidación.
+    - HashMap<String, Arriendo> historialXid;
     __
     ..Constructor..
     +Cliente()
     +Cliente(String nombre, String rut)
     ..Setter/Getter..
-    +String getNombre()
-    +void setNombre(String nombre)
-    +String getRut()
-    +void setRut(String rut)
     +void addArriendoToHistorial(Arriendo arriendo)
-    +int getDeuda()
-    +void setDeuda(int deuda)
     + Arriendo getArriendoXId(String id)
     + Arriendo getArriendo(int i)
     + Arriendo getHistorialXId(String id)
@@ -86,14 +77,67 @@ class Cliente{
     +void addToArriendoXid(Arriendo arriendo)
     +void mostrarHistorial(VideoClub tienda)
     +void mostrarHistorial(String id)
+    +String retornarHistorialCliente(VideoClub tienda)
     +boolean isEmptyArriendo()
     +boolean existIDHistorial(String id)
     +boolean existIDArriendo(String id)
     +int getSize(int modo)
-    +void delArriendo(String id)
-    +Arriendo delArriendo2(String id)
     +int contarGeneroEnHistorial(VideoClub tienda, String genero)
     +String generoMasVisto(VideoClub tienda)
+    + void identificacion()
+    + void arrendar(VideoClub tienda)
+    + void devolverArriendo(VideoClub tienda)
+    + void pagarDeuda(VideoClub tienda)
+}
+
+class Trabajador extends Persona implements Transacciones{
+    - String cargo;
+    - int sueldo;
+    - int vecesArriendosAtrasados;
+    __
+    ..Constructor..    
+    + Trabajador()
+    ..Setter/Getter..
+    + void setCargo(String cargo)
+    + void setSueldo(int sueldo)
+    + void setVecesArriendosAtrasados(int veces)
+    + String getCargo()
+    + int getSueldo()
+    + int setVecesArriendosAtrasados()
+    ..Otros métodos..
+    + void arrendar(VideoClub tienda)
+    + void devolverArriendo(VideoClub tienda)
+    + void pagarDeuda(VideoClub tienda)
+    + void identificacion()
+}
+
+abstract class Persona{
+    # String nombre
+    # String rut
+    # int deuda
+    # ArrayList<Arriendo> arriendosActuales
+    __
+    ..Constructor..
+    + Persona()
+    + Persona(String nombre, String rut)
+    ..Setter/Getter..
+     + String getNombre()
+     + void setNombre(String nombre)
+     + String getRut()
+     + void setRut(String rut)
+     + int getDeuda()
+     + void setDeuda(int deuda)
+     + Arriendo getArriendoXId(String id)
+     + Arriendo getArriendo(int i)
+    ..Otros métodos..
+     + void addToArriendosActuales(Arriendo arriendo)
+     + void addToArriendosXid(Arriendo arriendo)
+     + boolean isEmptyArriendos()
+     + boolean existIDArriendo(String id)
+     + void delArriendo(String id)
+     + Arriendo delArriendo2(String id)
+    ..Método abstracto..
+     + abstract void identificacion();
 }
 
 class Pelicula{
@@ -142,6 +186,13 @@ class Pelicula{
     +void setGeneros(String[] genero)
 }
 
+interface Transacciones{
+    + void arrendar(VideoClub tienda);
+    + void devolverArriendo(VideoClub tienda);
+    + void pagarDeuda(VideoClub tienda);
+}
+
+
 class Arriendo{
     -String id
     -float valoracion
@@ -170,18 +221,22 @@ class Arriendo{
 }
 
 class Main{
-    +static void main(String[] args)
+    + static void main(String[] args)
 }
 
-class Interface{
-    +static void inicioMenu(VideoClub tienda)
-    +static void menúCliente(String usuario,VideoClub x)
-    +static void menúAdmin(VideoClub x)
-    +static void menúEdiciónPelicula(VideoClub tienda)
-    +static void menúEdiciónCliente(VideoClub tienda)
+class MenuTienda{
+    + static void inicioMenu(VideoClub tienda)
+    + static void menúCliente(String usuario,VideoClub x)
+    + static void menúAdmin(VideoClub x)
+    + static void menúEdiciónPelicula(VideoClub tienda)
+    + static void menúEdiciónCliente(VideoClub tienda)
 }
 
 class Funciones{
+    + static String loginClientes(VideoClub x)
+    + static boolean formatoCorrectoRut(String rut)
+    + static boolean formatoCorrectoValuacion(float Valuacion)
+    + static String loginPelicula(VideoClub x)
     + static void listaPeliculas(VideoClub x)
     + static void listaClientes(VideoClub x)
     + static void mostrarHistorialCliente(VideoClub x, String rut)
@@ -210,12 +265,8 @@ class Funciones{
     + static void pagarDeuda(VideoClub tienda)
 }
 
-class Comprobar{
 
-    +static String loginClientes(VideoClub x)
-    +static boolean formatoCorrectoRut(String rut)
-    +static boolean formatoCorrectoValuacion(float Valuacion)
-    +static String loginPelicula(VideoClub x)
 
-}
+
+
 @enduml

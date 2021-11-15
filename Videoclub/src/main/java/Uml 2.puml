@@ -1,0 +1,251 @@
+@startuml
+Main "0..1" -> "0..1" LoginGUI: Invoca
+LoginGUI "0..1" -> "0..1" MenuAdmin: Invoca
+LoginGUI "0..1" -> "0..1" ClienteGUI: Invoca
+MenuAdmin "0..1" -> "0..1" RegistrarCliente: Invoca
+MenuAdmin "0..1" -> "0..1" InfoMenu: LLama
+ClienteGUI "0..1" -> "0..1" Cliente_InformacionGUI: LLama
+ClienteGUI "0..1" -> "0..1" Cliente_ServiciosGUI: LLama
+ClienteGUI "0..1" -> "0..1" Cliente_PeliculasGUI: LLama
+Cliente_PeliculasGUI "0..1" -> "0..1" FiltroGUI: LLama
+Cliente_PeliculasGUI "0..1" -> "0..1" BuscarPeliculaGUI: LLama
+BuscarPeliculaGUI "0..1" -> "0..1" DesplegarPeliculaGUI: LLama
+Cliente_PeliculasGUI "0..1" -> "0..1" MostrarDatosGUI: LLama
+Cliente_InformacionGUI "0..1" -> "0..1" MostrarDatosGUI: LLama
+
+class Main{
+    + static void main(String[] args)
+}
+
+class InfoMenu{
+    - String nameVentana;
+    - String nameFrame;
+    - JButton[] botones;
+    ..Constructor..
+    + InfoMenu(JButton[] args)
+    ..Setters y Getters..
+    + void setNameVentana(String nameVentana)
+    + void setNameFrame(String nameFrame)
+    + void setBotones(JButton[] botons)
+    + String getNameVentana()
+    + String getNameFrame()
+    + JButton[] getBotones()
+}
+
+class LoginGUI{
+    - VideoClub tienda;
+    - String rut;
+    __
+    ..Constructor..
+    + LoginGUI(VideoClub t)
+    ..Otros métodos..
+    - void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt)
+    - void buttonSalirActionPerformed(java.awt.event.ActionEvent evt)
+    - void textFieldRutMouseClicked(java.awt.event.MouseEvent evt)
+    - void boxAdminItemStateChanged(java.awt.event.ItemEvent evt)
+    - void boxClienteActionPerformed(java.awt.event.ActionEvent evt)
+    - void formMouseClicked(java.awt.event.MouseEvent evt)
+    - void textFieldRutActionPerformed(java.awt.event.ActionEvent evt)
+    - void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class MenuAdmin{
+    - String rutEmpleado;
+    - VideoClub tienda;
+    - JButton[] botonesActuales;
+    - String nombreVentana, nombreFrame;
+    - InfoMenu menuActual, menuAnterior;
+    __
+    ..Constructor..
+    + MenuAdmin(String rut, VideoClub tienda)
+    + MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre)
+    + MenuAdmin(String rut, VideoClub tienda, InfoMenu menu)
+    ..Otros métodos..
+    + void actionPerformed(ActionEvent e)
+}
+
+class ClienteGUI{
+    -VideoClub tienda;
+    -String rut;
+    -javax.swing.ButtonGroup Opciones;
+    -javax.swing.JButton bMenuAnterior;
+    -javax.swing.JButton bSiguiente;
+    -javax.swing.JLabel jLabel1;
+    -javax.swing.JPanel jPanel2;
+    -javax.swing.JRadioButton rBInformacionUsuario3;
+    -javax.swing.JRadioButton rBPeliculas1;
+    -javax.swing.JRadioButton rBServiciosParaClientes2;
+    __
+    ..Constructor..
+    +ClienteGUI(String r, VideoClub t)
+    +void initComponents()
+    ..Otros métodos..
+    +void bMenuAnteriorActionPerformed(java.awt.event.ActionEvent evt)
+    +void bSiguienteActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class RegistrarCliente{
+    - VideoClub local;
+    - JLabel nombreLabel,rutLabel, instructionLabel;
+    - JButton ingresarBoton;
+    - JTextField nombreCampo, rutCampo;
+    __
+    ..Constructor..
+    + RegistrarCliente(VideoClub tienda)
+    ..Otros métodos..
+    + void actionPerformed(ActionEvent e)
+}
+
+class Cliente_InformacionGUI{
+    - VideoClub tienda;
+    - String rut;
+    - javax.swing.ButtonGroup buttonGroup1;
+    - javax.swing.JButton jButton1;
+    - javax.swing.JButton jButton2;
+    - javax.swing.JLabel jLabel1;
+    - javax.swing.JPanel jPanel1;
+    - javax.swing.JRadioButton rBDesplegarFicha;
+    - javax.swing.JRadioButton rBRevisarHistorial;
+    - javax.swing.JRadioButton rBRevisarHistorialPeliculas;
+    __
+    ..Constructor..
+    + Cliente_InformacionGUI(String r, VideoClub t)
+    ..Otros métodos..
+    - void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+    - void jButton2ActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBDesplegarFichaActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBRevisarHistorialActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBRevisarHistorialPeliculasActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class Cliente_PeliculasGUI{
+    - VideoClub tienda;
+    - String rut;
+    - javax.swing.ButtonGroup buttonGroup1
+    - javax.swing.JLabel jLabel1
+    - javax.swing.JPanel jPanel1
+    - javax.swing.JComboBox<String> listaGeneros
+    - javax.swing.JButton menuAnterior
+    - javax.swing.JRadioButton rBBuscar
+    - javax.swing.JRadioButton rBDesplegarFiltros
+    - javax.swing.JRadioButton rBRecomendar
+    - javax.swing.JRadioButton rBRecomendarGen
+    - javax.swing.JRadioButton rbDesplegar
+    - javax.swing.JButton siguiente
+    __
+    ..Constructor..
+    + Cliente_PeliculasGUI(String r,VideoClub t)
+    ..Otros métodos..
+    - void menuAnteriorActionPerformed(java.awt.event.ActionEvent evt)
+    - void siguienteActionPerformed(java.awt.event.ActionEvent evt)
+    - void rbDesplegarActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBBuscarActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBRecomendarActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBRecomendarGenActionPerformed(java.awt.event.ActionEvent evt)
+    - void rBDesplegarFiltrosActionPerformed(java.awt.event.ActionEvent evt)
+
+}
+
+class Cliente_ServiciosGUI{
+    -VideoClub tienda;
+    -String rut;
+    -javax.swing.JButton bSiguiente;
+    -javax.swing.ButtonGroup buttonGroup1;
+    -javax.swing.JLabel jLabel1;
+    -javax.swing.JPanel jPanel1;
+    -javax.swing.JButton menuAnterior;
+    -javax.swing.JRadioButton rBArrendar;
+    -javax.swing.JRadioButton rBDevolver;
+    -javax.swing.JRadioButton rBPagar;
+    __
+    ..Constructor..
+    +Cliente_ServiciosGUI(String r, VideoClub t)
+    +void initComponents()
+    ..Otros métodos..
+    -void menuAnteriorActionPerformed(java.awt.event.ActionEvent evt)
+    -void bSiguienteActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class BuscarPeliculaGUI{
+    - VideoClub tienda;
+    - String pelicula;
+    - javax.swing.JButton bBuscar;
+    - javax.swing.JButton bCerrar;
+    - javax.swing.JLabel jLabel1;
+    - javax.swing.JLabel mensaje;
+    - javax.swing.JTextField tFPelicula;
+    __
+    ..Constructor..
+    + BuscarPeliculaGUI(VideoClub t)
+    ..Otros métodos..
+    - void bCerrarActionPerformed(java.awt.event.ActionEvent evt)
+    - void bBuscarActionPerformed(java.awt.event.ActionEvent evt)
+    - void tFPeliculaMouseClicked(java.awt.event.MouseEvent evt)
+}
+
+class MostrarDatosGUI{
+    - VideoClub tienda;
+    - String modo;
+    - String rut;
+    - javax.swing.JButton bCerrar;
+    - javax.swing.JScrollPane jScrollPane1;
+    - javax.swing.JTextArea jTextArea1;
+    __
+    ..Constructor..
+    +MostrarDatosGUI(VideoClub t, String modo)
+    +MostrarDatosGUI(VideoClub t, String rut, String modo)
+    ..Otros métodos..
+    +void bCerrarActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class DesplegarPeliculaGUI{
+    - VideoClub tienda;
+    - Pelicula pelicula;
+    - javax.swing.JButton bCerrar;
+    - javax.swing.JPanel jPanel1;
+    - javax.swing.JScrollPane jScrollPane1;
+    - javax.swing.JTextArea jTextArea1;
+    __
+    ..Constructor..
+    + DesplegarPeliculaGUI(VideoClub t, String p)
+    ..Otros Métodos..
+    - void bCerrarActionPerformed(java.awt.event.ActionEvent evt)
+}
+
+class FiltroGUI{
+    - VideoClub tienda;
+    - String input1, input2;
+    - javax.swing.JButton bCerrar;
+    - javax.swing.JButton bSiguiente;
+    - javax.swing.ButtonGroup buttonGroup1;
+    - javax.swing.JPanel jPanel1;
+    - javax.swing.JScrollPane jScrollPane1;
+    - javax.swing.JScrollPane jScrollPane3;
+    - javax.swing.JScrollPane jScrollPane4;
+    - javax.swing.JTextArea jTextArea1;
+    - javax.swing.JRadioButton rBCalidadDeImagen;
+    - javax.swing.JRadioButton rBDirector;
+    - javax.swing.JRadioButton rBDisponibilidad;
+    - javax.swing.JRadioButton rBGenero;
+    - javax.swing.JRadioButton rBRangoDeAnos;
+    - javax.swing.JRadioButton rBRangoDeDuracion;
+    - javax.swing.JRadioButton rBRangoDeValuacion;
+    - javax.swing.JTextArea tAInput1;
+    - javax.swing.JTextArea tAInput2;
+    __
+    ..Constructor..
+    +FiltroGUI(VideoClub t)
+    ..Otros metodos..
+    +void bCerrarActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBRangoDeAnosActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBRangoDeValuacionActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBGeneroActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBDisponibilidadActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBDirectorActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBCalidadDeImagenActionPerformed(java.awt.event.ActionEvent evt)
+    +void rBRangoDeDuracionActionPerformed(java.awt.event.ActionEvent evt)
+    +void bSiguienteActionPerformed(java.awt.event.ActionEvent evt)
+    +void tAInput1MouseClicked(java.awt.event.MouseEvent evt)
+    +void tAInput2MouseClicked(java.awt.event.MouseEvent evt)
+}
+@enduml
