@@ -1,0 +1,9 @@
+@startuml
+
+
+interface Transacciones{}
+
+class Trabajador implements Transacciones{}
+class Cliente implements Transacciones{}
+
+@enduml
