@@ -152,9 +152,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Peliculas"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBPeliculas1ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBServiciosParaClientes2">
           <Properties>
@@ -163,9 +160,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Servicios para Clientes"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBServiciosParaClientes2ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBInformacionUsuario3">
           <Properties>
@@ -174,9 +168,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Informaci&#xf3;n Usuario"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBInformacionUsuario3ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

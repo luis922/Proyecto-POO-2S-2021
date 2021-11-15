@@ -133,9 +133,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Desplegar Ficha de Cliente"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBDesplegarFichaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBRevisarHistorial">
           <Properties>
@@ -144,9 +141,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Revisar Historial"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBRevisarHistorialActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBRevisarHistorialPeliculas">
           <Properties>
@@ -155,9 +149,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Revisar Historial de una Pelicula"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBRevisarHistorialPeliculasActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

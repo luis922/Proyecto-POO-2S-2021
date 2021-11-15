@@ -145,9 +145,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Desplegar catalogo de peliculas"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbDesplegarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBBuscar">
           <Properties>
@@ -156,9 +153,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar Pelicula"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBBuscarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBRecomendar">
           <Properties>
@@ -167,9 +161,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Recomendar Pelicula"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBRecomendarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBRecomendarGen">
           <Properties>
@@ -178,9 +169,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Recomendar Pelicula por genero"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBRecomendarGenActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBDesplegarFiltros">
           <Properties>
@@ -189,9 +177,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Desplegar catalogo por filtros"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBDesplegarFiltrosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="listaGeneros">
           <Properties>

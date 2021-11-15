@@ -15,12 +15,7 @@ public class Cliente_ServiciosGUI extends javax.swing.JFrame {
         this.rut = r;
         initComponents();
     }
-
-    private Cliente_ServiciosGUI() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-   
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -56,27 +51,12 @@ public class Cliente_ServiciosGUI extends javax.swing.JFrame {
 
         buttonGroup1.add(rBArrendar);
         rBArrendar.setText("Arrendar Pelicula");
-        rBArrendar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rBArrendarActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rBDevolver);
         rBDevolver.setText("Devoplver Pelicula");
-        rBDevolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rBDevolverActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rBPagar);
         rBPagar.setText("Pagar Deuda");
-        rBPagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rBPagarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,14 +120,13 @@ public class Cliente_ServiciosGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAnteriorActionPerformed
-        // TODO add your handling code here:
+
         ClienteGUI cGUI = new ClienteGUI(rut,tienda);
         cGUI.setVisible(true);
         dispose();
     }//GEN-LAST:event_menuAnteriorActionPerformed
 
     private void bSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSiguienteActionPerformed
-        // TODO add your handling code here:
         
         if(rBArrendar.isSelected()){
             tienda.getClientFromClientXRut(rut).arrendar(tienda);
@@ -162,18 +141,6 @@ public class Cliente_ServiciosGUI extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_bSiguienteActionPerformed
-
-    private void rBArrendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBArrendarActionPerformed
-        
-    }//GEN-LAST:event_rBArrendarActionPerformed
-
-    private void rBDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBDevolverActionPerformed
-        
-    }//GEN-LAST:event_rBDevolverActionPerformed
-
-    private void rBPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBPagarActionPerformed
-        
-    }//GEN-LAST:event_rBPagarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

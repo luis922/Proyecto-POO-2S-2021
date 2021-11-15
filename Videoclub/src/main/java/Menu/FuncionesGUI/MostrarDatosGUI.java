@@ -1,4 +1,3 @@
-
 package Menu.FuncionesGUI;
 
 import Clases.VideoClub;
@@ -23,13 +22,6 @@ public class MostrarDatosGUI extends javax.swing.JFrame {
         this.rut = rut;
         initComponents();
     }
-    
-
-    private MostrarDatosGUI() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-
     @SuppressWarnings("unchecked")
     private void initComponents() {
 

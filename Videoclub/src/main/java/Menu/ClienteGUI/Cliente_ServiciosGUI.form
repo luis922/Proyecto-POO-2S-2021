@@ -133,9 +133,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Arrendar Pelicula"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBArrendarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBDevolver">
           <Properties>
@@ -144,9 +141,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Devoplver Pelicula"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBDevolverActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rBPagar">
           <Properties>
@@ -155,9 +149,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Pagar Deuda"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rBPagarActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
