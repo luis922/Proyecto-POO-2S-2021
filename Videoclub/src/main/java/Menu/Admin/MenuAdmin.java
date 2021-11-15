@@ -20,7 +20,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
     private String nombreVentana, nombreFrame;
     private InfoMenu menuActual, menuAnterior;
 
-    public MenuAdmin(String rut, VideoClub tienda) { //Menu llamado por LoginGUI
+    public MenuAdmin(String rut, VideoClub tienda) { //Usado para acceder al Menú empleado principal
         super("Menú Empleado");
 
         rutEmpleado = rut;
@@ -66,7 +66,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre) {
+    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre) {//Usado para acceder a distintos menús
         super(menu.getNameVentana());
 
         rutEmpleado = rut;
@@ -108,7 +108,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu) {
+    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu) { //Usado para volver al menú anterior
         super(menu.getNameVentana());
 
         rutEmpleado = rut;
