@@ -15,8 +15,8 @@ import Menu.Funciones;
  * @author sebas
  */
 public class Cliente_InformacionGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String rut;
+    private VideoClub tienda;
+    private String rut;
 
     public Cliente_InformacionGUI(String r, VideoClub t) {
         this.setLocationRelativeTo(null);

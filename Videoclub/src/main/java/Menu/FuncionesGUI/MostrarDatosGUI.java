@@ -6,9 +6,9 @@ import Menu.Funciones;
 import javax.swing.*;
 
 public class MostrarDatosGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String modo;
-    String rut;
+    private VideoClub tienda;
+    private String modo;
+    private String rut;
 
     public MostrarDatosGUI(VideoClub t, String modo) {
         this.setLocationRelativeTo(null);

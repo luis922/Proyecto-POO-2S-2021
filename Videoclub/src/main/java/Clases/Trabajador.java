@@ -6,9 +6,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class Trabajador extends Persona implements Transacciones{
-    String cargo;
-    int sueldo;
-    int vecesArriendosAtrasados;
+    private String cargo;
+    private int sueldo;
+    private int vecesArriendosAtrasados;
     
     public Trabajador(){
         cargo = null;

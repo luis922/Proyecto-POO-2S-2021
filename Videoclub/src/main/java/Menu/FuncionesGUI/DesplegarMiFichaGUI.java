@@ -13,9 +13,9 @@ import Clases.VideoClub;
  * @author sebas
  */
 public class DesplegarMiFichaGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String rut;
-    Cliente x;
+    private VideoClub tienda;
+    private String rut;
+    private Cliente x;
 
     /**
      * Creates new form DesplegarMiFichaGUI

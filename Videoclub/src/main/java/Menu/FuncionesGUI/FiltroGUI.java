@@ -13,8 +13,8 @@ import Menu.Funciones;
  * @author sebas
  */
 public class FiltroGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String input1,input2;
+    private VideoClub tienda;
+    private String input1,input2;
 
     /**
      * Creates new form FiltrosGUI

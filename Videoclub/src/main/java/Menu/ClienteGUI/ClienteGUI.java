@@ -13,8 +13,8 @@ import Menu.*;
  * @author sebas
  */
 public class ClienteGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String rut;
+    private VideoClub tienda;
+    private String rut;
 
     /**
      * Creates new form NewJFrame

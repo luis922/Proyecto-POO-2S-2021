@@ -14,8 +14,8 @@ import Menu.Funciones;
  * @author sebas
  */
 public class DesplegarPeliculaGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    Pelicula pelicula;
+    private VideoClub tienda;
+    private Pelicula pelicula;
     
 
     /**

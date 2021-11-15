@@ -18,7 +18,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
     private VideoClub tienda;
     private JButton[] botonesActuales;
     private String nombreVentana, nombreFrame;
-    InfoMenu menuActual, menuAnterior;
+    private InfoMenu menuActual, menuAnterior;
 
     public MenuAdmin(String rut, VideoClub tienda) { //Menu llamado por LoginGUI y menus de menu empleado
         super("Menú Empleado");

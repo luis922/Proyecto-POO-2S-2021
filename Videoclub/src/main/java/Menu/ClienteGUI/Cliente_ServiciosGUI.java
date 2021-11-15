@@ -5,8 +5,8 @@ import Clases.VideoClub;
 import Menu.Funciones; 
 
 public class Cliente_ServiciosGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String rut;
+    private VideoClub tienda;
+    private String rut;
 
    
     public Cliente_ServiciosGUI(String r, VideoClub t) {

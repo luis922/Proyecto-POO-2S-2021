@@ -12,8 +12,8 @@ import Clases.VideoClub;
  * @author sebas
  */
 public class BuscarPeliculaGUI extends javax.swing.JFrame {
-    VideoClub tienda;
-    String pelicula;
+    private VideoClub tienda;
+    private String pelicula;
 
     /**
      * Creates new form BuscarPeliculaGUI
