@@ -6,8 +6,11 @@
 package Menu;
 
 import Clases.*;
+import ExceptionsVideoClub.FechaInvalidaException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -103,30 +106,29 @@ public class Funciones {
         return x.obtenerIdXNombre(nombre);
     }
 
-    public static Boolean formatoCorrectoFecha(String fecha){//Comprueba que la fecha cumpla con el formato deseado
+    public static void formatoCorrectoFecha(String fecha) throws FechaInvalidaException {
+        //Comprueba que la fecha cumpla con el formato deseado
         //y y y y - m m - d d     2021-09-05 largo 10
-        //0 1 2 3 4 5 6 7 8 9
+        //0 1 2 3 4 5 6 7 8 9 <-- Indices
         String [] arfecha = fecha.split("");
-        if(fecha.length() != 10)// comprueba el largo de la fecha
-            return false;
+        if(fecha.length() != 10) // comprueba el largo de la fecha
+            throw new FechaInvalidaException("Fecha no cumple con el largo deseado");
         else{
             if (!arfecha[4].equals("-") || !arfecha[7].equals("-")) // comprueba que los guiones esten en su lugar
-                return false;
+                throw new FechaInvalidaException("Faltan guiones o no están ubicados en la posición correcta ");
             else{
                 if(tieneChar(fecha)){//comprueba si hay chars en año, mes y dia en vez de int
-                    return false;
+                    throw new FechaInvalidaException("Se han encontrado caracteres en la fecha");
                 }
                 else{
                     int mes = Integer.parseInt(arfecha[5]+arfecha[6]);
                     int dia = Integer.parseInt(arfecha[8]+arfecha[9]);
                     if( mes < 1 || mes > 12 ){
-                        return false;
+                        throw new FechaInvalidaException("Mes fuera de rango permitido");
                     }
                     else{
                         if(dia < 1 || dia > 31)
-                            return false;
-                        else
-                            return true;
+                            throw new FechaInvalidaException("Día fuera de rango permitido");
                     }
                 }
             }
@@ -188,7 +190,7 @@ public class Funciones {
                 break;
             }
             else{
-                System.out.println("No se encuentra la pelicula en el historial.");
+                System.out.println("No se encuentra la película en el historial.");
                 System.out.println("Ingrese nombre nuevamente o '0' para terminar.");
             }
         }while(!nombre.equals("0"));
@@ -199,12 +201,12 @@ public class Funciones {
         Scanner teclado = new Scanner(System.in);
         Cliente nuevo = new Cliente();
         int i = 0;
-        System.out.println("Bienvenido al registro de clientes, porfavor introduzca el nombre del cliente:");
+        System.out.println("Bienvenido al registro de clientes, por favor introduzca el nombre del cliente:");
         nuevo.setNombre(teclado.nextLine()) ;
         System.out.println("Introduzca el rut del cliente(con guión antes del dígito verificador): ");
         
         do{
-            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado, porfavor. ingreselo nuevamente.");
+            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado, por favor ingréselo nuevamente.");
             nuevo.setRut(teclado.nextLine());
             i++;
         }while(!formatoCorrectoRut(nuevo.getRut()));
@@ -218,7 +220,7 @@ public class Funciones {
     public static void registrarPelicula(VideoClub x){//Incompleto aún, falta ranking e ingreso en la base
         Scanner teclado = new Scanner(System.in);
         Pelicula nueva = new Pelicula();
-        System.out.println("Bienvenido al registro de peliculas, porfavor, introduzca el nombre de la película:");
+        System.out.println("Bienvenido al registro de películas, por favor, introduzca el nombre de la película:");
         nueva.setNombre(teclado.nextLine());
         nueva.setDirector(ingresoDirectores(teclado));
         nueva.setGeneros(ingresoGeneros(teclado));
@@ -270,7 +272,7 @@ public class Funciones {
                         fechaArriendo = LocalDate.parse(teclado.nextLine());
                         System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-06");
                         fechaEntrega = LocalDate.parse(teclado.nextLine());
-                        if(!x.getClientFromClientXRut(rut).existIDHistorial(id)){//Primera vez q arrienda la pelicula.
+                        if(!x.getClientFromClientXRut(rut).existIDHistorial(id)){//Primera vez q arrienda la película.
                             arriendo = new Arriendo();
                             arriendo.setId(id);
                             arriendo.setFechaArriendo(fechaArriendo);
@@ -281,7 +283,7 @@ public class Funciones {
                             x.getClientFromClientXRut(rut).addToHistorial(arriendo);
                         }
                         else{//Ha arrendadoo antes la pelicula
-                            System.out.println("Cliente ha arrendado la pelicula antes, se actualizan los datos...");
+                            System.out.println("Cliente ha arrendado la película antes, se actualizan los datos...");
                             arriendo = x.getClientFromClientXRut(rut).getHistorialXId(id);
                             arriendo.setFechaArriendo(fechaArriendo);
                             arriendo.setFechaEntrega(fechaEntrega);
@@ -349,7 +351,7 @@ public class Funciones {
         float valuacion;
         int contador = 0;
         do{
-            if(contador != 0) System.out.println("Porfavor, ingrese la Valuacion en el formato solicitado");
+            if(contador != 0) System.out.println("Por favor, ingrese la Valuación en el formato solicitado");
             valuacion = teclado.nextFloat();
             teclado.nextLine();
             contador++;
@@ -363,7 +365,7 @@ public class Funciones {
     public static void buscarPelicula(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String nombrePeli;
-        System.out.println("Ingrese nombre de la pelicula a buscar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+        System.out.println("Ingrese nombre de la película a buscar: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
         do{
             nombrePeli = teclado.nextLine();
             String id = x.obtenerIdXNombre(nombrePeli);
@@ -416,7 +418,7 @@ public class Funciones {
             cliente = new Cliente();
             cliente.setNombre(arrayLineaClientes[0]);
             cliente.setRut(arrayLineaClientes[1]);
-            for(i=0; i<arrayLineaClientes[2].split("_").length; i++){ //Recorre la lista de de los sarriendos separados por "_"
+            for(i=0; i<arrayLineaClientes[2].split("_").length; i++){ //Recorre la lista de de los arriendos separados por "_"
                 arriendo = new Arriendo();
                 arriendo.setId(arrayLineaClientes[2].split("_")[i]);
                 cliente.addToHistorial(arriendo); //Agrega el arriendo a la lista
@@ -485,7 +487,7 @@ public class Funciones {
         int contador = 0;
         System.out.println("Ingrese el nombre de la pelicula que desea eliminar:");
         do{
-            if(contador != 0) System.out.println("La pelicula ingresada no se encuentra en nuestro registro, intentelo nuevamente\n(ingrese \"0\" para cancelar)");
+            if(contador != 0) System.out.println("La película ingresada no se encuentra en nuestro registro, inténtelo nuevamente\n(ingrese \"0\" para cancelar)");
             nombre = teclado.nextLine();
             contador++;
         }while(!x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) && !nombre.equals("0"));
@@ -513,7 +515,7 @@ public class Funciones {
         System.out.println("Ingrese el rut del usuario a eliminar:");
         do{
             if(contador != 0)
-                System.out.println("El rut ingresado no se encuentra en nuestro registro, intenelo nuevamente\n(Ingrese \"0\" para cancelar)");
+                System.out.println("El rut ingresado no se encuentra en nuestro registro, inténtelo nuevamente\n(Ingrese \"0\" para cancelar)");
             rut = teclado.nextLine();
             contador++;
         }while(!x.containsRutClientes(rut) && !rut.equals("0"));
@@ -535,12 +537,12 @@ public class Funciones {
     }
 	
 //-----------------------------ARRENDAR PELICULAS--------------------------------------
-    public static Arriendo nuevoArriendo (VideoClub tienda, String rut){
+    public static Arriendo nuevoArriendo (VideoClub tienda, String rut){//Implementa try-catch
         String nombrePeli, id;
         Arriendo arriendo = new Arriendo();
         Scanner teclado = new Scanner(System.in);
         do{
-            System.out.println("Ingrese nombre pelicula a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
+            System.out.println("Ingrese nombre película a arrendar['0' para terminar]: (Killer Bean Forever, Bob Esponja: La Pelicula, Shrek, Shrek 2, ¿Quien mató al Capitan Alex?)");
             nombrePeli = teclado.nextLine();
             id = tienda.obtenerIdXNombre(nombrePeli);
             if (!nombrePeli.equals("0")){
@@ -556,11 +558,47 @@ public class Funciones {
                             System.out.println("No hay copias de esta película disponibles.");
                         }
                         else{
-                            System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
-                            arriendo.setFechaArriendo(LocalDate.parse(teclado.nextLine()));
-                            System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-06");
-                            //Agregar comprobación para evitar que se ingresen fechas de entregas anteriores a la de arriendo
-                            arriendo.setFechaEntrega(LocalDate.parse(teclado.nextLine()));
+                            String fechaArriendo, fechaEntrega;
+                            while(true){
+                                try{
+                                    System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
+                                    fechaArriendo = teclado.nextLine();
+                                    //Comprueba que la fecha ingresada sea la actual
+                                    if(ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(fechaArriendo)) != 0){
+                                        System.out.println("Ingrese la fecha de hoy");
+                                        continue;
+                                    }
+                                    else{
+                                        formatoCorrectoFecha(fechaArriendo);// throw FechaInvalidaException
+                                        arriendo.setFechaArriendo(LocalDate.parse(fechaArriendo));
+                                        System.out.println("Fecha de arriendo ingresada correctamente");
+                                    }
+                                    break;
+                                }
+                                catch (FechaInvalidaException e){
+                                    System.out.println("Formato incorrecto \n" + e +"\n");
+                                }
+                            }
+                            while(true){
+                                try{
+                                    System.out.println("Ingrese fecha entrega: yyyy-mm-dd Ej: 2021-09-15");
+                                    fechaEntrega = teclado.nextLine();
+                                    formatoCorrectoFecha(fechaEntrega);// throw FechaInvalidaException
+                                    //Comprueba que la fecha ingresada sea futura
+                                    if(ChronoUnit.DAYS.between(LocalDate.parse(fechaArriendo), LocalDate.parse(fechaEntrega)) < 1){
+                                        System.out.println("Ingrese una fecha futura");
+                                        continue;
+                                    }
+                                    else{
+                                        arriendo.setFechaEntrega(LocalDate.parse(fechaEntrega));
+                                        System.out.println("Fecha de entrega ingresada correctamente");
+                                    }
+                                    break;
+                                }
+                                catch (FechaInvalidaException e){
+                                    System.out.println("Formato incorrecto \n" + e +"\n");
+                                }
+                            }
                             arriendo.setId(id);
                             arriendo.setVecesArrendada(arriendo.getVecesArrendada()+1);
                             arriendo.setEntregado(false);
@@ -717,7 +755,7 @@ public class Funciones {
                     break;     
             }
         }
-        System.out.println("Se encontraron " + aux + " peliculas con el parametro ingresado");
+        System.out.println("Se encontraron " + aux + " películas con el parámetro ingresado");
     }
     
     public static void filtradoDirector(VideoClub tienda){
@@ -752,7 +790,7 @@ public class Funciones {
         String calidad;
         
         do{
-            if(i != 0) System.out.println("La calidad no se encuentra en nuestro catalogo, intentelo nuevamente");
+            if(i != 0) System.out.println("La calidad no se encuentra en nuestro catalogo, inténtelo nuevamente");
             System.out.println("Ingrese la calidad a buscar **Ingrese 0 para salir**");
             calidad = teclado.nextLine();
             
@@ -766,7 +804,7 @@ public class Funciones {
             i++;
         }while(cont == 0 && !calidad.equals("0"));
         
-        if(cont != 0) System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+        if(cont != 0) System.out.println("Se encontraron " + cont + " película con el parámetro ingresado");
     }
     
     public static void filtradoDuración(VideoClub tienda){
@@ -791,7 +829,7 @@ public class Funciones {
                 tienda.mostrarDatosPeliculas(Integer.toString(i));
             }
         }
-        System.out.println("Se encontraron " + cont + " pelicula con el parametro ingresado");
+        System.out.println("Se encontraron " + cont + " película con el parámetro ingresado");
     }
 
 //-----------------------------OTROS------------------------------------------------
@@ -845,12 +883,12 @@ public class Funciones {
             todasLasPeliculas = todasLasPeliculas.concat("Id: " + aux.getId() + "\n");
             todasLasPeliculas = todasLasPeliculas.concat("Nombre: " + aux.getNombre() + "\n");
             todasLasPeliculas = todasLasPeliculas.concat("Año de estreno: " + aux.getAñoEstreno()+ "\n");
-            todasLasPeliculas = todasLasPeliculas.concat("Duracion: " + aux.getDuraciónMin() + " minutos\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Duración: " + aux.getDuraciónMin() + " minutos\n");
             todasLasPeliculas = todasLasPeliculas.concat("Calidad: " + aux.getCalidad() + "\n");
-            todasLasPeliculas = todasLasPeliculas.concat("Puntuacion: " + aux.getValuacion()+ " de 5\n\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Puntuación: " + aux.getValuacion()+ " de 5\n\n");
             todasLasPeliculas = todasLasPeliculas.concat("Sinopsis: " + Funciones.formateoSinopsis(aux.getSinopsis()) + "\n\n");
             todasLasPeliculas = todasLasPeliculas.concat("Director(s): " + Funciones.comaFormateado(aux.getDirector()) + "\n");
-            todasLasPeliculas = todasLasPeliculas.concat("Generos: " + Funciones.comaFormateado(aux.getGeneros()) + "\n");
+            todasLasPeliculas = todasLasPeliculas.concat("Géneros: " + Funciones.comaFormateado(aux.getGeneros()) + "\n");
             todasLasPeliculas = todasLasPeliculas.concat("Actores: " + Funciones.comaFormateado(aux.getActores()) + "\n");
             todasLasPeliculas = todasLasPeliculas.concat("Copias disponibles: " + aux.getDisponibles() + "\n\n\n\n");
                         
