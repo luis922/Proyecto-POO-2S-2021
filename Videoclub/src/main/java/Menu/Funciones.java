@@ -563,13 +563,14 @@ public class Funciones {
                                 try{
                                     System.out.println("Ingrese fecha arriendo: yyyy-mm-dd Ej: 2021-09-06");
                                     fechaArriendo = teclado.nextLine();
+                                    formatoCorrectoFecha(fechaArriendo);// throw FechaInvalidaException
                                     //Comprueba que la fecha ingresada sea la actual
                                     if(ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(fechaArriendo)) != 0){
                                         System.out.println("Ingrese la fecha de hoy");
                                         continue;
                                     }
                                     else{
-                                        formatoCorrectoFecha(fechaArriendo);// throw FechaInvalidaException
+
                                         arriendo.setFechaArriendo(LocalDate.parse(fechaArriendo));
                                         System.out.println("Fecha de arriendo ingresada correctamente");
                                     }
