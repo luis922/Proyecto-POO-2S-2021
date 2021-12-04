@@ -96,11 +96,52 @@ public class Funciones {
             nombre = teclado.nextLine();
             contador++;
 
-        }while(x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) == false && nombre.equals("0"));
+        }while(!x.containsIdPeliculas(x.obtenerIdXNombre(nombre)) && nombre.equals("0"));
 
         if(nombre.equals("0")) return nombre;
 
         return x.obtenerIdXNombre(nombre);
+    }
+
+    public static Boolean formatoCorrectoFecha(String fecha){//Comprueba que la fecha cumpla con el formato deseado
+        //y y y y - m m - d d     2021-09-05 largo 10
+        //0 1 2 3 4 5 6 7 8 9
+        String [] arfecha = fecha.split("");
+        if(fecha.length() != 10)// comprueba el largo de la fecha
+            return false;
+        else{
+            if (!arfecha[4].equals("-") || !arfecha[7].equals("-")) // comprueba que los guiones esten en su lugar
+                return false;
+            else{
+                if(tieneChar(fecha)){//comprueba si hay chars en año, mes y dia en vez de int
+                    return false;
+                }
+                else{
+                    int mes = Integer.parseInt(arfecha[5]+arfecha[6]);
+                    int dia = Integer.parseInt(arfecha[8]+arfecha[9]);
+                    if( mes < 1 || mes > 12 ){
+                        return false;
+                    }
+                    else{
+                        if(dia < 1 || dia > 31)
+                            return false;
+                        else
+                            return true;
+                    }
+                }
+            }
+        }
+    }
+
+    public static boolean tieneChar(String linea){
+        for(int i=0; i < linea.length(); i++) {
+            if(i!= 4 && i!=7) {
+                if (!Character.isDigit(linea.charAt(i))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 //------------------MOSTRAR HISTORIAL CLIENTE------------------
@@ -819,39 +860,5 @@ public class Funciones {
     
 
 }
-
-
-
-    
-    
-
-//-----------------------------RECOMENDAR PELICULA----------------------------------
-    //Por implementar
-   /* public static void recomendarPelicula(VideoClub tienda, String rut){//No funcionando aun
-        String genero,peli = null;
-        ArrayList<String> ids = new ArrayList<>();
-        Scanner teclado = new Scanner(System.in);
-        float valoracion;
-
-        if(tienda.getClientFromClientXRut(rut).getSize(1) == 0) //Si no tiene historial de arriendos
-            System.out.println("Le recomendamos arrendar la película mejor evaluada de la tienda: "+ tienda.peliMejorEvaluada());
-        else{
-            genero = tienda.getClientFromClientXRut(rut).generoMasVisto(tienda);
-            System.out.println("Ingrese la valoración minima que debe tener la película recomendada. [0.0-5.0]");
-            valoracion = Float.parseFloat(teclado.nextLine());
-            do {
-                if(tienda.getClientFromClientXRut(rut).existIDHistorial(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero,ids,valoracion)))){
-                    //Si la pelicula ya esta registrada en historial, no se recomienda
-                    ids.add(tienda.obtenerIdXNombre(tienda.peliMejorEvaluada(genero)));
-                    //Y se descarta para ser la peli mejor evaluada
-                }
-                else
-                    peli = tienda.peliMejorEvaluada(genero,ids,valoracion);
-            }while(peli == null && tienda.peliMejorEvaluada(genero,ids,valoracion)!= null);
-
-            if(peli == null || tienda.peliMejorEvaluada(genero,ids,valoracion)== null)
-                System.out.println("No tenemos una película para recomendarle según los datos disponibles.");
-        }
-    }*/
 
 
