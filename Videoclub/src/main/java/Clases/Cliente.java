@@ -175,7 +175,7 @@ public class Cliente extends Persona implements Transacciones{
             }
             else{
                 diasAtraso = ChronoUnit.DAYS.between(getArriendoXId(id).getFechaEntrega(), LocalDate.now());
-                //Calcula dias transcurridos entre dos fechas, puede ser un numero positivo(no atraso), nega
+                //Calcula dias transcurridos entre dos fechas, puede ser un número positivo(no atraso)
                 tienda.getPeliFromPelisXId(id).setDisponibles((short)(tienda.getPeliFromPelisXId(id).getDisponibles()+1));
                 //Se agrega una copia más a las disponibles
 
