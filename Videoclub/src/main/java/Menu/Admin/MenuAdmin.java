@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class MenuAdmin extends JFrame implements ActionListener {
@@ -19,14 +20,16 @@ public class MenuAdmin extends JFrame implements ActionListener {
     private JButton[] botonesActuales;
     private String nombreVentana, nombreFrame;
     private InfoMenu menuActual, menuAnterior;
+    private HashMap<String,InfoMenu> menus; //Evita que se pierda info de menús anteriores
 
-    public MenuAdmin(String rut, VideoClub tienda) { //Usado para acceder al Menú empleado principal
+    public MenuAdmin(String rut, VideoClub tienda) { //Usado para acceder al Menú empleado principal la primera vez
         super("Menú Empleado");
 
         rutEmpleado = rut;
         this.tienda = tienda;
         this.nombreVentana = "Menú Empleado";
         this.nombreFrame = "Menú Empleado";
+        menus = new HashMap<>();
 
         botonesActuales = new JButton[4];
         botonesActuales[0] = new JButton("Gestión de datos");
@@ -35,6 +38,57 @@ public class MenuAdmin extends JFrame implements ActionListener {
         botonesActuales[3] = new JButton("Volver");
 
         menuActual = guardarInfoMenu(nombreVentana,nombreFrame,botonesActuales);
+        if(!menus.containsKey(nombreVentana))
+            menus.put(nombreVentana, menuActual);
+
+        int alto = 50 * botonesActuales.length + 5 * (botonesActuales.length - 1) + 200;
+        int botonY = (alto - (50 * botonesActuales.length + 5 * (botonesActuales.length - 1))) / 2
+                - (5 * (botonesActuales.length - 1)) / 2;
+        int nombreMenuY = botonY / 2 - 20;
+
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, alto);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        getContentPane().setBackground(new Color(0x123456));
+
+        JLabel nombreMenu = new JLabel("Menú Empleado", SwingConstants.CENTER);
+        nombreMenu.setBounds(0, nombreMenuY, 400, 40);
+        nombreMenu.setForeground(new Color(255, 255, 255));
+        nombreMenu.setFont(new Font(null, Font.ITALIC, 20));
+        add(nombreMenu);
+
+        int margen = 0;
+        for (int i = 0; i < botonesActuales.length; i++) {
+            botonesActuales[i].setFocusable(false);
+            botonesActuales[i].setBounds(100, botonY + margen, 200, 50);
+            botonesActuales[i].addActionListener(this);
+            add(botonesActuales[i]);
+            margen += 55;
+        }
+
+        setVisible(true);
+    }
+    public MenuAdmin(String rut, VideoClub tienda, HashMap<String, InfoMenu> menusUsados) {
+        //Usado para acceder al Menú empleado principal después de haber ingresado por primera vez
+        super("Menú Empleado");
+
+        rutEmpleado = rut;
+        this.tienda = tienda;
+        this.nombreVentana = "Menú Empleado";
+        this.nombreFrame = "Menú Empleado";
+        menus = menusUsados;
+
+        botonesActuales = new JButton[4];
+        botonesActuales[0] = new JButton("Gestión de datos");
+        botonesActuales[1] = new JButton("Servicios para cliente");
+        botonesActuales[2] = new JButton("Generar reportes");
+        botonesActuales[3] = new JButton("Volver");
+
+        menuActual = guardarInfoMenu(nombreVentana,nombreFrame,botonesActuales);
+        if(!menus.containsKey(nombreVentana))
+            menus.put(nombreVentana, menuActual);
 
         int alto = 50 * botonesActuales.length + 5 * (botonesActuales.length - 1) + 200;
         int botonY = (alto - (50 * botonesActuales.length + 5 * (botonesActuales.length - 1))) / 2
@@ -66,7 +120,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre) {//Usado para acceder a distintos menús
+    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, InfoMenu menuPadre, HashMap<String, InfoMenu> menusUsados) {
+        //Usado para acceder a distintos menús
         super(menu.getNameVentana());
 
         rutEmpleado = rut;
@@ -74,9 +129,12 @@ public class MenuAdmin extends JFrame implements ActionListener {
         this.nombreVentana = menu.getNameVentana();
         this.nombreFrame = menu.getNameFrame();
         botonesActuales = menu.getBotones();
+        menus = menusUsados;
 
         menuActual = guardarInfoMenu(nombreVentana,nombreFrame,botonesActuales);
         menuAnterior = menuPadre;
+        if(!menus.containsKey(nombreVentana))
+            menus.put(nombreVentana, menuActual);
 
         int alto = 50 * botonesActuales.length + 5 * (botonesActuales.length-1) + 200;
         int botonY = (alto -(50 * botonesActuales.length + 5 * (botonesActuales.length-1)))/2
@@ -108,7 +166,8 @@ public class MenuAdmin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu) { //Usado para volver al menú anterior
+    public MenuAdmin(String rut, VideoClub tienda, InfoMenu menu, HashMap<String, InfoMenu> menusUsados) {
+        //Usado para volver al menú anterior
         super(menu.getNameVentana());
 
         rutEmpleado = rut;
@@ -116,8 +175,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
         this.nombreVentana = menu.getNameVentana();
         this.nombreFrame = menu.getNameFrame();
         botonesActuales = menu.getBotones();
+        menus = menusUsados;
 
         menuActual = guardarInfoMenu(nombreVentana,nombreFrame,botonesActuales);
+        if(!menus.containsKey(nombreVentana))
+            menus.put(nombreVentana, menuActual);
 
         int alto = 50 * botonesActuales.length + 5 * (botonesActuales.length-1) + 200;
         int botonY = (alto -(50 * botonesActuales.length + 5 * (botonesActuales.length-1)))/2
@@ -195,7 +257,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     }
                     dispose();
                     menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
-                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
                 }
                 else{
                     dispose();
@@ -275,7 +337,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     }
                     dispose();
                     menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
-                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
                 }
                 else{
                     dispose();
@@ -300,7 +362,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior,menus);
                 }
                 break;
             }
@@ -327,7 +389,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior,menus);
                 }
                 break;
             }
@@ -350,7 +412,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                         botonesNextMenu[10] = new JButton("Volver");
                         menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
                         dispose();
-                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){
@@ -363,7 +425,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                             botonesNextMenu[3] = new JButton("Volver");
                             menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
                             dispose();
-                            new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual);
+                            new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
                         }
                         else{
                             if (e.getSource() == botonesActuales[2]){
@@ -378,7 +440,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                    if(menuAnterior == null)
+                        System.out.println("NULL AQUIIIIIIIIIIIIIII EDICION DATOS");
+                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
                 }
                 break;
             }
@@ -451,7 +515,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior,menus);
                 }
                 break;
             }
@@ -486,7 +550,9 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else {
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menuAnterior);
+                    if(menuAnterior == null)
+                        System.out.println("NULL AQUIIIIIIIIIIIIIII");
+                    new MenuAdmin(rutEmpleado, tienda, menuAnterior,menus);
                 }
                 break;
             }
