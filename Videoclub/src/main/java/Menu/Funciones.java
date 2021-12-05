@@ -70,12 +70,12 @@ public class Funciones {
             return rutIngresado;
         }
     }
-
+    
     public static void formatoCorrectoRut(String rut) throws RutInvalidoException{
         if(rut.equals(""))
             throw new RutInvalidoException("Ingrese rut.");
         if (rut.length() != 10){
-            throw new RutInvalidoException("Cantidad de caracteres para rut valido es de 10. (ej. 12345678-0)");
+            throw new RutInvalidoException("Largo de rut incorrecto, debe tener 10 caracteres. (ej. 11111111-1)");
         }
         for(int i=0; i<rut.length(); i++){
             if(i<rut.length()-2 && !Character.isDigit(rut.charAt(i)))
