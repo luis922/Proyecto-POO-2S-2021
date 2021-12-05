@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import ExceptionsVideoClub.RutInvalidoException;
 
 public class RegistrarCliente extends JFrame implements ActionListener {
 
@@ -72,32 +73,36 @@ public class RegistrarCliente extends JFrame implements ActionListener {
         String name = nombreCampo.getText();
         String id = rutCampo.getText();
         Cliente nuevoCliente = new Cliente();
+        
+        try{
+            id = rutCampo.getText();
+            Funciones.formatoCorrectoRut(id); //throw RutInvalido EXception
+        }
+        catch (RutInvalidoException ex){
+            JOptionPane.showMessageDialog(this,
+                        ex.getMessage(),
+                        "Error de formato rut",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         if (e.getSource() == ingresarBoton){
-            if(!Funciones.formatoCorrectoRut(id)){
-                nombreCampo.setEnabled(false);
-                JOptionPane.showMessageDialog(this,
-                        "Rut ingresado no cumple con el formato indicado",
-                        "Error de formato",JOptionPane.ERROR_MESSAGE);
+            nuevoCliente.setNombre(name);
+            nuevoCliente.setRut(id);
+            local.addClientToListaClients(nuevoCliente);
+            local.addClientToClientXRut(nuevoCliente.getRut(), nuevoCliente);
+            int boton = JOptionPane.showOptionDialog(this,
+                    "<html>¡Cliente registrado exitosamente!<br>¿Desea agregar alguien más?</html>",
+                    null, JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,
+                    null,null,1);
+            if (boton == JOptionPane.YES_OPTION) {
+                nombreCampo.setText("");
+                rutCampo.setText("");
+                nombreCampo.setEnabled(true);
             }
             else{
-                nuevoCliente.setNombre(name);
-                nuevoCliente.setRut(id);
-                local.addClientToListaClients(nuevoCliente);
-                local.addClientToClientXRut(nuevoCliente.getRut(), nuevoCliente);
-                int boton = JOptionPane.showOptionDialog(this,
-                        "<html>¡Cliente registrado exitosamente!<br>¿Desea agregar alguien más?</html>",
-                        null, JOptionPane.YES_NO_OPTION,JOptionPane.PLAIN_MESSAGE,
-                        null,null,1);
-                if (boton == JOptionPane.YES_OPTION) {
-                    nombreCampo.setText("");
-                    rutCampo.setText("");
-                    nombreCampo.setEnabled(true);
-                }
-                else{
-                    dispose();
-                }
+                dispose();
             }
+            
         }
     }
 }

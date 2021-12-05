@@ -7,6 +7,7 @@ package Menu;
 
 import Clases.*;
 import ExceptionsVideoClub.FechaInvalidaException;
+import ExceptionsVideoClub.RutInvalidoException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,53 +35,58 @@ public class Funciones {
     public static String loginTrabajadores(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String rutIngresado;
-        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: rut (1-1, 2-2, 3-3, 4-4)");
-        do{
+        System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: rut (11111111-1, 22222222-2, 33333333-3, 44444444-4)");
+        while (true){
             rutIngresado = teclado.nextLine();
-            if(!formatoCorrectoRut(rutIngresado)){
-                System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
+            try {
+                formatoCorrectoRut(rutIngresado);
+                if(!x.containsRutTrabajadores(rutIngresado)){
+                    System.out.println("Usuario no se encuentra registrado, ingrese nuevamente");
+                    continue;
+                }
             }
-            else if(!x.containsRutTrabajadores(rutIngresado)){
-                System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
+            catch(RutInvalidoException e){
+                System.out.println(e.getMessage());
             }
-            else
-                return rutIngresado;
-        }while(!rutIngresado.equals("0"));
-        return null;
+            return rutIngresado;
+        }
     }
     public static String loginClientes(VideoClub x){
         Scanner teclado = new Scanner(System.in);
         String rutIngresado;
         System.out.println("Ingrese el rut con su respectivo '-' ['0' para terminar]: (20844870-6, 15442310-9, 19034223-3, 10693359-1, 20378533-k)");
-        do{
+        while (true){
             rutIngresado = teclado.nextLine();
-            if(!formatoCorrectoRut(rutIngresado)){
-                System.out.println("Formato de rut incorrecot ingrese nuevamente['0' para terminar]");
+            try {
+                formatoCorrectoRut(rutIngresado);
+                if(!x.containsRutClientes(rutIngresado)){
+                    System.out.println("Usuario no se encuentra registrado, ingrese nuevamente");
+                    continue;
+                }
             }
-            else if(!x.containsRutClientes(rutIngresado)){
-                System.out.println("Usuario no se encuentra registrado, ingrese nuevamente['0' para terminar]");
+            catch(RutInvalidoException e){
+                System.out.println(e.getMessage());
             }
-            else
-                return rutIngresado;
-        }while(!rutIngresado.equals("0"));
-        return null;
+            return rutIngresado;
+        }
     }
 
-    public static boolean formatoCorrectoRut(String rut){
-        int i;
-        if (rut.equals("0"))
-            return true;
-        for(i=0; i<rut.length(); i++){
+    public static void formatoCorrectoRut(String rut) throws RutInvalidoException{
+        if(rut.equals(""))
+            throw new RutInvalidoException("Ingrese rut.");
+        if (rut.length() != 10){
+            throw new RutInvalidoException("Cantidad de caracteres para rut valido es de 10. (ej. 12345678-0)");
+        }
+        for(int i=0; i<rut.length(); i++){
             if(i<rut.length()-2 && !Character.isDigit(rut.charAt(i)))
-                return false;
+                throw new RutInvalidoException("Ingrese solo digitos antes del guion.");
             else if(i == rut.length()-2 && rut.charAt(i) != '-'){
-                return false;
+                throw new RutInvalidoException("Ingrese rut con guion.");
             }
             else if(i == rut.length()-1 && !Character.isDigit(rut.charAt(i)) && rut.charAt(i) != 'k' ){
-                return false;
+                throw new RutInvalidoException("Numero verificador incorrecto.");
             }
         }
-        return true;
     }
 
     public static boolean formatoCorrectoValuacion(float Valuacion){
@@ -205,12 +211,18 @@ public class Funciones {
         nuevo.setNombre(teclado.nextLine()) ;
         System.out.println("Introduzca el rut del cliente(con guión antes del dígito verificador): ");
         
-        do{
-            if(i != 0) System.out.println("El rut ingresado no se encuentra en el formato solicitado, por favor ingréselo nuevamente.");
-            nuevo.setRut(teclado.nextLine());
-            i++;
-        }while(!formatoCorrectoRut(nuevo.getRut()));
-        
+        String rut;
+        while (true){
+            rut = teclado.nextLine();
+            try{
+                formatoCorrectoRut(rut);
+                break;
+            }
+            catch(RutInvalidoException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        nuevo.setRut(rut);
         x.addClientToListaClients(nuevo);
         x.addClientToClientXRut(nuevo.getRut(), nuevo);
         System.out.println("¡Cliente registrado exitosamente!");
