@@ -324,8 +324,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){
-                            MostrarDatosGUI mTPGUI = new MostrarDatosGUI(tienda, "peliculas");
-                            mTPGUI.setVisible(true);
+                            Funciones.listaPeliculas(tienda);
                         }
                         else{
                             if (e.getSource() == botonesActuales[2]){
