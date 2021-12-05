@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cliente extends Persona implements Transacciones{
@@ -211,14 +212,22 @@ public class Cliente extends Persona implements Transacciones{
     @Override
     public void pagarDeuda(VideoClub tienda){//Menu cliente
         int monto;
-        Scanner teclado = new Scanner(System.in);
+        Scanner teclado;
 
         if(getDeuda()>0){
             System.out.println("Usted tiene una deuda de $"+getDeuda());
-            do {
+            while(true) {
                 System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
-                monto = teclado.nextInt();
-            }while(getDeuda()-monto !=0);
+                try{
+                    teclado = new Scanner(System.in);
+                    monto = teclado.nextInt();
+                    if(getDeuda() == monto)
+                        break;
+                }
+                catch(InputMismatchException e){
+                    System.out.println("Monto ingresado no cumple con la entrada esperada\n" +e);
+                }
+            }
             setDeuda(0);
             System.out.println("Su deuda ha sido cancelada exitosamente.");
         }

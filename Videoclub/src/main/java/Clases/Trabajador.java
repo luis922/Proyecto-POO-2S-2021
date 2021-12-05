@@ -3,6 +3,7 @@ package Clases;
 import Menu.Funciones;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Trabajador extends Persona implements Transacciones{
@@ -153,10 +154,18 @@ public class Trabajador extends Persona implements Transacciones{
                 Funciones.llenarPresentes(tienda, rutCliente);
                 if(tienda.getClientFromClientXRut(rutCliente).getDeuda()>0){
                     System.out.println("Cliente tiene una deuda de $"+tienda.getClientFromClientXRut(rutCliente).getDeuda());
-                    do {
+                    while(true) {
                         System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
-                        monto = teclado.nextInt();
-                    }while(tienda.getClientFromClientXRut(rutCliente).getDeuda()-monto !=0);
+                        try{
+                            teclado = new Scanner(System.in);
+                            monto = teclado.nextInt();
+                            if(tienda.getClientFromClientXRut(rutCliente).getDeuda() == monto)
+                                break;
+                        }
+                        catch(InputMismatchException e){
+                            System.out.println("Monto ingresado no cumple con la entrada esperada\n"+ e);
+                        }
+                    }
                     tienda.getClientFromClientXRut(rutCliente).setDeuda(0);
                     System.out.println("Deuda de cliente ha sido cancelada exitosamente.");
                 }
