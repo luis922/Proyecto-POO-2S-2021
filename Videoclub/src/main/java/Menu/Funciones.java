@@ -12,6 +12,7 @@ import ExceptionsVideoClub.RutInvalidoException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.temporal.ChronoUnit;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -143,7 +144,7 @@ public class Funciones {
 
     public static boolean tieneChar(String linea){
         for(int i=0; i < linea.length(); i++) {
-            if(i!= 4 && i!=7) {
+            if(i!= 4 && i!=7) {// Si el caracter no es guion
                 if (!Character.isDigit(linea.charAt(i))) {
                     return true;
                 }
@@ -582,7 +583,6 @@ public class Funciones {
                                         continue;
                                     }
                                     else{
-
                                         arriendo.setFechaArriendo(LocalDate.parse(fechaArriendo));
                                         System.out.println("Fecha de arriendo ingresada correctamente");
                                     }
@@ -640,10 +640,18 @@ public class Funciones {
             else{
                 if(tienda.getClientFromClientXRut(rut).getDeuda()>0){
                     System.out.println("Cliente tiene una deuda de $"+tienda.getClientFromClientXRut(rut).getDeuda());
-                    do {
+                    while(true) {
                         System.out.println("Por favor, ingrese el monto exacto de la deuda a cancelar.");
-                        monto = teclado.nextInt();
-                    }while(tienda.getClientFromClientXRut(rut).getDeuda()-monto !=0);
+                        try{
+                            monto = teclado.nextInt();
+                            if(tienda.getClientFromClientXRut(rut).getDeuda() == monto)
+                                break;
+                        }
+                        catch(InputMismatchException e){
+                            System.out.println("Monto ingresado no cumple con la entrada esperada");
+                        }
+
+                    }
                     tienda.getClientFromClientXRut(rut).setDeuda(0);
                     System.out.println("Deuda de cliente ha sido cancelada exitosamente.");
                 }
