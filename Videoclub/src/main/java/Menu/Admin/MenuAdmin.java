@@ -131,7 +131,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
         menuActual = guardarInfoMenu(nombreVentana,nombreFrame,botonesActuales);
         if(!menus.containsKey(nombreVentana))
             menus.put(nombreVentana, menuActual);
-
+        
         int alto = 50 * botonesActuales.length + 5 * (botonesActuales.length-1) + 200;
         int botonY = (alto -(50 * botonesActuales.length + 5 * (botonesActuales.length-1)))/2
                 - (5 * (botonesActuales.length-1))/2;
@@ -390,8 +390,6 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    if(menuAnterior == null)
-                        System.out.println("NULL AQUIIIIIIIIIIIIIII EDICION DATOS");
                     new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
                 }
                 break;
