@@ -21,6 +21,7 @@ public class MenuAdmin extends JFrame implements ActionListener {
     private String nombreVentana, nombreFrame;
     private InfoMenu menuActual, menuAnterior;
     private HashMap<String,InfoMenu> menus; //Evita que se pierda la info de menús anteriores
+    private int numClicks = 0;
 
     public MenuAdmin(String rut, VideoClub tienda) { //Usado para acceder al Menú empleado principal la primera vez
         super("Menú Empleado");
@@ -207,12 +208,21 @@ public class MenuAdmin extends JFrame implements ActionListener {
                         }
                     }
                     dispose();
-                    menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
-                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                    if(numClicks == 0) {
+                        numClicks++;
+                        menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                    }
+
                 }
                 else{
                     dispose();
-                    new LoginGUI(tienda).setVisible(true);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new LoginGUI(tienda).setVisible(true);
+                    }
+
+
                 }
                 break;
             }
@@ -250,7 +260,11 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda);
+                    if(numClicks == 0) {
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda);
+                    }
+
                 }
                 break;
             }
@@ -287,12 +301,19 @@ public class MenuAdmin extends JFrame implements ActionListener {
                         botonesNextMenu[4] = new JButton("Volver");
                     }
                     dispose();
-                    menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
-                    new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                    if(numClicks == 0){
+                        numClicks++;
+                        menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                    }
+
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda);
+                    }
                 }
                 break;
             }
@@ -313,7 +334,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    }
                 }
                 break;
             }
@@ -339,7 +363,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    }
                 }
                 break;
             }
@@ -360,9 +387,14 @@ public class MenuAdmin extends JFrame implements ActionListener {
                         botonesNextMenu[8] = new JButton("Actores");
                         botonesNextMenu[9] = new JButton("Géneros");
                         botonesNextMenu[10] = new JButton("Volver");
-                        menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+
                         dispose();
-                        new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                        if(numClicks == 0){
+                            numClicks++;
+                            menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                            new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                        }
+
                     }
                     else{
                         if (e.getSource() == botonesActuales[1]){
@@ -373,9 +405,14 @@ public class MenuAdmin extends JFrame implements ActionListener {
                             botonesNextMenu[1] = new JButton("Rut del cliente");
                             botonesNextMenu[2] = new JButton("Deuda del cliente");
                             botonesNextMenu[3] = new JButton("Volver");
-                            menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+
                             dispose();
-                            new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                            if(numClicks == 0) {
+                                numClicks++;
+                                menuSiguiente = guardarInfoMenu(nameVentana, nameFrame, botonesNextMenu);
+                                new MenuAdmin(rutEmpleado, tienda,menuSiguiente,menuActual,menus);
+                            }
+
                         }
                         else{
                             if (e.getSource() == botonesActuales[2]){
@@ -390,7 +427,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Gestión de datos"),menus);
+                    }
                 }
                 break;
             }
@@ -463,7 +503,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else{
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Edición de datos"),menus);
+                    if(numClicks == 0){
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Edición de datos"),menus);
+                    }
                 }
                 break;
             }
@@ -498,7 +541,10 @@ public class MenuAdmin extends JFrame implements ActionListener {
                 }
                 else {
                     dispose();
-                    new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Edición de datos"),menus);
+                    if(numClicks == 0) {
+                        numClicks++;
+                        new MenuAdmin(rutEmpleado, tienda, menus.get("Menú Edición de datos"), menus);
+                    }
                 }
                 break;
             }
